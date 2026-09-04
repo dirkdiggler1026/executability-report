@@ -2,7 +2,7 @@
 <html lang="zh-CN"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="对链上聚合器、代币化股票与预测市场的独立可执行深度测量。数据与复核脚本随附。">
+<meta name="description" content="对链上聚合器、Robinhood Chain 代币化股票与预测市场的独立可执行深度测量。数据与复核脚本随附，任何人可在指定区块重放核对。">
 <title>可成交性实测</title>
 </head><body style="margin:0">
 <title>可成交性实测</title>
@@ -251,12 +251,12 @@ footer p{font-size:14px;color:var(--ink-2)}
 <header class="mast">
   <div class="eyebrow">独立测量 · 2026-09-04 更新</div>
   <h1>盘面价格不是<br>你能成交的价格</h1>
-  <p class="standfirst">价格预言机告诉你它值多少；这份测量告诉你你能不能真的卖掉。三个互不相干的市场，同一个问题：屏幕上显示的价格，和你真按下去能拿到的价格，差得比想象中远。</p>
+  <p class="standfirst">价格预言机告诉你它值多少；这份测量告诉你你能不能真的卖掉。三个互不相干的市场，同一个问题：屏幕上显示的价格，和你真按下去能拿到的价格，差得比想象中远。本页引用的全部数字对应截至区块 53,861,286 的 17 轮快照，随附数据即这一份；采集仍在继续，仓库中的数据文件会随之增长，届时轮数会多于本文所述。</p>
   <div class="byline">
     <span>数据窗口 <b>2026-08-30 → 09-04</b></span>
     <span>链上样本 <b>51,084 条聚合器报价</b></span>
     <span>预测市场样本 <b>596 个盘口</b></span>
-    <span>代币化股票 <b>15 轮 · 960 次钉块报价</b></span>
+    <span>代币化股票 <b>17 轮 · 1,088 次钉块报价</b></span>
     <span>可复核性 <b>逐轮哈希，任何人可重算</b></span>
   </div>
 </header>
@@ -367,11 +367,11 @@ footer p{font-size:14px;color:var(--ink-2)}
 
   <div class="tw">
     <table>
-      <caption>Robinhood Chain（chainId 4663）· 15 轮 · 每 30 分钟一轮 · 2026-09-03 17:09 → 09-04 · 区块 53,579,264 → 53,825,566。数值为「卖出该名义金额实际收回的百分比」中位数，括号内为 15 轮的最小~最大。</caption>
+      <caption>Robinhood Chain（chainId 4663）· 17 轮 · 每 30 分钟一轮 · 2026-09-03 17:09 → 09-04 · 区块 53,579,264 → 53,861,286。数值为「卖出该名义金额实际收回的百分比」中位数。</caption>
       <thead><tr><th>代币</th><th>卖 $100</th><th>卖 $1,000</th><th>卖 $10,000</th><th>卖 $100,000</th></tr></thead>
       <tbody>
         <tr><td>NVDA</td><td class="pos">99.30%</td><td class="pos">99.28%</td><td class="pos">99.15%</td><td class="pos">97.84%</td></tr>
-        <tr><td>TSLA</td><td class="pos">99.29%</td><td class="pos">99.26%</td><td class="pos">98.94%</td><td class="mid">95.28%</td></tr>
+        <tr><td>TSLA</td><td class="pos">99.29%</td><td class="pos">99.26%</td><td class="pos">98.96%</td><td class="mid">95.30%</td></tr>
         <tr><td>AAPL</td><td class="mid">94.08%</td><td class="mid">80.25%</td><td class="neg">2.82%</td><td class="neg">0.35%</td></tr>
         <tr><td>QQQ</td><td class="neg">6.29%</td><td class="neg">4.12%</td><td class="neg">0.92%</td><td class="neg">0.11%</td></tr>
         <tr><td>GOOGL</td><td class="neg">4.11%</td><td class="neg">3.51%</td><td class="neg">1.42%</td><td class="neg">0.20%</td></tr>
@@ -383,13 +383,13 @@ footer p{font-size:14px;color:var(--ink-2)}
   </div>
 
   <div class="col">
-    <p><strong>卖出价值 $100 的 SPY 代币，收回 $0.90。</strong>而 NVDA 卖十万美元收回 97.84%。两者在任何界面上看起来是同一类资产：同一条链、同一个 DEX、同样标着「代币化股票」。</p>
+    <p><strong>卖出价值 $100 的 SPY 代币，收回 $0.90。</strong>而 NVDA 卖十万美元收回 97.8%。两者在任何界面上看起来是同一类资产：同一条链、同一个 DEX、同样标着「代币化股票」。</p>
 
     <h3>AAPL 是最值得看的那一个</h3>
     <p>它在 $100 收回 94%，$1,000 收回 80%，到 $10,000 只剩 2.82%。<strong>可成交性不是资产的属性，是金额的函数。</strong>AAPL 在小额上完全正常，在仓位变大的那一刻失效。这种坑比「全好」或「全坏」都更难发现。</p>
 
     <h3>而且这不是波动，是结构</h3>
-    <p>15 轮、跨越 6.8 小时的测量里，绝大多数数值的波动范围小到可以忽略：NVDA 在 $100 档是 99.3%~99.3%，SPY 是 0.9%~0.9%。唯一有意义的变动是 TSLA 的 $100,000 档（93.6%~95.5%）。</p>
+    <p>17 轮、跨越 7.8 小时的测量里，绝大多数数值的波动范围小到可以忽略：NVDA 在 $100 档是 99.30%~99.30%，SPY 是 0.90%~0.90%。唯一有意义的变动是 TSLA 的 $100,000 档（93.6%~97.0%）。</p>
     <p>「SPY 卖不掉」因此不是某一刻的状况，而是这个市场的常态。</p>
 
     <div class="note">
@@ -425,13 +425,13 @@ footer p{font-size:14px;color:var(--ink-2)}
   </div>
 
   <div class="col">
-    <p>实测：对基线首轮（区块 53,579,264）与最新一轮（区块 53,825,566）分别独立重放全部报价调用，重算出的哈希与原始记录逐字节一致。</p>
+    <p>实测：对基线首轮（区块 53,579,264）与其后的轮次分别独立重放全部报价调用，重算出的哈希与原始记录逐字节一致。</p>
 
     <h3>自己跑一遍</h3>
     <p>本页附带全部原始数据与复核脚本，无第三方依赖（<code>code/evm.py</code> 是零依赖实现，只需 Python 3 和 curl）：</p>
     <ul class="plain">
       <li><a href="./code/verify.py"><code>code/verify.py</code></a> —— 复核脚本。在指定区块高度重放全部报价、重算哈希、与记录比对</li>
-      <li><a href="./data/"><code>data/2026-09-03/</code>、<code>data/2026-09-04/</code></a> —— 每轮的 <code>quotes.jsonl.gz</code>（逐条报价）与 <code>rounds.jsonl</code>（逐轮哈希）</li>
+      <li>逐轮哈希 <a href="./data/2026-09-03/rounds.jsonl"><code>data/2026-09-03/rounds.jsonl</code></a>、<a href="./data/2026-09-04/rounds.jsonl"><code>09-04</code></a>；逐条报价 <a href="./data/2026-09-03/quotes.jsonl.gz"><code>quotes.jsonl.gz</code></a>（<a href="./data/2026-09-04/quotes.jsonl.gz"><code>09-04</code></a>）</li>
       <li><a href="./code/rhchain.py"><code>code/rhchain.py</code></a> —— 池子枚举与 Quoter 调用；<a href="./code/stock_pools.json"><code>stock_pools.json</code></a> 是全链扫描得到的池表</li>
       <li><a href="./README.md"><code>README.md</code></a> —— <code>rhdepth-v1</code> 原像规范全文与运行步骤</li>
     </ul>
@@ -556,7 +556,7 @@ python3 code/verify.py 53579264</td></tr>
       <li><strong>Kalshi 只能给出降级结论。</strong>该平台仅公开顶档，其结论标注「深度未知」，且方向是高估真实市场比例，不是低估。</li>
       <li><strong>「无法执行」不等于「你会亏 X%」。</strong>被拒绝报价意味着这个规模在当前流动性下吃不下，不是一个你会实际付出的成本。</li>
       <li><strong>代币化股票只测了 USDG 计价的池子。</strong>部分代币还有 ETH/WETH 计价的池，本轮未纳入统计——理论上某个代币可能在别的计价资产上更深。已知 TSLA 在 ETH 池上有额外深度。</li>
-      <li><strong>只有 6.8 小时、15 轮。</strong>「深度稳定」这个结论的时间尺度很短，不能外推到跨日、跨周末或财报窗口。美股休市时段的行为尚未测量。</li>
+      <li><strong>只有 7.8 小时、17 轮。</strong>「深度稳定」这个结论的时间尺度很短，不能外推到跨日、跨周末或财报窗口。美股休市时段的行为尚未测量。</li>
       <li><strong>报价 ≠ 成交。</strong>全部数字来自 Quoter 的模拟调用，不是实际发生的交易。真实成交会受 MEV、滑点保护、gas 等影响，通常更差不会更好。</li>
       <li><strong>预测市场那节的数字是 2026-09-03 的快照。</strong>事件型市场会到期，其中「49 个财报市场」这一批已随财报季结束而消失，复核时不会看到相同的匹配数。</li>
     </ul>
