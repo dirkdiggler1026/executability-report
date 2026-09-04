@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """独立复核一个轮次的 roundKeccak。
 
-这就是「证据承诺」卖的那件事本身：**任何人拿区块号 + 本文件，
-就能在同一区块高度重放全部报价、重算哈希、和链上承诺逐字节比对。**
+这就是「证据承诺」卖的那件事本身：任何人拿区块号 + 本文件，
+就能在同一区块高度重放全部报价、重算哈希、和链上承诺逐字节比对。
 不需要信任提交者，只需要信任算术。
 
     python3 verify.py <block>        复核指定轮次
     python3 verify.py --latest       复核最近一轮
 
-🔴 需要归档节点（在历史区块上 eth_call）。公共端点通常不支持，
+ 需要归档节点（在历史区块上 eth_call）。公共端点通常不支持，
    配 RHCHAIN_RPC 指向 Alchemy 一类的归档端点。
 """
 from __future__ import annotations
@@ -56,7 +56,7 @@ def rebuild(block: int) -> list[dict]:
 
 def main() -> int:
     arg = sys.argv[1] if len(sys.argv) > 1 else "--latest"
-    # 🔴 跨天查找。轮次按 UTC 日期分目录，但被复核的区块可能在任何一天 ——
+    #  跨天查找。轮次按 UTC 日期分目录，但被复核的区块可能在任何一天 ——
     #    只翻今天的目录，历史轮次就永远「找不到」，而第三方复核的
     #    恰恰多是历史轮次。
     recs = []
@@ -74,13 +74,13 @@ def main() -> int:
     print(f"复核轮次  块 {rec['block']:,}  规范 {rec['canon']}")
     print(f"  链上承诺 {rec['roundKeccak']}")
     if rec["canon"] != CANON_VERSION:
-        print(f"  ⚠️ 规范版本不符（本地 {CANON_VERSION}），哈希必然不同")
+        print(f"   规范版本不符（本地 {CANON_VERSION}），哈希必然不同")
 
     rows = rebuild(rec["block"])
     got = round_keccak(rows)
     print(f"  独立重算 {got}")
     ok = got == rec["roundKeccak"]
-    print(f"\n  {'✅ 一致 —— 该轮数据可被独立复现' if ok else '❌ 不一致'}")
+    print(f"\n  {' 一致 —— 该轮数据可被独立复现' if ok else ' 不一致'}")
     if not ok:
         orig = []
         for qf in sorted(ROOT.glob("*/quotes.jsonl.gz")):
