@@ -1,4 +1,19 @@
-"""最小 EVM 读侧工具 —— 零依赖。
+"""Minimal EVM read-side helpers with no dependencies.
+
+Implements keccak256 (real Keccak, not NIST SHA3), static-type ABI
+encoding, and eth_call over curl. Roughly 150 lines, deliberately
+dependency-free.
+
+rpc() returns (result, error). A non-None error means the call did not
+succeed and must never be treated as "queried and found nothing" -
+conflating the two writes RPC failures into the time series as if they
+were liquidity droughts.
+
+Rate limiting is measured in Alchemy compute units, not requests:
+different methods differ by up to 7x in cost.
+
+--- 中文原注释 ---
+最小 EVM 读侧工具 —— 零依赖。
 
  不装 web3。 这台机器只剩约 400MB 可用内存，而采集进程还在长。
 读侧只需要三样：keccak256、静态类型的 ABI 编码、eth_call。

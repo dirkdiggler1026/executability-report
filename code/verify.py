@@ -1,5 +1,20 @@
 #!/usr/bin/env python3
-"""独立复核一个轮次的 roundKeccak。
+"""Independently verify a round's roundKeccak.
+
+This is the product claim itself: given a block number and this file,
+anyone can replay every quote at that block height, recompute the hash,
+and compare it byte for byte against the committed value. You do not
+need to trust whoever published it; you need to trust arithmetic.
+
+    python3 verify.py <block>     verify a specific round
+    python3 verify.py --latest    verify the most recent round
+
+Requires an archive node (historical eth_call). Public endpoints
+typically retain only ~128 blocks of state; set RHCHAIN_RPC to an
+archive endpoint.
+
+--- 中文原注释 ---
+独立复核一个轮次的 roundKeccak。
 
 这就是「证据承诺」卖的那件事本身：任何人拿区块号 + 本文件，
 就能在同一区块高度重放全部报价、重算哈希、和链上承诺逐字节比对。

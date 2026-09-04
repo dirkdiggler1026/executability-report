@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>可成交性实测</title>
+</head><body style="margin:0"><div style="position:absolute;right:14px;top:10px;font:13px/1 sans-serif"><a href="index.html" style="color:#555;text-decoration:none">English</a></div>
+<title>可成交性实测</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F1F3F2;
+  --paper-2:#E7EBE9;
+  --ink:#14232B;
+  --ink-2:#42555C;
+  --ink-3:#6E8188;
+  --rule:#C7D1CE;
+  --rule-2:#DCE3E0;
+  --accent:#0E5A63;
+  --accent-soft:#D6E4E4;
+  --good:#2E6E52;
+  --warn:#9E6112;
+  --bad:#8F2C2C;
+  --grey-v:#7A8A8E;
+  --hatch:#B9C5C2;
+  --shadow:rgba(20,35,43,.07);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#101719;
+    --paper-2:#182124;
+    --ink:#DCE6E4;
+    --ink-2:#A3B4B4;
+    --ink-3:#7B8D8E;
+    --rule:#2B3A3C;
+    --rule-2:#212D30;
+    --accent:#5FB6AC;
+    --accent-soft:#1B3234;
+    --good:#63B98C;
+    --warn:#D6A052;
+    --bad:#D9736C;
+    --grey-v:#8A9B9E;
+    --hatch:#33454A;
+    --shadow:rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101719;
+  --paper-2:#182124;
+  --ink:#DCE6E4;
+  --ink-2:#A3B4B4;
+  --ink-3:#7B8D8E;
+  --rule:#2B3A3C;
+  --rule-2:#212D30;
+  --accent:#5FB6AC;
+  --accent-soft:#1B3234;
+  --good:#63B98C;
+  --warn:#D6A052;
+  --bad:#D9736C;
+  --grey-v:#8A9B9E;
+  --hatch:#33454A;
+  --shadow:rgba(0,0,0,.4);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"IBM Plex Sans","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px 96px}
+.col{max-width:64ch}
+
+/* ── masthead ─────────────────────────────── */
+header.mast{
+  border-bottom:2px solid var(--ink);
+  margin-bottom:44px;
+  padding:56px 0 20px;
+}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);font-weight:500;
+}
+h1{
+  font-family:Newsreader,Georgia,"Songti SC",serif;
+  font-weight:500;font-size:clamp(38px,6.2vw,60px);
+  line-height:1.08;letter-spacing:-.015em;
+  margin:14px 0 0;text-wrap:balance;
+}
+.standfirst{
+  font-family:Newsreader,Georgia,serif;
+  font-size:clamp(18px,2.4vw,21px);line-height:1.6;
+  color:var(--ink-2);margin:18px 0 0;max-width:58ch;
+}
+.byline{
+  display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:26px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;color:var(--ink-3);
+}
+.byline b{color:var(--ink-2);font-weight:500}
+
+/* ── readings strip ───────────────────────── */
+.readings{
+  display:grid;gap:1px;background:var(--rule);
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  border:1px solid var(--rule);margin:0 0 52px;
+}
+.reading{background:var(--paper);padding:20px 22px}
+.reading .k{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+}
+.reading .v{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:30px;font-weight:600;line-height:1.2;margin-top:8px;
+  font-variant-numeric:tabular-nums;letter-spacing:-.02em;
+}
+.reading .d{font-size:13.5px;color:var(--ink-2);margin-top:6px;line-height:1.5}
+
+/* ── sections ─────────────────────────────── */
+section{margin:0 0 68px}
+.sec-head{border-top:1px solid var(--ink);padding-top:14px;margin-bottom:28px}
+h2{
+  font-family:Newsreader,Georgia,"Songti SC",serif;
+  font-weight:500;font-size:clamp(26px,3.6vw,34px);line-height:1.2;
+  margin:10px 0 0;letter-spacing:-.01em;text-wrap:balance;
+}
+h3{
+  font-size:16px;font-weight:600;margin:38px 0 12px;
+  letter-spacing:.01em;
+}
+p{margin:0 0 18px}
+.col p:last-child{margin-bottom:0}
+strong{font-weight:600}
+em{font-style:normal;background:var(--accent-soft);padding:.1em .3em;border-radius:2px}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* ── ladder ───────────────────────────────── */
+.ladder{margin:26px 0 8px;display:flex;flex-direction:column;gap:2px}
+.lrow{display:grid;grid-template-columns:96px 1fr 84px;align-items:center;gap:14px}
+.lrow .sym{
+  font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;
+  color:var(--ink-2);text-align:right;
+}
+.track{
+  position:relative;height:26px;background:var(--paper-2);
+  border:1px solid var(--rule-2);overflow:hidden;
+}
+.bar{position:absolute;inset:0 auto 0 0;background:var(--accent);opacity:.82}
+.bar.w{background:var(--warn)}
+.bar.b{background:var(--bad)}
+.bar.g{background:var(--good)}
+.nq{
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(45deg,var(--hatch) 0 2px,transparent 2px 7px);
+}
+.lrow .num{
+  font-family:"IBM Plex Mono",monospace;font-size:13px;
+  font-variant-numeric:tabular-nums;font-weight:500;
+}
+.lcap{
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-3);
+  margin-top:12px;letter-spacing:.03em;
+}
+
+/* ── tables ───────────────────────────────── */
+.tw{overflow-x:auto;margin:26px 0 10px;border:1px solid var(--rule)}
+table{border-collapse:collapse;width:100%;min-width:560px;background:var(--paper)}
+th,td{
+  padding:10px 14px;text-align:right;
+  font-family:"IBM Plex Mono",monospace;font-size:13px;
+  font-variant-numeric:tabular-nums;
+  border-bottom:1px solid var(--rule-2);
+}
+th{
+  font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:500;background:var(--paper-2);
+  border-bottom:1px solid var(--rule);
+}
+td:first-child,th:first-child{text-align:left;font-weight:500}
+tbody tr:last-child td{border-bottom:none}
+tr.total td{background:var(--paper-2);font-weight:600;border-top:1px solid var(--rule)}
+.pos{color:var(--good)}.neg{color:var(--bad)}.mid{color:var(--warn)}.dim{color:var(--ink-3)}
+caption{
+  caption-side:bottom;text-align:left;padding:10px 14px;
+  font-size:12.5px;color:var(--ink-3);line-height:1.6;
+  border-top:1px solid var(--rule-2);
+}
+
+/* ── verdict chips ────────────────────────── */
+.chips{display:flex;flex-wrap:wrap;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:26px 0}
+.chip{background:var(--paper);padding:16px 20px;flex:1 1 150px}
+.chip .pct{
+  font-family:"IBM Plex Mono",monospace;font-size:26px;font-weight:600;
+  font-variant-numeric:tabular-nums;line-height:1.1;
+}
+.chip .lbl{font-size:13px;margin-top:6px;color:var(--ink-2)}
+.chip .sub{font-size:12px;color:var(--ink-3);margin-top:3px;font-family:"IBM Plex Mono",monospace}
+
+/* ── notes / callouts ─────────────────────── */
+.note{
+  border-left:2px solid var(--accent);padding:2px 0 2px 20px;
+  margin:26px 0;color:var(--ink-2);font-size:15px;
+}
+.fail{
+  display:grid;grid-template-columns:auto 1fr;gap:4px 18px;
+  padding:20px 0;border-top:1px solid var(--rule-2);
+}
+.fail:last-of-type{border-bottom:1px solid var(--rule-2)}
+.fail .n{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--accent);
+  font-weight:600;padding-top:4px;letter-spacing:.05em;
+}
+.fail .t{font-weight:600;font-size:15.5px}
+.fail .b{grid-column:2;color:var(--ink-2);font-size:14.5px;line-height:1.65}
+.fail .b code{
+  font-family:"IBM Plex Mono",monospace;font-size:13px;
+  background:var(--paper-2);padding:.1em .35em;border-radius:2px;
+}
+
+ul.plain{margin:18px 0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+ul.plain li{
+  padding-left:20px;position:relative;color:var(--ink-2);font-size:15px;line-height:1.65;
+}
+ul.plain li::before{
+  content:"";position:absolute;left:0;top:.7em;
+  width:7px;height:1px;background:var(--ink-3);
+}
+
+footer{border-top:2px solid var(--ink);margin-top:20px;padding-top:24px}
+footer p{font-size:14px;color:var(--ink-2)}
+.sig{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3);letter-spacing:.04em}
+
+@media (max-width:640px){
+  .wrap{padding:0 18px 64px}
+  .lrow{grid-template-columns:64px 1fr 70px;gap:9px}
+  .reading .v{font-size:26px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <div class="eyebrow">独立测量 · 2026-09-04 快照 · <a href="./">English (current)</a></div>
+  <h1>盘面价格不是<br>你能成交的价格</h1>
+  <p class="standfirst" style="font-size:15px;color:var(--ink-3)">本页是 2026-09-04 快照的中文版，可能落后于英文版。最新数据以 <a href="./">英文版</a>为准。</p>
+  <p class="standfirst">价格预言机告诉你它值多少；这份测量告诉你你能不能真的卖掉。三个互不相干的市场，同一个问题：屏幕上显示的价格，和你真按下去能拿到的价格，差得比想象中远。</p>
+  <div class="byline">
+    <span>数据窗口 <b>2026-08-30 → 09-04</b></span>
+    <span>链上样本 <b>51,084 条聚合器报价</b></span>
+    <span>预测市场样本 <b>596 个盘口</b></span>
+    <span>代币化股票 <b>17 轮 · 1,088 次钉块报价</b></span>
+    <span>可复核性 <b>逐轮哈希，任何人可重算</b></span>
+  </div>
+</header>
+
+<div class="readings">
+  <div class="reading">
+    <div class="k">代币化股票 · SPY</div>
+    <div class="v" style="color:var(--bad)">$0.90</div>
+    <div class="d">在 Robinhood Chain 卖出价值 $100 的 SPY 代币，实际收回 $0.90</div>
+  </div>
+  <div class="reading">
+    <div class="k">预测市场 · 单边</div>
+    <div class="v" style="color:var(--warn)">52.2%</div>
+    <div class="d">已验的 596 个盘口里，买得进去、卖不出来</div>
+  </div>
+  <div class="reading">
+    <div class="k">同一界面 · 同一资产类别</div>
+    <div class="v">1000<span style="font-size:20px">×</span></div>
+    <div class="d">NVDA 卖 $10 万收回 97.8%，SPY 卖 $100 收回 0.9%——差三个数量级</div>
+  </div>
+</div>
+
+<section>
+  <div class="sec-head">
+    <div class="eyebrow">发现一 · 链上</div>
+    <h2>问一家聚合器，可能把成本高估一个数量级</h2>
+  </div>
+
+  <div class="col">
+    <p>所有滑点数据都来自某一家聚合器。这份测量同时问六家：CoW、KyberSwap、ParaSwap、0x、1inch、LiFi。同一时刻、同一个币、同一个金额档，取买家实际能拿到的最好结果。</p>
+    <p>差距不是几个基点，是几倍。</p>
+  </div>
+
+  <div class="tw">
+    <table>
+      <caption>以太坊 · 2026-08-31 · 卖出方向 · 相对 $100 档的价格冲击中位数。「无报价」指该源明确拒绝为这个规模报价。这属于测量结果，不是调用失败。</caption>
+      <thead><tr><th>币</th><th>档位</th><th>仅 ParaSwap</th><th>仅 KyberSwap</th><th>六家最优</th></tr></thead>
+      <tbody>
+        <tr><td>LDO</td><td>$100,000</td><td class="neg">−11.29%</td><td class="mid">−4.22%</td><td class="pos">−0.71%</td></tr>
+        <tr><td>LDO</td><td>$1,000,000</td><td class="dim">无报价</td><td class="neg">−85.14%</td><td class="mid">−8.51%</td></tr>
+        <tr><td>PENDLE</td><td>$100,000</td><td class="dim">无报价</td><td class="neg">−6.61%</td><td class="pos">−0.79%</td></tr>
+        <tr><td>PENDLE</td><td>$1,000,000</td><td class="dim">无报价</td><td class="neg">−60.23%</td><td class="neg">−49.12%</td></tr>
+        <tr><td>CRV</td><td>$100,000</td><td class="neg">−6.06%</td><td class="mid">−2.38%</td><td class="mid">−1.82%</td></tr>
+        <tr><td>MKR</td><td>$100,000</td><td class="mid">−3.99%</td><td class="mid">−1.01%</td><td class="mid">−1.01%</td></tr>
+        <tr><td>UNI</td><td>$1,000,000</td><td class="neg">−6.65%</td><td class="mid">−1.94%</td><td class="mid">−1.21%</td></tr>
+        <tr><td>AAVE</td><td>$1,000,000</td><td class="mid">−3.58%</td><td class="mid">−2.38%</td><td class="mid">−1.06%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col">
+    <p>最极端的是 LDO 在 $100 万档：KyberSwap 单独看是 −85%，六家最优是 −8.5%。如果你拿单一来源的数据写一篇「链上流动性有多差」的分析，结论会差十倍。</p>
+
+    <h3>而且最优的那一家会换人</h3>
+    <p>这不是「某家一直更好」的问题。同一个币，金额档位一变，最优源就换：</p>
+  </div>
+
+  <div class="tw">
+    <table>
+      <caption>各金额档位上报价最优的来源。LDO 和 PENDLE 在大额档从 1inch 换成 CoW。CoW 走的是批量拍卖与求解器报价，与即时 AMM 路由不完全可比，这一点需要随数据一起说明。</caption>
+      <thead><tr><th>币</th><th>$100</th><th>$1,000</th><th>$10,000</th><th>$100,000</th><th>$1,000,000</th></tr></thead>
+      <tbody>
+        <tr><td>WETH</td><td>1inch</td><td>1inch</td><td>1inch</td><td>1inch</td><td>1inch</td></tr>
+        <tr><td>LINK</td><td>1inch</td><td>1inch</td><td>1inch</td><td>1inch</td><td class="mid">KyberSwap</td></tr>
+        <tr><td>MKR</td><td>KyberSwap</td><td>KyberSwap</td><td>KyberSwap</td><td>KyberSwap</td><td>KyberSwap</td></tr>
+        <tr><td>CRV</td><td>1inch</td><td>1inch</td><td>1inch</td><td>1inch</td><td class="mid">KyberSwap</td></tr>
+        <tr><td>LDO</td><td>1inch</td><td>1inch</td><td>1inch</td><td class="mid">CoW</td><td class="mid">CoW</td></tr>
+        <tr><td>PENDLE</td><td>1inch</td><td>1inch</td><td>1inch</td><td>1inch</td><td class="mid">CoW</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col">
+    <h3>Solana：单一来源下的退出阶梯</h3>
+    <p>Solana 上只有 Jupiter 一个可用报价源，所以下面这组数字受上面那条发现的直接限制，很可能高估了真实成本。放在这里是因为量级本身仍然说明问题。</p>
+  </div>
+
+  <div class="ladder">
+    <div class="lrow"><span class="sym">SOL</span><span class="track"><span class="bar g" style="width:1%"></span></span><span class="num pos">−0.13%</span></div>
+    <div class="lrow"><span class="sym">TRUMP</span><span class="track"><span class="bar w" style="width:8.4%"></span></span><span class="num mid">−8.38%</span></div>
+    <div class="lrow"><span class="sym">PENGU</span><span class="track"><span class="bar w" style="width:9.7%"></span></span><span class="num mid">−9.65%</span></div>
+    <div class="lrow"><span class="sym">WIF</span><span class="track"><span class="bar w" style="width:26.7%"></span></span><span class="num mid">−26.71%</span></div>
+    <div class="lrow"><span class="sym">BONK</span><span class="track"><span class="bar b" style="width:87.2%"></span></span><span class="num neg">−87.21%</span></div>
+    <div class="lrow"><span class="sym">PYTH</span><span class="track"><span class="bar b" style="width:92.9%"></span></span><span class="num neg">−92.90%</span></div>
+    <div class="lrow"><span class="sym">JTO</span><span class="track"><span class="bar b" style="width:93.4%"></span></span><span class="num neg">−93.41%</span></div>
+    <div class="lrow"><span class="sym">JUP</span><span class="track"><span class="bar b" style="width:97.2%"></span></span><span class="num neg">−97.17%</span></div>
+  </div>
+  <div class="lcap">卖出 $1,000,000 时相对 $100 档的价格冲击 · Jupiter · 2026-08-31 · 每格约 102 个样本</div>
+
+  <div class="col">
+    <div class="note">
+      <p style="margin:0">口径必须说清楚。「−92.90%」的准确含义是：按当前链上流动性，这个规模的卖单会被吃到这个价位。它不等于「你一定会亏 92%」：真去砸这一单大概率会被拒绝，不会成交，而且你可以分批走、可以走 CEX。这个数字告诉你的是「一次性砸出去的代价」，以及这些币在 $100 万这一档根本不存在可执行的市场。</p>
+    </div>
+    <p>$10 万这一档更贴近真实仓位：BONK −28.70%、PYTH −15.25%、WIF −3.40%、JTO −2.42%。这些都是 CEX 已上、日成交额可观的币。</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <div class="eyebrow">发现二 · 代币化股票</div>
+    <h2>八个代币化股票里，两个能卖，六个卖不掉</h2>
+  </div>
+
+  <div class="col">
+    <p>Robinhood Chain 于 2026 年 7 月 1 日上线主网，把美股搬到链上，24 小时交易。它的官方叙事是「代币化真实世界资产」。</p>
+    <p>下面这组数是「你按下卖出，实际收回多少」：把买到的量原路卖回去，含双边费用与价格冲击。全部通过 Uniswap V4 的 Quoter 在同一个钉死的区块高度上取得。</p>
+  </div>
+
+  <div class="tw">
+    <table>
+      <caption>Robinhood Chain（chainId 4663）· 17 轮 · 每 30 分钟一轮 · 2026-09-03 17:09 → 09-04 · 区块 53,579,264 → 53,861,286。数值为「卖出该名义金额实际收回的百分比」中位数。</caption>
+      <thead><tr><th>代币</th><th>卖 $100</th><th>卖 $1,000</th><th>卖 $10,000</th><th>卖 $100,000</th></tr></thead>
+      <tbody>
+        <tr><td>NVDA</td><td class="pos">99.30%</td><td class="pos">99.28%</td><td class="pos">99.15%</td><td class="pos">97.84%</td></tr>
+        <tr><td>TSLA</td><td class="pos">99.29%</td><td class="pos">99.26%</td><td class="pos">98.96%</td><td class="mid">95.30%</td></tr>
+        <tr><td>AAPL</td><td class="mid">94.08%</td><td class="mid">80.25%</td><td class="neg">2.82%</td><td class="neg">0.35%</td></tr>
+        <tr><td>QQQ</td><td class="neg">6.29%</td><td class="neg">4.12%</td><td class="neg">0.92%</td><td class="neg">0.11%</td></tr>
+        <tr><td>GOOGL</td><td class="neg">4.11%</td><td class="neg">3.51%</td><td class="neg">1.42%</td><td class="neg">0.20%</td></tr>
+        <tr><td>GME</td><td class="neg">0.96%</td><td class="neg">0.93%</td><td class="neg">0.72%</td><td class="neg">0.22%</td></tr>
+        <tr><td>RDDT</td><td class="neg">0.91%</td><td class="neg">0.85%</td><td class="neg">0.52%</td><td class="neg">0.11%</td></tr>
+        <tr><td>SPY</td><td class="neg">0.90%</td><td class="neg">0.84%</td><td class="neg">0.49%</td><td class="neg">0.09%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col">
+    <p><strong>卖出价值 $100 的 SPY 代币，收回 $0.90。</strong>而 NVDA 卖十万美元收回 97.8%。两者在任何界面上看起来是同一类资产：同一条链、同一个 DEX、同样标着「代币化股票」。</p>
+
+    <h3>AAPL 是最值得看的那一个</h3>
+    <p>它在 $100 收回 94%，$1,000 收回 80%，到 $10,000 只剩 2.82%。<strong>可成交性不是资产的属性，是金额的函数。</strong>AAPL 在小额上完全正常，在仓位变大的那一刻失效。这种坑比「全好」或「全坏」都更难发现。</p>
+
+    <h3>而且这不是波动，是结构</h3>
+    <p>17 轮、跨越 7.8 小时的测量里，绝大多数数值的波动范围小到可以忽略：NVDA 在 $100 档是 99.30%~99.30%，SPY 是 0.90%~0.90%。唯一有意义的变动是 TSLA 的 $100,000 档（93.6%~97.0%）。</p>
+    <p>「SPY 卖不掉」因此不是某一刻的状况，而是这个市场的常态。</p>
+
+    <div class="note">
+      <p style="margin:0"><strong>这些池子不是空的。</strong>在区块 53,861,286 上直接读取合约（<code>balanceOf</code> / <code>totalSupply</code>，非索引器、非聚合站），Uniswap V4 的单例合约持有上表八个代币各 31.6% 到 47.4% 的流通量，SPY 是 8,715 枚，占供应量 47.4%。资产是真的，池子是已初始化的，浏览器会把它们的 TVL 算进去。<strong>但你卖 $100 只能收回 $0.90。</strong>「有多少钱在里面」和「你能拿走多少」是两个不同的问题，而公开工具只回答前一个。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <div class="eyebrow">可复核性</div>
+    <h2>不需要相信我，自己算一遍</h2>
+  </div>
+  <div class="col">
+    <p>上面每一个数字都来自一次链上调用，而链上调用在指定区块高度是确定的：同样的输入，任何人在任何时候用任何语言，都会得到同样的输出。</p>
+    <p>所以每一轮测量都会生成一个哈希，原像里只包含可被第三方精确复现的字段：</p>
+  </div>
+
+  <div class="tw">
+    <table>
+      <caption>规范化原像 rhdepth-v1。整数一律以十进制字符串参与哈希——uint256 超出 JavaScript 的安全整数范围，用数字类型传递会静默丢精度。每轮产生 64 条规范化记录（8 代币 × 4 档位 × 买卖双向）；执行时的实际调用数更多（约 324 次，含逐池探测与汇率推导），但只有上表中的字段进入哈希。</caption>
+      <thead><tr><th>进入哈希</th><th>为什么</th></tr></thead>
+      <tbody>
+        <tr><td>区块高度</td><td>状态锚点</td></tr>
+        <tr><td>poolId</td><td>唯一确定池子</td></tr>
+        <tr><td>输入金额（原始整数）</td><td>调用参数</td></tr>
+        <tr><td>输出金额（原始整数）</td><td>链上返回值，确定性</td></tr>
+        <tr><td>状态</td><td>成交 / 流动性不足</td></tr>
+        <tr><td class="dim">时间戳、网络延迟</td><td class="dim">✗ 排除：第三方永远算不出同一个值</td></tr>
+        <tr><td class="dim">滑点、回收率等派生浮点</td><td class="dim">✗ 排除：跨语言的浮点序列化不一致</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col">
+    <p>实测：对基线首轮（区块 53,579,264）与其后的轮次分别独立重放全部报价调用，重算出的哈希与原始记录逐字节一致。</p>
+
+    <h3>自己跑一遍</h3>
+    <p>本页附带全部原始数据与复核脚本，无第三方依赖（<code>code/evm.py</code> 是零依赖实现，只需 Python 3 和 curl）：</p>
+    <ul class="plain">
+      <li><a href="./code/verify.py"><code>code/verify.py</code></a> —— 复核脚本。在指定区块高度重放全部报价、重算哈希、与记录比对</li>
+      <li>逐轮哈希 <a href="./data/2026-09-03/rounds.jsonl"><code>data/2026-09-03/rounds.jsonl</code></a>、<a href="./data/2026-09-04/rounds.jsonl"><code>09-04</code></a>；逐条报价 <a href="./data/2026-09-03/quotes.jsonl.gz"><code>quotes.jsonl.gz</code></a>（<a href="./data/2026-09-04/quotes.jsonl.gz"><code>09-04</code></a>）</li>
+      <li><a href="./code/rhchain.py"><code>code/rhchain.py</code></a> —— 池子枚举与 Quoter 调用；<a href="./code/stock_pools.json"><code>stock_pools.json</code></a> 是全链扫描得到的池表</li>
+      <li><a href="./README.md"><code>README.md</code></a> —— <code>rhdepth-v1</code> 原像规范全文与运行步骤</li>
+    </ul>
+    <p>需要一个 Robinhood Chain 的归档节点（在历史区块上 <code>eth_call</code>；公共端点通常只保留最近约 128 个区块的状态）：</p>
+    <div class="tw" style="border:none">
+      <table style="min-width:0"><tbody>
+        <tr><td style="font-weight:400;white-space:pre">export RHCHAIN_RPC="https://&lt;归档端点&gt;"
+python3 code/verify.py 53579264</td></tr>
+      </tbody></table>
+    </div>
+    <div class="note">
+      <p style="margin:0">这里给出的是<strong>可复核性，不是去中心化</strong>。提交这些哈希的权限是集中的，这是事实。但它不要求你信任提交者：任何人拿区块号重放一次，对得上就是真的，对不上就是假的。<strong>需要被信任的是算术，不是我。</strong></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <div class="eyebrow">发现三 · 预测市场</div>
+    <h2>同一种谎言，另一个市场</h2>
+  </div>
+
+  <div class="col">
+    <p>预测市场的界面上，每个市场都显示一个价格。抓下真实订单簿之后，能成交的是少数。</p>
+    <p>比「空壳」更值得单独拎出来的是单边市场：卖侧有真实深度，几十档、吃得下上万美元；买侧的挂单却全在 0.01 的灰尘价。你能以 0.99 买进去，想出来时只有 0.01 接你。档位数看着不少，价格却在接不住的位置。</p>
+  </div>
+
+  <div class="chips">
+    <div class="chip"><div class="pct pos">9.4%</div><div class="lbl">真实市场</div><div class="sub">56 个</div></div>
+    <div class="chip"><div class="pct mid">52.2%</div><div class="lbl">单边市场</div><div class="sub">311 个</div></div>
+    <div class="chip"><div class="pct" style="color:var(--grey-v)">21.3%</div><div class="lbl">灰色地带</div><div class="sub">127 个</div></div>
+    <div class="chip"><div class="pct neg">17.1%</div><div class="lbl">空壳报价</div><div class="sub">102 个</div></div>
+  </div>
+
+  <div class="tw">
+    <table>
+      <caption>2026-09-03 07:10 UTC · Polymarket + Kalshi + Pascal 共 38,775 个活跃市场 · 八个关键词全词匹配 · 每组只验成交量最高的一批。判据：价差 ≤0.10、卖盘 ≥3 档、书能吃下 ≥$200 且买一 &gt;0.02 才算真实市场。</caption>
+      <thead><tr><th>关键词</th><th>匹配</th><th>24h 无成交</th><th>已验</th><th>真实</th><th>单边</th><th>灰色</th><th>空壳</th></tr></thead>
+      <tbody>
+        <tr><td>bitcoin</td><td>238</td><td>54</td><td>78</td><td class="dim">0</td><td class="mid">47</td><td>15</td><td>16</td></tr>
+        <tr><td>ethereum</td><td>188</td><td>62</td><td>66</td><td class="dim">0</td><td class="mid">46</td><td>4</td><td>16</td></tr>
+        <tr><td>election</td><td>1,154</td><td>900</td><td>108</td><td class="pos">8</td><td class="mid">86</td><td>7</td><td>7</td></tr>
+        <tr><td>fed</td><td>82</td><td>65</td><td>75</td><td class="pos">14</td><td class="mid">31</td><td>14</td><td>16</td></tr>
+        <tr><td>trump</td><td>510</td><td>107</td><td>114</td><td class="pos">4</td><td class="mid">27</td><td>71</td><td>12</td></tr>
+        <tr><td>nba</td><td>69</td><td>65</td><td>59</td><td class="pos">21</td><td class="mid">33</td><td>2</td><td>3</td></tr>
+        <tr><td>china</td><td>24</td><td>9</td><td>24</td><td class="pos">2</td><td class="mid">14</td><td>3</td><td>5</td></tr>
+        <tr><td>gpt</td><td>100</td><td>26</td><td>72</td><td class="pos">7</td><td class="mid">27</td><td>11</td><td>27</td></tr>
+        <tr class="total"><td>合计</td><td>2,365</td><td>1,288</td><td>596</td><td>56</td><td>311</td><td>127</td><td>102</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col">
+    <p>两个细节值得注意。</p>
+    <p><strong>bitcoin 和 ethereum 的「真实市场」是零。</strong>144 个已验盘口，一个都没有两侧同时成立，几乎全是单边或空壳。而 nba 有 21/59 是真实市场，fed 有 14/75。<strong>话题越热闹，不代表越能成交。</strong></p>
+    <p><strong>54.5% 的匹配市场 24 小时内一笔成交都没有。</strong>搜 election 出来 1,154 个市场，其中 900 个是静的。界面上它们和活跃市场长得一模一样。</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <div class="eyebrow">方法</div>
+    <h2>我们的仪器骗了我们七次</h2>
+  </div>
+
+  <div class="col">
+    <p>这一节通常不会出现在这类报告里。放进来是因为它解释了一件更重要的事：为什么几乎没有人做独立的可执行性测量。</p>
+    <p>不是因为难，是因为仪器会安静地骗你。下面七个错误全部发生在这五天，每一个都产出过一个看起来像洞见的精确数字。最后两个是这次更新时才发现的，其中一个差点让上面整节结论完全反过来。</p>
+  </div>
+
+  <div class="fail">
+    <div class="n">01</div><div class="t">深度虚高一百万倍</div>
+    <div class="b">Limitless 的盘口数量是 6 位定点数。成交那条代码路径除了 <code>1e6</code>，盘口这条漏了。于是「吃掉 $10,000 的均价」永远等于顶档价，整条阶梯是平的。99.9% 的行都这样，而且没有一行报错。</div>
+  </div>
+  <div class="fail">
+    <div class="n">02</div><div class="t">「Kalshi 100% 是骨架报价」</div>
+    <div class="b">Kalshi 的顶档随市场列表一起返回，深档要逐个调且无批量接口，所以我们只存了顶档，<code>n_ask</code> 恒为 1。套用「卖盘 ≥3 档」的判据，它必然 100% 不合格。这是我们的采集口径造成的，与它的市场无关。对一家受监管交易所公开这种结论，一次就够毁掉「独立测量」这个身份。</div>
+  </div>
+  <div class="fail">
+    <div class="n">03</div><div class="t">74% 的清单是已经结束的市场</div>
+    <div class="b">Polymarket 枚举加了 <code>active=true&amp;closed=false</code>，但这两个参数拦不住已过期的市场。清单里 74% 是死盘，两万个额度全烧在上面，游标永远走不到当前活跃的市场，表现是「搜 bitcoin 只有 3 个结果」。同时它污染了统计：死盘没有订单簿，被判成空壳，把「真实市场占比」整体压低。</div>
+  </div>
+  <div class="fail">
+    <div class="n">04</div><div class="t">没有买单，却判成「真实市场」</div>
+    <div class="b">没有买单时 <code>bid1 = 0</code>，于是价差 = 卖一 − 0 = 卖一。只要卖一便宜（比如 0.05），价差就 ≤ 0.10 而通过判定——而那个市场一张买单都没有。修复前的输出里赫然写着「价差 1.000 · ✅ 真实市场」，自相矛盾。修正后该类别的数量掉了一半以上。</div>
+  </div>
+  <div class="fail">
+    <div class="n">05</div><div class="t">一条天天在响的假警报</div>
+    <div class="b">巡检把「慢源」写成了硬编码名单。某个源的采集间隔从 600s 改到 1800s 后名单没跟着改，它每三轮才出现一次却仍按「每轮都该到」统计，导致「多源同时到齐率」从 89% 掉到 43%，告警天天响而底下没有任何真问题。同一类错误（同一个事实抄了两份，然后漂移）在三天里出现了四次。</div>
+  </div>
+
+  <div class="fail">
+    <div class="n">06</div><div class="t">「链上股票代币池基本是空的」——这个结论是错的</div>
+    <div class="b">初次扫描得出「所有池子往返损耗 92%」，几乎写进了报告。错因：这条链 100 毫秒出块，链龄 5,341 万个区块 ≈ 62 天，而我们只扫了最近 400 万块 ≈ 4.6 天。那个窗口里全是发射台新造的垃圾池；真正的股票代币池建在开链初期，完全在扫描范围之外。全链重扫后结论反转：NVDA/TSLA 是真实可交易的。<strong>「最近 N 个区块」在不同链上意味着完全不同的时间跨度</strong>，任何按区块数取窗口的分析，第一步必须换算成时间。</div>
+  </div>
+  <div class="fail">
+    <div class="n">07</div><div class="t">一轮数据里的 64 行，来自 64 个不同的时刻</div>
+    <div class="b">采集器在轮次开始时记录一个区块号，但 324 次调用全部打的是「最新区块」。一轮跑 60~85 秒，而链每 100 毫秒出一个块，期间推进了约 700 个区块。后果有两层：记录的区块号与数据实际状态对不上（第三方永远复核不了），而且同一轮内各行互相也对不上（违背「同一时刻的横截面」这个前提）。这个错误是被复核脚本抓出来的：写完验证工具第一次运行就对不上。没有那个工具，它会一直静默存在。修复后整轮钉死在同一区块高度，代价是需要归档节点。</div>
+  </div>
+
+  <div class="col" style="margin-top:34px">
+    <h3>还有一个不是 bug 的障碍</h3>
+    <p>测量本身会触发限流。ParaSwap（现 Velora）免费档约 5,000 次/天，且按出口 IP 计，不按 key，也不分域名。我们一天发了 5,622 次，从 8 月 31 日 23:31 UTC 起连续 11 小时全线 429，直到滚动窗口滚过去才恢复。</p>
+    <p>这类源的商业模型是服务交易集成方，而「纯测量、零成交」不符合它的定位。所以独立第三方测量的门槛不在代码，在于如何合法且可持续地拿到报价权限。这也是「独立测量为什么没人做」的答案。</p>
+    <div class="note">
+      <p style="margin:0">坦白缺失比假装完整更可信。上面七个错误里，有五个是在为这份报告做核对时才发现的。「Polymarket 只有约 10% 的市场能成交」这个数字曾被写进对外文案又撤下；「链上股票代币池全是空的」这个结论在被推翻前，已经写好了整整一节。写复核工具的理由就在这里：它首先抓到的是你自己的错。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <div class="eyebrow">局限</div>
+    <h2>这份数据不能用来做什么</h2>
+  </div>
+  <div class="col">
+    <ul class="plain">
+      <li><strong>时间深度只有几天。</strong>链上数据自 2026-08-30，预测市场自 08-29。所有结论都是横截面的，不构成任何时间序列断言。「谁长期更优」需要至少数周样本。</li>
+      <li><strong>Solana 只有一个报价源。</strong>Jupiter 是唯一可用源，因此那组阶梯做不了横向对比——按发现一的结论，它很可能高估了真实成本。</li>
+      <li><strong>预测市场是关键词抽样，不是普查。</strong>八个关键词、每组只验成交量最高的一批。未验的市场按成交量排在后面，抽验尾部 50 个的结果是 45 个连订单簿都取不到——但这仍是抽样。</li>
+      <li><strong>本次拉取缺 Limitless。</strong>该平台清单接口在采样时刻返回空，未纳入统计。三天内出现过三次，稳定性存疑。</li>
+      <li><strong>Kalshi 只能给出降级结论。</strong>该平台仅公开顶档，其结论标注「深度未知」，且方向是高估真实市场比例，不是低估。</li>
+      <li><strong>「无法执行」不等于「你会亏 X%」。</strong>被拒绝报价意味着这个规模在当前流动性下吃不下，不是一个你会实际付出的成本。</li>
+      <li><strong>代币化股票只测了 USDG 计价的池子。</strong>部分代币还有 ETH/WETH 计价的池，本轮未纳入统计——理论上某个代币可能在别的计价资产上更深。已知 TSLA 在 ETH 池上有额外深度。</li>
+      <li><strong>只有 7.8 小时、17 轮。</strong>「深度稳定」这个结论的时间尺度很短，不能外推到跨日、跨周末或财报窗口。美股休市时段的行为尚未测量。</li>
+      <li><strong>报价 ≠ 成交。</strong>全部数字来自 Quoter 的模拟调用，不是实际发生的交易。真实成交会受 MEV、滑点保护、gas 等影响，通常更差不会更好。</li>
+      <li><strong>预测市场那节的数字是 2026-09-03 的快照。</strong>事件型市场会到期，其中「49 个财报市场」这一批已随财报季结束而消失，复核时不会看到相同的匹配数。</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="col">
+    <p>方法、判据阈值与全部原始口径均可复核。四个预测市场平台（Polymarket / Kalshi / Limitless / Pascal）、七个链上报价源（CoW / KyberSwap / ParaSwap / 0x / 1inch / LiFi / Jupiter）与 Robinhood Chain 上的代币化股票采集仍在持续，样本按天增长。</p>
+    <p>下一步是把测量延伸到美股休市时段——周五收盘到周一开盘之间有 62 小时，链上照常交易，而价格预言机停止更新。那段时间的可执行深度目前没有公开数据，风险却最集中。</p>
+    <p class="sig">独立开发者 · 自建数据管线 · 数据窗口 2026-08-30 → 09-04 · 报告更新于 2026-09-04</p>
+  </div>
+</footer>
+
+</div>
+
+</body></html>

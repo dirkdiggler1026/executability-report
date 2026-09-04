@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
-"""Robinhood Chain 股票代币可执行深度采集。
+"""Collect executable depth for tokenized stocks on Robinhood Chain.
+
+Every 30 minutes, at a single pinned block height, quote 8 tokenized
+stocks across 4 notional sizes in both directions through the Uniswap
+V4 Quoter. Writes one JSON row per quote plus a per-round canonical
+hash (see canon_lines for the exact preimage format).
+
+Output: {root}/uniswap_v4_rh/{day}/quotes.jsonl.gz and rounds.jsonl
+
+--- 中文原注释 ---
+Robinhood Chain 股票代币可执行深度采集。
 
  为什么独立于 dexfeed 而不是加一个 source：
    ① dexfeed 的数据格式 2026-09-01 冻结，它的 SOURCES 模型假设的是

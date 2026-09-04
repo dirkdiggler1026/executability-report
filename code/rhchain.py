@@ -1,4 +1,19 @@
-"""Robinhood Chain (4663) 股票代币可执行深度读取。
+"""Robinhood Chain (4663): pool discovery and executable-depth quoting.
+
+Enumerates initialised Uniswap V4 pools from Initialize events, derives
+poolIds, and quotes exact-input swaps through the V4 Quoter.
+
+Note on V3 vs V4: the official deployment page lists a v3 factory and
+getPool returns a non-zero address, but that pool was never initialised
+(sqrtPriceX96 = 0). All real liquidity is in the V4 PoolManager
+singleton. Deployed does not mean liquid.
+
+Addresses come from the official Uniswap deployment table, not from a
+block explorer search: the top-ranked verified StateView on the explorer
+points at a PoolManager with zero balance and zero Initialize events.
+
+--- 中文原注释 ---
+Robinhood Chain (4663) 股票代币可执行深度读取。
 
  为什么走 V4 而不是 V3（2026-09-03 实测）：
    官方部署页列了 v3 factory，`getPool` 也返回非零地址 —— 但那个池
