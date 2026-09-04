@@ -1,29 +1,14 @@
 #!/usr/bin/env python3
-"""Independently verify a round's roundKeccak.
+"""独立复核一个轮次的 roundKeccak。
 
-This is the product claim itself: given a block number and this file,
-anyone can replay every quote at that block height, recompute the hash,
-and compare it byte for byte against the committed value. You do not
-need to trust whoever published it; you need to trust arithmetic.
-
-    python3 verify.py <block>     verify a specific round
-    python3 verify.py --latest    verify the most recent round
-
-Requires an archive node (historical eth_call). Public endpoints
-typically retain only ~128 blocks of state; set RHCHAIN_RPC to an
-archive endpoint.
-
---- 中文原注释 ---
-独立复核一个轮次的 roundKeccak。
-
-这就是「证据承诺」卖的那件事本身：任何人拿区块号 + 本文件，
-就能在同一区块高度重放全部报价、重算哈希、和链上承诺逐字节比对。
+这就是「证据承诺」卖的那件事本身：**任何人拿区块号 + 本文件，
+就能在同一区块高度重放全部报价、重算哈希、和链上承诺逐字节比对。**
 不需要信任提交者，只需要信任算术。
 
     python3 verify.py <block>        复核指定轮次
     python3 verify.py --latest       复核最近一轮
 
- 需要归档节点（在历史区块上 eth_call）。公共端点通常不支持，
+🔴 需要归档节点（在历史区块上 eth_call）。公共端点通常不支持，
    配 RHCHAIN_RPC 指向 Alchemy 一类的归档端点。
 """
 from __future__ import annotations
@@ -37,41 +22,49 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 
 from collect import CANON_VERSION, ROOT, SIZES, canon_lines, load_pools, round_keccak
-from rhchain import QUOTES, STOCKS, STOCK_DEC, best_quote
+from rhchain import QUOTES, STOCKS, quote
 
 
 def rebuild(block: int) -> list[dict]:
-    """在指定区块高度重新执行全部报价，重建该轮的可复现字段。"""
+    """在指定区块高度重新执行同池往返，重建该轮的可复现字段。
+
+    v2 的每条记录是一次【闭环】：在同一个池里用 USDG 买入，再把买到的
+    全部卖回。所以重放必须复现两条腿，中间量 mid_amount_raw 也进原像 ——
+    没有它，第三方只能验证「投入和产出」，无法验证中间那一步走的是
+    哪个池、拿到了多少代币。
+    """
     idx = load_pools()
     U, UD = QUOTES["USDG"]
     bh = hex(block)
     rows = []
     for sym, ps in sorted(idx.items()):
-        base, bp, st = best_quote(ps, U, 100 * 10 ** UD, bh)
-        if not base:
-            rows.append({"block": block, "sell_sym": sym, "side": "buy",
-                         "size_usd": 100, "route": "", "amount_in_raw": str(100 * 10 ** UD),
-                         "amount_out_raw": None, "status": st})
-            continue
-        rate = base / 10 ** STOCK_DEC / 100
         for sz in SIZES:
-            o, p, st = best_quote(ps, U, sz * 10 ** UD, bh)
-            rows.append({"block": block, "sell_sym": sym, "side": "buy", "size_usd": sz,
-                         "route": p["id"] if p else "",
-                         "amount_in_raw": str(sz * 10 ** UD),
-                         "amount_out_raw": None if o is None else str(o), "status": st})
-            amt = int(rate * sz * 10 ** STOCK_DEC)
-            o2, p2, st2 = best_quote(ps, STOCKS[sym], amt, bh)
-            rows.append({"block": block, "sell_sym": sym, "side": "sell", "size_usd": sz,
-                         "route": p2["id"] if p2 else "",
-                         "amount_in_raw": str(amt),
-                         "amount_out_raw": None if o2 is None else str(o2), "status": st2})
+            amt_in = sz * 10 ** UD
+            best = None
+            for p in ps:
+                o, st = quote(p, U, amt_in, bh)
+                if not o:
+                    continue
+                back, st2 = quote(p, STOCKS[sym], o, bh)
+                if back and (best is None or back > best[0]):
+                    best = (back, o, p)
+            if best is None:
+                rows.append({"block": block, "sell_sym": sym, "side": "roundtrip",
+                             "size_usd": sz, "route": "",
+                             "amount_in_raw": str(amt_in), "mid_amount_raw": None,
+                             "amount_out_raw": None, "status": "no_liquidity"})
+                continue
+            back, mid, p = best
+            rows.append({"block": block, "sell_sym": sym, "side": "roundtrip",
+                         "size_usd": sz, "route": p["id"],
+                         "amount_in_raw": str(amt_in), "mid_amount_raw": str(mid),
+                         "amount_out_raw": str(back), "status": "ok"})
     return rows
 
 
 def main() -> int:
     arg = sys.argv[1] if len(sys.argv) > 1 else "--latest"
-    #  跨天查找。轮次按 UTC 日期分目录，但被复核的区块可能在任何一天 ——
+    # 🔴 跨天查找。轮次按 UTC 日期分目录，但被复核的区块可能在任何一天 ——
     #    只翻今天的目录，历史轮次就永远「找不到」，而第三方复核的
     #    恰恰多是历史轮次。
     recs = []
@@ -89,13 +82,13 @@ def main() -> int:
     print(f"复核轮次  块 {rec['block']:,}  规范 {rec['canon']}")
     print(f"  链上承诺 {rec['roundKeccak']}")
     if rec["canon"] != CANON_VERSION:
-        print(f"   规范版本不符（本地 {CANON_VERSION}），哈希必然不同")
+        print(f"  ⚠️ 规范版本不符（本地 {CANON_VERSION}），哈希必然不同")
 
     rows = rebuild(rec["block"])
     got = round_keccak(rows)
     print(f"  独立重算 {got}")
     ok = got == rec["roundKeccak"]
-    print(f"\n  {' 一致 —— 该轮数据可被独立复现' if ok else ' 不一致'}")
+    print(f"\n  {'✅ 一致 —— 该轮数据可被独立复现' if ok else '❌ 不一致'}")
     if not ok:
         orig = []
         for qf in sorted(ROOT.glob("*/quotes.jsonl.gz")):

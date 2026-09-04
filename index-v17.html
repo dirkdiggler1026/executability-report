@@ -4,6 +4,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Independent measurement of executable depth across on-chain aggregators, tokenized stocks on Robinhood Chain, and prediction markets. Data and verification script included.">
 </head><body style="margin:0">
+<div style="background:#8F2C2C;color:#fff;padding:14px 28px;font:14px/1.6 system-ui,sans-serif">
+<strong>SUPERSEDED.</strong> The tokenized-stock findings on this page were wrong: the pool discovery scan
+found 55 pools where the chain has 25,122, so only the shallowest were measured.
+<a href="./" style="color:#fff">Read the corrected version</a>. Kept online because deleting a superseded
+version makes every other claim harder to check.</div>
 <title>Executability</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -246,23 +251,23 @@ footer p{font-size:14px;color:var(--ink-2)}
 </style><div class="wrap">
 
 <header class="mast">
-  <div class="eyebrow">Independent measurement · v18 · corrected 2026-09-04</div>
+  <div class="eyebrow">Independent measurement · 2026-09-04</div>
   <h1>The price on screen<br>is not the price you get</h1>
   <p class="standfirst">A price oracle tells you what something is worth. This measurement tells you whether you can actually sell it. Three unrelated markets, one recurring gap: the number on the screen and the number you get when you press the button are further apart than they look.</p>
   <div class="byline">
     <span>Window <b>2026-08-30 → 09-04</b></span>
     <span>Aggregator quotes <b>51,084</b></span>
     <span>Prediction-market books <b>596</b></span>
-    <span>Tokenized stocks <b>12 rounds · 432 block-pinned round trips</b></span>
+    <span>Tokenized stocks <b>17 rounds · 1,088 block-pinned quotes</b></span>
     <span>Reproducible <b>hash per round</b></span>
   </div>
 </header>
 
 <div class="readings">
   <div class="reading">
-    <div class="k">Tokenized QQQ</div>
-    <div class="v" style="color:var(--bad)">$6.46</div>
-    <div class="d">Selling $100 of QQQ on Robinhood Chain returns $6.46. At $100,000 it returns $30.</div>
+    <div class="k">Tokenized SPY</div>
+    <div class="v" style="color:var(--bad)">$0.90</div>
+    <div class="d">Selling $100 of SPY on Robinhood Chain returns $0.90</div>
   </div>
   <div class="reading">
     <div class="k">Prediction markets · one-sided</div>
@@ -271,8 +276,8 @@ footer p{font-size:14px;color:var(--ink-2)}
   </div>
   <div class="reading">
     <div class="k">Same screen, same asset class</div>
-    <div class="v">3300<span style="font-size:20px">×</span></div>
-    <div class="d">SPY returns 99.7% on a $100,000 sell; QQQ returns 0.03%</div>
+    <div class="v">1000<span style="font-size:20px">×</span></div>
+    <div class="d">NVDA returns 97.8% on $100k; SPY returns 0.9% on $100</div>
   </div>
 </div>
 
@@ -352,69 +357,47 @@ footer p{font-size:14px;color:var(--ink-2)}
 </section>
 <section>
   <div class="sec-head">
-    <div class="eyebrow">Finding two · Tokenized stocks · corrected</div>
-    <h2>The previous version of this section was wrong</h2>
+    <div class="eyebrow">Finding two · Tokenized stocks</div>
+    <h2>Of eight tokenized stocks, two can be sold and six cannot</h2>
   </div>
 
   <div class="col">
-    <p>Everything this section said in the version published on 4 September is void: that six of eight tokenized stocks could not be sold, that $100 of SPY returned $0.90, and that AAPL fell off a cliff above $1,000. None of it holds.</p>
-    <p>The cause was mine, not the market's. The scan that builds the pool table silently skipped block ranges that failed. It found about 55 pools where the chain has 25,122, and the handful it did find were mostly the shallow ones. I measured those and reported the result as a property of the asset.</p>
+    <p>Robinhood Chain went live on 1 July 2026, putting US equities on-chain with 24-hour trading. Its stated purpose is tokenized real-world assets.</p>
+    <p>The figures below answer "if you press sell, how much comes back": buy a position, sell it straight back, including both legs of fees and price impact. All quotes taken through the Uniswap V4 Quoter at a single pinned block height.</p>
   </div>
 
   <div class="tw">
     <table>
-      <caption>What the earlier version published, against a re-measurement of the same thing. These figures are shown only so the size of the error is visible without going back to the superseded page.</caption>
-      <thead><tr><th>Claim</th><th>Published (v17)</th><th>Corrected</th></tr></thead>
+      <caption>Robinhood Chain (chainId 4663) · 17 rounds · one every 30 minutes · 2026-09-03 17:09 → 09-04 UTC · blocks 53,579,264 → 53,861,286. Median share of notional recovered on a sell.</caption>
+      <thead><tr><th>Token</th><th>Sell $100</th><th>Sell $1,000</th><th>Sell $10,000</th><th>Sell $100,000</th></tr></thead>
       <tbody>
-        <tr><td>SPY, sell $100</td><td class="neg">0.90% · PUBLISHED IN ERROR</td><td class="pos">99.93%</td></tr>
-        <tr><td>AAPL, sell $10,000</td><td class="neg">2.82% · PUBLISHED IN ERROR</td><td class="pos">99.85%</td></tr>
-        <tr><td>Tokens that cannot be sold</td><td class="neg">six of eight · PUBLISHED IN ERROR</td><td class="pos">one of nine</td></tr>
+        <tr><td>NVDA</td><td class="pos">99.30%</td><td class="pos">99.28%</td><td class="pos">99.15%</td><td class="pos">97.84%</td></tr>
+        <tr><td>TSLA</td><td class="pos">99.29%</td><td class="pos">99.26%</td><td class="pos">98.96%</td><td class="mid">95.30%</td></tr>
+        <tr><td>AAPL</td><td class="mid">94.08%</td><td class="mid">80.25%</td><td class="neg">2.82%</td><td class="neg">0.35%</td></tr>
+        <tr><td>QQQ</td><td class="neg">6.29%</td><td class="neg">4.12%</td><td class="neg">0.92%</td><td class="neg">0.11%</td></tr>
+        <tr><td>GOOGL</td><td class="neg">4.11%</td><td class="neg">3.51%</td><td class="neg">1.42%</td><td class="neg">0.20%</td></tr>
+        <tr><td>GME</td><td class="neg">0.96%</td><td class="neg">0.93%</td><td class="neg">0.72%</td><td class="neg">0.22%</td></tr>
+        <tr><td>RDDT</td><td class="neg">0.91%</td><td class="neg">0.85%</td><td class="neg">0.52%</td><td class="neg">0.11%</td></tr>
+        <tr><td>SPY</td><td class="neg">0.90%</td><td class="neg">0.84%</td><td class="neg">0.49%</td><td class="neg">0.09%</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="col">
-    <h3>What changed in the method</h3>
-    <ul class="plain">
-      <li><strong>Complete pool table.</strong> The scan now aborts on any failed block range instead of skipping it. Of 25,122 initialised pools, 1,027 pair a stock token with USDG; 125 of those can fill $10,000. The eight that return the most are kept per token. Selection is reproducible: <code>build_pool_table.py</code>.</li>
-      <li><strong>Same-pool round trip.</strong> Buy in one pool, sell the whole position back through that same pool. The previous method took the best buy pool and the best sell pool separately and derived a rate between them; that rate belongs to no actual pool and produced recovery figures above 100%, which cannot persist. A closed loop needs no rate assumption and must come in under 100%.</li>
-      <li><strong>Nine tokens, USDG-quoted pools only.</strong> AMC was absent from the earlier table because its pools were among those the broken scan missed.</li>
-    </ul>
-  </div>
+    <p>Selling $100 of tokenized SPY returns $0.90. Selling $100,000 of NVDA returns 97.8%. On any interface these look like the same kind of asset: same chain, same DEX, both labelled "tokenized stock".</p>
 
-  <div class="col">
-    <h3>Corrected measurements</h3>
-    <p>Twelve rounds over 5.1 hours, every 30 minutes, each pinned to a single block. Every size filled in every round; nothing was unquotable. Where a figure moves between rounds, the p10–p90 range is given underneath.</p>
-  </div>
+    <h3>AAPL is the one to look at</h3>
+    <p>It returns 94% at $100, 80% at $1,000, and 2.82% at $10,000. <strong>Executability is not a property of the asset. It is a function of size.</strong> AAPL behaves normally until your position grows, then stops. That failure mode is harder to spot than either "always fine" or "always broken".</p>
 
-  <div class="tw">
-    <table>
-      <caption>Robinhood Chain (chainId 4663) · 12 rounds, one every 30 minutes · 2026-09-04 07:30 → 12:42 UTC · blocks 54,088,399 → 54,270,401. Same-pool round trip: buy with USDG, sell the whole position back through the same pool. Median share of notional recovered, with the p10–p90 range. No round failed to fill at any size, so the "could not fill" count is zero throughout and is omitted.</caption>
-      <thead><tr><th>Token</th><th>$100</th><th>$1,000</th><th>$10,000</th><th>$100,000</th></tr></thead>
-      <tbody>
-        <tr><td>SPY</td><td class="pos">99.93%</td><td class="pos">99.93%</td><td class="pos">99.91%</td><td class="pos">99.71%</td></tr>
-        <tr><td>AAPL</td><td class="pos">99.93%</td><td class="pos">99.92%</td><td class="pos">99.85%</td><td class="pos">99.06%</td></tr>
-        <tr><td>GOOGL</td><td class="pos">99.99%</td><td class="pos">99.95%</td><td class="pos">99.53%</td><td class="pos">97.97%</td></tr>
-        <tr><td>NVDA</td><td class="pos">99.99%</td><td class="pos">99.89%</td><td class="pos">99.48%</td><td class="pos">96.50%</td></tr>
-        <tr><td>TSLA</td><td class="pos">99.89%</td><td class="pos">99.77%</td><td class="pos">99.07%</td><td class="pos">96.75%</td></tr>
-        <tr><td>RDDT</td><td class="pos">99.32%</td><td class="pos">99.32%</td><td class="pos">99.24%</td><td class="mid">93.12%<br><span class="dim" style="font-size:11px">90.1–96.6</span></td></tr>
-        <tr><td>AMC</td><td class="pos">99.75%</td><td class="pos">99.62%</td><td class="mid">97.08%<br><span class="dim" style="font-size:11px">86.1–99.0</span></td><td class="neg">74.55%<br><span class="dim" style="font-size:11px">28.5–83.6</span></td></tr>
-        <tr><td>GME</td><td class="pos">99.49%</td><td class="pos">99.37%</td><td class="mid">97.97%<br><span class="dim" style="font-size:11px">36.9–98.6</span></td><td class="neg">17.33%<br><span class="dim" style="font-size:11px">3.7–22.5</span></td></tr>
-        <tr><td>QQQ</td><td class="neg">6.46%</td><td class="neg">1.83%</td><td class="neg">0.26%</td><td class="neg">0.03%</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="col">
-    <p><strong>QQQ is the one token that cannot be sold at any size.</strong> $100 returns $6.46 and $100,000 returns $30. It is not a size effect and not a moment: all twelve rounds agree to within a tenth of a percent. Every other token on this chain returns at least 93% of a $100,000 sell.</p>
-    <p><strong>GME and AMC are where size still bites, and they are the two tickers retail sentiment concentrates in.</strong> Both are fine up to $1,000. GME at $100,000 returns 17% and never exceeded 23% in any round; AMC at the same size ranges from 28% to 84% depending on when you ask. The medians alone would hide that: the reason both carry a range is that a single number would misrepresent them.</p>
+    <h3>And this is structure, not noise</h3>
+    <p>Across 17 rounds spanning 7.8 hours, almost every figure barely moves: NVDA at the $100 tier ranges 99.30%–99.30%, SPY 0.90%–0.90%. The only meaningful variation is TSLA at $100,000 (93.6%–97.0%).</p>
+    <p>So "SPY cannot be sold" is not a momentary condition. It is the standing state of that market.</p>
 
     <div class="note">
-      <p style="margin:0"><strong>One observation, not yet a finding.</strong> Both GME and AMC improved markedly during the window — GME at $10,000 went from about 30% to 98% and stayed there, while AMC at $100,000 climbed steadily from 18% to 83% without reversing. The two shapes are different enough that they are unlikely to share a cause, and neither is explained by anything measured here. This is a single day's observation. Whether it repeats is not something one session can establish, and it is recorded here as an open question rather than a result.</p>
+      <p style="margin:0"><strong>These pools are not empty.</strong> Reading the contracts directly at block 53,861,286 (<code>balanceOf</code> and <code>totalSupply</code>, not an indexer or an aggregator site), the Uniswap V4 singleton holds between 31.6% and 47.4% of each of the eight tokens' supply. For SPY that is 8,715 units, 47.4% of supply. The assets are real, the pools are initialised, and explorers count their TVL. You still only get $0.90 back on $100. "How much is in there" and "how much can you take out" are different questions, and public tools only answer the first.</p>
     </div>
   </div>
 </section>
-
 
 <section>
   <div class="sec-head">
@@ -428,13 +411,12 @@ footer p{font-size:14px;color:var(--ink-2)}
 
   <div class="tw">
     <table>
-      <caption>Canonical preimage, rhdepth-v2. Integers are hashed as decimal strings: uint256 exceeds JavaScript's safe integer range, and passing them as numbers loses precision silently. Each round yields 36 canonical records (9 tokens × 4 sizes, one closed round trip each); the run makes many more calls than that, probing every candidate pool, but only the winning pool's figures enter the hash.</caption>
+      <caption>Canonical preimage, rhdepth-v1. Integers are hashed as decimal strings: uint256 exceeds JavaScript's safe integer range, and passing them as numbers loses precision silently. Each round yields 64 canonical records (8 tokens × 4 sizes × both directions); the run itself makes more calls than that (~324, including per-pool probing and rate derivation), but only the fields above enter the hash.</caption>
       <thead><tr><th>In the hash</th><th>Why</th></tr></thead>
       <tbody>
         <tr><td>Block height</td><td>State anchor</td></tr>
         <tr><td>poolId</td><td>Identifies the pool</td></tr>
         <tr><td>Input amount (raw integer)</td><td>Call parameter</td></tr>
-        <tr><td>Midpoint amount (raw integer)</td><td>Tokens received before selling back</td></tr>
         <tr><td>Output amount (raw integer)</td><td>Chain return value, deterministic</td></tr>
         <tr><td>Status</td><td>Filled / insufficient liquidity</td></tr>
         <tr><td class="dim">Timestamps, network latency</td><td class="dim">✗ excluded: nobody else can reproduce them</td></tr>
@@ -444,7 +426,7 @@ footer p{font-size:14px;color:var(--ink-2)}
   </div>
 
   <div class="col">
-    <p>Verified in practice: replaying every round trip independently for the first v2 round (block 54,088,399) reproduces the recorded hash byte for byte.</p>
+    <p>Verified in practice: replaying every quote call independently for the first round (block 53,579,264) and for later rounds reproduces the recorded hashes byte for byte.</p>
 
     <h3>Run it yourself</h3>
     <p>This page ships with the raw data and the verification script, with no third-party dependencies (<code>code/evm.py</code> is a from-scratch implementation needing only Python 3 and curl):</p>
@@ -452,14 +434,14 @@ footer p{font-size:14px;color:var(--ink-2)}
       <li><a href="./code/verify.py"><code>code/verify.py</code></a> — replays every quote at a given block, recomputes the hash, compares it to the record</li>
       <li>Per-round hashes <a href="./data/2026-09-03/rounds.jsonl"><code>data/2026-09-03/rounds.jsonl</code></a>, <a href="./data/2026-09-04/rounds.jsonl"><code>09-04</code></a>; per-quote records <a href="./data/2026-09-03/quotes.jsonl.gz"><code>quotes.jsonl.gz</code></a> (<a href="./data/2026-09-04/quotes.jsonl.gz"><code>09-04</code></a>)</li>
       <li><a href="./code/rhchain.py"><code>code/rhchain.py</code></a> — pool enumeration and Quoter calls; <a href="./code/stock_pools.json"><code>stock_pools.json</code></a> is the pool table from a full-chain scan</li>
-      <li><a href="./README.md"><code>README.md</code></a> — the full rhdepth-v2 specification and run instructions</li>
+      <li><a href="./README.md"><code>README.md</code></a> — the full rhdepth-v1 specification and run instructions</li>
     </ul>
-    <p>Every figure on this page corresponds to a snapshot of 12 rounds ending at block 54,270,401, which is exactly the data shipped alongside it. Collection continues, so the data files in the repository will grow past what this text describes.</p>
+    <p>Every figure on this page corresponds to a snapshot of 17 rounds ending at block 53,861,286, which is exactly the data shipped alongside it. Collection continues, so the data files in the repository will grow past what this text describes.</p>
     <p>You need an archive node for Robinhood Chain (historical <code>eth_call</code>; public endpoints typically retain only the last ~128 blocks of state):</p>
     <div class="tw" style="border:none">
       <table style="min-width:0"><tbody>
         <tr><td style="font-weight:400;white-space:pre">export RHCHAIN_RPC="https://&lt;archive endpoint&gt;"
-python3 code/verify.py 54088399</td></tr>
+python3 code/verify.py 53579264</td></tr>
       </tbody></table>
     </div>
     <div class="note">
@@ -513,12 +495,12 @@ python3 code/verify.py 54088399</td></tr>
 <section>
   <div class="sec-head">
     <div class="eyebrow">Method</div>
-    <h2>Our instruments lied to us nine times</h2>
+    <h2>Our instruments lied to us seven times</h2>
   </div>
 
   <div class="col">
     <p>This section does not usually appear in a report like this. It is here because it explains something more important: why almost nobody does independent executability measurement.</p>
-    <p>Not because it is hard, but because instruments lie quietly. Nine errors over six days, each producing a precise number that looked like an insight. Seven were caught before anything was published. Two were not: they are marked below, and the section they corrupted is corrected above. A process that genuinely self-corrects will eventually catch something late — what matters is which side of publication each one landed on, so that is stated.</p>
+    <p>Not because it is hard, but because instruments lie quietly. All seven errors below happened over five days, and each produced a precise number that looked like an insight. The last two were found during this update, and one of them nearly inverted an entire section's conclusion.</p>
   </div>
 
   <div class="fail">
@@ -550,20 +532,10 @@ python3 code/verify.py 54088399</td></tr>
     <div class="b">The collector recorded one block number at the start of a round, then made every call against "latest". A round takes 60–85 seconds and the chain advances roughly 700 blocks in that time. Two things break: the recorded block does not match the state the data came from, so nobody can ever verify it; and the rows within a round do not match each other, which breaks the premise of a same-moment cross-section. This one was caught by the verification script — it failed on its first run — and would otherwise have persisted silently. Fixed by pinning the whole round to one block height, at the cost of requiring an archive node.</div>
   </div>
 
-  <div class="fail">
-    <div class="n">08</div><div class="t">The pool table was 0.2% complete — found after publication</div>
-    <div class="b">The scan that builds the pool table skipped block ranges that failed instead of stopping. It returned 55 pools where the chain has 25,122, and the ones it happened to catch were mostly shallow. Every tokenized-stock figure in the previous version was measured against those pools: SPY's real round trip at $100 is 99.93%, not 0.90%, and the AAPL "size cliff" does not exist. Pool count is not a proxy for depth either — AMC has among the most pools of any token and among the fewest that can fill $10,000. Any pool table built before the scan was made fail-loud has to be discarded, not patched.</div>
-  </div>
-  <div class="fail">
-    <div class="n">09</div><div class="t">A metric that could exceed 100% — found after publication</div>
-    <div class="b">The old measurement took the best buy pool and the best sell pool separately, then derived a rate between them to size the sell. That rate belongs to no actual pool. It produced round-trip recoveries above 100% — buy and immediately sell back at a profit — which cannot persist for more than a few seconds in any real market. The replacement closes the loop inside one pool, needs no rate assumption, and cannot exceed 100% by construction: if it ever does, that is a bug announcing itself.</div>
-  </div>
-
   <div class="col" style="margin-top:34px">
     <h3>And one obstacle that is not a bug</h3>
     <p>Measuring at all can get you rate-limited. ParaSwap (now Velora) allows roughly 5,000 calls a day on the free tier, counted per egress IP rather than per key, and not separated by domain. We sent 5,622 in a day and got a solid 11 hours of 429s starting 23:31 UTC on 31 August, until the rolling window cleared.</p>
-    <p>0x disabled our key entirely on 4 September, after two notices about the quote-to-fill ratio. We stopped calling them rather than retrying, and 0x is excluded from the comparison until that is resolved.</p>
-    <p>But the barrier is not uniform, and that turns out to be the more useful finding. Asked the same question, 1inch replied that quote-only use is fine, that they have no quote-to-fill rule, and that they had never throttled a single one of our calls — with the condition that the free tier is for non-commercial use, which this is. So "independent measurement is impossible" is not an industry fact. It is the result of asking each provider, one at a time, and getting different answers. The barrier is not the code and not a universal policy. It is that almost nobody asks.</p>
+    <p>These sources exist to serve trading integrators, and "pure measurement, zero fills" does not fit that. So the barrier to independent third-party measurement is not the code. It is obtaining quote access legitimately and sustainably. That is also the answer to why nobody does it.</p>
     <div class="note">
       <p style="margin:0">Admitting what is missing is more credible than pretending to be complete. Five of the seven errors above were found while checking figures for this report. "Only about 10% of Polymarket markets are tradeable" was written into external copy and then withdrawn; "on-chain tokenized stock pools are all empty" had an entire section drafted before it was overturned. This is the reason to write a verification tool: the first errors it catches are your own.</p>
     </div>
@@ -583,10 +555,8 @@ python3 code/verify.py 54088399</td></tr>
       <li><strong>Limitless is missing from this pull.</strong> Its market-list endpoint returned empty at sampling time and it is excluded from the totals. That happened three times in three days; treat its availability as uncertain.</li>
       <li><strong>Kalshi only supports a degraded verdict.</strong> It publishes top-of-book only, so its results are marked "depth unknown", and the bias is toward overstating the tradeable share, not understating it.</li>
       <li><strong>"Cannot be executed" is not "you will lose X%".</strong> A refused quote means the size cannot be filled at current liquidity. It is not a cost you would actually pay.</li>
-      <li><strong>Tokenized stocks cover USDG-quoted pools only.</strong> Some tokens also have ETH/WETH pools, excluded here; a token could be deeper against a different quote asset. TSLA is known to have additional depth in an ETH pool.</li>
-      <li><strong>The pool table has no external cross-check.</strong> It is internally consistent — the scan aborts rather than skipping a failed range, and this run had none — but nothing independent confirms it is complete. DexScreener counts uninitialised pools in its liquidity figures and is not used as a reference; the block explorer's API is behind anti-bot protection.</li>
-      <li><strong>0x is absent.</strong> Its key was disabled on 4 September, so the aggregator comparison in the first section reflects the six sources available on 31 August, not today's five.</li>
-      <li><strong>Only 5.1 hours and 12 rounds.</strong> The "depth is stable" conclusion covers a short window and does not extrapolate across days, weekends or earnings. Behaviour while US markets are closed has not been measured.</li>
+      <li><strong>Tokenized stocks cover USDG-quoted pools only.</strong> Some tokens also have ETH/WETH pools, excluded from this round; in principle a token could be deeper against a different quote asset. TSLA is known to have additional depth in an ETH pool.</li>
+      <li><strong>Only 7.8 hours and 17 rounds.</strong> The "depth is stable" conclusion covers a short window and does not extrapolate across days, weekends or earnings. Behaviour while US markets are closed has not been measured.</li>
       <li><strong>Quotes are not fills.</strong> Every figure comes from a simulated Quoter call, not an executed trade. Real execution is affected by MEV, slippage protection and gas, and is generally worse rather than better.</li>
       <li><strong>The prediction-market figures are a 2026-09-03 snapshot.</strong> Event markets expire; the batch of 49 earnings markets referenced there has since ended with the earnings season, so a re-check will not return the same match counts.</li>
     </ul>
