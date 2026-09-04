@@ -450,7 +450,7 @@ footer p{font-size:14px;color:var(--ink-2)}
     <p>This page ships with the raw data and the verification script, with no third-party dependencies (<code>code/evm.py</code> is a from-scratch implementation needing only Python 3 and curl):</p>
     <ul class="plain">
       <li><a href="./code/verify.py"><code>code/verify.py</code></a> — replays every quote at a given block, recomputes the hash, compares it to the record</li>
-      <li>Per-round hashes <a href="./data/2026-09-03/rounds.jsonl"><code>data/2026-09-03/rounds.jsonl</code></a>, <a href="./data/2026-09-04/rounds.jsonl"><code>09-04</code></a>; per-quote records <a href="./data/2026-09-03/quotes.jsonl.gz"><code>quotes.jsonl.gz</code></a> (<a href="./data/2026-09-04/quotes.jsonl.gz"><code>09-04</code></a>)</li>
+      <li>Per-round hashes and per-quote records: <a href="./data/2026-09-04/rounds.jsonl"><code>data/2026-09-04/rounds.jsonl</code></a> and <a href="./data/2026-09-04/quotes.jsonl.gz"><code>quotes.jsonl.gz</code></a> (v2 rounds; the defective v1 09-03 data was removed)</li>
       <li><a href="./code/rhchain.py"><code>code/rhchain.py</code></a> — pool enumeration and Quoter calls; <a href="./code/stock_pools.json"><code>stock_pools.json</code></a> is the pool table from a full-chain scan</li>
       <li><a href="./README.md"><code>README.md</code></a> — the full rhdepth-v2 specification and run instructions</li>
     </ul>
