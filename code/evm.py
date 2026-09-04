@@ -153,12 +153,12 @@ def rpc(method: str, params: list, url: str = RPC, timeout: int = 25,
         retries: int = 3):
     """返回 (result, err)。
 
-     **err 非 None 表示【调用没成功】，绝不能当成「查到了空」。**
+     err 非 None 表示【调用没成功】，绝不能当成「查到了空」。
     2026-09-03 踩过两次：429 和 "exceeds limit of 10000" 都被当成
     「没有数据」，一次算出了错误的持仓表，一次差点把 RPC 故障
     写成 no_liquidity 存进时间序列。
 
-    execution reverted 是**例外**：那是合约在说话，属于数据，
+    execution reverted 是例外：那是合约在说话，属于数据，
     原样返回给调用方判断（见 rhchain.quote）。
 
      用 curl 不用 urllib —— 与项目其他部分一致（本机 Python 的

@@ -94,7 +94,7 @@ _NOT_ENOUGH = "7a5ed734"
 def quote(p: dict, token_in: str, amount_in: int, block: str = "latest"):
     """吃掉 amount_in 能拿到多少。返回 (数量或 None, 状态)。
 
-     **三种结果必须分开**（2026-09-03 差点混在一起写进历史）：
+     三种结果必须分开（2026-09-03 差点混在一起写进历史）：
        ok            拿到报价
        no_liquidity  合约回滚 NotEnoughLiquidity —— 这是【数据】，
                      和 pmfeed 的 no_liquidity、dexfeed 的「拒绝报价」同源
