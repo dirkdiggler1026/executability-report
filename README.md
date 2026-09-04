@@ -15,7 +15,8 @@ data/                   raw measurements
     quotes.jsonl.gz       one row per measurement
     rounds.jsonl          canonical hash per round
     MANIFEST.sha256       checksums
-  <date>.rhdepth-v2-defective/   quarantined, see below
+  snapshot-v18-12r/        frozen 12-round snapshot referenced by the report
+  <date>.rhdepth-v1-defective/   quarantined, see below
 code/
   collect.py            the collector
   build_pool_table.py   reproduces the pool selection
@@ -70,7 +71,11 @@ python3 code/verify.py --latest
 ```
 
 The script replays every round-trip at that block height, recomputes the
-hash, and compares it against `rounds.jsonl`.
+hash, and compares it against ounds.jsonl.
+
+Run it from the repository root: it looks for data/ next to the script
+(or honours RHDEPTH_DATA). Quarantined v1 rounds are excluded by their
+canon field and reported as defunct (exit code 2), never as mismatches.
 
 ## Canonical preimage `rhdepth-v2`
 
@@ -100,19 +105,28 @@ cd data/<date> && sha256sum -c MANIFEST.sha256
 
 ## Quarantined data
 
-Directories suffixed `.rhdepth-v2-defective` and `.pre-pinned-block` are
-kept but excluded from every conclusion:
+Three directories are kept but excluded from every conclusion. They are
+not deleted: removing a superseded version would make every other claim
+harder to check, not easier.
 
-- `.pre-pinned-block` — quote calls in a round were not pinned to one
-  block height, so the recorded block does not match the state the data
-  came from.
-- `.rhdepth-v2-defective` — collected against an incomplete pool table
-  (55 pools where the chain has 25,122) and with the cross-pool rate
-  derivation described above. **This produced published conclusions that
-  were wrong**; they are corrected in the current report.
+| directory | rounds | size | defect |
+|---|---|---|---|
+| `2026-09-03.pre-pinned-block` | 2 | 44K | not block-pinned, and v1 (broken pool table) |
+| `2026-09-03.rhdepth-v1-defective` | 14 | 64K | v1: incomplete pool table + cross-pool rate |
+| `2026-09-04.rhdepth-v1-defective` | 15 | 68K | v1: incomplete pool table + cross-pool rate |
 
-They are not deleted. Removing a superseded version would make every
-other claim harder to check, not easier.
+The `.pre-pinned-block` set has both defects: calls in a round were not
+pinned to one block height, and it was also collected on the broken pool
+table (canon `rhdepth-v1`), so neither the recorded block nor the pools
+hold. The `rhdepth-v1-defective` sets were collected against an
+incomplete pool table (55 pools where the chain has 25,122) with the
+cross-pool rate derivation described above. **They produced published
+conclusions that were wrong**; those are corrected in the current report.
+
+These three directories are shipped once, by hand, and never touched by
+the daily sync (which only pushes strict `YYYY-MM-DD` directories).
+`verify.py` excludes them by the `canon` field in each record, not by
+directory name.
 
 ## Limits
 

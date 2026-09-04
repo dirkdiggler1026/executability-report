@@ -15,13 +15,34 @@ from __future__ import annotations
 
 import gzip
 import json
+import os
 import sys
 import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from collect import CANON_VERSION, ROOT, SIZES, canon_lines, load_pools, round_keccak
+from collect import CANON_VERSION, SIZES, canon_lines, load_pools, round_keccak
+from collect import ROOT as COLLECT_ROOT
+
+
+def data_root() -> Path:
+    """数据目录。按优先级取三处之一。
+
+    🔴 这里原先直接用 collect.ROOT —— 一个写死的采集机绝对路径。
+       第三方 clone 本仓库后,那个目录在他机器上不存在,而
+       Path.glob() 对不存在的目录不报错,只静默返回空。症状是
+       「找不到区块 X 的轮次记录」,看起来像数据没发布,实际是
+       复核脚本压根没在别人的机器上跑通过 —— 而「自己算一遍」
+       正是这份报告卖的东西。
+    """
+    env = os.environ.get("RHDEPTH_DATA")
+    if env:
+        return Path(env)
+    repo = Path(__file__).resolve().parent.parent / "data"   # 仓库自带的数据
+    if any(repo.glob("*/rounds.jsonl")):
+        return repo
+    return COLLECT_ROOT                                       # 采集机上的实时目录
 from rhchain import QUOTES, STOCKS, quote
 
 
@@ -67,16 +88,35 @@ def main() -> int:
     # 🔴 跨天查找。轮次按 UTC 日期分目录，但被复核的区块可能在任何一天 ——
     #    只翻今天的目录，历史轮次就永远「找不到」，而第三方复核的
     #    恰恰多是历史轮次。
-    recs = []
-    for rf in sorted(ROOT.glob("*/rounds.jsonl")):
-        if ".pre-" in str(rf):          # 隔离的误报存档不参与复核
-            continue
-        recs += [json.loads(l) for l in rf.read_text().splitlines() if l.strip()]
+    root = data_root()
+    recs, superseded = [], {}
+    for rf in sorted(root.glob("*/rounds.jsonl")):
+        for line in rf.read_text().splitlines():
+            if not line.strip():
+                continue
+            r = json.loads(line)
+            # 🔴 按记录自带的 canon 字段过滤,不按目录名。
+            #    目录名是同一个事实的第二份抄写,迟早会漂移:隔离目录
+            #    先叫 .pre-*,后来又有 .rhdepth-v1-defective,任何写死
+            #    后缀的判断都会漏掉下一种,把已作废的轮次放进复核集。
+            if r.get("canon") != CANON_VERSION:
+                superseded[str(r["block"])] = (r.get("canon"), rf.parent.name)
+                continue
+            recs.append(r)
     recs.sort(key=lambda r: r["block"])
     rec = recs[-1] if arg == "--latest" else next(
         (r for r in recs if str(r["block"]) == arg), None)
     if not rec:
-        print(f"找不到区块 {arg} 的轮次记录")
+        if arg in superseded:
+            canon, where = superseded[arg]
+            print(f"区块 {arg} 属于已作废的规范 {canon}(在 {where}/)。")
+            print(f"该轮不参与复核:本地规范是 {CANON_VERSION},原像不同,哈希必然对不上。")
+            print("隔离数据保留可访问只是为了让更正可查,不是可复核的结论。")
+            return 2
+        print(f"找不到区块 {arg} 的轮次记录(数据目录 {root})")
+        if not any(root.glob("*/rounds.jsonl")):
+            print("该目录下没有任何 rounds.jsonl —— 若是从仓库 clone 而来,")
+            print("请在仓库根目录运行,或用 RHDEPTH_DATA 指向数据目录。")
         return 1
 
     print(f"复核轮次  块 {rec['block']:,}  规范 {rec['canon']}")
@@ -91,9 +131,7 @@ def main() -> int:
     print(f"\n  {'✅ 一致 —— 该轮数据可被独立复现' if ok else '❌ 不一致'}")
     if not ok:
         orig = []
-        for qf in sorted(ROOT.glob("*/quotes.jsonl.gz")):
-            if ".pre-" in str(qf):
-                continue
+        for qf in sorted(root.glob("*/quotes.jsonl.gz")):
             orig += [json.loads(l) for l in gzip.open(qf, "rt") if l.strip()]
         orig = [r for r in orig if r.get("block") == rec["block"]]
         a, b = set(canon_lines(orig)), set(canon_lines(rows))

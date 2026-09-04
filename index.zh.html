@@ -3,8 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>可成交性实测</title>
-</head><body style="margin:0"><div style="background:#fdecea;border-bottom:1px solid #e5c5c5;padding:10px 16px;font:13px/1.5 sans-serif;color:#a33"><b>本页为已作废的 v17 版本。</b> 其中"代币化股票"一节结论已被证伪(池表漏扫)。修正版 v18 见 <a href="index.html" style="color:#06c">英文首页</a>;中文 v18 翻译中。</div><div style="position:absolute;right:14px;top:10px;font:13px/1 sans-serif"><a href="index.html" style="color:#555;text-decoration:none">English</a></div>
-<title>可成交性实测</title>
+</head><body style="margin:0"><div style="position:absolute;right:14px;top:10px;font:13px/1 sans-serif"><a href="index.html" style="color:#555;text-decoration:none">English</a></div>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -248,24 +247,24 @@ footer p{font-size:14px;color:var(--ink-2)}
 <div class="wrap">
 
 <header class="mast">
-  <div class="eyebrow">独立测量 · 2026-09-04 快照 · <a href="./">English (current)</a></div>
+  <div class="eyebrow">独立测量 · v18 · 2026-09-04 更正 · <a href="./">English (canonical)</a></div>
   <h1>盘面价格不是<br>你能成交的价格</h1>
-  <p class="standfirst" style="font-size:15px;color:var(--ink-3)">本页是 2026-09-04 快照的中文版，可能落后于英文版。最新数据以 <a href="./">英文版</a>为准。</p>
+  <p class="standfirst" style="font-size:15px;color:var(--ink-3)">本页是英文版 v18 的中文版。英文版为准本，两版若有出入以 <a href="./">英文版</a> 为准。</p>
   <p class="standfirst">价格预言机告诉你它值多少；这份测量告诉你你能不能真的卖掉。三个互不相干的市场，同一个问题：屏幕上显示的价格，和你真按下去能拿到的价格，差得比想象中远。</p>
   <div class="byline">
     <span>数据窗口 <b>2026-08-30 → 09-04</b></span>
     <span>链上样本 <b>51,084 条聚合器报价</b></span>
     <span>预测市场样本 <b>596 个盘口</b></span>
-    <span>代币化股票 <b>17 轮 · 1,088 次钉块报价</b></span>
+    <span>代币化股票 <b>12 轮 · 432 次钉块往返</b></span>
     <span>可复核性 <b>逐轮哈希，任何人可重算</b></span>
   </div>
 </header>
 
 <div class="readings">
   <div class="reading">
-    <div class="k">代币化股票 · SPY</div>
-    <div class="v" style="color:var(--bad)">$0.90</div>
-    <div class="d">在 Robinhood Chain 卖出价值 $100 的 SPY 代币，实际收回 $0.90</div>
+    <div class="k">代币化股票 · QQQ</div>
+    <div class="v" style="color:var(--bad)">$6.46</div>
+    <div class="d">在 Robinhood Chain 卖出价值 $100 的 QQQ 代币，实际收回 $6.46；卖 $100,000 收回 $30</div>
   </div>
   <div class="reading">
     <div class="k">预测市场 · 单边</div>
@@ -274,8 +273,8 @@ footer p{font-size:14px;color:var(--ink-2)}
   </div>
   <div class="reading">
     <div class="k">同一界面 · 同一资产类别</div>
-    <div class="v">1000<span style="font-size:20px">×</span></div>
-    <div class="d">NVDA 卖 $10 万收回 97.8%，SPY 卖 $100 收回 0.9%——差三个数量级</div>
+    <div class="v">3300<span style="font-size:20px">×</span></div>
+    <div class="d">同样卖 $10 万：SPY 收回 99.7%，QQQ 收回 0.03%</div>
   </div>
 </div>
 
@@ -356,44 +355,65 @@ footer p{font-size:14px;color:var(--ink-2)}
 
 <section>
   <div class="sec-head">
-    <div class="eyebrow">发现二 · 代币化股票</div>
-    <h2>八个代币化股票里，两个能卖，六个卖不掉</h2>
+    <div class="eyebrow">发现二 · 代币化股票 · 已更正</div>
+    <h2>这一节的上一版是错的</h2>
   </div>
 
   <div class="col">
-    <p>Robinhood Chain 于 2026 年 7 月 1 日上线主网，把美股搬到链上，24 小时交易。它的官方叙事是「代币化真实世界资产」。</p>
-    <p>下面这组数是「你按下卖出，实际收回多少」：把买到的量原路卖回去，含双边费用与价格冲击。全部通过 Uniswap V4 的 Quoter 在同一个钉死的区块高度上取得。</p>
+    <p>9 月 4 日发布的那一版里，这一节说的话全部作废：八个代币化股票里六个卖不掉、卖 $100 的 SPY 只收回 $0.90、AAPL 在 $1,000 以上断崖——没有一条站得住。</p>
+    <p>错因在我，不在市场。构建池表的那次扫描，把失败的区块区间静默跳过了。全链有 25,122 个已初始化的池，它只找到约 55 个，而恰好被它抓到的那些大多是浅池。我测的是这些池子，然后把结果当成了资产的属性发出去。</p>
   </div>
 
   <div class="tw">
     <table>
-      <caption>Robinhood Chain（chainId 4663）· 17 轮 · 每 30 分钟一轮 · 2026-09-03 17:09 → 09-04 · 区块 53,579,264 → 53,861,286。数值为「卖出该名义金额实际收回的百分比」中位数。</caption>
-      <thead><tr><th>代币</th><th>卖 $100</th><th>卖 $1,000</th><th>卖 $10,000</th><th>卖 $100,000</th></tr></thead>
+      <caption>上一版发布的数字，与对同一件事的重新测量。列在这里，只是为了不必回到已作废的页面也能看清错误的量级。</caption>
+      <thead><tr><th>结论</th><th>已发布（v17）</th><th>更正后</th></tr></thead>
       <tbody>
-        <tr><td>NVDA</td><td class="pos">99.30%</td><td class="pos">99.28%</td><td class="pos">99.15%</td><td class="pos">97.84%</td></tr>
-        <tr><td>TSLA</td><td class="pos">99.29%</td><td class="pos">99.26%</td><td class="pos">98.96%</td><td class="mid">95.30%</td></tr>
-        <tr><td>AAPL</td><td class="mid">94.08%</td><td class="mid">80.25%</td><td class="neg">2.82%</td><td class="neg">0.35%</td></tr>
-        <tr><td>QQQ</td><td class="neg">6.29%</td><td class="neg">4.12%</td><td class="neg">0.92%</td><td class="neg">0.11%</td></tr>
-        <tr><td>GOOGL</td><td class="neg">4.11%</td><td class="neg">3.51%</td><td class="neg">1.42%</td><td class="neg">0.20%</td></tr>
-        <tr><td>GME</td><td class="neg">0.96%</td><td class="neg">0.93%</td><td class="neg">0.72%</td><td class="neg">0.22%</td></tr>
-        <tr><td>RDDT</td><td class="neg">0.91%</td><td class="neg">0.85%</td><td class="neg">0.52%</td><td class="neg">0.11%</td></tr>
-        <tr><td>SPY</td><td class="neg">0.90%</td><td class="neg">0.84%</td><td class="neg">0.49%</td><td class="neg">0.09%</td></tr>
+        <tr><td>SPY，卖 $100</td><td class="neg">0.90% · 错误发布</td><td class="pos">99.93%</td></tr>
+        <tr><td>AAPL，卖 $10,000</td><td class="neg">2.82% · 错误发布</td><td class="pos">99.85%</td></tr>
+        <tr><td>卖不掉的代币</td><td class="neg">八个里六个 · 错误发布</td><td class="pos">九个里一个</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="col">
-    <p><strong>卖出价值 $100 的 SPY 代币，收回 $0.90。</strong>而 NVDA 卖十万美元收回 97.8%。两者在任何界面上看起来是同一类资产：同一条链、同一个 DEX、同样标着「代币化股票」。</p>
+    <h3>方法上改了什么</h3>
+    <ul class="plain">
+      <li><strong>完整池表。</strong>扫描现在遇到任何失败的区块区间就中止，而不是跳过。25,122 个已初始化的池里，1,027 个是「股票代币 / USDG」配对，其中 125 个吃得下 $10,000。每个代币保留回收最高的八个池。选池过程可复现：<code>build_pool_table.py</code>。</li>
+      <li><strong>同池往返。</strong>在同一个池里买入，再把整个仓位从同一个池卖回去。上一版的做法是分别取最优买入池和最优卖出池，再在两者之间推导一个汇率；那个汇率不属于任何一个真实存在的池，并且算出过高于 100% 的回收率——买完立刻卖回还能多拿，这在任何真实市场里都撑不过几秒。闭环不需要任何汇率假设，且必然低于 100%。</li>
+      <li><strong>九个代币，只含 USDG 计价的池。</strong>AMC 在上一版的表里缺席，是因为它的池子正好落在坏扫描漏掉的那批里。</li>
+    </ul>
+  </div>
 
-    <h3>AAPL 是最值得看的那一个</h3>
-    <p>它在 $100 收回 94%，$1,000 收回 80%，到 $10,000 只剩 2.82%。<strong>可成交性不是资产的属性，是金额的函数。</strong>AAPL 在小额上完全正常，在仓位变大的那一刻失效。这种坑比「全好」或「全坏」都更难发现。</p>
+  <div class="col">
+    <h3>更正后的测量</h3>
+    <p>12 轮，跨 5.1 小时，每 30 分钟一轮，每轮钉死在同一个区块高度。所有档位在所有轮次全部成交，没有一档报不出价。数值在轮次之间有波动的，下面附 p10–p90 区间。</p>
+  </div>
 
-    <h3>而且这不是波动，是结构</h3>
-    <p>17 轮、跨越 7.8 小时的测量里，绝大多数数值的波动范围小到可以忽略：NVDA 在 $100 档是 99.30%~99.30%，SPY 是 0.90%~0.90%。唯一有意义的变动是 TSLA 的 $100,000 档（93.6%~97.0%）。</p>
-    <p>「SPY 卖不掉」因此不是某一刻的状况，而是这个市场的常态。</p>
+  <div class="tw">
+    <table>
+      <caption>Robinhood Chain（chainId 4663）· 12 轮 · 每 30 分钟一轮 · 2026-09-04 07:30 → 12:42 UTC · 区块 54,088,399 → 54,270,401。同池往返：用 USDG 买入，再把整个仓位从同一个池卖回。数值为「卖出该名义金额实际收回的百分比」中位数，附 p10–p90 区间。所有轮次、所有档位均成交，因此「无法成交」计数全程为零，表中略去。</caption>
+      <thead><tr><th>代币</th><th>卖 $100</th><th>卖 $1,000</th><th>卖 $10,000</th><th>卖 $100,000</th></tr></thead>
+      <tbody>
+        <tr><td>SPY</td><td class="pos">99.93%</td><td class="pos">99.93%</td><td class="pos">99.91%</td><td class="pos">99.71%</td></tr>
+        <tr><td>AAPL</td><td class="pos">99.93%</td><td class="pos">99.92%</td><td class="pos">99.85%</td><td class="pos">99.06%</td></tr>
+        <tr><td>GOOGL</td><td class="pos">99.99%</td><td class="pos">99.95%</td><td class="pos">99.53%</td><td class="pos">97.97%</td></tr>
+        <tr><td>NVDA</td><td class="pos">99.99%</td><td class="pos">99.89%</td><td class="pos">99.48%</td><td class="pos">96.50%</td></tr>
+        <tr><td>TSLA</td><td class="pos">99.89%</td><td class="pos">99.77%</td><td class="pos">99.07%</td><td class="pos">96.75%</td></tr>
+        <tr><td>RDDT</td><td class="pos">99.32%</td><td class="pos">99.32%</td><td class="pos">99.24%</td><td class="mid">93.12%<br><span class="dim" style="font-size:11px">90.1–96.6</span></td></tr>
+        <tr><td>AMC</td><td class="pos">99.75%</td><td class="pos">99.62%</td><td class="mid">97.08%<br><span class="dim" style="font-size:11px">86.1–99.0</span></td><td class="neg">74.55%<br><span class="dim" style="font-size:11px">28.5–83.6</span></td></tr>
+        <tr><td>GME</td><td class="pos">99.49%</td><td class="pos">99.37%</td><td class="mid">97.97%<br><span class="dim" style="font-size:11px">36.9–98.6</span></td><td class="neg">17.33%<br><span class="dim" style="font-size:11px">3.7–22.5</span></td></tr>
+        <tr><td>QQQ</td><td class="neg">6.46%</td><td class="neg">1.83%</td><td class="neg">0.26%</td><td class="neg">0.03%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col">
+    <p><strong>QQQ 是唯一一个在任何档位都卖不掉的代币。</strong>卖 $100 收回 $6.46，卖 $100,000 收回 $30。这不是规模效应，也不是某一刻的状况：12 轮的结果彼此相差不到千分之一。这条链上其他每一个代币，卖 $100,000 至少能收回 93%。</p>
+    <p><strong>GME 和 AMC 是规模仍然咬人的地方，而这两个恰好是散户情绪最集中的票。</strong>两者在 $1,000 以内都正常。GME 卖 $100,000 收回 17%，任何一轮都没超过 23%；AMC 同一档位在 28% 到 84% 之间，取决于你什么时候问。只给中位数会把这件事盖掉：这两行带区间，正是因为单个数字会误导。</p>
 
     <div class="note">
-      <p style="margin:0"><strong>这些池子不是空的。</strong>在区块 53,861,286 上直接读取合约（<code>balanceOf</code> / <code>totalSupply</code>，非索引器、非聚合站），Uniswap V4 的单例合约持有上表八个代币各 31.6% 到 47.4% 的流通量，SPY 是 8,715 枚，占供应量 47.4%。资产是真的，池子是已初始化的，浏览器会把它们的 TVL 算进去。<strong>但你卖 $100 只能收回 $0.90。</strong>「有多少钱在里面」和「你能拿走多少」是两个不同的问题，而公开工具只回答前一个。</p>
+      <p style="margin:0"><strong>一个观察，还不是结论。</strong>GME 和 AMC 在这个窗口里都明显改善——GME 的 $10,000 档从约 30% 升到 98% 后稳住，AMC 的 $100,000 档从 18% 一路爬到 83% 且没有回落。两条曲线的形状差别足够大，不太可能同源，而且都不能由这里测到的任何东西解释。这只是一天的观察。它会不会重复，不是一次采集能确定的事，所以记在这里当作待解问题，而不是结果。</p>
     </div>
   </div>
 </section>
@@ -410,12 +430,13 @@ footer p{font-size:14px;color:var(--ink-2)}
 
   <div class="tw">
     <table>
-      <caption>规范化原像 rhdepth-v1。整数一律以十进制字符串参与哈希——uint256 超出 JavaScript 的安全整数范围，用数字类型传递会静默丢精度。每轮产生 64 条规范化记录（8 代币 × 4 档位 × 买卖双向）；执行时的实际调用数更多（约 324 次，含逐池探测与汇率推导），但只有上表中的字段进入哈希。</caption>
+      <caption>规范化原像 rhdepth-v2。整数一律以十进制字符串参与哈希——uint256 超出 JavaScript 的安全整数范围，用数字类型传递会静默丢精度。每轮产生 36 条规范化记录（9 代币 × 4 档位，每档一次闭环往返）；运行时的实际调用数远多于此（会逐个探测候选池），但只有胜出那个池的数字进入哈希。</caption>
       <thead><tr><th>进入哈希</th><th>为什么</th></tr></thead>
       <tbody>
         <tr><td>区块高度</td><td>状态锚点</td></tr>
         <tr><td>poolId</td><td>唯一确定池子</td></tr>
         <tr><td>输入金额（原始整数）</td><td>调用参数</td></tr>
+        <tr><td>中间量（原始整数）</td><td>卖回之前拿到的代币数量</td></tr>
         <tr><td>输出金额（原始整数）</td><td>链上返回值，确定性</td></tr>
         <tr><td>状态</td><td>成交 / 流动性不足</td></tr>
         <tr><td class="dim">时间戳、网络延迟</td><td class="dim">✗ 排除：第三方永远算不出同一个值</td></tr>
@@ -425,21 +446,22 @@ footer p{font-size:14px;color:var(--ink-2)}
   </div>
 
   <div class="col">
-    <p>实测：对基线首轮（区块 53,579,264）与其后的轮次分别独立重放全部报价调用，重算出的哈希与原始记录逐字节一致。</p>
+    <p>实测：对 v2 首轮（区块 54,088,399）独立重放全部往返调用，重算出的哈希与原始记录逐字节一致。</p>
 
     <h3>自己跑一遍</h3>
     <p>本页附带全部原始数据与复核脚本，无第三方依赖（<code>code/evm.py</code> 是零依赖实现，只需 Python 3 和 curl）：</p>
     <ul class="plain">
       <li><a href="./code/verify.py"><code>code/verify.py</code></a> —— 复核脚本。在指定区块高度重放全部报价、重算哈希、与记录比对</li>
-      <li>逐轮哈希 <a href="./data/2026-09-03/rounds.jsonl"><code>data/2026-09-03/rounds.jsonl</code></a>、<a href="./data/2026-09-04/rounds.jsonl"><code>09-04</code></a>；逐条报价 <a href="./data/2026-09-03/quotes.jsonl.gz"><code>quotes.jsonl.gz</code></a>（<a href="./data/2026-09-04/quotes.jsonl.gz"><code>09-04</code></a>）</li>
+      <li>逐轮哈希与逐条报价：<a href="./data/snapshot-v18-12r/rounds.jsonl"><code>data/snapshot-v18-12r/rounds.jsonl</code></a>、<a href="./data/snapshot-v18-12r/quotes.jsonl.gz"><code>quotes.jsonl.gz</code></a>（v2 轮次；已作废的 v1 数据见下方隔离目录，不参与任何结论）</li>
       <li><a href="./code/rhchain.py"><code>code/rhchain.py</code></a> —— 池子枚举与 Quoter 调用；<a href="./code/stock_pools.json"><code>stock_pools.json</code></a> 是全链扫描得到的池表</li>
-      <li><a href="./README.md"><code>README.md</code></a> —— <code>rhdepth-v1</code> 原像规范全文与运行步骤</li>
+      <li><a href="./README.md"><code>README.md</code></a> —— <code>rhdepth-v2</code> 原像规范全文与运行步骤</li>
     </ul>
+    <p>本页每一个数字都对应「截止区块 54,270,401 的 12 轮」这一份快照，也就是随页发布的 <code>data/snapshot-v18-12r/</code>——该目录发布后不再改动，校验和永远对得上。采集仍在继续，活目录 <code>data/2026-09-04/</code> 会持续增长、超出本文描述的范围。</p>
     <p>需要一个 Robinhood Chain 的归档节点（在历史区块上 <code>eth_call</code>；公共端点通常只保留最近约 128 个区块的状态）：</p>
     <div class="tw" style="border:none">
       <table style="min-width:0"><tbody>
         <tr><td style="font-weight:400;white-space:pre">export RHCHAIN_RPC="https://&lt;归档端点&gt;"
-python3 code/verify.py 53579264</td></tr>
+python3 code/verify.py 54088399</td></tr>
       </tbody></table>
     </div>
     <div class="note">
@@ -494,12 +516,12 @@ python3 code/verify.py 53579264</td></tr>
 <section>
   <div class="sec-head">
     <div class="eyebrow">方法</div>
-    <h2>我们的仪器骗了我们七次</h2>
+    <h2>我们的仪器骗了我们九次</h2>
   </div>
 
   <div class="col">
     <p>这一节通常不会出现在这类报告里。放进来是因为它解释了一件更重要的事：为什么几乎没有人做独立的可执行性测量。</p>
-    <p>不是因为难，是因为仪器会安静地骗你。下面七个错误全部发生在这五天，每一个都产出过一个看起来像洞见的精确数字。最后两个是这次更新时才发现的，其中一个差点让上面整节结论完全反过来。</p>
+    <p>不是因为难，是因为仪器会安静地骗你。六天里九个错误，每一个都产出过一个看起来像洞见的精确数字。其中七个在发布之前抓住了，两个没有——下面标了出来，被它们污染的那一节已在上面更正。一个真正会自我纠错的流程，早晚会有一次抓晚了；要紧的是每个错误落在发布线的哪一侧，所以这里逐个写明。</p>
   </div>
 
   <div class="fail">
@@ -532,12 +554,22 @@ python3 code/verify.py 53579264</td></tr>
     <div class="b">采集器在轮次开始时记录一个区块号，但 324 次调用全部打的是「最新区块」。一轮跑 60~85 秒，而链每 100 毫秒出一个块，期间推进了约 700 个区块。后果有两层：记录的区块号与数据实际状态对不上（第三方永远复核不了），而且同一轮内各行互相也对不上（违背「同一时刻的横截面」这个前提）。这个错误是被复核脚本抓出来的：写完验证工具第一次运行就对不上。没有那个工具，它会一直静默存在。修复后整轮钉死在同一区块高度，代价是需要归档节点。</div>
   </div>
 
+  <div class="fail">
+    <div class="n">08</div><div class="t">池表只有 0.2% 是完整的——发布之后才发现</div>
+    <div class="b">构建池表的扫描遇到失败的区块区间时是跳过，而不是停下。全链有 25,122 个池，它只返回了 55 个，而且恰好抓到的那些大多是浅池。上一版里每一个代币化股票的数字，都是对着这些池子测出来的：SPY 卖 $100 的真实往返回收率是 99.93%，不是 0.90%，而所谓 AAPL 的「规模断崖」根本不存在。池子数量也不能当深度的代理指标——AMC 是所有代币里池子最多的之一，能吃下 $10,000 的却最少。<strong>任何在扫描改为「失败即中止」之前生成的池表，只能作废重建，不能修补。</strong></div>
+  </div>
+  <div class="fail">
+    <div class="n">09</div><div class="t">一个能超过 100% 的指标——发布之后才发现</div>
+    <div class="b">旧的测法是分别取最优买入池和最优卖出池，再在两者之间推导一个汇率来决定卖出量。那个汇率不属于任何一个真实存在的池。它算出过高于 100% 的往返回收率——买进去立刻卖回来还能多拿——这在任何真实市场里都撑不过几秒。替代做法把闭环收在同一个池内，不需要任何汇率假设，并且在构造上不可能超过 100%：一旦超过，就是 bug 自己在报警。</div>
+  </div>
+
   <div class="col" style="margin-top:34px">
     <h3>还有一个不是 bug 的障碍</h3>
     <p>测量本身会触发限流。ParaSwap（现 Velora）免费档约 5,000 次/天，且按出口 IP 计，不按 key，也不分域名。我们一天发了 5,622 次，从 8 月 31 日 23:31 UTC 起连续 11 小时全线 429，直到滚动窗口滚过去才恢复。</p>
-    <p>这类源的商业模型是服务交易集成方，而「纯测量、零成交」不符合它的定位。所以独立第三方测量的门槛不在代码，在于如何合法且可持续地拿到报价权限。这也是「独立测量为什么没人做」的答案。</p>
+    <p>0x 在 9 月 4 日直接停用了我们的 key，此前就报价/成交比给过两次通知。我们选择停止调用而不是换个方式重试，在此事解决之前，0x 不进入对比。</p>
+    <p>但这道门槛并不是一视同仁的，而这才是更有用的那个发现。同样的问题问过去，1inch 的答复是：只取报价没有问题，他们没有报价/成交比这类规则，并且从未对我们的任何一次调用限过速——条件是免费档限非商业用途，而这正是本项目的性质。所以「独立测量做不了」不是一个行业事实，它是逐家去问、然后得到不同答案的结果。门槛不在代码，也不在某条统一政策，而在于几乎没有人去问。</p>
     <div class="note">
-      <p style="margin:0">坦白缺失比假装完整更可信。上面七个错误里，有五个是在为这份报告做核对时才发现的。「Polymarket 只有约 10% 的市场能成交」这个数字曾被写进对外文案又撤下；「链上股票代币池全是空的」这个结论在被推翻前，已经写好了整整一节。写复核工具的理由就在这里：它首先抓到的是你自己的错。</p>
+      <p style="margin:0">坦白缺失比假装完整更可信。上面这些错误里，多数是在拿数字核对原始数据时才浮出来的；其中两个活到了发布之后，直到一次重跑逼出更正才被发现在为这份报告做核对时才发现的。「Polymarket 只有约 10% 的市场能成交」这个数字曾被写进对外文案又撤下；「链上股票代币池全是空的」这个结论在被推翻前，已经写好了整整一节。写复核工具的理由就在这里：它首先抓到的是你自己的错。</p>
     </div>
   </div>
 </section>
@@ -556,7 +588,9 @@ python3 code/verify.py 53579264</td></tr>
       <li><strong>Kalshi 只能给出降级结论。</strong>该平台仅公开顶档，其结论标注「深度未知」，且方向是高估真实市场比例，不是低估。</li>
       <li><strong>「无法执行」不等于「你会亏 X%」。</strong>被拒绝报价意味着这个规模在当前流动性下吃不下，不是一个你会实际付出的成本。</li>
       <li><strong>代币化股票只测了 USDG 计价的池子。</strong>部分代币还有 ETH/WETH 计价的池，本轮未纳入统计——理论上某个代币可能在别的计价资产上更深。已知 TSLA 在 ETH 池上有额外深度。</li>
-      <li><strong>只有 7.8 小时、17 轮。</strong>「深度稳定」这个结论的时间尺度很短，不能外推到跨日、跨周末或财报窗口。美股休市时段的行为尚未测量。</li>
+      <li><strong>池表没有外部交叉验证。</strong>它内部是自洽的——扫描遇到失败区间会中止而不是跳过，本轮也确实一个失败都没有——但没有任何独立来源确认它是完整的。DexScreener 的流动性数字把未初始化的池也算了进去，不能用作参照；区块浏览器的接口挡在反爬后面。</li>
+      <li><strong>缺 0x。</strong>它的 key 在 9 月 4 日被停用，因此第一节的聚合器对比反映的是 8 月 31 日当时可用的六家，而不是今天的五家。</li>
+      <li><strong>只有 5.1 小时、12 轮。</strong>「深度稳定」这个结论的时间尺度很短，不能外推到跨日、跨周末或财报窗口。美股休市时段的行为尚未测量。</li>
       <li><strong>报价 ≠ 成交。</strong>全部数字来自 Quoter 的模拟调用，不是实际发生的交易。真实成交会受 MEV、滑点保护、gas 等影响，通常更差不会更好。</li>
       <li><strong>预测市场那节的数字是 2026-09-03 的快照。</strong>事件型市场会到期，其中「49 个财报市场」这一批已随财报季结束而消失，复核时不会看到相同的匹配数。</li>
     </ul>

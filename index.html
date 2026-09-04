@@ -450,11 +450,11 @@ footer p{font-size:14px;color:var(--ink-2)}
     <p>This page ships with the raw data and the verification script, with no third-party dependencies (<code>code/evm.py</code> is a from-scratch implementation needing only Python 3 and curl):</p>
     <ul class="plain">
       <li><a href="./code/verify.py"><code>code/verify.py</code></a> — replays every quote at a given block, recomputes the hash, compares it to the record</li>
-      <li>Per-round hashes and per-quote records: <a href="./data/2026-09-04/rounds.jsonl"><code>data/2026-09-04/rounds.jsonl</code></a> and <a href="./data/2026-09-04/quotes.jsonl.gz"><code>quotes.jsonl.gz</code></a> (v2 rounds; the defective v1 09-03 data was removed)</li>
+      <li>Per-round hashes and per-quote records: <a href="./data/snapshot-v18-12r/rounds.jsonl"><code>data/2026-09-04/rounds.jsonl</code></a> and <a href="./data/snapshot-v18-12r/quotes.jsonl.gz"><code>quotes.jsonl.gz</code></a> (v2 rounds; the defective v1 09-03 data was removed)</li>
       <li><a href="./code/rhchain.py"><code>code/rhchain.py</code></a> — pool enumeration and Quoter calls; <a href="./code/stock_pools.json"><code>stock_pools.json</code></a> is the pool table from a full-chain scan</li>
       <li><a href="./README.md"><code>README.md</code></a> — the full rhdepth-v2 specification and run instructions</li>
     </ul>
-    <p>Every figure on this page corresponds to a snapshot of 12 rounds ending at block 54,270,401, which is exactly the data shipped alongside it. Collection continues, so the data files in the repository will grow past what this text describes.</p>
+    <p>Every figure on this page corresponds to a snapshot of 12 rounds ending at block 54,270,401, published as <code>data/snapshot-v18-12r/</code>. That directory does not change after publication, so its checksums will always match. Collection continues in the live directory <code>data/2026-09-04/</code>, which grows past what this text describes.</p>
     <p>You need an archive node for Robinhood Chain (historical <code>eth_call</code>; public endpoints typically retain only the last ~128 blocks of state):</p>
     <div class="tw" style="border:none">
       <table style="min-width:0"><tbody>
@@ -565,7 +565,7 @@ python3 code/verify.py 54088399</td></tr>
     <p>0x disabled our key entirely on 4 September, after two notices about the quote-to-fill ratio. We stopped calling them rather than retrying, and 0x is excluded from the comparison until that is resolved.</p>
     <p>But the barrier is not uniform, and that turns out to be the more useful finding. Asked the same question, 1inch replied that quote-only use is fine, that they have no quote-to-fill rule, and that they had never throttled a single one of our calls — with the condition that the free tier is for non-commercial use, which this is. So "independent measurement is impossible" is not an industry fact. It is the result of asking each provider, one at a time, and getting different answers. The barrier is not the code and not a universal policy. It is that almost nobody asks.</p>
     <div class="note">
-      <p style="margin:0">Admitting what is missing is more credible than pretending to be complete. Five of the seven errors above were found while checking figures for this report. "Only about 10% of Polymarket markets are tradeable" was written into external copy and then withdrawn; "on-chain tokenized stock pools are all empty" had an entire section drafted before it was overturned. This is the reason to write a verification tool: the first errors it catches are your own.</p>
+      <p style="margin:0">Admitting what is missing is more credible than pretending to be complete. Most of these errors surfaced only because figures were checked against the raw data; two of them survived to publication and were caught only when a re-run forced a correction. "Only about 10% of Polymarket markets are tradeable" was written into external copy and then withdrawn; "on-chain tokenized stock pools are all empty" had an entire section drafted before it was overturned. This is the reason to write a verification tool: the first errors it catches are your own.</p>
     </div>
   </div>
 </section>
