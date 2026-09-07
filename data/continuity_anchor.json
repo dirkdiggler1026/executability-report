@@ -1,0 +1,7 @@
+{
+ "epoch_start": "2026-08-29",
+ "headline_since": "2026-08-30",
+ "rule": "argmax(venues*days), 仅在 epoch 首期评估",
+ "anchored_utc": "2026-09-05T15:10:14Z",
+ "prev_epoch": null
+}
