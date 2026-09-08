@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-09-07T06:01:46Z",
+ "generated_utc": "2026-09-08T06:00:38Z",
  "since": "2026-08-29",
- "until": "2026-09-06",
- "days": 9,
+ "until": "2026-09-07",
+ "days": 10,
  "venues": 4,
  "venue_list": [
   "pm/kalshi",
@@ -29,46 +29,51 @@
  "tradeoff_curve": [
   {
    "since": "2026-08-29",
-   "days": 9,
+   "days": 10,
    "venues": 4
   },
   {
    "since": "2026-08-30",
-   "days": 8,
+   "days": 9,
    "venues": 9
   },
   {
    "since": "2026-08-31",
-   "days": 7,
+   "days": 8,
    "venues": 10
   },
   {
    "since": "2026-09-01",
-   "days": 6,
+   "days": 7,
    "venues": 10
   },
   {
    "since": "2026-09-02",
-   "days": 5,
+   "days": 6,
    "venues": 10
   },
   {
    "since": "2026-09-03",
-   "days": 4,
+   "days": 5,
    "venues": 10
   },
   {
    "since": "2026-09-04",
-   "days": 3,
+   "days": 4,
    "venues": 12
   },
   {
    "since": "2026-09-05",
-   "days": 2,
+   "days": 3,
    "venues": 12
   },
   {
    "since": "2026-09-06",
+   "days": 2,
+   "venues": 12
+  },
+  {
+   "since": "2026-09-07",
    "days": 1,
    "venues": 12
   }
@@ -77,9 +82,9 @@
   "per_chain": {
    "ethereum": {
     "sources_max": 4,
-    "groups": 19307,
-    "full": 13769,
-    "rate": 0.7132,
+    "groups": 21767,
+    "full": 16108,
+    "rate": 0.74,
     "sources_by_day": {
      "2026-08-30": [
       "cow",
@@ -123,6 +128,11 @@
       "paraswap"
      ],
      "2026-09-06": [
+      "cow",
+      "kyberswap",
+      "paraswap"
+     ],
+     "2026-09-07": [
       "cow",
       "kyberswap",
       "paraswap"
@@ -131,8 +141,8 @@
    },
    "solana": {
     "sources_max": 1,
-    "groups": 12724,
-    "full": 12724,
+    "groups": 14346,
+    "full": 14346,
     "rate": 1.0,
     "sources_by_day": {
      "2026-08-30": [
@@ -158,13 +168,16 @@
      ],
      "2026-09-06": [
       "jupiter"
+     ],
+     "2026-09-07": [
+      "jupiter"
      ]
     }
    },
    "robinhood": {
     "sources_max": 1,
-    "groups": 4644,
-    "full": 4644,
+    "groups": 6372,
+    "full": 6372,
     "rate": 1.0,
     "sources_by_day": {
      "2026-09-04": [
@@ -175,11 +188,14 @@
      ],
      "2026-09-06": [
       "uniswap_v4_rh"
+     ],
+     "2026-09-07": [
+      "uniswap_v4_rh"
      ]
     }
    }
   },
-  "worst": 0.7132,
+  "worst": 0.74,
   "bucket_s": 1800,
   "slow_excluded": [
    "lifi",
@@ -191,15 +207,15 @@
  },
  "headline": {
   "since": "2026-08-30",
-  "days": 8,
+  "days": 9,
   "venues": 9,
   "quorum": {
    "per_chain": {
     "ethereum": {
      "sources_max": 4,
-     "groups": 19307,
-     "full": 13769,
-     "rate": 0.7132,
+     "groups": 21767,
+     "full": 16108,
+     "rate": 0.74,
      "sources_by_day": {
       "2026-08-30": [
        "cow",
@@ -243,6 +259,11 @@
        "paraswap"
       ],
       "2026-09-06": [
+       "cow",
+       "kyberswap",
+       "paraswap"
+      ],
+      "2026-09-07": [
        "cow",
        "kyberswap",
        "paraswap"
@@ -251,8 +272,8 @@
     },
     "solana": {
      "sources_max": 1,
-     "groups": 12724,
-     "full": 12724,
+     "groups": 14346,
+     "full": 14346,
      "rate": 1.0,
      "sources_by_day": {
       "2026-08-30": [
@@ -278,13 +299,16 @@
       ],
       "2026-09-06": [
        "jupiter"
+      ],
+      "2026-09-07": [
+       "jupiter"
       ]
      }
     },
     "robinhood": {
      "sources_max": 1,
-     "groups": 4644,
-     "full": 4644,
+     "groups": 6372,
+     "full": 6372,
      "rate": 1.0,
      "sources_by_day": {
       "2026-09-04": [
@@ -295,11 +319,14 @@
       ],
       "2026-09-06": [
        "uniswap_v4_rh"
+      ],
+      "2026-09-07": [
+       "uniswap_v4_rh"
       ]
      }
     }
    },
-   "worst": 0.7132,
+   "worst": 0.74,
    "bucket_s": 1800,
    "slow_excluded": [
     "lifi",
