@@ -1,0 +1,28 @@
+Data in this directory is licensed under the Creative Commons Attribution 4.0
+International License (CC BY 4.0): https://creativecommons.org/licenses/by/4.0/
+
+You are free to share and adapt this data for any purpose, including
+commercially, provided you give appropriate credit.
+
+Suggested attribution:
+    "Executability measurement — Robinhood Chain depth, <round block or date>,
+     https://dirkdiggler1026.github.io/executability-report/"
+or cite the snapshot directory / round hash you actually used.
+
+Scope
+-----
+This license covers the measurement data under data/: round records, quote
+records, manifests, and the continuity metadata. These are quantities derived
+from public on-chain state (Uniswap v4 pool state on Robinhood Chain) and are
+independently reproducible from an archive node.
+
+It does NOT cover third-party venue data that is not present in this
+repository (aggregator quote responses, prediction-market order books, or any
+other keyed source), which remains subject to those providers' own terms. This
+repository holds none of it.
+
+Code is licensed separately — see /LICENSE (Apache License 2.0).
+
+No warranty: the data is provided as measured, including its published
+limitations (simulated Quoter calls, not executed trades; USDG-quoted pools
+only). Quoted figures are not investment advice.

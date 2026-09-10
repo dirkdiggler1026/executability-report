@@ -5,6 +5,43 @@ tokenized stocks on Robinhood Chain, and prediction markets.
 
 **Report:** https://dirkdiggler1026.github.io/executability-report/
 
+## Contact
+
+Independent, pseudonymous operator. Questions, corrections, citations, or a
+commissioned measurement:
+
+```
+dirkdiggler871026@gmail.com
+```
+
+Corrections are welcome and are published — the quarantine section below is the
+point, not an embarrassment. If you think a figure here is wrong, say so.
+
+## Commissioned measurement
+
+Available from October 2026. Two shapes, both measured exactly like the public
+series, both delivered with replayable evidence (block height, raw Quoter
+returns, round hash):
+
+1. **Verification report** — a named pool, token or venue, at sizes you choose:
+   what is actually executable at a pinned block, against a stated source of
+   truth (a claim, a diligence question, a dispute).
+2. **Collateral / liquidation-depth review** — for a protocol about to accept
+   tokenized stocks (or any token) as collateral: what that collateral can
+   actually be sold for, and at what size, measured before you set parameters.
+
+Conclusions are produced by the data, not by the payer. Coverage and scheduling
+are for sale; conclusions are not, and the paying party cannot change what the
+measurement finds.
+
+## License
+
+- `code/` — Apache License 2.0 (see `LICENSE`)
+- `data/` — Creative Commons Attribution 4.0 (see `data/LICENSE`)
+
+Attribution is the only condition on the data, and being the citable source is
+the point.
+
 ## Contents
 
 ```
