@@ -7,10 +7,18 @@
 
 **锚点现在是 git 历史，不是链。** `rounds.jsonl` 与数据在同一个仓库里，
 所以重算比对证明的是「未被事后改动，且任何改动都留在 git 历史里」——
-这是真的保证，但它不是链上承诺。每条记录的 `committed` 字段说的就是这件事，
-本脚本按该字段打印锚点，回填上链之后这行自己升级，不需要有人回来改措辞。
-早先这里写的是「和链上承诺逐字节比对」，而 353 条已发布轮次的 `committed`
-全部是 false —— 一个事实写在两处然后漂移，这份仓库自己犯过一次。
+这是真的保证，但它不是链上承诺。早先这里写的是「和链上承诺逐字节比对」，
+而已发布轮次的 `committed` 全部是 false —— 一个事实写在两处然后漂移，
+这份仓库自己犯过一次。
+
+**`committed` 永远不会翻成 true，不要指望本脚本自己跟进。**
+`rounds.jsonl` 在 MANIFEST.sha256 里，改动它会让已发布校验和失效；
+A8「已发布文件只增不改、链上状态不回写进数据文件」正是这个意思。
+所以下面那行按 `committed` 打印锚点，只对「尚未上链」的今天成立 ——
+回填之后它会在最该说「链上」的那一刻说「git 历史」。
+**改法是把锚点来源换成账本本身**（查 getRoundHash / latestCommittedBlock，
+或本地 append-only 的 commits.jsonl），而不是去动数据文件。
+这一条是 D4 的验收标准之一，不是可选项。
 
     python3 verify.py <block>        复核指定轮次
     python3 verify.py --latest       复核最近一轮
@@ -148,8 +156,10 @@ def main() -> int:
 
     print(f"复核轮次  块 {rec['block']:,}  规范 {rec['canon']}")
     print(f"  记录的轮次哈希 {rec['roundKeccak']}")
+    # D4 前：committed 恒为 false（A8，见文件头），所以这里恒走 git 历史分支。
+    # D4 起：锚点必须改成查账本，不要在这里加分支去猜。
     print("  锚点：" + ("链上（已提交）" if rec.get("committed")
-                        else "git 历史（尚未提交上链）"))
+                        else "git 历史（尚未提交上链；账本查询见 D4）"))
     if rec["canon"] != CANON_VERSION:
         print(f"   规范版本不符（本地 {CANON_VERSION}），哈希必然不同")
 
