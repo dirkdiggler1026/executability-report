@@ -23,12 +23,17 @@ Available from October 2026. Two shapes, both measured exactly like the public
 series, both delivered with replayable evidence (block height, raw Quoter
 returns, round hash):
 
-1. **Verification report** — a named pool, token or venue, at sizes you choose:
-   what is actually executable at a pinned block, against a stated source of
-   truth (a claim, a diligence question, a dispute).
+1. **Verification report** — a named pool or token, at sizes you choose: what is
+   actually executable at a pinned block, against a stated source of truth (a
+   claim, a diligence question, a dispute).
 2. **Collateral / liquidation-depth review** — for a protocol about to accept
    tokenized stocks (or any token) as collateral: what that collateral can
    actually be sold for, and at what size, measured before you set parameters.
+
+Both are measured from public on-chain state, which anyone can replay. Coverage
+of third-party aggregator APIs is not offered: those free tiers are licensed for
+non-commercial use, and paid work would not be. The public aggregator series in
+this report stays non-commercial for the same reason.
 
 Conclusions are produced by the data, not by the payer. Coverage and scheduling
 are for sale; conclusions are not, and the paying party cannot change what the
@@ -36,11 +41,14 @@ measurement finds.
 
 ## License
 
-- `code/` — Apache License 2.0 (see `LICENSE`)
+- `code/` — Apache License 2.0 (see `LICENSE`). The Apache text at the
+  repository root applies to `code/` only.
 - `data/` — Creative Commons Attribution 4.0 (see `data/LICENSE`)
+- the report itself (`index.html`, `index.zh.html`) — Creative Commons
+  Attribution 4.0, same terms as the data
 
-Attribution is the only condition on the data, and being the citable source is
-the point.
+Attribution is the only condition on the data and the report, and being the
+citable source is the point.
 
 ## Contents
 
