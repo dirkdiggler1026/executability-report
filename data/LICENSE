@@ -21,7 +21,9 @@ repository (aggregator quote responses, prediction-market order books, or any
 other keyed source), which remains subject to those providers' own terms. This
 repository holds none of it.
 
-Code is licensed separately — see /LICENSE (Apache License 2.0).
+Code is licensed separately: see /LICENSE (Apache License 2.0, which covers
+code/ only). The report itself (index.html, index.zh.html) carries the same
+CC BY 4.0 terms as the data above.
 
 No warranty: the data is provided as measured, including its published
 limitations (simulated Quoter calls, not executed trades; USDG-quoted pools

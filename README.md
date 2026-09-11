@@ -7,48 +7,44 @@ tokenized stocks on Robinhood Chain, and prediction markets.
 
 ## Contact
 
-Independent, pseudonymous operator. Questions, corrections, citations, or a
-commissioned measurement:
+Independent operator, working under a pseudonym. Questions, corrections,
+citations, and commissioned work:
 
 ```
 dirkdiggler871026@gmail.com
 ```
 
-Corrections are welcome and are published — the quarantine section below is the
-point, not an embarrassment. If you think a figure here is wrong, say so.
+Corrections get published. The quarantine section below is an example of that.
+If you think a figure here is wrong, say so.
 
 ## Commissioned measurement
 
-Available from October 2026. Two shapes, both measured exactly like the public
-series, both delivered with replayable evidence (block height, raw Quoter
-returns, round hash):
+From October 2026. Two kinds of work, measured the same way as the public
+series and delivered with the raw evidence (block height, Quoter returns,
+round hash):
 
-1. **Verification report** — a named pool or token, at sizes you choose: what is
-   actually executable at a pinned block, against a stated source of truth (a
-   claim, a diligence question, a dispute).
-2. **Collateral / liquidation-depth review** — for a protocol about to accept
-   tokenized stocks (or any token) as collateral: what that collateral can
-   actually be sold for, and at what size, measured before you set parameters.
+1. **Verification report.** A named pool or token, at sizes you pick. What is
+   actually executable at one pinned block, checked against a stated claim, a
+   diligence question, or a dispute.
+2. **Collateral / liquidation-depth review.** For a protocol about to accept
+   tokenized stocks (or any token) as collateral. What that collateral can be
+   sold for, and at what size, before parameters are set.
 
-Both are measured from public on-chain state, which anyone can replay. Coverage
-of third-party aggregator APIs is not offered: those free tiers are licensed for
+Both use public on-chain state, so anyone can replay them. I do not take paid
+work on third-party aggregator APIs: those free tiers are licensed for
 non-commercial use, and paid work would not be. The public aggregator series in
 this report stays non-commercial for the same reason.
 
-Conclusions are produced by the data, not by the payer. Coverage and scheduling
-are for sale; conclusions are not, and the paying party cannot change what the
-measurement finds.
+The data decides the conclusion. Coverage and scheduling are what you pay for.
 
 ## License
 
-- `code/` — Apache License 2.0 (see `LICENSE`). The Apache text at the
-  repository root applies to `code/` only.
-- `data/` — Creative Commons Attribution 4.0 (see `data/LICENSE`)
-- the report itself (`index.html`, `index.zh.html`) — Creative Commons
-  Attribution 4.0, same terms as the data
+- `code/` — Apache License 2.0 (`LICENSE`, which covers `code/` only)
+- `data/` — Creative Commons Attribution 4.0 (`data/LICENSE`)
+- `index.html`, `index.zh.html` — Creative Commons Attribution 4.0, same terms
+  as the data
 
-Attribution is the only condition on the data and the report, and being the
-citable source is the point.
+Attribution is the only condition, for the data and the report alike.
 
 ## Contents
 

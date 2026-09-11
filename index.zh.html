@@ -604,7 +604,7 @@ python3 code/verify.py 54088399</td></tr>
     <p>头部行算的是 9 个场子,不是 13 个。判定标准:一个场子只有在窗口内<strong>每一天</strong>都有数据才算数。被排除的有四个:0x(2026-09-05 退役,API key 于 09-04 00:46 UTC 被停用,HTTP 403 非限流)、1inch(08-31 才接入)、Polymarket Perps 与 Robinhood Chain 采集器(均 09-04 才接入)。场子构成见 <code>data/continuity.json</code> 的 <code>venue_list</code> 与 <code>venue_first_day</code>,可独立核实。该变化只影响场子数与到齐率分母,不影响上面 12 轮股票快照的任何数字。</p>
     <p>时间序列事后无法重建。这段窗口之所以存在，只因为它在发生时被记录了下来。</p>
     <p>下一步是分析美股休市时段——周五收盘到周一开盘之间有 65.5 小时（周五 20:00 UTC → 周一 13:30 UTC），链上照常交易，而价格预言机停止更新。这段窗口正是风险最集中的地方。整段发生时已被完整记录——采集全天候运行，Robinhood Chain 轮次自 09-04 起、早于周五收盘数小时就已开始。只是它未被纳入本报告的结论窗口，结果将另行报告。</p>
-    <p>委托测量与纠正：dirkdiggler871026@gmail.com · 代码 Apache-2.0 · 数据 CC BY 4.0</p>
+    <p>委托测量与纠正：dirkdiggler871026@gmail.com · 代码 Apache-2.0 · 报告与数据 CC BY 4.0</p>
     <p class="sig">独立开发者 · 自建数据管线 · 结论窗口 2026-08-30 → 09-04 · 报告更新于 2026-09-07</p>
   </div>
 </footer>
