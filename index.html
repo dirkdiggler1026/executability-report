@@ -247,8 +247,8 @@ footer p{font-size:14px;color:var(--ink-2)}
 
 <header class="mast">
   <div class="eyebrow">Independent measurement · v18 · corrected 2026-09-04</div>
-  <h1>The price on screen<br>is not the price you get</h1>
-  <p class="standfirst">A price oracle tells you what something is worth. This measurement tells you whether you can actually sell it. Three unrelated markets, one recurring gap: the number on the screen and the number you get when you press the button are further apart than they look.</p>
+  <h1>Nine tokens, one chain, one day, one size<br>Six came back at 93% or more. Three did not.</h1>
+  <p class="standfirst">A price oracle tells you what something is worth. This measurement tells you whether you can sell it, and what it costs when you do. On 2026-09-04, in one asset class and on one screen: a $100,000 sale of SPY returned 99.71%, a $100,000 sale of QQQ returned 0.03%. Nothing on the screen separated them.</p>
   <div class="byline">
     <span>Findings window <b>2026-08-30 → 09-04</b></span>
     <span>Aggregator quotes <b>51,084</b></span>
@@ -263,7 +263,7 @@ footer p{font-size:14px;color:var(--ink-2)}
   <div class="reading">
     <div class="k">Tokenized QQQ</div>
     <div class="v" style="color:var(--bad)">$6.46</div>
-    <div class="d">Selling $100 of QQQ on Robinhood Chain returns $6.46. At $100,000 it returns $30.</div>
+    <div class="d">Selling $100 of QQQ on Robinhood Chain returned $6.46; at $100,000 it returned $30. USDG-quoted pools only.</div>
   </div>
   <div class="reading">
     <div class="k">Prediction markets · one-sided</div>
@@ -272,8 +272,8 @@ footer p{font-size:14px;color:var(--ink-2)}
   </div>
   <div class="reading">
     <div class="k">Same screen, same asset class</div>
-    <div class="v">3300<span style="font-size:20px">×</span></div>
-    <div class="d">SPY returns 99.7% on a $100,000 sell; QQQ returns 0.03%</div>
+    <div class="v" style="color:var(--bad)">0.03%</div>
+    <div class="d">QQQ at a $100,000 sell on 2026-09-04. SPY at the same size returned 99.71%, and six of the nine tokens returned 93% or more. USDG-quoted pools only.</div>
   </div>
 </div>
 
@@ -601,7 +601,7 @@ python3 code/verify.py 54088399</td></tr>
     <p>A time series cannot be reconstructed after the fact. This window exists only because it was being recorded while it happened.</p>
     <p>Next is the analysis of the hours when US markets are closed. There are 65.5 hours between Friday's close and Monday's open (20:00 UTC Friday to 13:30 UTC Monday), during which the chain keeps trading while price oracles stop updating. That window is where the risk concentrates. The whole of it was recorded as it happened — the collectors run around the clock, and the Robinhood Chain rounds began on 09-04, hours before that Friday's close. It was not analysed within this report's window; results will be reported separately.</p>
     <p>Commissioned measurement &amp; corrections: dirkdiggler871026@gmail.com · code Apache-2.0 · report &amp; data CC BY 4.0</p>
-    <p class="sig">Independent developer · self-built data pipeline · findings window 2026-08-30 → 09-04 · updated 2026-09-07</p>
+    <p class="sig">Independent developer · self-built data pipeline · data through 2026-09-04 · wording revised 2026-09-11</p>
   </div>
 </footer>
 

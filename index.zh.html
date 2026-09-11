@@ -248,9 +248,9 @@ footer p{font-size:14px;color:var(--ink-2)}
 
 <header class="mast">
   <div class="eyebrow">独立测量 · v18 · 2026-09-04 更正 · <a href="./">English (canonical)</a></div>
-  <h1>盘面价格不是<br>你能成交的价格</h1>
+  <h1>九个代币，同一条链、同一天、同一个档位<br>六个拿回了 93% 以上，三个没有</h1>
   <p class="standfirst" style="font-size:15px;color:var(--ink-3)">本页是英文版 v18 的中文版。英文版为准本，两版若有出入以 <a href="./">英文版</a> 为准。</p>
-  <p class="standfirst">价格预言机告诉你它值多少；这份测量告诉你你能不能真的卖掉。三个互不相干的市场，同一个问题：屏幕上显示的价格，和你真按下去能拿到的价格，差得比想象中远。</p>
+  <p class="standfirst">价格预言机告诉你它值多少；这份测量告诉你它能不能卖掉、卖掉的代价是多少。2026-09-04 那天，同一个资产类别、同一个屏幕：卖 $10 万的 SPY 拿回 99.71%，卖同样规模的 QQQ 拿回 0.03%——而屏幕上没有任何东西能把它们区分开。</p>
   <div class="byline">
     <span>结论窗口 <b>2026-08-30 → 09-04</b></span>
     <span>链上样本 <b>51,084 条聚合器报价</b></span>
@@ -265,7 +265,7 @@ footer p{font-size:14px;color:var(--ink-2)}
   <div class="reading">
     <div class="k">代币化股票 · QQQ</div>
     <div class="v" style="color:var(--bad)">$6.46</div>
-    <div class="d">在 Robinhood Chain 卖出价值 $100 的 QQQ 代币，实际收回 $6.46；卖 $100,000 收回 $30</div>
+    <div class="d">在 Robinhood Chain 卖出价值 $100 的 QQQ 代币，实际收回 $6.46；卖 $100,000 收回 $30（2026-09-04）。仅统计 USDG 计价池</div>
   </div>
   <div class="reading">
     <div class="k">预测市场 · 单边</div>
@@ -274,8 +274,8 @@ footer p{font-size:14px;color:var(--ink-2)}
   </div>
   <div class="reading">
     <div class="k">同一界面 · 同一资产类别</div>
-    <div class="v">3300<span style="font-size:20px">×</span></div>
-    <div class="d">同样卖 $10 万：SPY 收回 99.7%，QQQ 收回 0.03%</div>
+    <div class="v" style="color:var(--bad)">0.03%</div>
+    <div class="d">2026-09-04 卖 $10 万的 QQQ 收回 0.03%；SPY 同档位收回 99.71%，九个代币里六个 ≥93%。仅统计 USDG 计价池</div>
   </div>
 </div>
 
@@ -605,7 +605,7 @@ python3 code/verify.py 54088399</td></tr>
     <p>时间序列事后无法重建。这段窗口之所以存在，只因为它在发生时被记录了下来。</p>
     <p>下一步是分析美股休市时段——周五收盘到周一开盘之间有 65.5 小时（周五 20:00 UTC → 周一 13:30 UTC），链上照常交易，而价格预言机停止更新。这段窗口正是风险最集中的地方。整段发生时已被完整记录——采集全天候运行，Robinhood Chain 轮次自 09-04 起、早于周五收盘数小时就已开始。只是它未被纳入本报告的结论窗口，结果将另行报告。</p>
     <p>委托测量与纠正：dirkdiggler871026@gmail.com · 代码 Apache-2.0 · 报告与数据 CC BY 4.0</p>
-    <p class="sig">独立开发者 · 自建数据管线 · 结论窗口 2026-08-30 → 09-04 · 报告更新于 2026-09-07</p>
+    <p class="sig">独立开发者 · 自建数据管线 · 数据截至 2026-09-04 · 措辞修订 2026-09-11</p>
   </div>
 </footer>
 
