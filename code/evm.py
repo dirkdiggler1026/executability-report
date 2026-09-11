@@ -1,6 +1,6 @@
 """最小 EVM 读侧工具 —— 零依赖。
 
-🔴 **不装 web3。** 这台机器只剩约 400MB 可用内存，而采集进程还在长。
+**不装 web3。** 这台机器只剩约 400MB 可用内存，而采集进程还在长。
 读侧只需要三样：keccak256、静态类型的 ABI 编码、eth_call。
 全部手写不到 150 行，比拖进一整套依赖树可靠得多。
 """
@@ -10,7 +10,7 @@ import json
 import subprocess
 
 # ── keccak-f[1600] ────────────────────────────────────────────────
-# ⚠️ hashlib.sha3_256 是 NIST SHA3，**不是** Keccak（padding 不同）。
+# hashlib.sha3_256 是 NIST SHA3，**不是** Keccak（padding 不同）。
 #    以太坊用的是原始 Keccak256，必须自己实现。
 _RC = [0x0000000000000001, 0x0000000000008082, 0x800000000000808A,
        0x8000000080008000, 0x000000000000808B, 0x0000000080000001,
@@ -50,7 +50,7 @@ def _f(A):
 def keccak256(data: bytes) -> bytes:
     rate = 136                       # 1088 bits，keccak256 的 rate
     A = [[0] * 5 for _ in range(5)]
-    # 🔴 padding 是 0x01（Keccak），不是 0x06（NIST SHA3）—— 差这一个字节
+    # padding 是 0x01（Keccak），不是 0x06（NIST SHA3）—— 差这一个字节
     #    就会算出完全不同的哈希，而且不会报错。
     p = bytearray(data) + b"\x01"
     while len(p) % rate != 0:
@@ -91,7 +91,7 @@ def enc_b32(b: bytes) -> str:
 
 
 # ── RPC ───────────────────────────────────────────────────────────
-# 🔴 端点从环境读，**不写进代码**（/etc/rhchain.env，chmod 600）。
+# 端点从环境读，**不写进代码**（/etc/rhchain.env，chmod 600）。
 #    公共端点实测扛不住分析型负载：getLogs 有 10,000 条结果上限，
 #    收窄区间又会 `log query timed out` 或 429（2026-09-03 实测）。
 #    未配置时降级到公共端点 —— 采集能继续，但分析型扫描会失败。
@@ -101,7 +101,7 @@ RPC = (_os.environ.get("RHCHAIN_RPC")
        or _os.environ.get("RHCHAIN_RPC_FALLBACK")
        or "https://rpc.mainnet.chain.robinhood.com")
 
-# 🔴 **按方法分流端点**（2026-09-04）：两边的限制正好互补。
+# **按方法分流端点**（2026-09-04）：两边的限制正好互补。
 #    Alchemy 免费档把 eth_getLogs 限到【10 个区块】，全链扫描不可能；
 #    公共端点的 getLogs 能吃 200 万区块，但没有归档能力，
 #    历史区块上的 eth_call 会失败。
@@ -111,15 +111,15 @@ LOGS_RPC = (_os.environ.get("RHCHAIN_LOGS_RPC")
 _IS_PUBLIC = "alchemy" not in RPC and "quicknode" not in RPC
 
 
-# 🔴 **限速器。** 2026-09-03：一次全链 getLogs 扫描把这个公共 RPC 打到
+# **限速器。** 2026-09-03：一次全链 getLogs 扫描把这个公共 RPC 打到
 # 429，而当时采集器正在同一台机器上跑 —— 如果不区分错误，429 会被记成
 # 「吃不下」写进历史。研究性扫描和采集共用这个节流器。
-# 🔴 **按 Compute Unit 限速，不是按请求数**（2026-09-03 踩过）：
+# **按 Compute Unit 限速，不是按请求数**（2026-09-03 踩过）：
 #    Alchemy 免费档是 300 CU/s，而不同方法的 CU 相差 7 倍 ——
 #    按 25 次/秒发 eth_getLogs 就是 1,875 CU/s，超限六倍。
 #    「一秒几次」这个直觉在按 CU 计费的服务上是错的。
 #
-# 🔴 **失败必须收窄整体节奏，不能只收窄查询窗口**：
+# **失败必须收窄整体节奏，不能只收窄查询窗口**：
 #    同日实测，撞限流后只把 getLogs 的区间对半砍、却继续全速重试，
 #    产生了 2,325 个失败区间、零收获的重试风暴。
 #    退避要作用在【发送速率】上。
@@ -161,7 +161,7 @@ def rpc(method: str, params: list, url: str = None, timeout: int = 25,
         retries: int = 3):
     """返回 (result, err)。
 
-    🔴 **err 非 None 表示【调用没成功】，绝不能当成「查到了空」。**
+    **err 非 None 表示【调用没成功】，绝不能当成「查到了空」。**
     2026-09-03 踩过两次：429 和 "exceeds limit of 10000" 都被当成
     「没有数据」，一次算出了错误的持仓表，一次差点把 RPC 故障
     写成 no_liquidity 存进时间序列。
@@ -169,9 +169,8 @@ def rpc(method: str, params: list, url: str = None, timeout: int = 25,
     execution reverted 是**例外**：那是合约在说话，属于数据，
     原样返回给调用方判断（见 rhchain.quote）。
 
-    🔴 用 curl 不用 urllib —— 与项目其他部分一致（本机 Python 的
-    TLS 指纹被多个 CDN 拦过）。
-    """
+    用 curl 不用 urllib —— 与项目其他部分一致（本机 Python 的
+    TLS 指纹被多个 CDN 拦过）。"""
     import time as _t
     if url is None:
         url = LOGS_RPC if method == "eth_getLogs" else RPC

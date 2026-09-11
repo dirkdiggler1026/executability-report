@@ -21,8 +21,8 @@ only, and applies retroactively to rounds collected before this script.
     python3 analyze.py [--min-rounds 12]
 
 --- 中文 ---
-🔴 用分位而非裸 min~max：一次瞬时抽走深度会让极值夸大常态。
-🔴 缺测（吃不下）不计为 0%，单列计数 —— 「12 轮里有 3 轮连一万都吃不下」
+用分位而非裸 min~max：一次瞬时抽走深度会让极值夸大常态。
+缺测（吃不下）不计为 0%，单列计数 —— 「12 轮里有 3 轮连一万都吃不下」
    这个信息不能被平均数吃掉。
 """
 from __future__ import annotations

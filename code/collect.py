@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 """Robinhood Chain 股票代币可执行深度采集。
 
-🔴 **为什么独立于 dexfeed 而不是加一个 source**：
+**为什么独立于 dexfeed 而不是加一个 source**：
    ① dexfeed 的数据格式 2026-09-01 冻结，它的 SOURCES 模型假设的是
       「HTTP 聚合器 + 限流/配额」，而这里是无许可 RPC，语义对不上；
    ② 改 dexfeed 的 CHAINS/SOURCES 会牵动巡检、status.py、备份的断采检测，
       而那条 62 天的序列不能为一个新实验冒险。
    写进同一个数据根 ⇒ backup.sh 自动覆盖，无需改任何配置。
 
-🔴 **每轮重新推汇率，不缓存。** 用 $100 买入的实际成交量反推「每美元多少
+**每轮重新推汇率，不缓存。** 用 $100 买入的实际成交量反推「每美元多少
    代币」，再用它换算卖出方向的投入量。缓存汇率会在价格漂移后把卖出侧
    的规模算错，而那正是要测的东西。
 
-⚠️ 采样窗口的教训（2026-09-03）：这条链 100ms 出块，「最近 400 万块」
+采样窗口的教训（2026-09-03）：这条链 100ms 出块，「最近 400 万块」
    只有 4.6 天。任何按块数取窗口的分析，第一行先把它换算成时间。
 """
 from __future__ import annotations
@@ -33,7 +33,7 @@ POOLS = Path(__file__).parent / "stock_pools.json"   # 筛选后的池表，见 
 SIZES = [100, 1_000, 10_000, 100_000]
 SOURCE = "uniswap_v4_rh"
 
-# 🔴 **口径断点 2026-09-11：status 的语义变了**（至今没有一行不同，但语义变了）。
+# **口径断点 2026-09-11：status 的语义变了**（至今没有一行不同，但语义变了）。
 # 此前：任何一次 quote 失败都走同一个 `continue` —— rpc_error / revert_other /
 #   no_liquidity 三者合流；全部池失败时整行硬编码成 no_liquidity。
 #   这正是 rhchain.best_quote() 的 docstring 警告过的那件事：
@@ -43,12 +43,12 @@ SOURCE = "uniswap_v4_rh"
 #   那个形状和 QQQ 0.03%、GME 94.9→7.4 不可区分。
 # 现在：故障 → 同一 pinned block 有界重试 → 仍失败则**丢掉整轮**。
 #
-# 🔴 为什么是「丢整轮」而不是「把这行标成 rpc_error」：
+# 为什么是「丢整轮」而不是「把这行标成 rpc_error」：
 #   status 在 canon 原像里（见 canon_lines）。写一行 rpc_error 进 series，
 #   第三方在同一区块回放时 RPC 是好的 ⇒ 他算出 ok ⇒ **哈希永久对不上**，
 #   而且无从得知原因。可复算是这个项目的全部可信度，宁可留一个诚实的空档。
 #   这与本文件既有的「取区块高度失败，本轮放弃」是同一条原则。
-# ⚠️ 也不能只丢那一行：rounds.jsonl 记 rows 数、轮次哈希覆盖全部行，
+# 也不能只丢那一行：rounds.jsonl 记 rows 数、轮次哈希覆盖全部行，
 #   35 行的轮次不是残缺的 36 行轮次，是另一种东西。
 #
 # 归档节点上按 pinned block 重放是幂等的 ⇒ 重试不改变语义，只是重问一次。
@@ -74,10 +74,9 @@ def quote_retry(p, token_in, amount_in, block):
 def load_pools() -> dict:
     """按 (代币, 计价资产) 索引全链扫出来的池子。
 
-    🔴 池表是**全链扫描**的产物，不能用「最近 N 块」重建 ——
+    池表是**全链扫描**的产物，不能用「最近 N 块」重建 ——
     真正的股票代币池建在开链初期（块 84 万左右），而发射台每天
-    造几千个垃圾池。窗口取窄了会只看到垃圾。
-    """
+    造几千个垃圾池。窗口取窄了会只看到垃圾。"""
     found = json.loads(POOLS.read_text())
     U = QUOTES["USDG"][0].lower()
     rev = {v.lower(): k for k, v in STOCKS.items()}
@@ -97,21 +96,21 @@ def row(sym, side, size_usd, out, ts, ms, pool, status="ok", note="", blk=None,
     """字段名对齐 dexfeed 的 quotes.jsonl，分析侧可以复用同一套代码。"""
     return {"source": SOURCE, "chain": "robinhood", "sell_sym": sym,
             "side": side, "size_usd": size_usd, "ts": ts,
-            # 🔴 区块号是链上数据唯一可复现的锚点。墙钟时间无法让第三方
+            # 区块号是链上数据唯一可复现的锚点。墙钟时间无法让第三方
             #    在同一状态下复算 —— 而「可复算」是独立测量的全部可信度。
             "block": blk,
             "out_amount": out, "eff_price": None, "route": pool,
             # ok / no_liquidity（数据）/ rpc_error（故障，分析时必须剔除）
             "status": status,
             "detail": note, "latency_ms": ms, "tag": "",
-            # 🔴 **原始整数是唯一可被第三方复现的量。**
+            # **原始整数是唯一可被第三方复现的量。**
             #    out_amount / eff_price 这些是我们除过小数位的浮点，
             #    不同语言的浮点序列化结果不同，不能进哈希原像。
             #    存成【十进制字符串】而不是数字：uint256 超过 JS 的 2^53，
             #    用数字类型会在别人解析时静默丢精度。
             "amount_in_raw": None if amt_in_raw is None else str(amt_in_raw),
             "amount_out_raw": None if out_raw is None else str(out_raw),
-            # 🔴 产品要的那个数：卖出 $N 名义金额，实际收回名义金额的百分之几。
+            # 产品要的那个数：卖出 $N 名义金额，实际收回名义金额的百分之几。
             #    直接存，不要留给分析侧再推 —— 推导规则会漂移，存下来的不会。
             "recovery_pct": None,
             # 买入方向相对 $100 档的价格冲击
@@ -119,17 +118,17 @@ def row(sym, side, size_usd, out, ts, ms, pool, status="ok", note="", blk=None,
 
 
 # ── 证据承诺：轮次哈希 ────────────────────────────────────────────
-# 🔴 **原像里只能放「任何人在同一区块都能精确复现」的量。**
+# **原像里只能放「任何人在同一区块都能精确复现」的量。**
 # 这是整个「证据承诺」功能成立与否的分界线：
-#   ❌ ts / latency_ms  —— 墙钟时间与网络抖动，第三方永远算不出同一个值
-#   ❌ out_amount / eff_price / *_pct —— 我们除过小数位的浮点，
+#   排除  ts / latency_ms  —— 墙钟时间与网络抖动，第三方永远算不出同一个值
+#   排除  out_amount / eff_price / *_pct —— 我们除过小数位的浮点，
 #      不同语言的浮点序列化不一致，哈希必然对不上
-#   ✅ block / poolId / 输入金额 / quoter 返回的原始整数 / status
+#   收录  block / poolId / 输入金额 / quoter 返回的原始整数 / status
 #      —— 在同一区块高度重放 eth_call 就能逐字节复现
 # 若把不可复现的字段放进原像，"任何人都能重算核对"这句话当场失效，
 # 而且是【静默失效】：哈希照样生成、上链、看起来一切正常，
 # 只是没有任何人能验证它 —— 那比不做这个功能更糟。
-# 🔴 v2 起改用【同池往返】作为主指标（2026-09-04）。
+# v2 起改用【同池往返】作为主指标（2026-09-04）。
 # v1 的做法是：用「买入最优池」推出一个汇率，再用它换算卖出的投入量。
 # 当买入最优池和卖出最优池不是同一个池时，那个汇率不属于任何一个池，
 # 算出来的「名义金额」是虚的 —— 实测产出过 106.58% 的回收率，
@@ -175,14 +174,14 @@ def main() -> int:
     blk_r, err = rpc("eth_blockNumber", [])
     if err:
         print(f"取区块高度失败，本轮放弃: {err}", flush=True)
-        return 1                      # 🔴 宁可丢一轮，不写无锚点的数据
+        return 1                      # 宁可丢一轮，不写无锚点的数据
     blk = int(blk_r, 16)
-    # 🔴 **整轮钉在同一个区块高度上**（2026-09-03 由 verify.py 抓出）。
+    # **整轮钉在同一个区块高度上**（2026-09-03 由 verify.py 抓出）。
     #    这条链 100ms 出块，一轮 324 次调用要跑 60~85 秒 = 链推进约 700 块。
     #    若各次调用都打 "latest"，会同时坏掉两件事：
     #      ① 记录的 block 与报价实际状态对不上 ⇒ 第三方永远复核不了
-    #      ② 64 行之间互相也对不上 ⇒ 违反 dexfeed 立过的「同时性是命脉」
-    #    ⚠️ 代价：整轮在历史区块上取值，需要归档节点（Alchemy 有；
+    #      ② 36 行之间互相也对不上 ⇒ 违反 dexfeed 立过的「同时性是命脉」
+    #    代价：整轮在历史区块上取值，需要归档节点（Alchemy 有；
     #      公共端点只保留最近约 128 块的状态，降级后这条会失效）。
     bh = hex(blk)
     ts = int(time.time())
@@ -190,7 +189,7 @@ def main() -> int:
     out_rows = []
     failures = []           # rpc_error：故障，会导致丢轮
     reverts = []            # revert_other：池表/ABI 可能错了，单独报警
-    # 🔴 **第一次重试耗尽即中止整轮，不要把剩下的问完。**
+    # **第一次重试耗尽即中止整轮，不要把剩下的问完。**
     #    任何一次耗尽都已经决定了这一轮要丢，继续问是纯浪费 —— 而且是危险的
     #    浪费：实测全故障场景下 288 次失败 × 退避 (1.5+3.0)s ≈ 21 分钟，
     #    会吃掉 30 分钟的轮次间隔并和下一轮叠起来（dexfeed 8-31 的占空比事故
@@ -207,7 +206,7 @@ def main() -> int:
             t0 = time.time()
             for p in ps:
                 # 同一个池内闭环：USDG → 股票 → USDG
-                # 🔴 两条腿都要接住 status。旧版只接第一条、且两条都丢弃，
+                # 两条腿都要接住 status。旧版只接第一条、且两条都丢弃，
                 #    于是「问不到」和「吃不下」在这个 continue 上合流。
                 o, st, n1 = quote_retry(p, U, amt_in, bh)
                 if st == "rpc_error":
@@ -235,7 +234,7 @@ def main() -> int:
                     best = (back, o, p)
             ms = int((time.time() - t0) * 1000)
             if best is None:
-                # 🔴 本格一个池都没成，而且期间出现过 revert_other ⇒ **不能写
+                # 本格一个池都没成，而且期间出现过 revert_other ⇒ **不能写
                 #    no_liquidity**。链没有说「吃不下」，它说的是别的；写成
                 #    no_liquidity 就是在数据里放一句链没说过的话 —— 和这次
                 #    要修的 rpc_error 合流是同一类错误，只是换了个来源。
@@ -259,11 +258,11 @@ def main() -> int:
     d = ROOT / day
     d.mkdir(parents=True, exist_ok=True)
 
-    # 🔴 **有任何一次重试耗尽的 rpc_error ⇒ 整轮不落盘。**
+    # **有任何一次重试耗尽的 rpc_error ⇒ 整轮不落盘。**
     #    不能只丢那一格：没问成的池可能恰好是最好的，剩下的池会给出一个
     #    偏低但看起来正常的数字（旧版 ok_partial 那一半）。也不能标记它：
     #    status 进 canon 原像，第三方回放算不出同一个值。
-    #    ⚠️ 空档必须能和「采集器挂了」区分开，否则到齐率纪律失去意义 ——
+    #    空档必须能和「采集器挂了」区分开，否则到齐率纪律失去意义 ——
     #      所以丢轮要留下可自证的记录，而不是静默 return。
     if failures:
         rec = {"ts": ts, "block": blk, "event": "round_dropped",
@@ -285,7 +284,7 @@ def main() -> int:
         for r in out_rows:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
 
-    # 🔴 轮次哈希：链上证据承诺的原料。只承诺可复现的部分（见 canon_lines）。
+    # 轮次哈希：链上证据承诺的原料。只承诺可复现的部分（见 canon_lines）。
     #    这里只算不提交 —— 私钥不上这台机器，提交由本地在回填窗口批量做。
     rk = round_keccak(out_rows)
     with open(d / "rounds.jsonl", "a", encoding="utf-8") as f:
@@ -299,7 +298,7 @@ def main() -> int:
     print(f"{time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(ts))} | 块 {blk:,} | "
           f"{len(out_rows)} 行 | " + " ".join(f"{k}={v}" for k, v in sorted(c.items()))
           + f" | roundKeccak {rk[:18]}…")
-    # 🔴 这里不再有 rpc_error 分支：故障轮次在上面就整轮丢掉了，永远走不到这。
+    # 这里不再有 rpc_error 分支：故障轮次在上面就整轮丢掉了，永远走不到这。
     #    旧版这里有一个 `if c.get("rpc_error")` 的告警，而 row() 在本文件从未
     #    以 rpc_error 调用过 ⇒ 那个分支**永不触发**，等于故障发生时零信号。
     return 0

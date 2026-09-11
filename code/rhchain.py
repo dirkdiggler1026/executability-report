@@ -1,11 +1,11 @@
 """Robinhood Chain (4663) 股票代币可执行深度读取。
 
-🔴 **为什么走 V4 而不是 V3**（2026-09-03 实测）：
+**为什么走 V4 而不是 V3**（2026-09-03 实测）：
    官方部署页列了 v3 factory，`getPool` 也返回非零地址 —— 但那个池
    **从未 initialize**（sqrtPriceX96 = 0）。真实流动性全在 Uniswap V4
    的 PoolManager 单例里。**「已部署」不等于「有流动性」。**
 
-🔴 **地址必须用官方部署表，不能用区块浏览器搜索排序。**
+**地址必须用官方部署表，不能用区块浏览器搜索排序。**
    Blockscout 上「已验证、排序第一」的 StateView 指向一个
    余额为 0、Initialize 事件为 0 的空 PoolManager。
 """
@@ -57,9 +57,8 @@ def scan_pools(blocks_back: int = 4_000_000, step: int = 500_000) -> list[dict]:
     """枚举已初始化的池。只保留 sqrtPriceX96 != 0 的 —— 未初始化的池
     存在但不可交易，把它们算进流动性正是 DexScreener 的错法。
 
-    ⚠️ 公共 RPC 的 getLogs 有 10,000 条结果上限；区间取大了会报错而不是
-    截断，取小了会撞 429。失败的区间必须报出来，不能静默跳过。
-    """
+    公共 RPC 的 getLogs 有 10,000 条结果上限；区间取大了会报错而不是
+    截断，取小了会撞 429。失败的区间必须报出来，不能静默跳过。"""
     head_r, err = rpc("eth_blockNumber", [])
     if err:
         raise RuntimeError(f"取区块高度失败: {err}")
@@ -94,21 +93,20 @@ _NOT_ENOUGH = "7a5ed734"
 def quote(p: dict, token_in: str, amount_in: int, block: str = "latest"):
     """吃掉 amount_in 能拿到多少。返回 (数量或 None, 状态)。
 
-    🔴 **三种结果必须分开**（2026-09-03 差点混在一起写进历史）：
+    **三种结果必须分开**（2026-09-03 差点混在一起写进历史）：
        ok            拿到报价
        no_liquidity  合约回滚 NotEnoughLiquidity —— 这是【数据】，
                      和 pmfeed 的 no_liquidity、dexfeed 的「拒绝报价」同源
        rpc_error     429 / 超时 / 结果集超限 —— 这是【故障】，
                      绝不能记成「吃不下」，否则时间序列里会出现
-                     由我们自己的限流造成的假流动性枯竭
-    """
+                     由我们自己的限流造成的假流动性枯竭"""
     zfo = token_in.lower() == p["c0"].lower()
     data = (_QSEL + enc_uint(0x20)
             + enc_addr(p["c0"]) + enc_addr(p["c1"]) + enc_uint(p["fee"])
             + enc_uint(p["ts"]) + enc_addr(p["hooks"])
             + enc_uint(1 if zfo else 0) + enc_uint(amount_in)
             + enc_uint(0x100) + enc_uint(0))
-    # 🔴 block 参数是「可复核」的前提：第三方必须能在【当时那个区块】
+    # block 参数是「可复核」的前提：第三方必须能在【当时那个区块】
     #    重放同一次调用。写死 latest 的话，谁都验证不了历史轮次。
     r, err = rpc("eth_call", [{"to": V4_QUOTER, "data": "0x" + data,
                                "gas": "0x2000000"}, block])
@@ -124,10 +122,9 @@ def best_quote(pools: list[dict], token_in: str, amount_in: int,
                block: str = "latest"):
     """多个池子里取最好的 —— 和 dexfeed 对多聚合器取最优是同一个原则。
 
-    返回 (最优数量或 None, 池, 状态)。⚠️ 只要有【任何一个池】是 rpc_error，
+    返回 (最优数量或 None, 池, 状态)。只要有【任何一个池】是 rpc_error，
     整条结果就标记成 rpc_error —— 因为那个没问成的池可能恰好是最好的，
-    把它当成「不存在」会低估深度。宁可丢一个采样点，不可写一个假的。
-    """
+    把它当成「不存在」会低估深度。宁可丢一个采样点，不可写一个假的。"""
     best, bp, saw_err = None, None, False
     for p in pools:
         o, st = quote(p, token_in, amount_in, block)

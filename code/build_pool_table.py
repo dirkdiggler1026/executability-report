@@ -21,7 +21,7 @@ most pools (208) and among the fewest usable ones (10).
     python3 build_pool_table.py [--top N] [--probe USD] > stock_pools.json
 
 --- 中文说明 ---
-🔴 「选了哪些池」是结论的一部分，必须可复现。
+「选了哪些池」是结论的一部分，必须可复现。
    分两步：全链扫描（失败即中止）→ 用 $10,000 试探筛掉吃不下的。
    排序依据是【实际能换出多少】，不是费率/池子数/TVL ——
    池子数尤其误导：AMC 池最多（208）而可用的最少（10）。
