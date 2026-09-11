@@ -2,8 +2,15 @@
 """独立复核一个轮次的 roundKeccak。
 
 这就是「证据承诺」卖的那件事本身：**任何人拿区块号 + 本文件，
-就能在同一区块高度重放全部报价、重算哈希、和链上承诺逐字节比对。**
+就能在同一区块高度重放全部报价、重算哈希、和记录的轮次哈希逐字节比对。**
 不需要信任提交者，只需要信任算术。
+
+**锚点现在是 git 历史，不是链。** `rounds.jsonl` 与数据在同一个仓库里，
+所以重算比对证明的是「未被事后改动，且任何改动都留在 git 历史里」——
+这是真的保证，但它不是链上承诺。每条记录的 `committed` 字段说的就是这件事，
+本脚本按该字段打印锚点，回填上链之后这行自己升级，不需要有人回来改措辞。
+早先这里写的是「和链上承诺逐字节比对」，而 353 条已发布轮次的 `committed`
+全部是 false —— 一个事实写在两处然后漂移，这份仓库自己犯过一次。
 
     python3 verify.py <block>        复核指定轮次
     python3 verify.py --latest       复核最近一轮
@@ -140,7 +147,9 @@ def main() -> int:
         return 1
 
     print(f"复核轮次  块 {rec['block']:,}  规范 {rec['canon']}")
-    print(f"  链上承诺 {rec['roundKeccak']}")
+    print(f"  记录的轮次哈希 {rec['roundKeccak']}")
+    print("  锚点：" + ("链上（已提交）" if rec.get("committed")
+                        else "git 历史（尚未提交上链）"))
     if rec["canon"] != CANON_VERSION:
         print(f"   规范版本不符（本地 {CANON_VERSION}），哈希必然不同")
 

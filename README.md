@@ -112,7 +112,13 @@ python3 code/verify.py --latest
 ```
 
 The script replays every round-trip at that block height, recomputes the
-hash, and compares it against ounds.jsonl.
+hash, and compares it against rounds.jsonl.
+
+That recorded hash is anchored in git history, not on a chain. rounds.jsonl
+ships in this repository next to the data, so recomputing it shows the round
+has not been revised without the change appearing in the history. Each record
+carries a `committed` field naming which anchor applies; every round published
+so far reads `committed: false`.
 
 Run it from the repository root: it looks for data/ next to the script
 (or honours RHDEPTH_DATA). Quarantined v1 rounds are excluded by their
