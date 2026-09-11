@@ -33,6 +33,43 @@ POOLS = Path(__file__).parent / "stock_pools.json"   # 筛选后的池表，见 
 SIZES = [100, 1_000, 10_000, 100_000]
 SOURCE = "uniswap_v4_rh"
 
+# 🔴 **口径断点 2026-09-11：status 的语义变了**（至今没有一行不同，但语义变了）。
+# 此前：任何一次 quote 失败都走同一个 `continue` —— rpc_error / revert_other /
+#   no_liquidity 三者合流；全部池失败时整行硬编码成 no_liquidity。
+#   这正是 rhchain.best_quote() 的 docstring 警告过的那件事：
+#   **故障被记成「吃不下」，序列里出现由我们自己的限流造成的假枯竭。**
+#   更危险的是另一半 —— 最优池 rpc_error、次优池成功时，会写下一个
+#   **看起来完全正常、只是偏低**的数字，标着 ok，没有任何标记。
+#   那个形状和 QQQ 0.03%、GME 94.9→7.4 不可区分。
+# 现在：故障 → 同一 pinned block 有界重试 → 仍失败则**丢掉整轮**。
+#
+# 🔴 为什么是「丢整轮」而不是「把这行标成 rpc_error」：
+#   status 在 canon 原像里（见 canon_lines）。写一行 rpc_error 进 series，
+#   第三方在同一区块回放时 RPC 是好的 ⇒ 他算出 ok ⇒ **哈希永久对不上**，
+#   而且无从得知原因。可复算是这个项目的全部可信度，宁可留一个诚实的空档。
+#   这与本文件既有的「取区块高度失败，本轮放弃」是同一条原则。
+# ⚠️ 也不能只丢那一行：rounds.jsonl 记 rows 数、轮次哈希覆盖全部行，
+#   35 行的轮次不是残缺的 36 行轮次，是另一种东西。
+#
+# 归档节点上按 pinned block 重放是幂等的 ⇒ 重试不改变语义，只是重问一次。
+QUOTE_RETRIES = 2                 # 首次 + 2 次重试
+RETRY_SLEEP_S = 1.5               # 线性退避；evm._throttle 已在管发送速率
+
+
+def quote_retry(p, token_in, amount_in, block):
+    """同一 pinned block 上的有界重试。返回 (数量或 None, 状态, 尝试次数)。
+
+    只对 rpc_error 重试 —— no_liquidity 和 revert_other 是【链上事实】，
+    在同一区块重问一百次也是同一个答案，重试它们纯属浪费配额。
+    """
+    for i in range(QUOTE_RETRIES + 1):
+        o, st = quote(p, token_in, amount_in, block)
+        if st != "rpc_error":
+            return o, st, i + 1
+        if i < QUOTE_RETRIES:
+            time.sleep(RETRY_SLEEP_S * (i + 1))
+    return None, "rpc_error", QUOTE_RETRIES + 1
+
 
 def load_pools() -> dict:
     """按 (代币, 计价资产) 索引全链扫出来的池子。
@@ -151,21 +188,64 @@ def main() -> int:
     ts = int(time.time())
     day = time.strftime("%Y-%m-%d", time.gmtime(ts))
     out_rows = []
+    failures = []           # rpc_error：故障，会导致丢轮
+    reverts = []            # revert_other：池表/ABI 可能错了，单独报警
+    # 🔴 **第一次重试耗尽即中止整轮，不要把剩下的问完。**
+    #    任何一次耗尽都已经决定了这一轮要丢，继续问是纯浪费 —— 而且是危险的
+    #    浪费：实测全故障场景下 288 次失败 × 退避 (1.5+3.0)s ≈ 21 分钟，
+    #    会吃掉 30 分钟的轮次间隔并和下一轮叠起来（dexfeed 8-31 的占空比事故
+    #    就是这么来的）。故障要**快速失败**，而不是慢慢耗死采集节奏。
     for sym, ps in sorted(idx.items()):
+        if failures:
+            break
         for sz in SIZES:
+            if failures:
+                break
             amt_in = sz * 10 ** UD
             best = None
+            cell_revert = 0          # 本格出现过几次 revert_other
             t0 = time.time()
             for p in ps:
                 # 同一个池内闭环：USDG → 股票 → USDG
-                o, st = quote(p, U, amt_in, bh)
-                if not o:
+                # 🔴 两条腿都要接住 status。旧版只接第一条、且两条都丢弃，
+                #    于是「问不到」和「吃不下」在这个 continue 上合流。
+                o, st, n1 = quote_retry(p, U, amt_in, bh)
+                if st == "rpc_error":
+                    failures.append({"sym": sym, "size_usd": sz, "leg": "buy",
+                                     "pool_id": p["id"], "tries": n1})
+                    break                        # 这一轮已注定要丢，快速失败
+                if st == "revert_other":
+                    reverts.append({"sym": sym, "size_usd": sz, "leg": "buy",
+                                    "pool_id": p["id"]})
+                    cell_revert += 1
                     continue
-                back, st2 = quote(p, STOCKS[sym], o, bh)
+                if not o:
+                    continue                     # no_liquidity —— 这是数据
+                back, st2, n2 = quote_retry(p, STOCKS[sym], o, bh)
+                if st2 == "rpc_error":
+                    failures.append({"sym": sym, "size_usd": sz, "leg": "sell",
+                                     "pool_id": p["id"], "tries": n2})
+                    break                        # 同上，快速失败
+                if st2 == "revert_other":
+                    reverts.append({"sym": sym, "size_usd": sz, "leg": "sell",
+                                    "pool_id": p["id"]})
+                    cell_revert += 1
+                    continue
                 if back and (best is None or back > best[0]):
                     best = (back, o, p)
             ms = int((time.time() - t0) * 1000)
             if best is None:
+                # 🔴 本格一个池都没成，而且期间出现过 revert_other ⇒ **不能写
+                #    no_liquidity**。链没有说「吃不下」，它说的是别的；写成
+                #    no_liquidity 就是在数据里放一句链没说过的话 —— 和这次
+                #    要修的 rpc_error 合流是同一类错误，只是换了个来源。
+                #    revert_other 意味着池表或 ABI 可能已失效，按缺陷处理：
+                #    报警 + 丢轮，不当测量落盘。
+                if cell_revert:
+                    failures.append({"sym": sym, "size_usd": sz, "leg": "-",
+                                     "pool_id": "", "tries": 0,
+                                     "why": "revert_other 覆盖全部池，拒绝写成 no_liquidity"})
+                    break
                 out_rows.append(row(sym, "roundtrip", sz, None, ts, ms, "",
                                     "no_liquidity", "", blk, amt_in, None))
                 continue
@@ -178,6 +258,29 @@ def main() -> int:
 
     d = ROOT / day
     d.mkdir(parents=True, exist_ok=True)
+
+    # 🔴 **有任何一次重试耗尽的 rpc_error ⇒ 整轮不落盘。**
+    #    不能只丢那一格：没问成的池可能恰好是最好的，剩下的池会给出一个
+    #    偏低但看起来正常的数字（旧版 ok_partial 那一半）。也不能标记它：
+    #    status 进 canon 原像，第三方回放算不出同一个值。
+    #    ⚠️ 空档必须能和「采集器挂了」区分开，否则到齐率纪律失去意义 ——
+    #      所以丢轮要留下可自证的记录，而不是静默 return。
+    if failures:
+        rec = {"ts": ts, "block": blk, "event": "round_dropped",
+               "cells_failed": len(failures), "rows_would_be": len(out_rows),
+               "detail": failures[:20]}
+        with open(d / "failures.jsonl", "a", encoding="utf-8") as f:
+            f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        print(f"{time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(ts))} | 块 {blk:,} | "
+              f"🔴 丢轮：{len(failures)} 次 RPC 故障重试耗尽，本轮不落盘 "
+              f"（宁可留空档，不写可能偏低的数字）", flush=True)
+        return 2
+
+    if reverts:
+        # 14,384 行里一次都没出现过 ⇒ 任何一次出现都是信号，不设阈值。
+        print(f"  🔴 {len(reverts)} 次 revert_other（非 NotEnoughLiquidity 回滚）"
+              f"—— 池表或 ABI 可能已失效：{reverts[:5]}", flush=True)
+
     with gzip.open(d / "quotes.jsonl.gz", "at", encoding="utf-8") as f:
         for r in out_rows:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
@@ -196,9 +299,9 @@ def main() -> int:
     print(f"{time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(ts))} | 块 {blk:,} | "
           f"{len(out_rows)} 行 | " + " ".join(f"{k}={v}" for k, v in sorted(c.items()))
           + f" | roundKeccak {rk[:18]}…")
-    if c.get("rpc_error"):
-        print(f"  ⚠️ {c['rpc_error']} 行是 RPC 故障，不是流动性枯竭 —— 分析时必须剔除",
-              flush=True)
+    # 🔴 这里不再有 rpc_error 分支：故障轮次在上面就整轮丢掉了，永远走不到这。
+    #    旧版这里有一个 `if c.get("rpc_error")` 的告警，而 row() 在本文件从未
+    #    以 rpc_error 调用过 ⇒ 那个分支**永不触发**，等于故障发生时零信号。
     return 0
 
 
