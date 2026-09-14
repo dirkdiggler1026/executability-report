@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-09-13T06:03:49Z",
+ "generated_utc": "2026-09-14T06:01:10Z",
  "since": "2026-08-29",
- "until": "2026-09-12",
- "days": 15,
+ "until": "2026-09-13",
+ "days": 16,
  "venues": 4,
  "venue_list": [
   "pm/kalshi",
@@ -29,76 +29,81 @@
  "tradeoff_curve": [
   {
    "since": "2026-08-29",
-   "days": 15,
+   "days": 16,
    "venues": 4
   },
   {
    "since": "2026-08-30",
-   "days": 14,
+   "days": 15,
    "venues": 9
   },
   {
    "since": "2026-08-31",
-   "days": 13,
+   "days": 14,
    "venues": 10
   },
   {
    "since": "2026-09-01",
-   "days": 12,
+   "days": 13,
    "venues": 10
   },
   {
    "since": "2026-09-02",
-   "days": 11,
+   "days": 12,
    "venues": 10
   },
   {
    "since": "2026-09-03",
-   "days": 10,
+   "days": 11,
    "venues": 10
   },
   {
    "since": "2026-09-04",
-   "days": 9,
+   "days": 10,
    "venues": 12
   },
   {
    "since": "2026-09-05",
-   "days": 8,
+   "days": 9,
    "venues": 12
   },
   {
    "since": "2026-09-06",
-   "days": 7,
+   "days": 8,
    "venues": 12
   },
   {
    "since": "2026-09-07",
-   "days": 6,
+   "days": 7,
    "venues": 12
   },
   {
    "since": "2026-09-08",
-   "days": 5,
+   "days": 6,
    "venues": 12
   },
   {
    "since": "2026-09-09",
-   "days": 4,
+   "days": 5,
    "venues": 12
   },
   {
    "since": "2026-09-10",
-   "days": 3,
+   "days": 4,
    "venues": 12
   },
   {
    "since": "2026-09-11",
-   "days": 2,
+   "days": 3,
    "venues": 12
   },
   {
    "since": "2026-09-12",
+   "days": 2,
+   "venues": 12
+  },
+  {
+   "since": "2026-09-13",
    "days": 1,
    "venues": 12
   }
@@ -107,11 +112,11 @@
   "per_chain": {
    "ethereum": {
     "sources_max": 4,
-    "groups": 33269,
-    "full": 25275,
+    "groups": 35535,
+    "full": 27231,
     "dropped_rounds": 0,
     "dropped_groups": 0,
-    "rate": 0.7597,
+    "rate": 0.7663,
     "sources_by_day": {
      "2026-08-30": [
       "cow",
@@ -185,6 +190,11 @@
       "paraswap"
      ],
      "2026-09-12": [
+      "cow",
+      "kyberswap",
+      "paraswap"
+     ],
+     "2026-09-13": [
       "cow",
       "kyberswap",
       "paraswap"
@@ -193,8 +203,8 @@
    },
    "solana": {
     "sources_max": 1,
-    "groups": 21985,
-    "full": 21985,
+    "groups": 23526,
+    "full": 23526,
     "dropped_rounds": 0,
     "dropped_groups": 0,
     "rate": 1.0,
@@ -240,13 +250,16 @@
      ],
      "2026-09-12": [
       "jupiter"
+     ],
+     "2026-09-13": [
+      "jupiter"
      ]
     }
    },
    "robinhood": {
     "sources_max": 1,
-    "groups": 15012,
-    "full": 15012,
+    "groups": 16740,
+    "full": 16740,
     "dropped_rounds": 0,
     "dropped_groups": 0,
     "rate": 1.0,
@@ -277,11 +290,14 @@
      ],
      "2026-09-12": [
       "uniswap_v4_rh"
+     ],
+     "2026-09-13": [
+      "uniswap_v4_rh"
      ]
     }
    }
   },
-  "worst": 0.7597,
+  "worst": 0.7663,
   "bucket_s": 1800,
   "slow_excluded": [
    "lifi",
@@ -293,17 +309,17 @@
  },
  "headline": {
   "since": "2026-08-30",
-  "days": 14,
+  "days": 15,
   "venues": 9,
   "quorum": {
    "per_chain": {
     "ethereum": {
      "sources_max": 4,
-     "groups": 33269,
-     "full": 25275,
+     "groups": 35535,
+     "full": 27231,
      "dropped_rounds": 0,
      "dropped_groups": 0,
-     "rate": 0.7597,
+     "rate": 0.7663,
      "sources_by_day": {
       "2026-08-30": [
        "cow",
@@ -377,6 +393,11 @@
        "paraswap"
       ],
       "2026-09-12": [
+       "cow",
+       "kyberswap",
+       "paraswap"
+      ],
+      "2026-09-13": [
        "cow",
        "kyberswap",
        "paraswap"
@@ -385,8 +406,8 @@
     },
     "solana": {
      "sources_max": 1,
-     "groups": 21985,
-     "full": 21985,
+     "groups": 23526,
+     "full": 23526,
      "dropped_rounds": 0,
      "dropped_groups": 0,
      "rate": 1.0,
@@ -432,13 +453,16 @@
       ],
       "2026-09-12": [
        "jupiter"
+      ],
+      "2026-09-13": [
+       "jupiter"
       ]
      }
     },
     "robinhood": {
      "sources_max": 1,
-     "groups": 15012,
-     "full": 15012,
+     "groups": 16740,
+     "full": 16740,
      "dropped_rounds": 0,
      "dropped_groups": 0,
      "rate": 1.0,
@@ -469,11 +493,14 @@
       ],
       "2026-09-12": [
        "uniswap_v4_rh"
+      ],
+      "2026-09-13": [
+       "uniswap_v4_rh"
       ]
      }
     }
    },
-   "worst": 0.7597,
+   "worst": 0.7663,
    "bucket_s": 1800,
    "slow_excluded": [
     "lifi",
