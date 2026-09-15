@@ -37,8 +37,12 @@ One line per row. Nine fields, in this order, joined by `|` (U+007C):
 - **`side`** — in canon 2 always the literal `roundtrip`. It **is** part of the preimage.
 - **`size_usd`** — the notional in whole US dollars, decimal string: `100`, `1000`, `10000`,
   `100000`.
-- **`route`** — the Uniswap v4 **poolId**, a 32-byte value rendered as `0x` plus 64 lowercase hex
-  digits. This is a key into the PoolManager singleton, **not an address**.
+- **`route`** — the Uniswap v4 **poolId**, a key into the PoolManager singleton, **not an
+  address**. It appears in the data as `0x` plus 64 lowercase hex digits, and **the value is
+  copied through unchanged**. The reference implementation applies no case folding and no
+  normalisation of any kind. Read this as a statement about the value, not as a rule to apply:
+  an implementation that lower-cases the field agrees on every published round (no published row
+  contains an upper-case hex digit — 0 of 21,908) and would disagree the first time one did.
 - **`amount_in_raw`** — USDG paid in, in the token's smallest unit, decimal string.
 - **`mid_amount_raw`** — the raw integer the quoter returned for the **first** leg: how many stock
   tokens the USDG bought. Decimal string.
@@ -59,10 +63,18 @@ A field with no value renders as the **empty string**, so consecutive `|` appear
 implementation the expression is Python's `value or ""`, which maps `None`, `""`, and **`0`** all
 to the empty string.
 
-> **Cross-language trap.** JavaScript's `??` is not equivalent: `0 ?? ""` yields `0`, while
-> `0 || ""` yields `""`. An implementation using `??` — the more modern and more correct-looking
-> choice — diverges on any zero-valued field. No published round contains a zero in these fields,
-> so **the vectors cannot catch this**. It is written down because nothing else will catch it.
+> **Cross-language note.** JavaScript's `??` is not equivalent: `0 ?? ""` yields `0`, while
+> `0 || ""` yields `""`. This diverges only on a **numeric** field holding zero.
+>
+> In canon 2 that is currently unreachable. Only `block` and `size_usd` are numeric; `block` is
+> never 0 and `size_usd` is one of 100 / 1000 / 10000 / 100000. The three `*_raw` amounts are
+> already strings in the data and are concatenated without conversion, so a non-string there
+> raises rather than producing a different hash, and the string `"0"` is truthy under both
+> operators. `null` behaves identically under both.
+>
+> It is recorded because the exclusion rests on the current value domains, not on the
+> serialisation: should a numeric field ever be able to hold 0, `??` and `||` part company, and
+> no vector would show it.
 
 ## Sorting
 
@@ -111,8 +123,10 @@ Every published round is a vector, and they are already public:
     executability-report/data/<YYYY-MM-DD>/quotes.jsonl.gz   the input rows
     executability-report/data/<YYYY-MM-DD>/rounds.jsonl      the expected roundKeccak
 
-Use rows whose `block` matches the round's `block`, and take only records whose `canon` is
-`rhdepth-v2`.
+Use rows whose `block` matches the round's `block`. **Filter by canon at the round level, not on
+the rows:** `rounds.jsonl` records carry a `canon` field, the rows in `quotes.jsonl.gz` do not
+(0 of 21,908 rows have one). Take the rounds whose `canon` is `rhdepth-v2`, then take the rows
+matching those blocks.
 
 ### Synthetic vector — `no_liquidity`, which no published round contains
 
@@ -149,3 +163,22 @@ sorting sections above are written the way they are.
 How a round is *produced* — which pool wins, how retries are bounded, when a round is dropped — is
 not part of the serialization. Two implementations that agree on this note will agree on the hash
 of any given set of rows, whether or not they agree on how those rows were obtained.
+
+## Revisions
+
+**2026-09-15, after the first second-implementation run (478 rounds, 478 matches, 0 mismatches).**
+The agreement showed the note was sufficient to reproduce the format. Three corrections came out
+of the same run, none of which changed a single hash — they were found by reading the reference
+implementation alongside the note, not by any vector:
+
+1. `route` was described in a way that reads as an instruction to lower-case. The reference
+   implementation copies the value through untouched. Both readings agree on every published row
+   and would part company on the first upper-case one.
+2. The `??` trap was stated as a live risk. It is unreachable under the current value domains;
+   it is now recorded as a conditional rather than a hazard.
+3. The vectors section told the reader to filter rows by `canon`. Rows carry no such field; the
+   filter belongs at the round level.
+
+This is the result the note's own honest-boundary section predicted in a different form. Total
+agreement did not prove the format unambiguous — **two readings of one sentence survived every
+vector, and only a second reader comparing prose against code found them.**
