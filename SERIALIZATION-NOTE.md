@@ -42,7 +42,8 @@ One line per row. Nine fields, in this order, joined by `|` (U+007C):
   copied through unchanged**. The reference implementation applies no case folding and no
   normalisation of any kind. Read this as a statement about the value, not as a rule to apply:
   an implementation that lower-cases the field agrees on every published round (no published row
-  contains an upper-case hex digit — 0 of 21,908) and would disagree the first time one did.
+  contains an upper-case hex digit — 0 of the 21,368 rows published through 2026-09-14, every
+  directory included) and would disagree the first time one did.
 - **`amount_in_raw`** — USDG paid in, in the token's smallest unit, decimal string.
 - **`mid_amount_raw`** — the raw integer the quoter returned for the **first** leg: how many stock
   tokens the USDG bought. Decimal string.
@@ -178,6 +179,13 @@ implementation alongside the note, not by any vector:
    it is now recorded as a conditional rather than a hazard.
 3. The vectors section told the reader to filter rows by `canon`. Rows carry no such field; the
    filter belongs at the round level.
+
+A fourth correction followed, of a different kind. The row count backing point 1 was originally
+given as 21,908 — a figure taken from the collecting machine, which holds the current partial day
+as well. **A reader cannot reproduce it from the published repository, and it grows every day.**
+The published count through 2026-09-14 is 21,368. Any audit figure quoted in a document that
+claims reproducibility has to name the window it was counted over, exactly as the measurements
+themselves do.
 
 This is the result the note's own honest-boundary section predicted in a different form. Total
 agreement did not prove the format unambiguous — **two readings of one sentence survived every
