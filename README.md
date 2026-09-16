@@ -120,6 +120,16 @@ has not been revised without the change appearing in the history. Each record
 carries a `committed` field naming which anchor applies; every round published
 so far reads `committed: false`.
 
+The same hashes can also be anchored on-chain, by
+[ievidence-ledger](https://github.com/dirkdiggler1026/ievidence-ledger):
+`IEvidenceLedger` at `0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9` on Robinhood
+Chain testnet (chainId 46630). As of 2026-09-16 it is deployed and empty —
+`latestCommittedBlock()` returns 0 and `getRoundHash()` returns canon 0
+("absent") for every block, which is why every record above still reads
+`committed: false`. The two anchors are not redundant: git history can be
+rewritten by whoever holds the repository, while the ledger can only be appended
+to.
+
 Run it from the repository root: it looks for data/ next to the script
 (or honours RHDEPTH_DATA). Quarantined v1 rounds are excluded by their
 canon field and reported as defunct (exit code 2), never as mismatches.
