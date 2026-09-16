@@ -531,12 +531,12 @@ python3 code/verify.py 54088399</td></tr>
 <section>
   <div class="sec-head">
     <div class="eyebrow">Method</div>
-    <h2>Our instruments lied to us nine times</h2>
+    <h2>Our instruments lied to us ten times</h2>
   </div>
 
   <div class="col">
     <p>This section does not usually appear in a report like this. It is here because it explains something more important: why almost nobody does independent executability measurement.</p>
-    <p>Not because it is hard, but because instruments lie quietly. Nine errors over six days, each producing a precise number that looked like an insight. Seven were caught before anything was published. Two were not: they are marked below, and the section they corrupted is corrected above. A process that genuinely self-corrects will eventually catch something late — what matters is which side of publication each one landed on, so that is stated.</p>
+    <p>Not because it is hard, but because instruments lie quietly. Ten errors over six days, each producing a precise number that looked like an insight. Eight were caught before anything was published. Two were not: they are marked below, and the section they corrupted is corrected above. A process that genuinely self-corrects will eventually catch something late — what matters is which side of publication each one landed on, so that is stated.</p>
   </div>
 
   <div class="fail">
@@ -576,6 +576,10 @@ python3 code/verify.py 54088399</td></tr>
     <div class="n">09</div><div class="t">A metric that could exceed 100% — found after publication</div>
     <div class="b">The old measurement took the best buy pool and the best sell pool separately, then derived a rate between them to size the sell. That rate belongs to no actual pool. It produced round-trip recoveries above 100% — buy and immediately sell back at a profit — which cannot persist for more than a few seconds in any real market. The replacement closes the loop inside one pool, needs no rate assumption, and cannot exceed 100% by construction: if it ever does, that is a bug announcing itself.</div>
   </div>
+  <div class="fail">
+    <div class="n">10</div><div class="t">The pool table was correct when it was built, and stale when it was used</div>
+    <div class="b">A round is replayed against <code>stock_pools.json</code>. That file was built on 2026-09-04, and the last pool in it was initialised at block 53,983,886. A round taken on 2026-09-12 sits at block 61,129,566 — 7,145,680 blocks later. In between, a QQQ/USDG pool was created that the table never saw. The $100 QQQ figure measured 6.58% against that table; measured against the chain, it is about 95.56%. One cell, one date, no error message: the table was not wrong, it was out of date. This is not the same defect as #08 — #08 was a scan that returned incomplete results, this is a complete snapshot of an earlier chain. What caught it was a question about provenance: <em>which date is that table from?</em> Nothing in the monitoring had a reason to look. The fix is not to rebuild the table in place — replaying an old block against a new table produces different rows and a different hash, so every already-published round would fail verification at once. What is needed is a versioned table: each round records which table it was replayed against, and the verifier selects by record. That is a change to the serialisation contract, so it is scheduled deliberately rather than patched in.</div>
+  </div>
 
   <div class="col" style="margin-top:34px">
     <h3>And one obstacle that is not a bug</h3>
@@ -603,6 +607,7 @@ python3 code/verify.py 54088399</td></tr>
       <li><strong>"Cannot be executed" is not "you will lose X%".</strong> A refused quote means the size cannot be filled at current liquidity. It is not a cost you would actually pay.</li>
       <li><strong>Tokenized stocks cover USDG-quoted pools only.</strong> Some tokens also have ETH/WETH pools, excluded here; a token could be deeper against a different quote asset. TSLA is known to have additional depth in an ETH pool.</li>
       <li><strong>The pool table has no external cross-check.</strong> It is internally consistent — the scan aborts rather than skipping a failed range, and this run had none — but nothing independent confirms it is complete. DexScreener counts uninitialised pools in its liquidity figures and is not used as a reference; the block explorer's API is behind anti-bot protection.</li>
+      <li><strong>The pool table stops at block 53,983,886.</strong> That is 2026-09-04 04:34 UTC, about three hours before the first measured round, and pools created after that block are not in the table at all. So every row in this report means "the best route among the pools in this table", never "the best route on the chain". One row is known to be affected and is recorded as error 10 above; which others are is what an incremental scan will establish.</li>
       <li><strong>0x is absent.</strong> Its key was disabled on 4 September, so the aggregator comparison in the first section reflects the six sources available on 31 August, not today's five.</li>
       <li><strong>Only 5.1 hours and 12 rounds.</strong> The "depth is stable" conclusion covers a short window and does not extrapolate across days, weekends or earnings. Behaviour while US markets are closed is outside this report's window; it is being recorded now.</li>
       <li><strong>Quotes are not fills.</strong> Every figure comes from a simulated Quoter call, not an executed trade. Real execution is affected by MEV, slippage protection and gas, and is generally worse rather than better.</li>
