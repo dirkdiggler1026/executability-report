@@ -108,7 +108,21 @@ RPC = (_os.environ.get("RHCHAIN_RPC")
 #    所以：日志扫描走公共端点，历史状态查询走 Alchemy。
 LOGS_RPC = (_os.environ.get("RHCHAIN_LOGS_RPC")
             or "https://rpc.mainnet.chain.robinhood.com")
-_IS_PUBLIC = "alchemy" not in RPC and "quicknode" not in RPC
+
+
+def _is_public(url: str) -> bool:
+    """Whether THIS endpoint is one of the rate-limited public ones.
+
+    Asked of the URL a request is going to, not of the primary endpoint. The two differ here:
+    getLogs is routed to LOGS_RPC while everything else goes to RPC, so a budget chosen from RPC
+    was being spent on whichever endpoint the method actually used (2026-09-15).
+    """
+    return "alchemy" not in url and "quicknode" not in url
+
+
+def _cap_for(url: str) -> float:
+    """CU/s ceiling for one endpoint, leaving about a third of headroom."""
+    return 60.0 if _is_public(url) else 200.0
 
 
 # **限速器。** 2026-09-03：一次全链 getLogs 扫描把这个公共 RPC 打到
@@ -123,38 +137,62 @@ _IS_PUBLIC = "alchemy" not in RPC and "quicknode" not in RPC
 #    同日实测，撞限流后只把 getLogs 的区间对半砍、却继续全速重试，
 #    产生了 2,325 个失败区间、零收获的重试风暴。
 #    退避要作用在【发送速率】上。
+#
+# **节流状态必须按端点分开**（2026-09-15）：此前只有一份 `_CU_BUDGET` 和一个桶，
+#    而预算按【主端点】判。于是 `RHCHAIN_RPC` 设为 Alchemy 时预算是 200 CU/s，
+#    而 `eth_getLogs` 实际发往公共的 `LOGS_RPC` —— 对公共端点的许可放宽了 3.33 倍，
+#    正是 2026-09-03 那次事故的场景。四种耦合，必须一起改：
+#      ① 预算按 url 选      ② 桶按 url 分
+#      ③ 惩罚/恢复按 url 分  ④ 恢复的上限也按 url 算
+#    ④ 是反向的一层：`_recover` 每次成功都把预算 ×1.05 抬回上限，
+#    所以采集器自己成功的 Alchemy 调用，会不断把扫描在公共端点上的许可抬回去。
+#    ⇒ 干扰是双向的；只把桶分开、不把惩罚和恢复分开，堵不住。
 _CU = {"eth_getLogs": 75, "eth_call": 26, "eth_getCode": 19,
        "eth_getBalance": 19, "eth_blockNumber": 10, "eth_getStorageAt": 17,
        "alchemy_getAssetTransfers": 150}
 _CU_DEFAULT = 26
-_CU_BUDGET = [60.0 if _IS_PUBLIC else 200.0]     # 留 1/3 余量
-_bucket = [0.0, 0.0]
+
+# One token bucket and one budget PER URL. See the note above for why one is not enough.
+_state: dict[str, list] = {}
 
 
-def _throttle(method: str = ""):
-    """令牌桶，按方法的 CU 成本扣额。"""
+def _state_for(url: str) -> list:
+    st = _state.get(url)
+    if st is None:
+        st = [0.0, 0.0, _cap_for(url)]      # last timestamp, tokens, budget
+        _state[url] = st
+    return st
+
+
+def _throttle(method: str = "", url: str = ""):
+    """令牌桶，按方法的 CU 成本扣额，**只对本端点**扣。"""
     import time as _t
+    st = _state_for(url)
+    budget = st[2]
     cost = _CU.get(method, _CU_DEFAULT)
     now = _t.monotonic()
-    if _bucket[0] == 0.0:
-        _bucket[0], _bucket[1] = now, _CU_BUDGET[0]
-    _bucket[1] = min(_CU_BUDGET[0], _bucket[1] + (now - _bucket[0]) * _CU_BUDGET[0])
-    _bucket[0] = now
-    if _bucket[1] < cost:
-        _t.sleep((cost - _bucket[1]) / _CU_BUDGET[0])
-        _bucket[1], _bucket[0] = 0.0, _t.monotonic()
+    if st[0] == 0.0:
+        st[0], st[1] = now, budget
+    st[1] = min(budget, st[1] + (now - st[0]) * budget)
+    st[0] = now
+    if st[1] < cost:
+        _t.sleep((cost - st[1]) / budget)
+        st[1], st[0] = 0.0, _t.monotonic()
     else:
-        _bucket[1] -= cost
+        st[1] -= cost
 
 
-def _penalize():
-    """撞限流 ⇒ 把预算砍半（下限 20 CU/s），成功一次恢复一点。"""
-    _CU_BUDGET[0] = max(20.0, _CU_BUDGET[0] / 2)
+def _penalize(url: str = ""):
+    """本端点撞限流 ⇒ 只砍【本端点】的预算（下限 20 CU/s）。"""
+    st = _state_for(url)
+    st[2] = max(20.0, st[2] / 2)
 
 
-def _recover():
-    cap = 60.0 if _IS_PUBLIC else 200.0
-    _CU_BUDGET[0] = min(cap, _CU_BUDGET[0] * 1.05)
+def _recover(url: str = ""):
+    """本端点成功一次 ⇒ 只恢复本端点的预算，回到【本端点】的上限。"""
+    st = _state_for(url)
+    st[2] = min(_cap_for(url), st[2] * 1.05)
+
 
 
 def rpc(method: str, params: list, url: str = None, timeout: int = 25,
@@ -177,7 +215,7 @@ def rpc(method: str, params: list, url: str = None, timeout: int = 25,
     body = json.dumps({"jsonrpc": "2.0", "id": 1,
                        "method": method, "params": params})
     for attempt in range(retries):
-        _throttle(method)
+        _throttle(method, url)
         try:
             r = subprocess.run(["curl", "-sS", "-m", str(timeout), "-X", "POST",
                                 "-H", "Content-Type: application/json",
@@ -187,13 +225,13 @@ def rpc(method: str, params: list, url: str = None, timeout: int = 25,
         except Exception as e:
             d = {"error": {"code": -1, "message": repr(e)[:120]}}
         if "result" in d:
-            _recover()
+            _recover(url)
             return d["result"], None
         err = d.get("error") or {"code": -2, "message": "空响应"}
         if err.get("code") == 3:            # execution reverted = 数据
             return None, err
         if err.get("code") in (429, -32000) or "limit" in str(err.get("message","")).lower():
-            _penalize()
+            _penalize(url)
             if attempt < retries - 1:
                 _t.sleep(2 ** attempt)
                 continue
