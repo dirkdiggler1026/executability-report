@@ -456,9 +456,10 @@ footer p{font-size:14px;color:var(--ink-2)}
       <li>逐轮哈希与逐条报价：<a href="./data/snapshot-v18-12r/rounds.jsonl"><code>data/snapshot-v18-12r/rounds.jsonl</code></a>、<a href="./data/snapshot-v18-12r/quotes.jsonl.gz"><code>quotes.jsonl.gz</code></a>（v2 轮次；已作废的 v1 数据见下方隔离目录，不参与任何结论）</li>
       <li><a href="./code/rhchain.py"><code>code/rhchain.py</code></a> —— 池子枚举与 Quoter 调用；<a href="./code/stock_pools.json"><code>stock_pools.json</code></a> 是全链扫描得到的池表</li>
       <li><a href="./README.md"><code>README.md</code></a> —— <code>rhdepth-v2</code> 原像规范全文与运行步骤</li>
+      <li><a href="./SERIALIZATION-NOTE.md"><code>SERIALIZATION-NOTE.md</code></a> —— 逐轮哈希序列化的散文规范，第二实现无需阅读参考代码</li>
     </ul>
-    <p>本页每一个数字都对应「截止区块 54,270,401 的 12 轮」这一份快照，也就是随页发布的 <code>data/snapshot-v18-12r/</code>——该目录发布后不再改动，校验和永远对得上。采集仍在继续：<code>data/</code> 下的按日活目录不断增长（当前至 2026-09-06），超出本文描述的范围。</p>
-    <p>需要一个 Robinhood Chain 的归档节点（在历史区块上 <code>eth_call</code>；公共端点通常只保留最近约 128 个区块的状态）：</p>
+    <p>本页每一个数字都对应「截止区块 54,270,401 的 12 轮」这一份快照，也就是随页发布的 <code>data/snapshot-v18-12r/</code>——该目录发布后不再改动，校验和永远对得上。采集仍在继续：<code>data/</code> 下的按日活目录不断增长，超出本文描述的范围。</p>
+    <p>要重算本页发布的快照，需要一个 Robinhood Chain 的归档节点（在历史区块上 <code>eth_call</code>）。公共端点 <code>rpc.mainnet.chain.robinhood.com</code> 只保留一小段滚动窗口的状态：约 <b>3,100 至 5,900 个区块</b>——大致<b>五到十分钟</b>——观测于 2026-09-11 至 2026-09-15。窗口会移动，且不同状态读取方法在同一深度上给出过不一致的结果，所以请把它当作区间，而不是一个数。归档端点没有这个窗口。<b>2026-09-15 更正：</b>本段此前写"约 128 个区块"——约十三秒——即使按观测到的最小值，也把窗口低估了二十四倍。<b>因此落在该窗口内的一轮，可以用公共端点重算，不需要 key，也不需要归档访问。</b></p>
     <div class="tw" style="border:none">
       <table style="min-width:0"><tbody>
         <tr><td style="font-weight:400;white-space:pre">export RHCHAIN_RPC="https://&lt;归档端点&gt;"

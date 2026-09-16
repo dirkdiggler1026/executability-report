@@ -182,7 +182,8 @@ def main() -> int:
     #      ① 记录的 block 与报价实际状态对不上 ⇒ 第三方永远复核不了
     #      ② 36 行之间互相也对不上 ⇒ 违反 dexfeed 立过的「同时性是命脉」
     #    代价：整轮在历史区块上取值，需要归档节点（Alchemy 有；
-    #      公共端点只保留最近约 128 块的状态，降级后这条会失效）。
+    #      公共端点只保留约五到十分钟的状态(实测 3,100–5,900 块,2026-09-11/13/15,
+    #      rpc.mainnet.chain.robinhood.com),降级后这条会失效)。
     bh = hex(blk)
     ts = int(time.time())
     day = time.strftime("%Y-%m-%d", time.gmtime(ts))
