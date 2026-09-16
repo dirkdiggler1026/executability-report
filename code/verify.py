@@ -80,11 +80,13 @@ def preflight(block: int) -> str | None:
     r, err = _rpc("eth_getBalance", [POOL_MANAGER, hex(block)])
     if err:
         m = str(err.get("message") or err)
-        return (f"RPC 无法读取区块 {block:,} 的历史状态:{m}\n"
-                "  这个端点读不了历史状态(不是归档节点,或端点暂时不可用)。\n"
-                "  用 RHCHAIN_RPC 指向一个 Robinhood Chain 归档端点后重试。")
+        return (f"this RPC cannot read historical state at block {block:,}: {m}\n"
+                "  The endpoint does not keep state history (it is not an archive\n"
+                "  endpoint, or it is temporarily unavailable).\n"
+                "  Point RHCHAIN_RPC at a Robinhood Chain archive endpoint and retry.")
     if r is None:
-        return f"RPC 对区块 {block:,} 返回空,无法复核。请改用归档端点。"
+        return (f"the RPC returned nothing for block {block:,}; this round cannot be checked.\n"
+                "  Use an archive endpoint.")
     return None
 
 
@@ -151,24 +153,23 @@ def main() -> int:
     if not rec:
         if arg in superseded:
             canon, where = superseded[arg]
-            print(f"区块 {arg} 属于已作废的规范 {canon}(在 {where}/)。")
-            print(f"该轮不参与复核:本地规范是 {CANON_VERSION},原像不同,哈希必然对不上。")
-            print("隔离数据保留可访问只是为了让更正可查,不是可复核的结论。")
+            print(f"Block {arg} belongs to the superseded canon {canon} (in {where}/).")
+            print(f"That round is not checked: the local canon is {CANON_VERSION}, so the")
+            print("preimage differs and the hash cannot match. The quarantined data stays")
+            print("readable so the correction can be inspected, not as a checkable result.")
             return 2
-        print(f"找不到区块 {arg} 的轮次记录(数据目录 {root})")
+        print(f"No round record for block {arg} (data root {root})")
         if not any(root.glob("*/rounds.jsonl")):
-            print("该目录下没有任何 rounds.jsonl —— 若是从仓库 clone 而来,")
-            print("请在仓库根目录运行,或用 RHDEPTH_DATA 指向数据目录。")
+            print("There is no rounds.jsonl under that root. If you cloned the repository,")
+            print("run this from the repository root, or set RHDEPTH_DATA to the data directory.")
         return 1
 
-    print(f"复核轮次  块 {rec['block']:,}  规范 {rec['canon']}")
-    print(f"  记录的轮次哈希 {rec['roundKeccak']}")
-    # D4 前：committed 恒为 false（A8，见文件头），所以这里恒走 git 历史分支。
-    # D4 起：锚点必须改成查账本，不要在这里加分支去猜。
-    print("  锚点：" + ("链上（已提交）" if rec.get("committed")
-                        else "git 历史（尚未提交上链；账本查询见 D4）"))
+    print(f"round      block {rec['block']:,}  canon {rec['canon']}")
+    print(f"  recorded round hash {rec['roundKeccak']}")
+    print("  anchor: " + ("on chain (committed)" if rec.get("committed")
+                         else "git history (not committed on chain yet)"))
     if rec["canon"] != CANON_VERSION:
-        print(f"   规范版本不符（本地 {CANON_VERSION}），哈希必然不同")
+        print(f"   canon mismatch (local {CANON_VERSION}); the hash cannot match")
 
     bad = preflight(rec["block"])
     if bad:
@@ -177,20 +178,20 @@ def main() -> int:
 
     rows = rebuild(rec["block"])
     got = round_keccak(rows)
-    print(f"  独立重算 {got}")
+    print(f"  recomputed          {got}")
     ok = got == rec["roundKeccak"]
-    print(f"\n  {' 一致 —— 该轮数据可被独立复现' if ok else ' 不一致'}")
+    print(f"\n  {'MATCH -- this round is independently reproducible' if ok else 'MISMATCH'}")
     if not ok:
         orig = []
         for qf in sorted(root.glob("*/quotes.jsonl.gz")):
             orig += [json.loads(l) for l in gzip.open(qf, "rt") if l.strip()]
         orig = [r for r in orig if r.get("block") == rec["block"]]
         a, b = set(canon_lines(orig)), set(canon_lines(rows))
-        print(f"  原始独有 {len(a-b)} 行，重算独有 {len(b-a)} 行")
+        print(f"  only in published: {len(a-b)} lines; only in recomputed: {len(b-a)} lines")
         for x in list(a - b)[:3]:
-            print(f"    原始: {x}")
+            print(f"    published:  {x}")
         for x in list(b - a)[:3]:
-            print(f"    重算: {x}")
+            print(f"    recomputed: {x}")
     return 0 if ok else 1
 
 
