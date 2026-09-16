@@ -114,7 +114,7 @@ python3 code/verify.py --latest
 The script replays every round-trip at that block height, recomputes the
 hash, and compares it against rounds.jsonl.
 
-That recorded hash is anchored in git history, not on a chain. rounds.jsonl
+That recorded hash is anchored in git history, not yet on a chain. rounds.jsonl
 ships in this repository next to the data, so recomputing it shows the round
 has not been revised without the change appearing in the history. Each record
 carries a `committed` field naming which anchor applies; every round published
