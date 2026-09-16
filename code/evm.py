@@ -227,7 +227,7 @@ def rpc(method: str, params: list, url: str = None, timeout: int = 25,
         if "result" in d:
             _recover(url)
             return d["result"], None
-        err = d.get("error") or {"code": -2, "message": "空响应"}
+        err = d.get("error") or {"code": -2, "message": "empty response from the RPC"}
         if err.get("code") == 3:            # execution reverted = 数据
             return None, err
         if err.get("code") in (429, -32000) or "limit" in str(err.get("message","")).lower():
@@ -236,7 +236,7 @@ def rpc(method: str, params: list, url: str = None, timeout: int = 25,
                 _t.sleep(2 ** attempt)
                 continue
         return None, err
-    return None, {"code": 429, "message": "重试后仍被限流"}
+    return None, {"code": 429, "message": "still rate-limited after retries"}
 
 
 def call(to: str, data_hex: str, url: str = RPC):
