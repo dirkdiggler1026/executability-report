@@ -468,6 +468,21 @@ python3 code/verify.py 54088399</td></tr>
     <div class="note">
       <p style="margin:0">What this gives you is <strong>verifiability, not decentralization</strong>. The right to publish these hashes is centralised, and that is a fact. But it does not ask you to trust the publisher: replay the block, and it either matches or it does not. <strong>The thing being trusted is arithmetic, not me.</strong></p>
     </div>
+
+    <h3>The on-chain ledger</h3>
+    <p>Recomputing a round proves the numbers were not changed. It does not, on its own, prove they were not computed today. An append-only ledger on Robinhood Chain records each round's hash, so the commitment carries its own timestamp — the one in the transaction that wrote it.</p>
+    <p><b>Deployed on the Robinhood Chain iteration network</b> (chainId 46630) at <code>0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9</code>, in block 119,878,215, transaction <code>0xa0dd3b2f…</code>, canon <code>rhdepth-v2</code>. Those values are transcribed from <a href="https://github.com/dirkdiggler1026/ievidence-ledger/blob/main/deployments.jsonl"><code>deployments.jsonl</code></a> in the ledger repository, which is append-only and is the place to check them; the deployment on mainnet (chainId 4663) is not made yet.</p>
+    <p>One round, one call:</p>
+    <div class="tw" style="border:none">
+      <table style="min-width:0"><tbody>
+        <tr><td style="font-weight:400;white-space:pre">cast call 0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9 \
+  "getRoundHash(uint64)(bytes32,uint8)" 61129566 \
+  --rpc-url https://rpc.testnet.chain.robinhood.com</td></tr>
+      </tbody></table>
+    </div>
+    <p>Compare what comes back against the <code>roundKeccak</code> and <code>canon</code> for that block in <code>data/</code>. A returned <b>canon of 0 means the round was never recorded</b>, which is unambiguous because the contract refuses to deploy with canon 0 and every recorded round therefore carries 2 or more; it is not a round stored as zero.</p>
+    <p><b>As of 2026-09-16 the ledger is deployed and empty:</b> <code>latestCommittedBlock()</code> returns 0, and the call above returns zeros. The backfill of the published rounds is written and rehearsed but not yet executed, so the command works today and returns a real value once it has run. <b>The ledger is an additional anchor, not the primary one.</b> The primary anchor is that <code>rounds.jsonl</code> is published in git: any change after the fact stays in the history. A ledger can be redeployed; the published record cannot be quietly rewritten.</p>
+
   </div>
 </section>
 <section>
