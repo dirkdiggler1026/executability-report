@@ -12,8 +12,13 @@
 这份仓库自己犯过一次。
 
 **`committed` 永远不会翻成 true，不要指望本脚本自己跟进。**
-`rounds.jsonl` 在 MANIFEST.sha256 里，改动它会让已发布校验和失效；
-A8「已发布文件只增不改、链上状态不回写进数据文件」正是这个意思。
+理由是 A8「已发布文件只增不改、链上状态不回写进数据文件」这条规矩本身，
+外加 `rounds.jsonl` 逐日进 git —— 任何事后改动都留在 git 历史里。
+ 这里原先写的是「`rounds.jsonl` 在 MANIFEST.sha256 里」。**那是假的**：
+   备份清单只覆盖 `*.jsonl.gz`（见 backup.sh 的 GLOB），所以每天的
+   MANIFEST 里只有 quotes.jsonl.gz 一行，`rounds.jsonl` 从来没进去过。
+   结论没变（锚是 git 不是清单），但一个编出来的理由比没有理由更坏 ——
+   这正是本文件头几行在警告的那件事，而它自己犯了第二次。
 所以下面那行按 `committed` 打印锚点，只对「尚未上链」的今天成立 ——
 回填之后它会在最该说「链上」的那一刻说「git 历史」。
 **改法是把锚点来源换成账本本身**（查 getRoundHash / latestCommittedBlock，
