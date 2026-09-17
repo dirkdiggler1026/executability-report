@@ -5,5 +5,11 @@ rh-report-deploy*
 # This repository is public and has a remote. The code here reads RHCHAIN_RPC, and an archive
 # endpoint's URL carries an API key, so the natural place to put one is a file that must never be
 # committable. Prefer exporting it in the shell; this is the guard for when it is not.
+#
+# A rule set rather than one glob: `*.env` matches `.env` (gitignore's `*` matches the empty
+# string) but not `.env.local`, and `.env` alone does not match `prod.env`. The cost is
+# asymmetric -- a missed pattern puts a live key in a public repository, three extra lines do not.
 .env
+.env.*
 *.env
+!.env.example
