@@ -5,11 +5,15 @@
 就能在同一区块高度重放全部报价、重算哈希、和记录的轮次哈希逐字节比对。**
 不需要信任提交者，只需要信任算术。
 
-**锚点现在是 git 历史，不是链。** `rounds.jsonl` 与数据在同一个仓库里，
+**本脚本的锚点是 git 历史，不是链。** `rounds.jsonl` 与数据在同一个仓库里，
 所以重算比对证明的是「未被事后改动，且任何改动都留在 git 历史里」——
 这是真的保证，但它不是链上承诺。早先这里写的是「和链上承诺逐字节比对」，
 而已发布轮次的 `committed` 全部是 false —— 一个事实写在两处然后漂移，
 这份仓库自己犯过一次。
+ ⚠️ **链上锚点自 2026-09-19 起是存在的**(EvidenceLedger @ 46630)——
+   「不是链」说的是**本脚本不去查它**，不是「没有链上锚点」。
+   上一句警告的正是「一个事实写在两处然后漂移」；回填落地那天，
+   它自己成了漂掉的那一份。
 
 **`committed` 永远不会翻成 true，不要指望本脚本自己跟进。**
 `rounds.jsonl` 在 MANIFEST.sha256 里，改动它会让已发布校验和失效；
@@ -21,11 +25,16 @@ A8「已发布文件只增不改、链上状态不回写进数据文件」正是
    不是已发布校验和。2026-09-16 有人读了后者，据此断言前者「不含 rounds.jsonl」，
    把一句真话「更正」成了假话，并推进了公开仓库。
    **断言「X 是假的」之前，先读一遍 X 本身。**
-所以下面那行按 `committed` 打印锚点，只对「尚未上链」的今天成立 ——
-回填之后它会在最该说「链上」的那一刻说「git 历史」。
-**改法是把锚点来源换成账本本身**（查 getRoundHash / latestCommittedBlock，
-或本地 append-only 的 commits.jsonl），而不是去动数据文件。
-这一条是 D4 的验收标准之一，不是可选项。
+🔴 **2026-09-19：上面预言的那一天到了,而这里做的【不是】它说的那个改法。**
+   回填已落地(测试网 46630,610 轮,水印 64,907,249),于是原先那行
+   `anchor: git history (not committed on chain yet)` 变成了假话。
+   但更早的问题是:那个括号**断言了本工具从未查过的事** ——
+   它不是那天才变假的,它从第一天起就没有依据,只是碰巧为真。
+   而且那行的三元表达式有一条分支**永远走不到**(`committed` 按 A8 恒为 false),
+   看起来在处理两种情况,其实只有一种。
+   **这次只做一件事:把断言收回到查过的范围内**,并删掉走不到的那条分支。
+**D4 那个改法(把锚点来源换成账本本身:查 getRoundHash / latestCommittedBlock,
+或本地 append-only 的 commits.jsonl)仍然欠着,不要因为这一行不再说假话就以为它做了。**
 
     python3 verify.py <block>        复核指定轮次
     python3 verify.py --latest       复核最近一轮
@@ -166,8 +175,10 @@ def main() -> int:
 
     print(f"round      block {rec['block']:,}  canon {rec['canon']}")
     print(f"  recorded round hash {rec['roundKeccak']}")
-    print("  anchor: " + ("on chain (committed)" if rec.get("committed")
-                         else "git history (not committed on chain yet)"))
+    # `rec["committed"]` 按 A8 恒为 false(链上状态不回写进数据文件),
+    # 所以【不能】拿它判断上链与否。只说查过的:哈希在 git 历史里。
+    # 链上状态要问账本本身 —— 本工具不查,所以本工具不说。
+    print("  anchor: git history (this tool does not query the ledger)")
     if rec["canon"] != CANON_VERSION:
         print(f"   canon mismatch (local {CANON_VERSION}); the hash cannot match")
 
