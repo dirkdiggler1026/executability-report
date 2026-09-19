@@ -223,7 +223,22 @@ def rpc(method: str, params: list, url: str = None, timeout: int = 25,
                                capture_output=True, timeout=timeout + 5)
             d = json.loads(r.stdout or "{}")
         except Exception as e:
-            d = {"error": {"code": -1, "message": repr(e)[:120]}}
+            # 🔴 `repr(e)` 对 subprocess.TimeoutExpired 会展开整条 argv —— 里面有
+            #    带 key 的 url。而这个 message 会被 verify.py 的 preflight 原样印在
+            #    屏幕上(第三方跑、录屏演示都会看到)。
+            #
+            #    今天它印不出来,但靠的是【参数顺序】:url 排在 `-d body` 之后。
+            #    2026-09-19 两边各量了一次,结论一致 ——
+            #        固定前缀(到 -d 的 body 开头)  103 字符
+            #        最短 JSON-RPC body(eth_chainId) 66 字符
+            #        ⇒ url 最早出现在第 174 字符,而截断点是 120,余量 49
+            #    这是结构性的,不是巧合:body 永远排在 url 前面。
+            #
+            #    **但它依赖 argv 的顺序,而没有任何东西会在顺序被改时响。**
+            #    所以这里不靠那个余量,靠这一行主动替换。删掉它是静默的 ——
+            #    这一段注释是它目前唯一的守卫。
+            #    (这个仓库没有 CI、没有 selftest。补上测试运行器是提交之后的事。)
+            d = {"error": {"code": -1, "message": repr(e).replace(url, "<rpc>")[:120]}}
         if "result" in d:
             _recover(url)
             return d["result"], None
