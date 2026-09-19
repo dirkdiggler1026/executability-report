@@ -227,17 +227,20 @@ def rpc(method: str, params: list, url: str = None, timeout: int = 25,
             #    带 key 的 url。而这个 message 会被 verify.py 的 preflight 原样印在
             #    屏幕上(第三方跑、录屏演示都会看到)。
             #
-            #    今天它印不出来,但靠的是【参数顺序】:url 排在 `-d body` 之后。
-            #    2026-09-19 两边各量了一次,结论一致 ——
-            #        固定前缀(到 -d 的 body 开头)  103 字符
-            #        最短 JSON-RPC body(eth_chainId) 66 字符
-            #        ⇒ url 最早出现在第 174 字符,而截断点是 120,余量 49
-            #    这是结构性的,不是巧合:body 永远排在 url 前面。
+            #    今天它印不出来。2026-09-19 两边各量了一次(0-based 索引):
+            #        现状 url 在 -d body 之后   url@174  key@217  截断 120 ⇒ 余量 54 / 97
+            #        调序 url 挪到 -d 之前      url@ 98  key@141  ⇒ key 仍不进前 120
+            #        极端 url 挪到 argv 最前    url@ 25  key@ 68  ⇒ 【只有这一种会印出 key】
+            #    key 在 url 内的偏移是 43(`https://…/v2/` 那一段),
+            #    所以对现实的调序,冗余来自这个偏移,**不是**来自 argv 顺序 ——
+            #    这一行防的是最后那种极端情况。
             #
-            #    **但它依赖 argv 的顺序,而没有任何东西会在顺序被改时响。**
-            #    所以这里不靠那个余量,靠这一行主动替换。删掉它是静默的 ——
-            #    这一段注释是它目前唯一的守卫。
-            #    (这个仓库没有 CI、没有 selftest。补上测试运行器是提交之后的事。)
+            #    ⚠️ 复核时【不要】用 `url in message` 当判据:url@98 那种情形下
+            #       url 被从中间截断,判出来是 False,而主机名其实已经进画面 ——
+            #       假阴性。要查就查 key 本身:`key in message[:120]`。
+            #
+            #    删掉这一行是静默的 —— 这段注释是它目前唯一的守卫。
+            #    (这个仓库没有 CI、没有 selftest;补测试运行器是提交之后的事。)
             d = {"error": {"code": -1, "message": repr(e).replace(url, "<rpc>")[:120]}}
         if "result" in d:
             _recover(url)
