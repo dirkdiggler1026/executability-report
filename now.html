@@ -62,8 +62,9 @@
   <h1>Not the quoted price. <b>The result of a full round trip, inside one pool.</b></h1>
   <div class="lead">Buy a tokenised stock with USDG and sell the whole position straight back
     through the same pool, at four sizes, at one pinned block every 30 minutes. Below is the
-    latest published day: median recovery per token and size, with the p10&ndash;p90 range beneath
-    it. A round that could not fill is counted separately, never as a zero.</div>
+    latest published day: median recovery per token and size, with the p10&ndash;p90 range
+    <b>within that day</b> beneath it. A round that could not fill is counted separately, never as
+    a zero.</div>
 
   <div class="anchor mono">
     <b>latest round</b> &nbsp; block 67,481,109 &nbsp;&middot;&nbsp; canon rhdepth-v2
@@ -71,7 +72,7 @@
     <b>roundKeccak</b> &nbsp; 0x6f0f17fd5ef6cf042cada08673a063652be9cde3e00b2a6a268d18ce7687597e<br>
     <b>day</b> &nbsp; 2026-09-19 &nbsp;&middot;&nbsp; 48 rounds &nbsp;&middot;&nbsp; blocks 66,641,745 .. 67,481,109<br>
     <b>in the ledger</b> &nbsp; not yet &nbsp;&middot;&nbsp; commits are batched, so the chain watermark lags the published series<br>
-    <b>generated</b> &nbsp; 2026-09-20 11:03 UTC &nbsp;&middot;&nbsp; regenerated daily with the data, so this page cannot be older than the day it shows
+    <b>generated</b> &nbsp; 2026-09-20 11:11 UTC &nbsp;&middot;&nbsp; regenerated daily with the data, so this page cannot be older than the day it shows
   </div>
 
   <table>
@@ -112,8 +113,11 @@
         than implying this is the only one.</div></div>
     <div><b>The failure is not one thing.</b> Some tokens collapse at every size with almost no
       variance; some switch between two states with nothing in between; some slope down as size
-      rises. The range column is what shows which is which &mdash; a wide p10&ndash;p90 is a token
-      that switches, not a token that is noisy.</div>
+      rises. <b>The range above shows how far each cell moved within the day &mdash; it is not a
+      characterisation of the token.</b> A token that alternates between two states can look
+      constant on any single day, and one that is quiet today can be wide tomorrow. Which shape a
+      token has is a property of the series, not of one day; it is established in the report, not
+      here.</div>
     <div><a href="https://github.com/dirkdiggler1026/executability-report">data, method, verifier and
       error archive</a> &middot; ten published errors, eight caught before publication</div>
   </div>

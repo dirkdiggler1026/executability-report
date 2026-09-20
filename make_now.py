@@ -26,6 +26,20 @@ token. A round whose size could not be filled is NOT a zero -- it is counted sep
 averaging it in as 0% hides the thing worth reporting. This is the same definition code/analyze.py
 uses.
 
+The range is labelled "within that day", and the mechanism sentence says the range is not a
+characterisation of the token. That wording is load-bearing rather than cautious. Measured over
+the last two published days, TWO cells change character between them:
+
+    RDDT $100,000   0.04-33.50   ->  33.21-33.50
+    GME  $10,000   13.68-58.82   ->  52.75-60.04
+
+RDDT is the sharper case: across the published series its $100,000 median is 0.04 and 534 of 706
+rounds are below 50%, while on the latest day it sits at ~33 with a narrow spread. So a single-day
+page with an unqualified range would not merely fail to show the mechanism -- it would hand the
+reader a wrong character judgement ("this token is stable"). The fix is the wording, not a new
+column: adding a cross-window statistic here would break the one-sentence definition the page
+rests on, and the mechanism belongs to the series, which the report already carries.
+
     python make_now.py
 """
 
@@ -184,8 +198,9 @@ def main() -> int:
   <h1>Not the quoted price. <b>The result of a full round trip, inside one pool.</b></h1>
   <div class="lead">Buy a tokenised stock with USDG and sell the whole position straight back
     through the same pool, at four sizes, at one pinned block every 30 minutes. Below is the
-    latest published day: median recovery per token and size, with the p10&ndash;p90 range beneath
-    it. A round that could not fill is counted separately, never as a zero.</div>
+    latest published day: median recovery per token and size, with the p10&ndash;p90 range
+    <b>within that day</b> beneath it. A round that could not fill is counted separately, never as
+    a zero.</div>
 
   <div class="anchor mono">
     <b>latest round</b> &nbsp; block {last['block']:,} &nbsp;&middot;&nbsp; canon {html.escape(str(last['canon']))}
@@ -226,8 +241,11 @@ def main() -> int:
         than implying this is the only one.</div></div>
     <div><b>The failure is not one thing.</b> Some tokens collapse at every size with almost no
       variance; some switch between two states with nothing in between; some slope down as size
-      rises. The range column is what shows which is which &mdash; a wide p10&ndash;p90 is a token
-      that switches, not a token that is noisy.</div>
+      rises. <b>The range above shows how far each cell moved within the day &mdash; it is not a
+      characterisation of the token.</b> A token that alternates between two states can look
+      constant on any single day, and one that is quiet today can be wide tomorrow. Which shape a
+      token has is a property of the series, not of one day; it is established in the report, not
+      here.</div>
     <div><a href="https://github.com/dirkdiggler1026/executability-report">data, method, verifier and
       error archive</a> &middot; ten published errors, eight caught before publication</div>
   </div>
