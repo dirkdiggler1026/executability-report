@@ -17,6 +17,12 @@ dirkdiggler871026@gmail.com
 Corrections get published. The quarantine section below is an example of that.
 If you think a figure here is wrong, say so.
 
+**The error archive.** Ten instrument failures over six days are written up on the
+report page, numbered, each with what it was and how it was caught — eight caught
+before anything was published, two after. Section heading: *"Our instruments lied
+to us ten times"*. Two of them (#08, #10) are about the pool table being incomplete
+or out of date; see **Limits** below for the cutoff that is still open.
+
 ## Commissioned measurement
 
 From October 2026. Two kinds of work, measured the same way as the public
@@ -51,6 +57,7 @@ Attribution is the only condition, for the data and the report alike.
 ```
 index.html              the report (English, canonical)
 index.zh.html           Chinese snapshot, may lag
+now.html                current figures, regenerated daily (make_now.py)
 data/                   raw measurements
   <date>/
     quotes.jsonl.gz       one row per measurement
@@ -192,6 +199,12 @@ directory name.
   generally worse.
 - USDG-quoted pools only. ETH/WETH pools are not included; TSLA is known
   to have additional depth in an ETH pool, and other tokens may too.
+- **The pool table stops at block 53,983,886** (2026-09-04 04:33:55 UTC,
+  about three hours before the first measured round). Pools created after
+  that block are not in it. So every figure here means *the best route
+  among the pools in this table*, never *the best route on the chain*.
+  One affected cell is known and written up as error #10; which others
+  are affected is what an incremental scan has yet to establish.
 - The pool table is internally consistent (fail-loud scan, zero failed
   ranges) but has **no external cross-check**. DexScreener counts
   uninitialised pools in its liquidity figures and is not used as a
