@@ -128,9 +128,20 @@ def main() -> int:
     #      EX_ABSENT     a published round in a QUARANTINED v1 directory. Every quarantined round
     #                    is below the frozen list's first block (54,088,399; measured, not assumed),
     #                    so once the first batch lands it is permanently un-committable.
-    #    ⚠️ On a freshly deployed ledger the watermark is 0 and EX_ABSENT is only absent by
-    #       intention, not by construction. Do not point this page at a new chain until its first
-    #       batch has landed.
+    #    ⚠️ The two thresholds are NOT the same, and the binding one is the later.
+    #       EX_ABSENT  sits below the frozen list's first block, so it becomes structural as soon
+    #                  as the watermark passes that first block -- batch 1.
+    #       EX_COMMITTED is row 397 of 802. At batch size 64 that is batch 7 of 13; at 129, batch
+    #                  4 of 7. An earlier draft of this comment said "until its first batch has
+    #                  landed" and would have had the page assert canon 2 through six batches
+    #                  where the chain says canon 0.
+    #       So the threshold is a watermark, not a batch number -- batch size is a decision made
+    #       on the day, and anything phrased in batches is wrong before it is read:
+    #           cast call <ledger> 'latestCommittedBlock()(uint64)' --rpc-url <rpc>   >= 61129566
+    #       Simplest safe rule: switch after the whole backfill, when the watermark is the ceiling.
+    #    Neither example's answer depends on the chain: the hash is the round's own roundKeccak,
+    #    and canon 2 is what the commit passes in. Past the threshold, a new chain returns these
+    #    two byte-for-byte, so nothing below this line changes when LEDGER and RH_RPC do.
     EX_COMMITTED = 61_129_566          # data/2026-09-12
     EX_ABSENT = 53_808_204             # data/2026-09-03.rhdepth-v1-defective, last row
     RH_RPC = "https://rpc.testnet.chain.robinhood.com"
@@ -156,8 +167,10 @@ def main() -> int:
             others = sorted({r["chainId"] for r in recs} - {LEDGER_CHAIN})
             print(f"WARN make_now: {_authority} now also has chainId {others}, and this page still "
                   f"points readers at {LEDGER_CHAIN} only. Page is incomplete, not wrong -- published "
-                  f"anyway. Update index.html, index.zh.html, README.md and make_now.py together.",
-                  file=sys.stderr)
+                  f"anyway. Update index.html, index.zh.html, README.md and make_now.py together. "
+                  f"Before repointing LEDGER/RH_RPC at a new chain, check on that chain: "
+                  f"latestCommittedBlock() >= {EX_COMMITTED} -- below it this page's canon 2 example "
+                  f"is false there (it is row 397 of the backfill, not row 1).", file=sys.stderr)
     # Staleness defence. A page that regenerates daily will one day fail to regenerate, and the
     # failure mode this project exists to hunt is a page that keeps saying "latest" while showing
     # old numbers. So the generation time and the round's own time are both printed: a reader can
