@@ -71,10 +71,11 @@
       &nbsp;&middot;&nbsp; 36 rows &nbsp;&middot;&nbsp; 2026-09-20 23:37 UTC<br>
     <b>roundKeccak</b> &nbsp; 0xdfe8902ddcb7b2fe185ce4a8c920bcfb286e9e57a962632c4312cacf547b1bb3<br>
     <b>day</b> &nbsp; 2026-09-20 &nbsp;&middot;&nbsp; 48 rounds &nbsp;&middot;&nbsp; blocks 67,499,202 .. 68,337,980<br>
-    <b>in the ledger</b> &nbsp; this page does not ask &mdash; ask the ledger itself. Commits are batched, so whether the round above is on chain depends on whether its batch has been written &mdash; run it and see. Block 61,129,566 is committed and returns its hash with canon 2; a round that is not yet committed returns canon 0. Running both is the cheapest way to check that canon 0 means what it says:<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;cast call 0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9 'getRoundHash(uint64)(bytes32,uint8)' 68337980 --rpc-url https://rpc.testnet.chain.robinhood.com<br>
+    <b>in the ledger</b> &nbsp; this page does not ask &mdash; ask the ledger itself. Commits are batched, so the round above may not be on chain yet; these two always answer the same way, which is what makes them worth running:<br>
     &nbsp;&nbsp;&nbsp;&nbsp;cast call 0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9 'getRoundHash(uint64)(bytes32,uint8)' 61129566 --rpc-url https://rpc.testnet.chain.robinhood.com<br>
-    <b>generated</b> &nbsp; 2026-09-22 04:12 UTC &nbsp;&middot;&nbsp; regenerated daily with the data, so this page cannot be older than the day it shows
+    &nbsp;&nbsp;&nbsp;&nbsp;cast call 0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9 'getRoundHash(uint64)(bytes32,uint8)' 53808204 --rpc-url https://rpc.testnet.chain.robinhood.com<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="sub">61,129,566 is a published round in the backfill &mdash; hash, canon 2. 53,808,204 is a published round that was <b>quarantined</b> (canon rhdepth-v1) and sits below the first committed block, so it returns canon 0 and always will. Canon 0 means absent, not broken.</span><br>
+    <b>generated</b> &nbsp; 2026-09-22 05:06 UTC &nbsp;&middot;&nbsp; regenerated daily with the data, so this page cannot be older than the day it shows
   </div>
 
   <table>

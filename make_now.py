@@ -120,6 +120,19 @@ def main() -> int:
     #    is a transcription, and the guard below refuses to generate a page from a stale one.
     LEDGER = "0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9"
     LEDGER_CHAIN = 46630
+    # 🔴 Both examples must be PERMANENT. The first version of this line used the latest published
+    #    round as the canon-0 example, which dies the moment a backfill reaches it -- and reaching
+    #    it is the plan. These two cannot move:
+    #      EX_COMMITTED  a published round inside the frozen list -> committed, canon 2, and the
+    #                    watermark only moves forward, so that answer cannot be revised.
+    #      EX_ABSENT     a published round in a QUARANTINED v1 directory. Every quarantined round
+    #                    is below the frozen list's first block (54,088,399; measured, not assumed),
+    #                    so once the first batch lands it is permanently un-committable.
+    #    ⚠️ On a freshly deployed ledger the watermark is 0 and EX_ABSENT is only absent by
+    #       intention, not by construction. Do not point this page at a new chain until its first
+    #       batch has landed.
+    EX_COMMITTED = 61_129_566          # data/2026-09-12
+    EX_ABSENT = 53_808_204             # data/2026-09-03.rhdepth-v1-defective, last row
     RH_RPC = "https://rpc.testnet.chain.robinhood.com"
     _authority = os.environ.get("DEPLOYMENTS_JSONL", "/root/predict-data/dexfeed/chain/deployments.jsonl")
     if os.path.exists(_authority):
@@ -245,9 +258,10 @@ def main() -> int:
       &nbsp;&middot;&nbsp; {last['rows']} rows &nbsp;&middot;&nbsp; {round_utc}<br>
     <b>roundKeccak</b> &nbsp; {html.escape(str(last['roundKeccak']))}<br>
     <b>day</b> &nbsp; {day.name} &nbsp;&middot;&nbsp; {n_rounds} rounds &nbsp;&middot;&nbsp; blocks {span}<br>
-    <b>in the ledger</b> &nbsp; this page does not ask &mdash; ask the ledger itself. Commits are batched, so whether the round above is on chain depends on whether its batch has been written &mdash; run it and see. Block 61,129,566 is committed and returns its hash with canon 2; a round that is not yet committed returns canon 0. Running both is the cheapest way to check that canon 0 means what it says:<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;cast call {LEDGER} 'getRoundHash(uint64)(bytes32,uint8)' {last['block']} --rpc-url {RH_RPC}<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;cast call {LEDGER} 'getRoundHash(uint64)(bytes32,uint8)' 61129566 --rpc-url {RH_RPC}<br>
+    <b>in the ledger</b> &nbsp; this page does not ask &mdash; ask the ledger itself. Commits are batched, so the round above may not be on chain yet; these two always answer the same way, which is what makes them worth running:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;cast call {LEDGER} 'getRoundHash(uint64)(bytes32,uint8)' {EX_COMMITTED} --rpc-url {RH_RPC}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;cast call {LEDGER} 'getRoundHash(uint64)(bytes32,uint8)' {EX_ABSENT} --rpc-url {RH_RPC}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="sub">{EX_COMMITTED:,} is a published round in the backfill &mdash; hash, canon 2. {EX_ABSENT:,} is a published round that was <b>quarantined</b> (canon rhdepth-v1) and sits below the first committed block, so it returns canon 0 and always will. Canon 0 means absent, not broken.</span><br>
     <b>generated</b> &nbsp; {gen_utc} &nbsp;&middot;&nbsp; regenerated daily with the data, so this page cannot be older than the day it shows
   </div>
 
