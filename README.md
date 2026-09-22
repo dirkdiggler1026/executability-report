@@ -121,21 +121,34 @@ python3 code/verify.py --latest
 The script replays every round-trip at that block height, recomputes the
 hash, and compares it against rounds.jsonl.
 
-That recorded hash is anchored in git history, not yet on a chain. rounds.jsonl
+That recorded hash has two anchors. The first is git history: rounds.jsonl
 ships in this repository next to the data, so recomputing it shows the round
-has not been revised without the change appearing in the history. Each record
-carries a `committed` field naming which anchor applies; every round published
-so far reads `committed: false`.
+has not been revised without the change appearing in the history. The second
+is the on-chain ledger described below, which since 2026-09-19 holds the
+hashes of the published rounds through block 64,907,249.
+
+Each record carries a `committed` field, and it reads `false` on every round
+ever published. That is not a status: chain state is never written back into
+a published file, so the field cannot become `true`. It is a constant, and
+the next section says what to ask instead.
 
 The same hashes can also be anchored on-chain, by
 [ievidence-ledger](https://github.com/dirkdiggler1026/ievidence-ledger):
 `IEvidenceLedger` at `0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9` on Robinhood
-Chain testnet (chainId 46630). As of 2026-09-16 it is deployed and empty —
-`latestCommittedBlock()` returns 0 and `getRoundHash()` returns canon 0
-("absent") for every block, which is why every record above still reads
-`committed: false`. The two anchors are not redundant: git history can be
-rewritten by whoever holds the repository, while the ledger can only be appended
-to.
+Chain testnet (chainId 46630). It was deployed and empty on 2026-09-16.
+On 2026-09-19 a backfill landed: 610 rounds in ten transactions, and
+`latestCommittedBlock()` has returned 64,907,249 since. Those 610 rounds are
+every published round at or below that block; everything else — later rounds,
+and the quarantined directories — returns canon 0 ("absent").
+
+Records above read `committed: false` regardless, and will keep doing so.
+That field is not a report of the chain — chain state is never written back
+into a published data file, so the field is false by construction. To ask
+whether a round is anchored, ask the ledger. `code/verify.py` deliberately
+does not, and says so.
+
+The two anchors are not redundant: git history can be rewritten by whoever
+holds the repository, while the ledger can only be appended to.
 
 Run it from the repository root: it looks for data/ next to the script
 (or honours RHDEPTH_DATA). Quarantined v1 rounds are excluded by their

@@ -106,7 +106,14 @@ def main() -> int:
 
     n_rounds = len(blocks)
     span = f"{min(blocks):,} .. {max(blocks):,}"
-    committed = "yes" if last.get("committed") else "not yet"
+    # 🔴 NOT `last["committed"]`. That field is `false` on every record ever published and
+    #    always will be: A8 says chain state is never written back into a published data file,
+    #    so the "yes" branch of a ternary on it is dead code. code/verify.py:33 already carries
+    #    this lesson; this file was written the day after and repeated it anyway.
+    #    This page reads published bytes only (see the docstring), so it must not ask the chain
+    #    either. It states the boundary and hands over the call.
+    LEDGER = "0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9"
+    RH_TESTNET = "https://rpc.testnet.chain.robinhood.com"
     # Staleness defence. A page that regenerates daily will one day fail to regenerate, and the
     # failure mode this project exists to hunt is a page that keeps saying "latest" while showing
     # old numbers. So the generation time and the round's own time are both printed: a reader can
@@ -207,7 +214,9 @@ def main() -> int:
       &nbsp;&middot;&nbsp; {last['rows']} rows &nbsp;&middot;&nbsp; {round_utc}<br>
     <b>roundKeccak</b> &nbsp; {html.escape(str(last['roundKeccak']))}<br>
     <b>day</b> &nbsp; {day.name} &nbsp;&middot;&nbsp; {n_rounds} rounds &nbsp;&middot;&nbsp; blocks {span}<br>
-    <b>in the ledger</b> &nbsp; {committed} &nbsp;&middot;&nbsp; commits are batched, so the chain watermark lags the published series<br>
+    <b>in the ledger</b> &nbsp; this page does not ask &mdash; ask the ledger itself. Commits are batched, so the round above is normally <b>not</b> on chain yet and returns canon 0; a backfilled one returns its hash. Both are reproducible right now, which is the cheapest way to check that canon 0 means what it says:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;cast call {LEDGER} 'getRoundHash(uint64)(bytes32,uint8)' {last['block']} --rpc-url {RH_TESTNET}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;cast call {LEDGER} 'getRoundHash(uint64)(bytes32,uint8)' 61129566 --rpc-url {RH_TESTNET}<br>
     <b>generated</b> &nbsp; {gen_utc} &nbsp;&middot;&nbsp; regenerated daily with the data, so this page cannot be older than the day it shows
   </div>
 
@@ -255,7 +264,7 @@ def main() -> int:
 
     print(f"wrote {OUT}")
     print(f"  day {day.name} · {n_rounds} rounds · blocks {span}")
-    print(f"  latest block {last['block']:,} · keccak {str(last['roundKeccak'])[:18]}… · committed {committed}")
+    print(f"  latest block {last['block']:,} · keccak {str(last['roundKeccak'])[:18]}…")
     print(f"  {len(tokens)} tokens x {len(SIZES)} sizes = {len(tokens) * len(SIZES)} cells")
     print(f"  {sum(unfilled.values())} rounds could not fill at some size and are counted separately")
     return 0

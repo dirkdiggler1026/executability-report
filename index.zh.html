@@ -473,7 +473,7 @@ python3 code/verify.py 54088399</td></tr>
 
     <h3>链上账本</h3>
     <p>重算一轮证明的是这些数字没有被改过，它本身证明不了这些数字不是今天才算的。Robinhood Chain 上的一个只增账本记录每一轮的哈希，于是那个承诺自带时间戳——写它那笔交易的时间戳。</p>
-    <p><b>已部署在 Robinhood Chain 迭代网</b>（chainId 46630），地址 <code>0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9</code>，部署于区块 119,878,215，交易 <code>0xa0dd3b2f…</code>，canon 为 <code>rhdepth-v2</code>。这些值抄自账本仓库里的 <a href="https://github.com/dirkdiggler1026/ievidence-ledger/blob/main/deployments.jsonl"><code>deployments.jsonl</code></a>——那个文件只增不改，核对请以它为准；主网（chainId 4663）的部署尚未进行。</p>
+    <p><b>已部署在 Robinhood Chain 迭代网</b>（chainId 46630），地址 <code>0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9</code>，部署于区块 119,878,215，交易 <code>0xa0dd3b2f…</code>，canon 为 <code>rhdepth-v2</code>。这些值抄自账本仓库里的 <a href="https://github.com/dirkdiggler1026/ievidence-ledger/blob/main/deployments.jsonl"><code>deployments.jsonl</code></a>——那个文件只增不改，核对请以它为准；截至 2026-09-22 02:35 UTC，主网（chainId 4663）上没有部署。这是一句关于某个时刻的陈述，不是计划：<code>deployments.jsonl</code> 是该查的那个文件，它只增不改，此后其中出现主网条目，并不会让这句话变假。</p>
     <p>查一轮，一条命令：</p>
     <div class="tw" style="border:none">
       <table style="min-width:0"><tbody>

@@ -71,8 +71,10 @@
       &nbsp;&middot;&nbsp; 36 rows &nbsp;&middot;&nbsp; 2026-09-20 23:37 UTC<br>
     <b>roundKeccak</b> &nbsp; 0xdfe8902ddcb7b2fe185ce4a8c920bcfb286e9e57a962632c4312cacf547b1bb3<br>
     <b>day</b> &nbsp; 2026-09-20 &nbsp;&middot;&nbsp; 48 rounds &nbsp;&middot;&nbsp; blocks 67,499,202 .. 68,337,980<br>
-    <b>in the ledger</b> &nbsp; not yet &nbsp;&middot;&nbsp; commits are batched, so the chain watermark lags the published series<br>
-    <b>generated</b> &nbsp; 2026-09-21 06:01 UTC &nbsp;&middot;&nbsp; regenerated daily with the data, so this page cannot be older than the day it shows
+    <b>in the ledger</b> &nbsp; this page does not ask &mdash; ask the ledger itself. Commits are batched, so the round above is normally <b>not</b> on chain yet and returns canon 0; a backfilled one returns its hash. Both are reproducible right now, which is the cheapest way to check that canon 0 means what it says:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;cast call 0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9 'getRoundHash(uint64)(bytes32,uint8)' 68337980 --rpc-url https://rpc.testnet.chain.robinhood.com<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;cast call 0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9 'getRoundHash(uint64)(bytes32,uint8)' 61129566 --rpc-url https://rpc.testnet.chain.robinhood.com<br>
+    <b>generated</b> &nbsp; 2026-09-22 02:56 UTC &nbsp;&middot;&nbsp; regenerated daily with the data, so this page cannot be older than the day it shows
   </div>
 
   <table>
