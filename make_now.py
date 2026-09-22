@@ -49,6 +49,7 @@ import datetime
 import gzip
 import html
 import json
+import os
 import statistics as st
 import sys
 from pathlib import Path
@@ -112,8 +113,38 @@ def main() -> int:
     #    this lesson; this file was written the day after and repeated it anyway.
     #    This page reads published bytes only (see the docstring), so it must not ask the chain
     #    either. It states the boundary and hands over the call.
+    # 🔴 The ledger address now lives in five published places (index.html x2, index.zh.html x2,
+    #    README.md, here, and the generated page). That is error #05's shape exactly -- one fact
+    #    written down in two places, then drifting apart -- and a mainnet deployment is the event
+    #    that makes it drift. deployments.jsonl in the ledger repository stays the authority; this
+    #    is a transcription, and the guard below refuses to generate a page from a stale one.
     LEDGER = "0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9"
-    RH_TESTNET = "https://rpc.testnet.chain.robinhood.com"
+    LEDGER_CHAIN = 46630
+    RH_RPC = "https://rpc.testnet.chain.robinhood.com"
+    _authority = os.environ.get("DEPLOYMENTS_JSONL", "/root/predict-data/dexfeed/chain/deployments.jsonl")
+    if os.path.exists(_authority):
+        # Only runs where the authority file is reachable (the machine that publishes). Anywhere
+        # else this is a no-op, so the script stays runnable by a stranger with just this repo.
+        recs = [json.loads(l) for l in open(_authority) if l.strip()]
+        match = [r for r in recs if r["chainId"] == LEDGER_CHAIN]
+        if not match:
+            raise SystemExit(f"make_now: chainId {LEDGER_CHAIN} is gone from {_authority} -- "
+                             f"if the ledger moved, this file and both index pages move with it")
+        if match[-1]["address"].lower() != LEDGER.lower():
+            raise SystemExit(f"make_now: LEDGER is {LEDGER} but {_authority} says "
+                             f"{match[-1]['address']} -- fix the transcription, do not edit the authority")
+        if len(recs) > len(match):
+            # 🔴 WARN, not fatal -- and the split matters. A wrong address above is fatal because the
+            #    page would print a command that reads the wrong contract. A NEW chain appearing here
+            #    does not make this page false, only incomplete: the 46630 ledger still exists and
+            #    still returns what the page says. Killing the daily publication over an incomplete
+            #    page would be the third time this project built a check that blocks the thing it
+            #    protects (CI fmt blocking tests; copies_agree blocking backups). Publish, and shout.
+            others = sorted({r["chainId"] for r in recs} - {LEDGER_CHAIN})
+            print(f"WARN make_now: {_authority} now also has chainId {others}, and this page still "
+                  f"points readers at {LEDGER_CHAIN} only. Page is incomplete, not wrong -- published "
+                  f"anyway. Update index.html, index.zh.html, README.md and make_now.py together.",
+                  file=sys.stderr)
     # Staleness defence. A page that regenerates daily will one day fail to regenerate, and the
     # failure mode this project exists to hunt is a page that keeps saying "latest" while showing
     # old numbers. So the generation time and the round's own time are both printed: a reader can
@@ -214,9 +245,9 @@ def main() -> int:
       &nbsp;&middot;&nbsp; {last['rows']} rows &nbsp;&middot;&nbsp; {round_utc}<br>
     <b>roundKeccak</b> &nbsp; {html.escape(str(last['roundKeccak']))}<br>
     <b>day</b> &nbsp; {day.name} &nbsp;&middot;&nbsp; {n_rounds} rounds &nbsp;&middot;&nbsp; blocks {span}<br>
-    <b>in the ledger</b> &nbsp; this page does not ask &mdash; ask the ledger itself. Commits are batched, so the round above is normally <b>not</b> on chain yet and returns canon 0; a backfilled one returns its hash. Both are reproducible right now, which is the cheapest way to check that canon 0 means what it says:<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;cast call {LEDGER} 'getRoundHash(uint64)(bytes32,uint8)' {last['block']} --rpc-url {RH_TESTNET}<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;cast call {LEDGER} 'getRoundHash(uint64)(bytes32,uint8)' 61129566 --rpc-url {RH_TESTNET}<br>
+    <b>in the ledger</b> &nbsp; this page does not ask &mdash; ask the ledger itself. Commits are batched, so whether the round above is on chain depends on whether its batch has been written &mdash; run it and see. Block 61,129,566 is committed and returns its hash with canon 2; a round that is not yet committed returns canon 0. Running both is the cheapest way to check that canon 0 means what it says:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;cast call {LEDGER} 'getRoundHash(uint64)(bytes32,uint8)' {last['block']} --rpc-url {RH_RPC}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;cast call {LEDGER} 'getRoundHash(uint64)(bytes32,uint8)' 61129566 --rpc-url {RH_RPC}<br>
     <b>generated</b> &nbsp; {gen_utc} &nbsp;&middot;&nbsp; regenerated daily with the data, so this page cannot be older than the day it shows
   </div>
 
