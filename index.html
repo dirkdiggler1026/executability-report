@@ -408,7 +408,20 @@ footer p{font-size:14px;color:var(--ink-2)}
   </div>
 
   <div class="col">
-    <p><strong>QQQ is the one token that cannot be sold at any size.</strong> $100 returns $6.46 and $100,000 returns $30. It is not a size effect and not a moment: all twelve rounds agree to within a tenth of a percent. Every other token on this chain returns at least 93% through the $10,000 size; at $100,000 only GME and AMC fall further, to 17% and 75% respectively.</p>
+    <p><strong>QQQ is where this table's own method shows its limit.</strong> At the <code>$100,000</code> rung QQQ returns 0.03%, and that holds on the chain as well as here. At <code>$100</code> and <code>$1,000</code> <b>this table was wrong</b>, and the reason is in how the table is built: pools are selected with a <code>$10,000</code> probe, and a pool that cannot fill <code>$10,000</code> is dropped before it is ever a candidate. The pool that wins QQQ at small sizes is one of those — it is absent from the table by construction, not by accident.</p>
+    <p>Quoted instead against <b>every initialized QQQ/USDG pool</b>, at three pinned blocks:</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>block</th><th>$100</th><th>$1,000</th><th>$10,000</th><th>$100,000</th></tr></thead>
+        <tbody>
+          <tr><td>54,088,399 (09-04)</td><td>99.67%</td><td>98.62%</td><td>0.26%</td><td>0.03%</td></tr>
+          <tr><td>61,129,566 (09-12)</td><td>99.29%</td><td>99.21%</td><td>91.11%</td><td>0.03%</td></tr>
+          <tr><td>70,427,772 (09-23)</td><td>97.34%</td><td>2.19%</td><td>0.35%</td><td>0.04%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The pool that serves the small sizes is one contract, <code>0xf9568ec0…</code> (fee 0.30%), and its capacity — the largest notional it will quote — went <b>$9,841 → $10,506 → $287</b> across those three blocks. <b>So the size QQQ can absorb is not a property of the token. It is however much capital someone is willing to leave in a cheap pool, and over seven weeks that moved across two orders of magnitude — up once, then down.</b> At the <code>$10,000</code> rung alone the answer went 0.26% → 91.11% → 0.35%. Naming a collapse threshold would be naming one day's reading.</p>
+    <p><b>Unaffected:</b> every other token on this chain returns at least 93% through the <code>$10,000</code> size; at <code>$100,000</code> only GME and AMC fall further, to 17% and 75%. Both statements were re-checked against the chain at the same blocks and hold.</p>
     <p><strong>GME and AMC are where size still bites, and they are the two tickers retail sentiment concentrates in.</strong> Both are fine up to $1,000. GME at $100,000 returns 17% and never exceeded 23% in any round; AMC at the same size ranges from 28% to 84% depending on when you ask. The medians alone would hide that: the reason both carry a range is that a single number would misrepresent them.</p>
 
     <div class="note">
@@ -584,6 +597,10 @@ python3 code/verify.py 54088399</td></tr>
   <div class="fail">
     <div class="n">10</div><div class="t">The pool table was correct when it was built, and stale when it was used</div>
     <div class="b">A round is replayed against <code>stock_pools.json</code>. That file was built on 2026-09-04, and the last pool in it was initialised at block 53,983,886. A round taken on 2026-09-12 sits at block 61,129,566 — 7,145,680 blocks later. In between, a QQQ/USDG pool was created that the table never saw. The $100 QQQ figure measured 6.58% against that table; measured against the chain, it is about 95.56%. One cell, one date, no error message: the table was not wrong, it was out of date. This is not the same defect as #08 — #08 was a scan that returned incomplete results, this is a complete snapshot of an earlier chain. What caught it was a question about provenance: <em>which date is that table from?</em> Nothing in the monitoring had a reason to look. The fix is not to rebuild the table in place — replaying an old block against a new table produces different rows and a different hash, so every already-published round would fail verification at once. What is needed is a versioned table: each round records which table it was replayed against, and the verifier selects by record. That is a change to the serialisation contract, so it is scheduled deliberately rather than patched in.</div>
+  </div>
+  <div class="fail">
+    <div class="n">11</div><div class="t">The rule that builds the pool table cannot see the pools that win at small sizes</div>
+    <div class="b">The entry above is about a table that went stale. This one is about the rule that builds it, which does not go stale — it excludes pools by design. Every candidate is probed with a <code>$10,000</code> buy and dropped if it cannot fill one, so a pool that can fill <code>$300</code> and not <code>$10,000</code> is never a candidate — and <code>$100</code> and <code>$1,000</code> are exactly the sizes at which such a pool wins. Quoted against <em>every initialized QQQ/USDG pool</em> rather than against the table, at this page's own window block 54,088,399, QQQ returns <b>99.67%</b> at <code>$100</code> and <b>98.62%</b> at <code>$1,000</code>. The table said 6.46% and 1.83%, and the sentence built on it said QQQ <em>cannot be sold at any size</em>. The pool doing that work is one contract, fee 0.30%, and its capacity — the largest notional it will quote — has been <b>$9,841 → $10,506 → $287</b> across three pinned blocks, so what QQQ can absorb is not a property of the token at all. Unlike the entry above, <b>rebuilding the table does not fix this</b> — the probe would still be there. The fix is to select pools per size rather than once, which changes the method and is scheduled as such. Found <b>2026-09-23</b>, after the ten above and after the film that names them. It was caught by a question that needed an archive endpoint to answer: <em>does that cell survive a quote against every pool on the chain, at the block it claims?</em></div>
   </div>
 
   <div class="col" style="margin-top:34px">
