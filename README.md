@@ -147,6 +147,13 @@ into a published data file, so the field is false by construction. To ask
 whether a round is anchored, ask the ledger. `code/verify.py` deliberately
 does not, and says so.
 
+On 2026-09-23 a second ledger was deployed on Robinhood Chain **mainnet**
+(chainId 4663) at `0x7f5446b920e09531f443ce951076cbaed09dfab6`, block
+70,145,346, owner `0x6768cEF3…` — a key that has never held the iteration-network
+ledger. 850 published rounds through block 69,196,861 were committed in fourteen
+transactions. The iteration-network ledger is not superseded: its watermark only
+moves forward, so what it holds it keeps holding.
+
 The two anchors are not redundant: git history can be rewritten by whoever
 holds the repository, while the ledger can only be appended to.
 

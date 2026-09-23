@@ -118,8 +118,15 @@ def main() -> int:
     #    written down in two places, then drifting apart -- and a mainnet deployment is the event
     #    that makes it drift. deployments.jsonl in the ledger repository stays the authority; this
     #    is a transcription, and the guard below refuses to generate a page from a stale one.
-    LEDGER = "0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9"
-    LEDGER_CHAIN = 46630
+    LEDGER = "0x7f5446b920e09531f443ce951076cbaed09dfab6"
+    LEDGER_CHAIN = 4663
+    # 🔴 Chains this page has been written for. LEDGER_CHAIN is the one the commands point at;
+    #    ACKNOWLEDGED is every chain the prose already accounts for. Before 2026-09-23 there was
+    #    one of each and the guard compared against LEDGER_CHAIN alone — which, the moment a
+    #    second ledger existed, would have warned every single day about a chain the page already
+    #    discusses. A warning that fires daily is not a warning. It fires on chains nobody has
+    #    written about yet, which is the only case where someone has to do something.
+    ACKNOWLEDGED = {4663, 46630}
     # 🔴 Both examples must be PERMANENT. The first version of this line used the latest published
     #    round as the canon-0 example, which dies the moment a backfill reaches it -- and reaching
     #    it is the plan. These two cannot move:
@@ -128,6 +135,9 @@ def main() -> int:
     #      EX_ABSENT     a published round in a QUARANTINED v1 directory. Every quarantined round
     #                    is below the frozen list's first block (54,088,399; measured, not assumed),
     #                    so once the first batch lands it is permanently un-committable.
+    #    ✅ 2026-09-23: repointed at mainnet 4663 after its backfill put the watermark at
+    #       69,196,861 — past EX_COMMITTED's 61,129,566. Both calls were re-run against the new
+    #       chain before this line changed: canon 2 with the same hash, canon 0 with zeros.
     #    ⚠️ The two thresholds are NOT the same, and the binding one is the later.
     #       EX_ABSENT  sits below the frozen list's first block, so it becomes structural as soon
     #                  as the watermark passes that first block -- batch 1.
@@ -144,7 +154,7 @@ def main() -> int:
     #    two byte-for-byte, so nothing below this line changes when LEDGER and RH_RPC do.
     EX_COMMITTED = 61_129_566          # data/2026-09-12
     EX_ABSENT = 53_808_204             # data/2026-09-03.rhdepth-v1-defective, last row
-    RH_RPC = "https://rpc.testnet.chain.robinhood.com"
+    RH_RPC = "https://rpc.mainnet.chain.robinhood.com"
     _authority = os.environ.get("DEPLOYMENTS_JSONL", "/root/predict-data/dexfeed/chain/deployments.jsonl")
     if os.path.exists(_authority):
         # Only runs where the authority file is reachable (the machine that publishes). Anywhere
@@ -157,14 +167,14 @@ def main() -> int:
         if match[-1]["address"].lower() != LEDGER.lower():
             raise SystemExit(f"make_now: LEDGER is {LEDGER} but {_authority} says "
                              f"{match[-1]['address']} -- fix the transcription, do not edit the authority")
-        if len(recs) > len(match):
+        if {r["chainId"] for r in recs} - ACKNOWLEDGED:
             # 🔴 WARN, not fatal -- and the split matters. A wrong address above is fatal because the
             #    page would print a command that reads the wrong contract. A NEW chain appearing here
             #    does not make this page false, only incomplete: the 46630 ledger still exists and
             #    still returns what the page says. Killing the daily publication over an incomplete
             #    page would be the third time this project built a check that blocks the thing it
             #    protects (CI fmt blocking tests; copies_agree blocking backups). Publish, and shout.
-            others = sorted({r["chainId"] for r in recs} - {LEDGER_CHAIN})
+            others = sorted({r["chainId"] for r in recs} - ACKNOWLEDGED)
             print(f"WARN make_now: {_authority} now also has chainId {others}, and this page still "
                   f"points readers at {LEDGER_CHAIN} only. Page is incomplete, not wrong -- published "
                   f"anyway. Update index.html, index.zh.html, README.md and make_now.py together. "

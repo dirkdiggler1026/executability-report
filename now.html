@@ -72,10 +72,10 @@
     <b>roundKeccak</b> &nbsp; 0xe2a159bc222d278f5d21b62e59453c4b7d5e0e1343cf7e4c5383a59bcade3196<br>
     <b>day</b> &nbsp; 2026-09-21 &nbsp;&middot;&nbsp; 48 rounds &nbsp;&middot;&nbsp; blocks 68,355,516 .. 69,196,861<br>
     <b>in the ledger</b> &nbsp; this page does not ask &mdash; ask the ledger itself. Commits are batched, so the round above may not be on chain yet; these two always answer the same way, which is what makes them worth running:<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;cast call 0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9 'getRoundHash(uint64)(bytes32,uint8)' 61129566 --rpc-url https://rpc.testnet.chain.robinhood.com<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;cast call 0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9 'getRoundHash(uint64)(bytes32,uint8)' 53808204 --rpc-url https://rpc.testnet.chain.robinhood.com<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;cast call 0x7f5446b920e09531f443ce951076cbaed09dfab6 'getRoundHash(uint64)(bytes32,uint8)' 61129566 --rpc-url https://rpc.mainnet.chain.robinhood.com<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;cast call 0x7f5446b920e09531f443ce951076cbaed09dfab6 'getRoundHash(uint64)(bytes32,uint8)' 53808204 --rpc-url https://rpc.mainnet.chain.robinhood.com<br>
     &nbsp;&nbsp;&nbsp;&nbsp;<span class="sub">61,129,566 is a published round in the backfill &mdash; hash, canon 2. 53,808,204 is a published round that was <b>quarantined</b> (canon rhdepth-v1) and sits below the first committed block, so it returns canon 0 and always will. Canon 0 means absent, not broken.</span><br>
-    <b>generated</b> &nbsp; 2026-09-22 06:02 UTC &nbsp;&middot;&nbsp; regenerated daily with the data, so this page cannot be older than the day it shows
+    <b>generated</b> &nbsp; 2026-09-23 03:52 UTC &nbsp;&middot;&nbsp; regenerated daily with the data, so this page cannot be older than the day it shows
   </div>
 
   <table>
