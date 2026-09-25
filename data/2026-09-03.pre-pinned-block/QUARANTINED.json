@@ -1,0 +1,14 @@
+{
+  "quarantined": true,
+  "directory": "2026-09-03.pre-pinned-block",
+  "canon": "rhdepth-v1",
+  "current_canon": "rhdepth-v2",
+  "rounds": 2,
+  "quote_rows": 576,
+  "reason": "not block-pinned, and v1 (broken pool table)",
+  "excluded_from": "every published conclusion; verify.py filters these by the canon field in rounds.jsonl, not by directory name",
+  "why_this_file_exists": "quotes.jsonl.gz rows carry no canon field, so a reader opening the quote file directly has only the directory name to go on. A directory name is a second transcription of the same fact and does not survive being copied under a different name (it did not, 2026-09-25). This file travels with the contents.",
+  "marked_utc": "2026-09-25T12:26:46Z",
+  "reason_source": "README.md:198 (quarantine table) — this file quotes it; do not edit here",
+  "real_fix": "quote rows should carry the same `canon` field that round records already carry, so the content states its own status. The round preimage is nine named fields, so an extra key does not change roundKeccak; it applies to new data only, because published files are append-only (A8). This marker is the stopgap for data already published."
+}
