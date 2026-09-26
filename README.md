@@ -135,7 +135,11 @@ the next section says what to ask instead.
 The same hashes can also be anchored on-chain, by
 [ievidence-ledger](https://github.com/dirkdiggler1026/ievidence-ledger):
 `IEvidenceLedger` at `0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9` on Robinhood
-Chain testnet (chainId 46630). It was deployed and empty on 2026-09-16.
+Chain testnet (chainId 46630). It was deployed on 2026-09-15 and still empty on
+2026-09-16 — the film's "the ledger did not exist until the fifteenth" is that
+deployment. A second `IEvidenceLedger` went to Robinhood Chain mainnet (chainId 4663)
+at `0x7f5446b920e09531f443ce951076cbaed09dfab6` on 2026-09-23, with 850 published
+rounds backfilled through block 69,196,861 in fourteen transactions.
 On 2026-09-19 a backfill landed: 610 rounds in ten transactions, and
 `latestCommittedBlock()` has returned 64,907,249 since. Those 610 rounds are
 every published round at or below that block; everything else — later rounds,
