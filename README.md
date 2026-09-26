@@ -90,11 +90,12 @@ needs no rate assumption and carries its own sanity check: it must be
 **What a round trip cannot see.** Both legs are quoted against the same pinned
 block, so the sell leg is priced against the book as it stood *before* the buy,
 and the cost is the buy-side cost **plus** the sell-side cost. At block
-54,088,399, QQQ at $100,000: 0.133% buy plus 0.131% sell = 0.264% against a
-measured round-trip cost of 0.264%. A forced seller walks **one** side, so the
-round trip is not that seller's number. This is why a second series measures the
-sell side alone (below), and why the field this project proposed to the SEC was
-corrected to one-sided depth.
+54,088,399, QQQ at $100,000: 0.133016% buy plus 0.130941% sell = 0.263957%,
+against a measured round-trip cost of 0.263675% — the two agree to 0.1%, because
+they are the same two sides measured in separate passes. A forced seller walks
+**one** side, so the round trip is not that seller's number. This is why a second
+series measures the sell side alone (below), and why the field this project
+proposed to the SEC was corrected to one-sided depth.
 
 ## Which pools
 
