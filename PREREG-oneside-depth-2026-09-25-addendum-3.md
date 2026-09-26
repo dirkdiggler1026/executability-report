@@ -32,19 +32,60 @@ fabrication. The four rounds keep their numbers and lose their resolvability, wh
 description of what happened.
 
 **What was done.** An explicit absence record:
-`data-oneside/enumerations/MISSING-71909188.json` (6,655 bytes). It states what is missing and why,
-names the four affected rounds, and carries 41 `(asset, pool, quote)` pairs recovered from those
-rounds' own quote rows — which is evidence, since it comes from the rounds themselves.
+`data-oneside/enumerations/MISSING-71909188.json`, 6,655 bytes, sha256
+`48c0219e2e9d314752405c44f21765a3ace685d321e9397a5acc43837c3472c7`, with top-level keys
+`record` · `enumerated_at_block` · `canon` · `written_utc` · `what_is_missing` · `rule_it_fails` ·
+`rounds_affected` · `not_reconstructed` · `derived_from_published_rows`. It quotes §2a in full in
+`rule_it_fails`, so the rule appears in two places word for word rather than paraphrased twice.
 
-It also states what it does **not** contain: `present_not_quoted`, `unclassified` and
-`per_asset_candidates`. The collector version that produced those rounds never recorded them, and
-they cannot be recovered from anywhere. A missing record that lists its own holes is worth more
-than one that quietly omits them.
+Two of its passages matter enough to repeat here, because they are the record's own statement of
+what it is and is not:
+
+> **what_is_missing** — "The enumeration that produced the venue list for the first four rounds of
+> this series was never archived. Archiving of `enumerations/pools-<block>.json` began with the
+> 03:30 UTC re-enumeration on 2026-09-26, which wrote `pools-72764101.json`. The list used before
+> that was held only in `pools-oneside.json` and was overwritten in place."
+
+> **not_reconstructed** — "The original file is not reconstructed here. Re-running the enumeration
+> at block 71909188 today would produce a list, not the list, and presenting it as the original
+> would be a fabrication. What follows is derived from the published quote rows of the four rounds
+> themselves and is **strictly less than the original**."
+
+What it does contain: 41 `(asset, pool, quote)` pairs, 41 distinct pool addresses and no
+duplicates, recovered from those rounds' own rows in `data-oneside/2026-09-26/quotes.jsonl.gz` —
+27 USDG-quoted and 14 WETH-quoted, distributed NVDA 7 · SPY 6 · GOOGL 5 · AAPL 4 · AMC 4 · GME 4 ·
+RDDT 4 · TSLA 4 · QQQ 3. Being derived from the rounds themselves is what makes it evidence rather
+than a reconstruction.
+
+What it does **not** contain, in its own words: `present_not_quoted`, `unclassified`,
+`per_asset_candidates`, and — "none of these were recorded by the collector version that ran those
+rounds, so they are not recoverable from anywhere". A missing record that lists its own holes is
+worth more than one that quietly omits them.
+
+**One scope limit, stated because a count invites the wrong conclusion.** The venue set is
+verified identical **across those four rounds** (`identical_across_all_four_rounds: true`). It is
+**not** evidence that the set was stable afterwards, and it should not be read across to the
+one-off measurement of 2026-09-25 (block 72,245,711, `measurements/oneside-depth/depth_fixed.json`).
+QQQ happens to carry three pools in both places; whether they are the same three was **not checked**,
+and a matching count is not an identity. Any statement about stability here covers the four rounds
+above and nothing else.
 
 **Publication.** `data-oneside/` is published by the same daily sync as `data/`, and only for
 complete days, so this file first appears in the public repository with the 2026-09-27 06:01 UTC
 sync. Until then the four rounds' `enumerated_at_block` is unresolvable **and the record saying so
 is also not yet public**; that window is stated here rather than left to be discovered.
+
+The sha256 above was computed on the collecting host, before publication, and this addendum was
+written without access to that host — so it is a registered expectation, not a verified fact. Once
+the file is public:
+
+```
+sha256sum data-oneside/enumerations/MISSING-71909188.json
+# 48c0219e2e9d314752405c44f21765a3ace685d321e9397a5acc43837c3472c7
+```
+
+If that differs, the file that shipped is not the file this addendum registers, and the difference
+matters more than the hash does.
 
 **Status: rounds 1–4 do not satisfy §2a.**
 
