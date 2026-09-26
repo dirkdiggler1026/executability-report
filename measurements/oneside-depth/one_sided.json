@@ -1,0 +1,113 @@
+{
+ "54088399": {
+  "_block_hash": "0x1ab9aed1e89e48c08350fd4f090a2949f438b3e2218f473b9a035a29a907f14f",
+  "_pool_mid_usdg_per_share": 719.409099,
+  "100": {
+   "shares_sold": 0.13900296802664175,
+   "usdg_received": 99.949918,
+   "vs_pool_mid": 100,
+   "slippage_pct": 0.05008200000000684,
+   "buy_slippage_pct": 0.05008149503142878,
+   "asymmetry_buy_over_sell": 0.9999899171642893
+  },
+  "1000": {
+   "shares_sold": 1.3900296802664176,
+   "usdg_received": 999.49185,
+   "vs_pool_mid": 1000,
+   "slippage_pct": 0.05081500000000405,
+   "buy_slippage_pct": 0.05081494433414324,
+   "asymmetry_buy_over_sell": 0.9999989045388014
+  },
+  "10000": {
+   "shares_sold": 13.900296802664176,
+   "usdg_received": 9994.185115,
+   "vs_pool_mid": 10000,
+   "slippage_pct": 0.05814884999999492,
+   "buy_slippage_pct": 0.05814884536549103,
+   "asymmetry_buy_over_sell": 0.9999999202993027
+  },
+  "100000": {
+   "shares_sold": 139.00296802664175,
+   "usdg_received": 99869.059194,
+   "vs_pool_mid": 100000,
+   "slippage_pct": 0.13094080600000169,
+   "buy_slippage_pct": 0.13301586845320124,
+   "asymmetry_buy_over_sell": 1.015847332215135
+  },
+  "_note": "slippage_pct = \u5356\u51fa\u4fa7(\u6e05\u7b97\u4eba\u9762\u5bf9\u7684\u90a3\u4e00\u4fa7);buy_slippage_pct = \u4e70\u5165\u4fa7"
+ },
+ "61129566": {
+  "_block_hash": "0x59658f49e67d2b61cb2989ed66c602c9ecbd4fb4f2c3ffd8d9a9999ac40ca44e",
+  "_pool_mid_usdg_per_share": 716.035664,
+  "100": {
+   "shares_sold": 0.13965784804400133,
+   "usdg_received": 99.949919,
+   "vs_pool_mid": 100,
+   "slippage_pct": 0.05008100000000182,
+   "buy_slippage_pct": 0.05008048593406755,
+   "asymmetry_buy_over_sell": 0.9999897353101124
+  },
+  "1000": {
+   "shares_sold": 1.3965784804400132,
+   "usdg_received": 999.491951,
+   "vs_pool_mid": 1000,
+   "slippage_pct": 0.05080490000000104,
+   "buy_slippage_pct": 0.05080485350743569,
+   "asymmetry_buy_over_sell": 0.99999908488029
+  },
+  "10000": {
+   "shares_sold": 13.965784804400132,
+   "usdg_received": 9994.195204,
+   "vs_pool_mid": 10000,
+   "slippage_pct": 0.058047960000007226,
+   "buy_slippage_pct": 0.05804795181459932,
+   "asymmetry_buy_over_sell": 0.9999998589888791
+  },
+  "100000": {
+   "shares_sold": 139.65784804400133,
+   "usdg_received": 99867.554703,
+   "vs_pool_mid": 100000,
+   "slippage_pct": 0.13244529699999452,
+   "buy_slippage_pct": 0.13071217490080445,
+   "asymmetry_buy_over_sell": 0.9869144307993801
+  },
+  "_note": "slippage_pct = \u5356\u51fa\u4fa7(\u6e05\u7b97\u4eba\u9762\u5bf9\u7684\u90a3\u4e00\u4fa7);buy_slippage_pct = \u4e70\u5165\u4fa7"
+ },
+ "70427772": {
+  "_block_hash": "0x34d2b54a1703077ffa52d37f960e427c5ff2c5241f8a49b036841e5dea050e51",
+  "_pool_mid_usdg_per_share": 747.633253,
+  "100": {
+   "shares_sold": 0.133755420400609,
+   "usdg_received": 99.949928,
+   "vs_pool_mid": 100,
+   "slippage_pct": 0.050072000000001005,
+   "buy_slippage_pct": 0.05007164621051441,
+   "asymmetry_buy_over_sell": 0.999992934384754
+  },
+  "1000": {
+   "shares_sold": 1.3375542040060902,
+   "usdg_received": 999.492835,
+   "vs_pool_mid": 1000,
+   "slippage_pct": 0.05071650000000316,
+   "buy_slippage_pct": 0.05071645748305764,
+   "asymmetry_buy_over_sell": 0.9999991616742969
+  },
+  "10000": {
+   "shares_sold": 13.3755420400609,
+   "usdg_received": 9994.283588,
+   "vs_pool_mid": 10000,
+   "slippage_pct": 0.057164119999997265,
+   "buy_slippage_pct": 0.05716411264883314,
+   "asymmetry_buy_over_sell": 0.999999871402479
+  },
+  "100000": {
+   "shares_sold": 133.755420400609,
+   "usdg_received": 99878.603783,
+   "vs_pool_mid": 100000,
+   "slippage_pct": 0.12139621700000269,
+   "buy_slippage_pct": 1.7354110903510356,
+   "asymmetry_buy_over_sell": 14.295429736092988
+  },
+  "_note": "slippage_pct = \u5356\u51fa\u4fa7(\u6e05\u7b97\u4eba\u9762\u5bf9\u7684\u90a3\u4e00\u4fa7);buy_slippage_pct = \u4e70\u5165\u4fa7"
+ }
+}

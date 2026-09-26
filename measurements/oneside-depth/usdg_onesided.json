@@ -1,0 +1,1088 @@
+{
+ "block": 72236870,
+ "hash": "0x3c7b19a17395b12c95470a0cd8f0d6e5e1dfc90926de778e20d71811c67e64c9",
+ "weth_usd": 2711.4996090000004,
+ "weth_pool": "0xfae65eaa11943f45e83d5b45dc7a7c801c51bfb0",
+ "rows": [
+  {
+   "sym": "AAPL",
+   "pool": "0x3714aa8105de1f384481b425788af413748c1837",
+   "fee": 10000,
+   "usd": 100,
+   "usd_per_share": 339.5522304639704,
+   "sell_slippage_pct": 1.6686569999999956,
+   "buy_slippage_pct": 2.599653367064503,
+   "asymmetry": 1.5579315383955539
+  },
+  {
+   "sym": "AAPL",
+   "pool": "0x3714aa8105de1f384481b425788af413748c1837",
+   "fee": 10000,
+   "usd": 1000,
+   "usd_per_share": 339.5522304639704,
+   "sell_slippage_pct": 5.525320099999997,
+   "buy_slippage_pct": 66.32442483246216,
+   "asymmetry": 12.003725328503988
+  },
+  {
+   "sym": "AAPL",
+   "pool": "0x3714aa8105de1f384481b425788af413748c1837",
+   "fee": 10000,
+   "usd": 10000,
+   "usd_per_share": 339.5522304639704,
+   "sell_slippage_pct": 75.42036378,
+   "buy_slippage_pct": 96.50646395682017,
+   "asymmetry": 1.2795809927187303
+  },
+  {
+   "sym": "AAPL",
+   "pool": "0x3714aa8105de1f384481b425788af413748c1837",
+   "fee": 10000,
+   "usd": 100000,
+   "usd_per_share": 339.5522304639704,
+   "sell_slippage_pct": 97.540570675,
+   "buy_slippage_pct": 99.64958050018511,
+   "asymmetry": 1.0216218729354396
+  },
+  {
+   "sym": "AAPL",
+   "pool": "0x783c9bbb765047cfdd2b84b92b2ca9f11d34b7ed",
+   "fee": 3000,
+   "usd": 100,
+   "usd_per_share": 336.29272087354815,
+   "sell_slippage_pct": 0.3053919999999932,
+   "buy_slippage_pct": 0.30539185551374803,
+   "asymmetry": 0.999999526882678
+  },
+  {
+   "sym": "AAPL",
+   "pool": "0x783c9bbb765047cfdd2b84b92b2ca9f11d34b7ed",
+   "fee": 3000,
+   "usd": 1000,
+   "usd_per_share": 336.29272087354815,
+   "sell_slippage_pct": 0.3538923999999999,
+   "buy_slippage_pct": 0.3538923242788594,
+   "asymmetry": 0.9999997860334371
+  },
+  {
+   "sym": "AAPL",
+   "pool": "0x783c9bbb765047cfdd2b84b92b2ca9f11d34b7ed",
+   "fee": 3000,
+   "usd": 10000,
+   "usd_per_share": 336.29272087354815,
+   "sell_slippage_pct": 0.836258160000003,
+   "buy_slippage_pct": 0.8384238255427334,
+   "asymmetry": 1.0025897093102571
+  },
+  {
+   "sym": "AAPL",
+   "pool": "0x783c9bbb765047cfdd2b84b92b2ca9f11d34b7ed",
+   "fee": 3000,
+   "usd": 100000,
+   "usd_per_share": 336.29272087354815,
+   "sell_slippage_pct": 10.237161040000009,
+   "buy_slippage_pct": 69.60155590049797,
+   "asymmetry": 6.798911888612618
+  },
+  {
+   "sym": "AAPL",
+   "pool": "0xaae0d815ee56e4092a5e5c2911e676fea50b2d6d",
+   "fee": 500,
+   "usd": 100,
+   "usd_per_share": 336.5080379307977,
+   "sell_slippage_pct": 0.050397999999995946,
+   "buy_slippage_pct": 0.05039786536638058,
+   "asymmetry": 0.9999973285920996
+  },
+  {
+   "sym": "AAPL",
+   "pool": "0xaae0d815ee56e4092a5e5c2911e676fea50b2d6d",
+   "fee": 500,
+   "usd": 1000,
+   "usd_per_share": 336.5080379307977,
+   "sell_slippage_pct": 0.05397860000000421,
+   "buy_slippage_pct": 0.05397851113044805,
+   "asymmetry": 0.9999983536150223
+  },
+  {
+   "sym": "AAPL",
+   "pool": "0xaae0d815ee56e4092a5e5c2911e676fea50b2d6d",
+   "fee": 500,
+   "usd": 10000,
+   "usd_per_share": 336.5080379307977,
+   "sell_slippage_pct": 0.08977656999999972,
+   "buy_slippage_pct": 0.09117347323540637,
+   "asymmetry": 1.0155597750661074
+  },
+  {
+   "sym": "AAPL",
+   "pool": "0xaae0d815ee56e4092a5e5c2911e676fea50b2d6d",
+   "fee": 500,
+   "usd": 100000,
+   "usd_per_share": 336.5080379307977,
+   "sell_slippage_pct": 0.5631033210000025,
+   "buy_slippage_pct": 0.6194226966317995,
+   "asymmetry": 1.1000160601642
+  },
+  {
+   "sym": "AMC",
+   "pool": "0xc97894fc00c6eeb060838559d905b4c2253fd429",
+   "fee": 10000,
+   "usd": 100,
+   "usd_per_share": 2.9350185170594356,
+   "sell_slippage_pct": 8.434724000000005,
+   "buy_slippage_pct": 78.46902384334177,
+   "asymmetry": 9.303093242095619
+  },
+  {
+   "sym": "AMC",
+   "pool": "0xc97894fc00c6eeb060838559d905b4c2253fd429",
+   "fee": 10000,
+   "usd": 1000,
+   "usd_per_share": 2.9350185170594356,
+   "sell_slippage_pct": 85.9774108,
+   "buy_slippage_pct": 97.84690238433417,
+   "asymmetry": 1.1380536058703243
+  },
+  {
+   "sym": "AMC",
+   "pool": "0xc97894fc00c6eeb060838559d905b4c2253fd429",
+   "fee": 10000,
+   "usd": 10000,
+   "usd_per_share": 2.9350185170594356,
+   "sell_slippage_pct": 98.59774108,
+   "buy_slippage_pct": 99.78469023843341,
+   "asymmetry": 1.0120382997159167
+  },
+  {
+   "sym": "AMC",
+   "pool": "0xc97894fc00c6eeb060838559d905b4c2253fd429",
+   "fee": 10000,
+   "usd": 100000,
+   "usd_per_share": 2.9350185170594356,
+   "sell_slippage_pct": 99.859774108,
+   "buy_slippage_pct": 99.97846902384335,
+   "asymmetry": 1.0011886159056897
+  },
+  {
+   "sym": "AMC",
+   "pool": "0xaa34fea710a1a737840329051d81d3b0b7c564d5",
+   "fee": 3000,
+   "usd": 100,
+   "usd_per_share": 2.9159557229795467,
+   "sell_slippage_pct": 0.3052720000000009,
+   "buy_slippage_pct": 0.3052719157917827,
+   "asymmetry": 0.9999997241534823
+  },
+  {
+   "sym": "AMC",
+   "pool": "0xaa34fea710a1a737840329051d81d3b0b7c564d5",
+   "fee": 3000,
+   "usd": 1000,
+   "usd_per_share": 2.9159557229795467,
+   "sell_slippage_pct": 0.352694099999995,
+   "buy_slippage_pct": 0.35493534588583175,
+   "asymmetry": 1.006354645245942
+  },
+  {
+   "sym": "AMC",
+   "pool": "0xaa34fea710a1a737840329051d81d3b0b7c564d5",
+   "fee": 3000,
+   "usd": 10000,
+   "usd_per_share": 2.9159557229795467,
+   "sell_slippage_pct": 0.8242157100000091,
+   "buy_slippage_pct": 0.890663419983484,
+   "asymmetry": 1.080619319890753
+  },
+  {
+   "sym": "AMC",
+   "pool": "0xaa34fea710a1a737840329051d81d3b0b7c564d5",
+   "fee": 3000,
+   "usd": 100000,
+   "usd_per_share": 2.9159557229795467,
+   "sell_slippage_pct": 4.4146247779999985,
+   "buy_slippage_pct": 10.949033007536624,
+   "asymmetry": 2.4801729610408643
+  },
+  {
+   "sym": "AMC",
+   "pool": "0xff54652b940f0717cd618e790ebdece9d4c4d2f6",
+   "fee": 500,
+   "usd": 100,
+   "usd_per_share": 2.9170213930931794,
+   "sell_slippage_pct": 93.512951,
+   "buy_slippage_pct": 97.9860029942495,
+   "asymmetry": 1.0478335027011338
+  },
+  {
+   "sym": "AMC",
+   "pool": "0xff54652b940f0717cd618e790ebdece9d4c4d2f6",
+   "fee": 500,
+   "usd": 1000,
+   "usd_per_share": 2.9170213930931794,
+   "sell_slippage_pct": 99.3512951,
+   "buy_slippage_pct": 99.79860029942496,
+   "asymmetry": 1.0045022583648733
+  },
+  {
+   "sym": "AMC",
+   "pool": "0xff54652b940f0717cd618e790ebdece9d4c4d2f6",
+   "fee": 500,
+   "usd": 10000,
+   "usd_per_share": 2.9170213930931794,
+   "sell_slippage_pct": 99.93512951,
+   "buy_slippage_pct": 99.97986002994249,
+   "asymmetry": 1.000447595556856
+  },
+  {
+   "sym": "AMC",
+   "pool": "0xff54652b940f0717cd618e790ebdece9d4c4d2f6",
+   "fee": 500,
+   "usd": 100000,
+   "usd_per_share": 2.9170213930931794,
+   "sell_slippage_pct": 99.993512951,
+   "buy_slippage_pct": 99.99798600299425,
+   "asymmetry": 1.0000447334218214
+  },
+  {
+   "sym": "GME",
+   "pool": "0xe9713f453adb9245b19559790c96f470a18f2fdf",
+   "fee": 10000,
+   "usd": 100,
+   "usd_per_share": 24.983996782761416,
+   "sell_slippage_pct": 1.0007259999999962,
+   "buy_slippage_pct": 1.0007254366427132,
+   "asymmetry": 0.9999994370514176
+  },
+  {
+   "sym": "GME",
+   "pool": "0xe9713f453adb9245b19559790c96f470a18f2fdf",
+   "fee": 10000,
+   "usd": 1000,
+   "usd_per_share": 24.983996782761416,
+   "sell_slippage_pct": 1.0072539000000047,
+   "buy_slippage_pct": 1.0072538880422144,
+   "asymmetry": 0.9999999881283256
+  },
+  {
+   "sym": "GME",
+   "pool": "0xe9713f453adb9245b19559790c96f470a18f2fdf",
+   "fee": 10000,
+   "usd": 10000,
+   "usd_per_share": 24.983996782761416,
+   "sell_slippage_pct": 1.0724910800000043,
+   "buy_slippage_pct": 1.072491076590032,
+   "asymmetry": 0.9999999968205122
+  },
+  {
+   "sym": "GME",
+   "pool": "0xe9713f453adb9245b19559790c96f470a18f2fdf",
+   "fee": 10000,
+   "usd": 100000,
+   "usd_per_share": 24.983996782761416,
+   "sell_slippage_pct": 1.8892172519999972,
+   "buy_slippage_pct": 1.7221579758524008,
+   "asymmetry": 0.9115722260260216
+  },
+  {
+   "sym": "GME",
+   "pool": "0x0a0675689c2ad2a3ade86539bcbd27b6c0764e9d",
+   "fee": 3000,
+   "usd": 100,
+   "usd_per_share": 24.874202714816562,
+   "sell_slippage_pct": 0.33585600000001214,
+   "buy_slippage_pct": 0.3358558931498612,
+   "asymmetry": 0.9999996818572515
+  },
+  {
+   "sym": "GME",
+   "pool": "0x0a0675689c2ad2a3ade86539bcbd27b6c0764e9d",
+   "fee": 3000,
+   "usd": 1000,
+   "usd_per_share": 24.874202714816562,
+   "sell_slippage_pct": 0.6574022000000013,
+   "buy_slippage_pct": 0.6588946665601947,
+   "asymmetry": 1.0022702488068849
+  },
+  {
+   "sym": "GME",
+   "pool": "0x0a0675689c2ad2a3ade86539bcbd27b6c0764e9d",
+   "fee": 3000,
+   "usd": 10000,
+   "usd_per_share": 24.874202714816562,
+   "sell_slippage_pct": 4.176132870000004,
+   "buy_slippage_pct": 58.506749739054676,
+   "asymmetry": 14.009791249542932
+  },
+  {
+   "sym": "GME",
+   "pool": "0x0a0675689c2ad2a3ade86539bcbd27b6c0764e9d",
+   "fee": 3000,
+   "usd": 100000,
+   "usd_per_share": 24.874202714816562,
+   "sell_slippage_pct": 78.96910968499999,
+   "buy_slippage_pct": 95.85065906473376,
+   "asymmetry": 1.2137740877043266
+  },
+  {
+   "sym": "GME",
+   "pool": "0xe2b46c905e12ab8e2f864e4821a4325884c1b126",
+   "fee": 500,
+   "usd": 100,
+   "usd_per_share": 24.832891045457544,
+   "sell_slippage_pct": 0.0516760000000005,
+   "buy_slippage_pct": 0.05167517831531354,
+   "asymmetry": 0.9999840992977986
+  },
+  {
+   "sym": "GME",
+   "pool": "0xe2b46c905e12ab8e2f864e4821a4325884c1b126",
+   "fee": 500,
+   "usd": 1000,
+   "usd_per_share": 24.832891045457544,
+   "sell_slippage_pct": 0.0667493000000019,
+   "buy_slippage_pct": 0.06675265181870227,
+   "asymmetry": 1.0000502150389647
+  },
+  {
+   "sym": "GME",
+   "pool": "0xe2b46c905e12ab8e2f864e4821a4325884c1b126",
+   "fee": 500,
+   "usd": 10000,
+   "usd_per_share": 24.832891045457544,
+   "sell_slippage_pct": 0.2659019099999882,
+   "buy_slippage_pct": 0.2190565118770249,
+   "asymmetry": 0.8238245143746227
+  },
+  {
+   "sym": "GME",
+   "pool": "0xe2b46c905e12ab8e2f864e4821a4325884c1b126",
+   "fee": 500,
+   "usd": 100000,
+   "usd_per_share": 24.832891045457544,
+   "sell_slippage_pct": 4.113976941999997,
+   "buy_slippage_pct": 46.0128836999489,
+   "asymmetry": 11.184526395906312
+  },
+  {
+   "sym": "GOOGL",
+   "pool": "0x34d0dc122cf9a8eb296fc5e0d3a233625d7d19b7",
+   "fee": 500,
+   "usd": 100,
+   "usd_per_share": 343.38814904655044,
+   "sell_slippage_pct": 0.05041000000000073,
+   "buy_slippage_pct": 0.050409146385987924,
+   "asymmetry": 0.9999830665738384
+  },
+  {
+   "sym": "GOOGL",
+   "pool": "0x34d0dc122cf9a8eb296fc5e0d3a233625d7d19b7",
+   "fee": 500,
+   "usd": 1000,
+   "usd_per_share": 343.38814904655044,
+   "sell_slippage_pct": 0.054091400000000345,
+   "buy_slippage_pct": 0.0540913131292009,
+   "asymmetry": 0.9999983939997958
+  },
+  {
+   "sym": "GOOGL",
+   "pool": "0x34d0dc122cf9a8eb296fc5e0d3a233625d7d19b7",
+   "fee": 500,
+   "usd": 10000,
+   "usd_per_share": 343.38814904655044,
+   "sell_slippage_pct": 0.09095381999999486,
+   "buy_slippage_pct": 0.09090007370632369,
+   "asymmetry": 0.999409081513331
+  },
+  {
+   "sym": "GOOGL",
+   "pool": "0x34d0dc122cf9a8eb296fc5e0d3a233625d7d19b7",
+   "fee": 500,
+   "usd": 100000,
+   "usd_per_share": 343.38814904655044,
+   "sell_slippage_pct": 0.5310339209999904,
+   "buy_slippage_pct": 0.6775465423641602,
+   "asymmetry": 1.2759006827440926
+  },
+  {
+   "sym": "GOOGL",
+   "pool": "0x553e9a453425cd9b90919f317061fbc3794cc57a",
+   "fee": 3000,
+   "usd": 100,
+   "usd_per_share": 343.08464742366124,
+   "sell_slippage_pct": 0.3869829999999963,
+   "buy_slippage_pct": 0.3869824697974922,
+   "asymmetry": 0.9999986299075047
+  },
+  {
+   "sym": "GOOGL",
+   "pool": "0x553e9a453425cd9b90919f317061fbc3794cc57a",
+   "fee": 3000,
+   "usd": 1000,
+   "usd_per_share": 343.08464742366124,
+   "sell_slippage_pct": 1.300793999999994,
+   "buy_slippage_pct": 1.1613185020405203,
+   "asymmetry": 0.8927766441423667
+  },
+  {
+   "sym": "GOOGL",
+   "pool": "0x553e9a453425cd9b90919f317061fbc3794cc57a",
+   "fee": 3000,
+   "usd": 10000,
+   "usd_per_share": 343.08464742366124,
+   "sell_slippage_pct": 55.705838529999994,
+   "buy_slippage_pct": 53.9940933092282,
+   "asymmetry": 0.9692717089277824
+  },
+  {
+   "sym": "GOOGL",
+   "pool": "0x553e9a453425cd9b90919f317061fbc3794cc57a",
+   "fee": 3000,
+   "usd": 100000,
+   "usd_per_share": 343.08464742366124,
+   "sell_slippage_pct": 95.568692541,
+   "buy_slippage_pct": 95.39752481180462,
+   "asymmetry": 0.9982089560436127
+  },
+  {
+   "sym": "GOOGL",
+   "pool": "0x5c0eaa89799f7b76606f4ff66c92a2654d178927",
+   "fee": 250,
+   "usd": 100,
+   "usd_per_share": 343.4001769212387,
+   "sell_slippage_pct": 0.032375000000006704,
+   "buy_slippage_pct": 0.03237436515236558,
+   "asymmetry": 0.9999803908064518
+  },
+  {
+   "sym": "GOOGL",
+   "pool": "0x5c0eaa89799f7b76606f4ff66c92a2654d178927",
+   "fee": 250,
+   "usd": 1000,
+   "usd_per_share": 343.4001769212387,
+   "sell_slippage_pct": 0.09869479999999875,
+   "buy_slippage_pct": 0.09869472862732431,
+   "asymmetry": 0.9999992768344995
+  },
+  {
+   "sym": "GOOGL",
+   "pool": "0x5c0eaa89799f7b76606f4ff66c92a2654d178927",
+   "fee": 250,
+   "usd": 10000,
+   "usd_per_share": 343.4001769212387,
+   "sell_slippage_pct": 0.8455337700000065,
+   "buy_slippage_pct": 0.7245821284496134,
+   "asymmetry": 0.8569523230865254
+  },
+  {
+   "sym": "GOOGL",
+   "pool": "0x5c0eaa89799f7b76606f4ff66c92a2654d178927",
+   "fee": 250,
+   "usd": 100000,
+   "usd_per_share": 343.4001769212387,
+   "sell_slippage_pct": 81.665137422,
+   "buy_slippage_pct": 70.49883361240428,
+   "asymmetry": 0.8632671888875363
+  },
+  {
+   "sym": "NVDA",
+   "pool": "0xb944cec30bd4175855215d767adc81f39e5f7e2b",
+   "fee": 3000,
+   "usd": 100,
+   "usd_per_share": 226.37807804501765,
+   "sell_slippage_pct": 0.31259300000000545,
+   "buy_slippage_pct": 0.312592377165799,
+   "asymmetry": 0.9999980075235004
+  },
+  {
+   "sym": "NVDA",
+   "pool": "0xb944cec30bd4175855215d767adc81f39e5f7e2b",
+   "fee": 3000,
+   "usd": 1000,
+   "usd_per_share": 226.37807804501765,
+   "sell_slippage_pct": 0.4257807999999974,
+   "buy_slippage_pct": 0.42578079359638643,
+   "asymmetry": 0.9999999849603106
+  },
+  {
+   "sym": "NVDA",
+   "pool": "0xb944cec30bd4175855215d767adc81f39e5f7e2b",
+   "fee": 3000,
+   "usd": 10000,
+   "usd_per_share": 226.37807804501765,
+   "sell_slippage_pct": 1.5559375800000108,
+   "buy_slippage_pct": 1.6348316038900523,
+   "asymmetry": 1.0507051342574045
+  },
+  {
+   "sym": "NVDA",
+   "pool": "0xb944cec30bd4175855215d767adc81f39e5f7e2b",
+   "fee": 3000,
+   "usd": 100000,
+   "usd_per_share": 226.37807804501765,
+   "sell_slippage_pct": 74.140735438,
+   "buy_slippage_pct": 83.61120864445067,
+   "asymmetry": 1.1277364346401761
+  },
+  {
+   "sym": "NVDA",
+   "pool": "0xb75d2d02b0ec3de50d32e40a4f1a8dae8acc4333",
+   "fee": 100,
+   "usd": 100,
+   "usd_per_share": 207.1899419684993,
+   "sell_slippage_pct": 17.703541,
+   "buy_slippage_pct": 99.99999776042974,
+   "asymmetry": 5.648587350995472
+  },
+  {
+   "sym": "NVDA",
+   "pool": "0xb75d2d02b0ec3de50d32e40a4f1a8dae8acc4333",
+   "fee": 100,
+   "usd": 1000,
+   "usd_per_share": 207.1899419684993,
+   "sell_slippage_pct": 91.77035409999999,
+   "buy_slippage_pct": 99.99999977604297,
+   "asymmetry": 1.0896765165259723
+  },
+  {
+   "sym": "NVDA",
+   "pool": "0xb75d2d02b0ec3de50d32e40a4f1a8dae8acc4333",
+   "fee": 100,
+   "usd": 10000,
+   "usd_per_share": 207.1899419684993,
+   "sell_slippage_pct": 99.17703541,
+   "buy_slippage_pct": 99.99999997760429,
+   "asymmetry": 1.0082979347406598
+  },
+  {
+   "sym": "NVDA",
+   "pool": "0xb75d2d02b0ec3de50d32e40a4f1a8dae8acc4333",
+   "fee": 100,
+   "usd": 100000,
+   "usd_per_share": 207.1899419684993,
+   "sell_slippage_pct": 99.91770354100001,
+   "buy_slippage_pct": 99.99999999776043,
+   "asymmetry": 1.000823642396131
+  },
+  {
+   "sym": "NVDA",
+   "pool": "0xd4eb21209c4d6093f80b5b84f5c45cc093ea14a3",
+   "fee": 500,
+   "usd": 100,
+   "usd_per_share": 225.75671587227123,
+   "sell_slippage_pct": 0.050059000000002296,
+   "buy_slippage_pct": 0.050058875919090084,
+   "asymmetry": 0.999997521306614
+  },
+  {
+   "sym": "NVDA",
+   "pool": "0xd4eb21209c4d6093f80b5b84f5c45cc093ea14a3",
+   "fee": 500,
+   "usd": 1000,
+   "usd_per_share": 225.75671587227123,
+   "sell_slippage_pct": 0.05058880000000654,
+   "buy_slippage_pct": 0.05058875606924751,
+   "asymmetry": 0.9999991316109687
+  },
+  {
+   "sym": "NVDA",
+   "pool": "0xd4eb21209c4d6093f80b5b84f5c45cc093ea14a3",
+   "fee": 500,
+   "usd": 10000,
+   "usd_per_share": 225.75671587227123,
+   "sell_slippage_pct": 0.05588724999999739,
+   "buy_slippage_pct": 0.055887248582531246,
+   "asymmetry": 0.9999999746370389
+  },
+  {
+   "sym": "NVDA",
+   "pool": "0xd4eb21209c4d6093f80b5b84f5c45cc093ea14a3",
+   "fee": 500,
+   "usd": 100000,
+   "usd_per_share": 225.75671587227123,
+   "sell_slippage_pct": 0.1146208230000001,
+   "buy_slippage_pct": 0.10879286285746526,
+   "asymmetry": 0.949154438172767
+  },
+  {
+   "sym": "NVDA",
+   "pool": "0x18a5af4e442f8be68968cc1f00d537f8af2d12cd",
+   "fee": 122,
+   "usd": 100,
+   "usd_per_share": 225.70458719559412,
+   "sell_slippage_pct": 0.014031000000003235,
+   "buy_slippage_pct": 0.014030438750955998,
+   "asymmetry": 0.9999599993551965
+  },
+  {
+   "sym": "NVDA",
+   "pool": "0x18a5af4e442f8be68968cc1f00d537f8af2d12cd",
+   "fee": 122,
+   "usd": 1000,
+   "usd_per_share": 225.70458719559412,
+   "sell_slippage_pct": 0.030501400000004786,
+   "buy_slippage_pct": 0.03050137218304494,
+   "asymmetry": 0.9999990880103914
+  },
+  {
+   "sym": "NVDA",
+   "pool": "0x18a5af4e442f8be68968cc1f00d537f8af2d12cd",
+   "fee": 122,
+   "usd": 10000,
+   "usd_per_share": 225.70458719559412,
+   "sell_slippage_pct": 0.19491273999999725,
+   "buy_slippage_pct": 0.13668096499747096,
+   "asymmetry": 0.7012418223532894
+  },
+  {
+   "sym": "NVDA",
+   "pool": "0x18a5af4e442f8be68968cc1f00d537f8af2d12cd",
+   "fee": 122,
+   "usd": 100000,
+   "usd_per_share": 225.70458719559412,
+   "sell_slippage_pct": 22.458603776999997,
+   "buy_slippage_pct": 2.897349021330331,
+   "asymmetry": 0.12900842145394298
+  },
+  {
+   "sym": "QQQ",
+   "pool": "0xebd78dcfc8a6b3a696f1e191ad1ff321f9579f79",
+   "fee": 3000,
+   "usd": 100,
+   "usd_per_share": 745.4609521588075,
+   "sell_slippage_pct": 0.3733019999999976,
+   "buy_slippage_pct": 0.5303340048828042,
+   "asymmetry": 1.4206567467701958
+  },
+  {
+   "sym": "QQQ",
+   "pool": "0xebd78dcfc8a6b3a696f1e191ad1ff321f9579f79",
+   "fee": 3000,
+   "usd": 1000,
+   "usd_per_share": 745.4609521588075,
+   "sell_slippage_pct": 0.9750031000000048,
+   "buy_slippage_pct": 6.190137176707178,
+   "asymmetry": 6.348838456726083
+  },
+  {
+   "sym": "QQQ",
+   "pool": "0xebd78dcfc8a6b3a696f1e191ad1ff321f9579f79",
+   "fee": 3000,
+   "usd": 10000,
+   "usd_per_share": 745.4609521588075,
+   "sell_slippage_pct": 14.942051049999993,
+   "buy_slippage_pct": 82.3080887826415,
+   "asymmetry": 5.508486653352824
+  },
+  {
+   "sym": "QQQ",
+   "pool": "0xebd78dcfc8a6b3a696f1e191ad1ff321f9579f79",
+   "fee": 3000,
+   "usd": 100000,
+   "usd_per_share": 745.4609521588075,
+   "sell_slippage_pct": 91.491483519,
+   "buy_slippage_pct": 98.23051421166842,
+   "asymmetry": 1.0736574644269368
+  },
+  {
+   "sym": "QQQ",
+   "pool": "0xd60a5d14db690b7afad71f76b108071d7175597d",
+   "fee": 500,
+   "usd": 100,
+   "usd_per_share": 745.2009004276651,
+   "sell_slippage_pct": 0.050269000000002784,
+   "buy_slippage_pct": 0.05026828457130872,
+   "asymmetry": 0.9999857679943093
+  },
+  {
+   "sym": "QQQ",
+   "pool": "0xd60a5d14db690b7afad71f76b108071d7175597d",
+   "fee": 500,
+   "usd": 1000,
+   "usd_per_share": 745.2009004276651,
+   "sell_slippage_pct": 0.05268280000000347,
+   "buy_slippage_pct": 0.052682780903401394,
+   "asymmetry": 0.9999996375173287
+  },
+  {
+   "sym": "QQQ",
+   "pool": "0xd60a5d14db690b7afad71f76b108071d7175597d",
+   "fee": 500,
+   "usd": 10000,
+   "usd_per_share": 745.2009004276651,
+   "sell_slippage_pct": 0.07682132999999869,
+   "buy_slippage_pct": 0.07682695209498824,
+   "asymmetry": 1.0000731840361206
+  },
+  {
+   "sym": "QQQ",
+   "pool": "0xd60a5d14db690b7afad71f76b108071d7175597d",
+   "fee": 500,
+   "usd": 100000,
+   "usd_per_share": 745.2009004276651,
+   "sell_slippage_pct": 0.3167685620000027,
+   "buy_slippage_pct": 0.324238503695351,
+   "asymmetry": 1.0235817015684412
+  },
+  {
+   "sym": "RDDT",
+   "pool": "0xa8744e76aed23b05f0126335e7bd38f7935d19fe",
+   "fee": 10000,
+   "usd": 100,
+   "usd_per_share": 152.86427162912898,
+   "sell_slippage_pct": 1.0007810000000061,
+   "buy_slippage_pct": 1.0007808874875068,
+   "asymmetry": 0.9999998875753043
+  },
+  {
+   "sym": "RDDT",
+   "pool": "0xa8744e76aed23b05f0126335e7bd38f7935d19fe",
+   "fee": 10000,
+   "usd": 1000,
+   "usd_per_share": 152.86427162912898,
+   "sell_slippage_pct": 1.0078083999999987,
+   "buy_slippage_pct": 1.0078083205642185,
+   "asymmetry": 0.9999999211796804
+  },
+  {
+   "sym": "RDDT",
+   "pool": "0xa8744e76aed23b05f0126335e7bd38f7935d19fe",
+   "fee": 10000,
+   "usd": 10000,
+   "usd_per_share": 152.86427162912898,
+   "sell_slippage_pct": 1.0780278200000049,
+   "buy_slippage_pct": 1.078027817804561,
+   "asymmetry": 0.9999999979634627
+  },
+  {
+   "sym": "RDDT",
+   "pool": "0xa8744e76aed23b05f0126335e7bd38f7935d19fe",
+   "fee": 10000,
+   "usd": 100000,
+   "usd_per_share": 152.86427162912898,
+   "sell_slippage_pct": 1.7747823079999892,
+   "buy_slippage_pct": 1.7631303477488314,
+   "asymmetry": 0.9934347101621221
+  },
+  {
+   "sym": "RDDT",
+   "pool": "0x1a774e182159d2880dbc646eb89a8defe569f97c",
+   "fee": 3000,
+   "usd": 100,
+   "usd_per_share": 153.3918625689508,
+   "sell_slippage_pct": 0.38288300000001163,
+   "buy_slippage_pct": 0.38288259029378713,
+   "asymmetry": 0.9999989299440704
+  },
+  {
+   "sym": "RDDT",
+   "pool": "0x1a774e182159d2880dbc646eb89a8defe569f97c",
+   "fee": 3000,
+   "usd": 1000,
+   "usd_per_share": 153.3918625689508,
+   "sell_slippage_pct": 1.129780200000008,
+   "buy_slippage_pct": 1.1226707799010804,
+   "asymmetry": 0.9937072537658852
+  },
+  {
+   "sym": "RDDT",
+   "pool": "0x1a774e182159d2880dbc646eb89a8defe569f97c",
+   "fee": 3000,
+   "usd": 10000,
+   "usd_per_share": 153.3918625689508,
+   "sell_slippage_pct": 60.25097887,
+   "buy_slippage_pct": 44.85402646917771,
+   "asymmetry": 0.7444530746289884
+  },
+  {
+   "sym": "RDDT",
+   "pool": "0x1a774e182159d2880dbc646eb89a8defe569f97c",
+   "fee": 3000,
+   "usd": 100000,
+   "usd_per_share": 153.3918625689508,
+   "sell_slippage_pct": 96.025097887,
+   "buy_slippage_pct": 94.48540264691778,
+   "asymmetry": 0.9839656998642782
+  },
+  {
+   "sym": "SPY",
+   "pool": "0xa43b424bc609495aed4bcd88d654934b510b0ad9",
+   "fee": 3000,
+   "usd": 100,
+   "usd_per_share": 770.0234045918006,
+   "sell_slippage_pct": 0.311125000000001,
+   "buy_slippage_pct": 0.31112477897576873,
+   "asymmetry": 0.9999992895966822
+  },
+  {
+   "sym": "SPY",
+   "pool": "0xa43b424bc609495aed4bcd88d654934b510b0ad9",
+   "fee": 3000,
+   "usd": 1000,
+   "usd_per_share": 770.0234045918006,
+   "sell_slippage_pct": 0.4111361999999952,
+   "buy_slippage_pct": 0.41113618204319247,
+   "asymmetry": 0.9999999563239561
+  },
+  {
+   "sym": "SPY",
+   "pool": "0xa43b424bc609495aed4bcd88d654934b510b0ad9",
+   "fee": 3000,
+   "usd": 10000,
+   "usd_per_share": 770.0234045918006,
+   "sell_slippage_pct": 1.3798496599999988,
+   "buy_slippage_pct": 1.6167544986847249,
+   "asymmetry": 1.1716888770945715
+  },
+  {
+   "sym": "SPY",
+   "pool": "0xa43b424bc609495aed4bcd88d654934b510b0ad9",
+   "fee": 3000,
+   "usd": 100000,
+   "usd_per_share": 770.0234045918006,
+   "sell_slippage_pct": 78.16296138599999,
+   "buy_slippage_pct": 85.09840027029287,
+   "asymmetry": 1.088730503058129
+  },
+  {
+   "sym": "SPY",
+   "pool": "0xa7bb1ac63bbab0c44316e6c8c455213441689167",
+   "fee": 500,
+   "usd": 100,
+   "usd_per_share": 771.0253907498524,
+   "sell_slippage_pct": 0.05048600000000514,
+   "buy_slippage_pct": 0.05048520586516947,
+   "asymmetry": 0.999984270196972
+  },
+  {
+   "sym": "SPY",
+   "pool": "0xa7bb1ac63bbab0c44316e6c8c455213441689167",
+   "fee": 500,
+   "usd": 1000,
+   "usd_per_share": 771.0253907498524,
+   "sell_slippage_pct": 0.05485190000000806,
+   "buy_slippage_pct": 0.054851846672854254,
+   "asymmetry": 0.9999990277975093
+  },
+  {
+   "sym": "SPY",
+   "pool": "0xa7bb1ac63bbab0c44316e6c8c455213441689167",
+   "fee": 500,
+   "usd": 10000,
+   "usd_per_share": 771.0253907498524,
+   "sell_slippage_pct": 0.09849665000000174,
+   "buy_slippage_pct": 0.0984972790120775,
+   "asymmetry": 1.0000063861265918
+  },
+  {
+   "sym": "SPY",
+   "pool": "0xa7bb1ac63bbab0c44316e6c8c455213441689167",
+   "fee": 500,
+   "usd": 100000,
+   "usd_per_share": 771.0253907498524,
+   "sell_slippage_pct": 0.6607966730000081,
+   "buy_slippage_pct": 0.8705559818577568,
+   "asymmetry": 1.3174339663446613
+  },
+  {
+   "sym": "SPY",
+   "pool": "0x5ad1a528cd9de3962cb6c75ff250e434887479c1",
+   "fee": 50,
+   "usd": 100,
+   "usd_per_share": 770.93726522715,
+   "sell_slippage_pct": 0.006766999999996415,
+   "buy_slippage_pct": 0.0067661276289432415,
+   "asymmetry": 0.999871084519998
+  },
+  {
+   "sym": "SPY",
+   "pool": "0x5ad1a528cd9de3962cb6c75ff250e434887479c1",
+   "fee": 50,
+   "usd": 1000,
+   "usd_per_share": 770.93726522715,
+   "sell_slippage_pct": 0.022658499999994586,
+   "buy_slippage_pct": 0.02265846930916693,
+   "asymmetry": 0.9999986455048808
+  },
+  {
+   "sym": "SPY",
+   "pool": "0x5ad1a528cd9de3962cb6c75ff250e434887479c1",
+   "fee": 50,
+   "usd": 10000,
+   "usd_per_share": 770.93726522715,
+   "sell_slippage_pct": 0.18130449000000048,
+   "buy_slippage_pct": 0.21094360845953508,
+   "asymmetry": 1.1634770239806775
+  },
+  {
+   "sym": "SPY",
+   "pool": "0x5ad1a528cd9de3962cb6c75ff250e434887479c1",
+   "fee": 50,
+   "usd": 100000,
+   "usd_per_share": 770.93726522715,
+   "sell_slippage_pct": 77.602537142,
+   "buy_slippage_pct": 71.55743888132959,
+   "asymmetry": 0.9221017961099793
+  },
+  {
+   "sym": "SPY",
+   "pool": "0x38453c115607463ac284820ce959831042f3df4e",
+   "fee": 150,
+   "usd": 100,
+   "usd_per_share": 770.8628696689087,
+   "sell_slippage_pct": 0.01546199999999942,
+   "buy_slippage_pct": 0.015461120243698279,
+   "asymmetry": 0.9999431020371787
+  },
+  {
+   "sym": "SPY",
+   "pool": "0x38453c115607463ac284820ce959831042f3df4e",
+   "fee": 150,
+   "usd": 1000,
+   "usd_per_share": 770.8628696689087,
+   "sell_slippage_pct": 0.01961109999999433,
+   "buy_slippage_pct": 0.019611011047449,
+   "asymmetry": 0.999995464173589
+  },
+  {
+   "sym": "SPY",
+   "pool": "0x38453c115607463ac284820ce959831042f3df4e",
+   "fee": 150,
+   "usd": 10000,
+   "usd_per_share": 770.8628696689087,
+   "sell_slippage_pct": 0.06107261999999114,
+   "buy_slippage_pct": 0.06167095183576832,
+   "asymmetry": 1.0097970553052622
+  },
+  {
+   "sym": "SPY",
+   "pool": "0x38453c115607463ac284820ce959831042f3df4e",
+   "fee": 150,
+   "usd": 100000,
+   "usd_per_share": 770.8628696689087,
+   "sell_slippage_pct": 0.41461177699999574,
+   "buy_slippage_pct": 0.9259109731227566,
+   "asymmetry": 2.233199885980967
+  },
+  {
+   "sym": "TSLA",
+   "pool": "0xf4acdaeeb7022862a763c9b1b885e11191c889e3",
+   "fee": 3000,
+   "usd": 100,
+   "usd_per_share": 381.4337154592087,
+   "sell_slippage_pct": 0.3015170000000067,
+   "buy_slippage_pct": 0.301516542501612,
+   "asymmetry": 0.9999984826779428
+  },
+  {
+   "sym": "TSLA",
+   "pool": "0xf4acdaeeb7022862a763c9b1b885e11191c889e3",
+   "fee": 3000,
+   "usd": 1000,
+   "usd_per_share": 381.4337154592087,
+   "sell_slippage_pct": 0.3151633999999959,
+   "buy_slippage_pct": 0.3151633491608741,
+   "asymmetry": 0.999999838689639
+  },
+  {
+   "sym": "TSLA",
+   "pool": "0xf4acdaeeb7022862a763c9b1b885e11191c889e3",
+   "fee": 3000,
+   "usd": 10000,
+   "usd_per_share": 381.4337154592087,
+   "sell_slippage_pct": 0.4466172999999962,
+   "buy_slippage_pct": 0.4514262182127582,
+   "asymmetry": 1.0107674248461984
+  },
+  {
+   "sym": "TSLA",
+   "pool": "0xf4acdaeeb7022862a763c9b1b885e11191c889e3",
+   "fee": 3000,
+   "usd": 100000,
+   "usd_per_share": 381.4337154592087,
+   "sell_slippage_pct": 1.600376153000005,
+   "buy_slippage_pct": 3.1603653403998067,
+   "asymmetry": 1.9747640793544097
+  },
+  {
+   "sym": "TSLA",
+   "pool": "0xc4f0172d6ac8dd294dd1137d047d5e1893760236",
+   "fee": 500,
+   "usd": 100,
+   "usd_per_share": 381.1437599718856,
+   "sell_slippage_pct": 0.0673560000000073,
+   "buy_slippage_pct": 0.06735592429726323,
+   "asymmetry": 0.9999988760801699
+  },
+  {
+   "sym": "TSLA",
+   "pool": "0xc4f0172d6ac8dd294dd1137d047d5e1893760236",
+   "fee": 500,
+   "usd": 1000,
+   "usd_per_share": 381.1437599718856,
+   "sell_slippage_pct": 0.22232450000000403,
+   "buy_slippage_pct": 0.22333070112737774,
+   "asymmetry": 1.0045258220635769
+  },
+  {
+   "sym": "TSLA",
+   "pool": "0xc4f0172d6ac8dd294dd1137d047d5e1893760236",
+   "fee": 500,
+   "usd": 10000,
+   "usd_per_share": 381.1437599718856,
+   "sell_slippage_pct": 1.6384773999999935,
+   "buy_slippage_pct": 53.01294761340327,
+   "asymmetry": 32.355006918864724
+  },
+  {
+   "sym": "TSLA",
+   "pool": "0xc4f0172d6ac8dd294dd1137d047d5e1893760236",
+   "fee": 500,
+   "usd": 100000,
+   "usd_per_share": 381.1437599718856,
+   "sell_slippage_pct": 80.135221001,
+   "buy_slippage_pct": 95.30129476134033,
+   "asymmetry": 1.1892560296321024
+  },
+  {
+   "sym": "TSLA",
+   "pool": "0xb349fb08c2712f3a70bad40a4d006b68d67e888b",
+   "fee": 10000,
+   "usd": 100,
+   "usd_per_share": 378.42817440183137,
+   "sell_slippage_pct": 4.1984020000000015,
+   "buy_slippage_pct": 66.84038238431611,
+   "asymmetry": 15.920434104289225
+  },
+  {
+   "sym": "TSLA",
+   "pool": "0xb349fb08c2712f3a70bad40a4d006b68d67e888b",
+   "fee": 10000,
+   "usd": 1000,
+   "usd_per_share": 378.42817440183137,
+   "sell_slippage_pct": 6.712369200000001,
+   "buy_slippage_pct": 96.68403823843161,
+   "asymmetry": 14.40386178972867
+  },
+  {
+   "sym": "TSLA",
+   "pool": "0xb349fb08c2712f3a70bad40a4d006b68d67e888b",
+   "fee": 10000,
+   "usd": 10000,
+   "usd_per_share": 378.42817440183137,
+   "sell_slippage_pct": 48.83229577,
+   "buy_slippage_pct": 99.66840382384316,
+   "asymmetry": 2.0410345705080326
+  },
+  {
+   "sym": "TSLA",
+   "pool": "0xb349fb08c2712f3a70bad40a4d006b68d67e888b",
+   "fee": 10000,
+   "usd": 100000,
+   "usd_per_share": 378.42817440183137,
+   "sell_slippage_pct": 94.883229577,
+   "buy_slippage_pct": 99.96684038238432,
+   "asymmetry": 1.0535775481931593
+  }
+ ]
+}

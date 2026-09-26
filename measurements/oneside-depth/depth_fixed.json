@@ -1,0 +1,509 @@
+{
+ "block": 72245711,
+ "hash": "0x7d5572108c50b1bab07aef03ab507761049b99eff60691a51390ef5e0c35a7fd",
+ "weth_usd": 2715.98002,
+ "weth_pool": "0xfae65eaa11943f45e83d5b45dc7a7c801c51bfb0",
+ "note": "ranking is by absolute USD proceeds for an identical share count; the reference mid only labels the rung",
+ "assets": {
+  "QQQ": {
+   "reference_mid_usd": 745.4609521588075,
+   "pool_mids": {
+    "0xebd78dcfc8a6b3a696f1e191ad1ff321f9579f79": 745.4609521588075,
+    "0xa40d00a55d43ba2d188039dcf88bd68f4f133e78": 746.2556318184612,
+    "0xd60a5d14db690b7afad71f76b108071d7175597d": 745.1822044121607
+   },
+   "rungs": [
+    {
+     "usd": 100,
+     "shares": 0.13414518857145552,
+     "best_proceeds_usd": 99.912357,
+     "pct_of_notional": 99.91235699999999,
+     "pool": "0xd60a5d14db690b7afad71f76b108071d7175597d",
+     "fee": 500,
+     "quote": "USDG",
+     "pool_mid_usd": 745.1822044121607,
+     "failed": 0
+    },
+    {
+     "usd": 1000,
+     "shares": 1.341451885714555,
+     "best_proceeds_usd": 999.099452,
+     "pct_of_notional": 99.9099452,
+     "pool": "0xd60a5d14db690b7afad71f76b108071d7175597d",
+     "fee": 500,
+     "quote": "USDG",
+     "pool_mid_usd": 745.1822044121607,
+     "failed": 0
+    },
+    {
+     "usd": 10000,
+     "shares": 13.41451885714555,
+     "best_proceeds_usd": 9988.582441,
+     "pct_of_notional": 99.88582441,
+     "pool": "0xd60a5d14db690b7afad71f76b108071d7175597d",
+     "fee": 500,
+     "quote": "USDG",
+     "pool_mid_usd": 745.1822044121607,
+     "failed": 0
+    },
+    {
+     "usd": 100000,
+     "shares": 134.14518857145552,
+     "best_proceeds_usd": 99646.063304,
+     "pct_of_notional": 99.646063304,
+     "pool": "0xd60a5d14db690b7afad71f76b108071d7175597d",
+     "fee": 500,
+     "quote": "USDG",
+     "pool_mid_usd": 745.1822044121607,
+     "failed": 0
+    }
+   ]
+  },
+  "SPY": {
+   "reference_mid_usd": 770.8145389897668,
+   "pool_mids": {
+    "0xa43b424bc609495aed4bcd88d654934b510b0ad9": 770.0234045918006,
+    "0xddcbba3666f578e3f09516f21ff85bfee859ab5e": 770.6102088409414,
+    "0xa7bb1ac63bbab0c44316e6c8c455213441689167": 770.8888792174478,
+    "0x5ad1a528cd9de3962cb6c75ff250e434887479c1": 770.8575046918643,
+    "0x3e1afde90341f843c941ff4077d915bde3008c7e": 770.7715732876693,
+    "0x38453c115607463ac284820ce959831042f3df4e": 770.8592624514453
+   },
+   "rungs": [
+    {
+     "usd": 100,
+     "shares": 0.1297328928578079,
+     "best_proceeds_usd": 99.998807,
+     "pct_of_notional": 99.998807,
+     "pool": "0x5ad1a528cd9de3962cb6c75ff250e434887479c1",
+     "fee": 50,
+     "quote": "USDG",
+     "pool_mid_usd": 770.8575046918643,
+     "failed": 0
+    },
+    {
+     "usd": 1000,
+     "shares": 1.297328928578079,
+     "best_proceeds_usd": 999.861896,
+     "pct_of_notional": 99.9861896,
+     "pool": "0x38453c115607463ac284820ce959831042f3df4e",
+     "fee": 150,
+     "quote": "USDG",
+     "pool_mid_usd": 770.8592624514453,
+     "failed": 0
+    },
+    {
+     "usd": 10000,
+     "shares": 12.973289285780789,
+     "best_proceeds_usd": 9994.472362,
+     "pct_of_notional": 99.94472362,
+     "pool": "0x38453c115607463ac284820ce959831042f3df4e",
+     "fee": 150,
+     "quote": "USDG",
+     "pool_mid_usd": 770.8592624514453,
+     "failed": 0
+    },
+    {
+     "usd": 100000,
+     "shares": 129.73289285780788,
+     "best_proceeds_usd": 99591.202163,
+     "pct_of_notional": 99.59120216299999,
+     "pool": "0x38453c115607463ac284820ce959831042f3df4e",
+     "fee": 150,
+     "quote": "USDG",
+     "pool_mid_usd": 770.8592624514453,
+     "failed": 0
+    }
+   ]
+  },
+  "NVDA": {
+   "reference_mid_usd": 225.71738981593393,
+   "pool_mids": {
+    "0xb944cec30bd4175855215d767adc81f39e5f7e2b": 226.1616850506006,
+    "0x8b6a6416a5d1040efcfa6234da6aa1265dfe123e": 226.3222635402478,
+    "0xb75d2d02b0ec3de50d32e40a4f1a8dae8acc4333": 207.1899419684993,
+    "0xc0be1cb0f674d9737c72b2a63fc542361185b807": 226.12125847115425,
+    "0xd4eb21209c4d6093f80b5b84f5c45cc093ea14a3": 225.7020657779908,
+    "0x62ab521f71431f78ac374cdbadc6cda3c8916b6c": 225.59407025097997,
+    "0x18a5af4e442f8be68968cc1f00d537f8af2d12cd": 225.71738981593393
+   },
+   "rungs": [
+    {
+     "usd": 100,
+     "shares": 0.4430318819544526,
+     "best_proceeds_usd": 99.987569,
+     "pct_of_notional": 99.98756899999998,
+     "pool": "0x18a5af4e442f8be68968cc1f00d537f8af2d12cd",
+     "fee": 106,
+     "quote": "USDG",
+     "pool_mid_usd": 225.71738981593393,
+     "failed": 0
+    },
+    {
+     "usd": 1000,
+     "shares": 4.430318819544526,
+     "best_proceeds_usd": 999.710985,
+     "pct_of_notional": 99.97109850000001,
+     "pool": "0x18a5af4e442f8be68968cc1f00d537f8af2d12cd",
+     "fee": 106,
+     "quote": "USDG",
+     "pool_mid_usd": 225.71738981593393,
+     "failed": 0
+    },
+    {
+     "usd": 10000,
+     "shares": 44.30318819544526,
+     "best_proceeds_usd": 9993.733176,
+     "pct_of_notional": 99.93733175999999,
+     "pool": "0xd4eb21209c4d6093f80b5b84f5c45cc093ea14a3",
+     "fee": 500,
+     "quote": "USDG",
+     "pool_mid_usd": 225.7020657779908,
+     "failed": 0
+    },
+    {
+     "usd": 100000,
+     "shares": 443.0318819544526,
+     "best_proceeds_usd": 99884.410516,
+     "pct_of_notional": 99.884410516,
+     "pool": "0xd4eb21209c4d6093f80b5b84f5c45cc093ea14a3",
+     "fee": 500,
+     "quote": "USDG",
+     "pool_mid_usd": 225.7020657779908,
+     "failed": 0
+    }
+   ]
+  },
+  "GME": {
+   "reference_mid_usd": 24.83844523986852,
+   "pool_mids": {
+    "0xe9713f453adb9245b19559790c96f470a18f2fdf": 24.98252918168583,
+    "0x0a0675689c2ad2a3ade86539bcbd27b6c0764e9d": 24.874202714816562,
+    "0xe2b46c905e12ab8e2f864e4821a4325884c1b126": 24.802687764920474,
+    "0xc6bcc95043dc48c204bb2d57fb264a10efe0a607": 24.80075305284225
+   },
+   "rungs": [
+    {
+     "usd": 100,
+     "shares": 4.026016887703126,
+     "best_proceeds_usd": 99.807569,
+     "pct_of_notional": 99.807569,
+     "pool": "0x0a0675689c2ad2a3ade86539bcbd27b6c0764e9d",
+     "fee": 3000,
+     "quote": "USDG",
+     "pool_mid_usd": 24.874202714816562,
+     "failed": 0
+    },
+    {
+     "usd": 1000,
+     "shares": 40.26016887703127,
+     "best_proceeds_usd": 997.856333,
+     "pct_of_notional": 99.7856333,
+     "pool": "0xe2b46c905e12ab8e2f864e4821a4325884c1b126",
+     "fee": 500,
+     "quote": "USDG",
+     "pool_mid_usd": 24.802687764920474,
+     "failed": 0
+    },
+    {
+     "usd": 10000,
+     "shares": 402.60168877031265,
+     "best_proceeds_usd": 9956.173945,
+     "pct_of_notional": 99.56173945,
+     "pool": "0xe2b46c905e12ab8e2f864e4821a4325884c1b126",
+     "fee": 500,
+     "quote": "USDG",
+     "pool_mid_usd": 24.802687764920474,
+     "failed": 0
+    },
+    {
+     "usd": 100000,
+     "shares": 4026.0168877031265,
+     "best_proceeds_usd": 98671.260941,
+     "pct_of_notional": 98.671260941,
+     "pool": "0xe9713f453adb9245b19559790c96f470a18f2fdf",
+     "fee": 10000,
+     "quote": "USDG",
+     "pool_mid_usd": 24.98252918168583,
+     "failed": 0
+    }
+   ]
+  },
+  "AMC": {
+   "reference_mid_usd": 2.9197876746904896,
+   "pool_mids": {
+    "0xc97894fc00c6eeb060838559d905b4c2253fd429": 2.9350185170594356,
+    "0xcf38764ae8c92222af4358a701871a6235cfc7b7": 2.9225539562878002,
+    "0xaa34fea710a1a737840329051d81d3b0b7c564d5": 2.9159557229795467,
+    "0xff54652b940f0717cd618e790ebdece9d4c4d2f6": 2.9170213930931794
+   },
+   "rungs": [
+    {
+     "usd": 100,
+     "shares": 34.249065734069326,
+     "best_proceeds_usd": 99.563894,
+     "pct_of_notional": 99.563894,
+     "pool": "0xaa34fea710a1a737840329051d81d3b0b7c564d5",
+     "fee": 3000,
+     "quote": "USDG",
+     "pool_mid_usd": 2.9159557229795467,
+     "failed": 0
+    },
+    {
+     "usd": 1000,
+     "shares": 342.4906573406932,
+     "best_proceeds_usd": 995.16597,
+     "pct_of_notional": 99.516597,
+     "pool": "0xaa34fea710a1a737840329051d81d3b0b7c564d5",
+     "fee": 3000,
+     "quote": "USDG",
+     "pool_mid_usd": 2.9159557229795467,
+     "failed": 0
+    },
+    {
+     "usd": 10000,
+     "shares": 3424.9065734069322,
+     "best_proceeds_usd": 9904.630795,
+     "pct_of_notional": 99.04630794999998,
+     "pool": "0xaa34fea710a1a737840329051d81d3b0b7c564d5",
+     "fee": 3000,
+     "quote": "USDG",
+     "pool_mid_usd": 2.9159557229795467,
+     "failed": 0
+    },
+    {
+     "usd": 100000,
+     "shares": 34249.06573406932,
+     "best_proceeds_usd": 95463.102548,
+     "pct_of_notional": 95.463102548,
+     "pool": "0xaa34fea710a1a737840329051d81d3b0b7c564d5",
+     "fee": 3000,
+     "quote": "USDG",
+     "pool_mid_usd": 2.9159557229795467,
+     "failed": 0
+    }
+   ]
+  },
+  "TSLA": {
+   "reference_mid_usd": 381.20190325477324,
+   "pool_mids": {
+    "0xa953ca88ff430e9487c60ca34d757414f4efda07": 381.57738510906347,
+    "0xf4acdaeeb7022862a763c9b1b885e11191c889e3": 381.4337154592087,
+    "0xc4f0172d6ac8dd294dd1137d047d5e1893760236": 380.9700910503377,
+    "0xb349fb08c2712f3a70bad40a4d006b68d67e888b": 378.42817440183137
+   },
+   "rungs": [
+    {
+     "usd": 100,
+     "shares": 0.262328176082494,
+     "best_proceeds_usd": 99.87188,
+     "pct_of_notional": 99.87188,
+     "pool": "0xc4f0172d6ac8dd294dd1137d047d5e1893760236",
+     "fee": 500,
+     "quote": "USDG",
+     "pool_mid_usd": 380.9700910503377,
+     "failed": 0
+    },
+    {
+     "usd": 1000,
+     "shares": 2.62328176082494,
+     "best_proceeds_usd": 997.7409572151896,
+     "pct_of_notional": 99.77409572151896,
+     "pool": "0xa953ca88ff430e9487c60ca34d757414f4efda07",
+     "fee": 3000,
+     "quote": "WETH",
+     "pool_mid_usd": 381.57738510906347,
+     "failed": 0
+    },
+    {
+     "usd": 10000,
+     "shares": 26.232817608249402,
+     "best_proceeds_usd": 9961.384176,
+     "pct_of_notional": 99.61384176,
+     "pool": "0xf4acdaeeb7022862a763c9b1b885e11191c889e3",
+     "fee": 3000,
+     "quote": "USDG",
+     "pool_mid_usd": 381.4337154592087,
+     "failed": 0
+    },
+    {
+     "usd": 100000,
+     "shares": 262.328176082494,
+     "best_proceeds_usd": 98458.636966,
+     "pct_of_notional": 98.45863696600001,
+     "pool": "0xf4acdaeeb7022862a763c9b1b885e11191c889e3",
+     "fee": 3000,
+     "quote": "USDG",
+     "pool_mid_usd": 381.4337154592087,
+     "failed": 0
+    }
+   ]
+  },
+  "AAPL": {
+   "reference_mid_usd": 336.30305776911575,
+   "pool_mids": {
+    "0x8bb3514e2204e1cdf3ac149efee7ff04d91b719f": 336.20167612098203,
+    "0x3714aa8105de1f384481b425788af413748c1837": 339.5522304639704,
+    "0x783c9bbb765047cfdd2b84b92b2ca9f11d34b7ed": 336.29272087354815,
+    "0xaae0d815ee56e4092a5e5c2911e676fea50b2d6d": 336.3133946646833
+   },
+   "rungs": [
+    {
+     "usd": 100,
+     "shares": 0.29735084974652126,
+     "best_proceeds_usd": 99.952673,
+     "pct_of_notional": 99.95267299999999,
+     "pool": "0xaae0d815ee56e4092a5e5c2911e676fea50b2d6d",
+     "fee": 500,
+     "quote": "USDG",
+     "pool_mid_usd": 336.3133946646833,
+     "failed": 0
+    },
+    {
+     "usd": 1000,
+     "shares": 2.973508497465213,
+     "best_proceeds_usd": 999.490878,
+     "pct_of_notional": 99.9490878,
+     "pool": "0xaae0d815ee56e4092a5e5c2911e676fea50b2d6d",
+     "fee": 500,
+     "quote": "USDG",
+     "pool_mid_usd": 336.3133946646833,
+     "failed": 0
+    },
+    {
+     "usd": 10000,
+     "shares": 29.73508497465213,
+     "best_proceeds_usd": 9991.324308,
+     "pct_of_notional": 99.91324308,
+     "pool": "0xaae0d815ee56e4092a5e5c2911e676fea50b2d6d",
+     "fee": 500,
+     "quote": "USDG",
+     "pool_mid_usd": 336.3133946646833,
+     "failed": 0
+    },
+    {
+     "usd": 100000,
+     "shares": 297.35084974652125,
+     "best_proceeds_usd": 99391.364902,
+     "pct_of_notional": 99.39136490199999,
+     "pool": "0xaae0d815ee56e4092a5e5c2911e676fea50b2d6d",
+     "fee": 500,
+     "quote": "USDG",
+     "pool_mid_usd": 336.3133946646833,
+     "failed": 0
+    }
+   ]
+  },
+  "GOOGL": {
+   "reference_mid_usd": 343.26115253715176,
+   "pool_mids": {
+    "0x34d0dc122cf9a8eb296fc5e0d3a233625d7d19b7": 343.1619860342299,
+    "0x553e9a453425cd9b90919f317061fbc3794cc57a": 343.08464742366124,
+    "0x8fb9301586f27e2cff85312f7c1d0f16c6167cde": 343.76907638168007,
+    "0x8c2b4303fa0b99d07a5d3e9411497a277e65b673": 344.3183411331918,
+    "0x5c0eaa89799f7b76606f4ff66c92a2654d178927": 343.26115253715176
+   },
+   "rungs": [
+    {
+     "usd": 100,
+     "shares": 0.2913233823893801,
+     "best_proceeds_usd": 99.967624,
+     "pct_of_notional": 99.967624,
+     "pool": "0x5c0eaa89799f7b76606f4ff66c92a2654d178927",
+     "fee": 250,
+     "quote": "USDG",
+     "pool_mid_usd": 343.26115253715176,
+     "failed": 0
+    },
+    {
+     "usd": 1000,
+     "shares": 2.913233823893801,
+     "best_proceeds_usd": 999.170346,
+     "pct_of_notional": 99.9170346,
+     "pool": "0x34d0dc122cf9a8eb296fc5e0d3a233625d7d19b7",
+     "fee": 500,
+     "quote": "USDG",
+     "pool_mid_usd": 343.1619860342299,
+     "failed": 0
+    },
+    {
+     "usd": 10000,
+     "shares": 29.132338238938008,
+     "best_proceeds_usd": 9987.384366,
+     "pct_of_notional": 99.87384366,
+     "pool": "0x34d0dc122cf9a8eb296fc5e0d3a233625d7d19b7",
+     "fee": 500,
+     "quote": "USDG",
+     "pool_mid_usd": 343.1619860342299,
+     "failed": 0
+    },
+    {
+     "usd": 100000,
+     "shares": 291.32338238938013,
+     "best_proceeds_usd": 99423.670654,
+     "pct_of_notional": 99.423670654,
+     "pool": "0x34d0dc122cf9a8eb296fc5e0d3a233625d7d19b7",
+     "fee": 500,
+     "quote": "USDG",
+     "pool_mid_usd": 343.1619860342299,
+     "failed": 0
+    }
+   ]
+  },
+  "RDDT": {
+   "reference_mid_usd": 153.29341296992084,
+   "pool_mids": {
+    "0xa8744e76aed23b05f0126335e7bd38f7935d19fe": 152.86427162912898,
+    "0xa541143f20d7b0643123064abf25f423e375b531": 154.01035506336586,
+    "0x1a774e182159d2880dbc646eb89a8defe569f97c": 153.3918625689508,
+    "0x714187eed11d8fc9500ff6798734c8bb63a8a19b": 153.19496337089083
+   },
+   "rungs": [
+    {
+     "usd": 100,
+     "shares": 0.6523437508669857,
+     "best_proceeds_usd": 99.681041,
+     "pct_of_notional": 99.681041,
+     "pool": "0x1a774e182159d2880dbc646eb89a8defe569f97c",
+     "fee": 3000,
+     "quote": "USDG",
+     "pool_mid_usd": 153.3918625689508,
+     "failed": 0
+    },
+    {
+     "usd": 1000,
+     "shares": 6.523437508669858,
+     "best_proceeds_usd": 995.8036269931732,
+     "pct_of_notional": 99.58036269931732,
+     "pool": "0x714187eed11d8fc9500ff6798734c8bb63a8a19b",
+     "fee": 3000,
+     "quote": "WETH",
+     "pool_mid_usd": 153.19496337089083,
+     "failed": 0
+    },
+    {
+     "usd": 10000,
+     "shares": 65.23437508669858,
+     "best_proceeds_usd": 9907.397476796958,
+     "pct_of_notional": 99.07397476796957,
+     "pool": "0x714187eed11d8fc9500ff6798734c8bb63a8a19b",
+     "fee": 3000,
+     "quote": "WETH",
+     "pool_mid_usd": 153.19496337089083,
+     "failed": 0
+    },
+    {
+     "usd": 100000,
+     "shares": 652.3437508669857,
+     "best_proceeds_usd": 97952.384514,
+     "pct_of_notional": 97.952384514,
+     "pool": "0xa8744e76aed23b05f0126335e7bd38f7935d19fe",
+     "fee": 10000,
+     "quote": "USDG",
+     "pool_mid_usd": 152.86427162912898,
+     "failed": 0
+    }
+   ]
+  }
+ }
+}
