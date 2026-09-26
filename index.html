@@ -549,67 +549,67 @@ python3 code/verify.py 54088399</td></tr>
 <section>
   <div class="sec-head">
     <div class="eyebrow">Method</div>
-    <h2>Our instruments lied to us ten times</h2>
+    <h2>Our instruments lied to us thirteen times</h2>
   </div>
 
   <div class="col">
     <p>This section does not usually appear in a report like this. It is here because it explains something more important: why almost nobody does independent executability measurement.</p>
-    <p>Not because it is hard, but because instruments lie quietly. Ten errors over six days, each producing a precise number that looked like an insight. Eight were caught before anything was published. Two were not: they are marked below, and the section they corrupted is corrected above. A process that genuinely self-corrects will eventually catch something late — what matters is which side of publication each one landed on, so that is stated.</p>
+    <p>Not because it is hard, but because instruments lie quietly. Thirteen errors, each producing a precise number that looked like an insight. Seven were caught before anything was published. Six were not — 08, 09, 10, 11, 12 and 13 — and the section each one corrupted is corrected above. A process that genuinely self-corrects will eventually catch something late; what matters is which side of publication each one landed on, so each entry carries its side and this paragraph counts them.</p>
   </div>
 
-  <div class="fail">
+  <div class="fail" data-found="pre">
     <div class="n">01</div><div class="t">Depth overstated by a factor of a million</div>
     <div class="b">Limitless returns order-book sizes as 6-decimal fixed point. The trade path divided by <code>1e6</code>; the book path did not. So "average price to fill $10,000" always equalled the top-of-book price and the whole ladder was flat. 99.9% of rows looked like this, and not one of them raised an error.</div>
   </div>
-  <div class="fail">
+  <div class="fail" data-found="pre">
     <div class="n">02</div><div class="t">"Kalshi is 100% empty quotes"</div>
     <div class="b">Kalshi returns top-of-book with its market list; depth requires one call per market with no batch endpoint. So we only stored the top level and <code>n_ask</code> was always 1. Apply a "≥ 3 ask levels" test and it fails 100% by construction. That was an artefact of our collection, not a property of their market. Publishing that about a regulated exchange once would be enough to destroy the "independent measurement" claim.</div>
   </div>
-  <div class="fail">
+  <div class="fail" data-found="pre">
     <div class="n">03</div><div class="t">74% of the market list had already expired</div>
     <div class="b">The Polymarket enumeration passed <code>active=true&amp;closed=false</code>, and those two flags do not exclude expired markets. 74% of the list was dead, the 20,000-market budget was spent on them, and the cursor never reached the currently active set. The symptom was "searching bitcoin returns 3 results". It also contaminated the statistics: dead markets have no book, so they were classified as empty quotes and dragged the tradeable share down.</div>
   </div>
-  <div class="fail">
+  <div class="fail" data-found="pre">
     <div class="n">04</div><div class="t">A market with no bids classified as tradeable</div>
     <div class="b">With no bids, <code>bid1 = 0</code>, so spread = ask − 0 = ask. Whenever the ask was cheap (say 0.05) the spread came in under 0.10 and passed the test, for a market with not a single bid in it. The output before the fix read "spread 1.000 · ✅ tradeable", which is self-contradictory. Correcting it cut that category by more than half.</div>
   </div>
-  <div class="fail">
+  <div class="fail" data-found="pre">
     <div class="n">05</div><div class="t">An alert that fired every day for nothing</div>
     <div class="b">The health check kept its list of "slow sources" hardcoded. After one source's interval changed from 600s to 1800s the list was not updated, so it appeared once every three rounds while still being counted as "should be present every round". The multi-source quorum dropped from 89% to 43% and the alert fired daily with nothing actually wrong underneath. The same class of error — one fact written down in two places, then drifting apart — occurred four times in three days.</div>
   </div>
-  <div class="fail">
+  <div class="fail" data-found="pre">
     <div class="n">06</div><div class="t">"On-chain tokenized stock pools are basically empty" — this was wrong</div>
     <div class="b">The first scan concluded that every pool had a ~92% round-trip loss, and that nearly went into the report. The cause: this chain produces a block every 100 milliseconds, so its 53.41 million blocks are about 62 days, and we had only scanned the most recent 4 million — about 4.6 days. That window contained nothing but freshly minted launchpad pools; the real stock-token pools were created in the chain's first days, entirely outside the scan. A full-chain rescan reversed the conclusion: NVDA and TSLA are genuinely tradeable. "The last N blocks" means a completely different span on different chains, and any block-windowed analysis has to convert to time first.</div>
   </div>
-  <div class="fail">
+  <div class="fail" data-found="pre">
     <div class="n">07</div><div class="t">The 64 rows in a round came from 64 different moments</div>
     <div class="b">The collector recorded one block number at the start of a round, then made every call against "latest". A round takes 60–85 seconds and the chain advances roughly 700 blocks in that time. Two things break: the recorded block does not match the state the data came from, so nobody can ever verify it; and the rows within a round do not match each other, which breaks the premise of a same-moment cross-section. This one was caught by the verification script — it failed on its first run — and would otherwise have persisted silently. Fixed by pinning the whole round to one block height, at the cost of requiring an archive node.</div>
   </div>
 
-  <div class="fail">
+  <div class="fail" data-found="post">
     <div class="n">08</div><div class="t">The pool table was 0.2% complete — found after publication</div>
     <div class="b">The scan that builds the pool table skipped block ranges that failed instead of stopping. It returned 55 pools where the chain has 25,122, and the ones it happened to catch were mostly shallow. Every tokenized-stock figure in the previous version was measured against those pools: SPY's real round trip at $100 is 99.93%, not 0.90%, and the AAPL "size cliff" does not exist. Pool count is not a proxy for depth either — AMC has among the most pools of any token and among the fewest that can fill $10,000. Any pool table built before the scan was made fail-loud has to be discarded, not patched.</div>
   </div>
-  <div class="fail">
+  <div class="fail" data-found="post">
     <div class="n">09</div><div class="t">A metric that could exceed 100% — found after publication</div>
     <div class="b">The old measurement took the best buy pool and the best sell pool separately, then derived a rate between them to size the sell. That rate belongs to no actual pool. It produced round-trip recoveries above 100% — buy and immediately sell back at a profit — which cannot persist for more than a few seconds in any real market. The replacement closes the loop inside one pool, needs no rate assumption, and cannot exceed 100% by construction: if it ever does, that is a bug announcing itself.</div>
   </div>
-  <div class="fail">
+  <div class="fail" data-found="post">
     <div class="n">10</div><div class="t">The pool table was correct when it was built, and stale when it was used</div>
     <div class="b">A round is replayed against <code>stock_pools.json</code>. That file was built on 2026-09-04, and the last pool in it was initialised at block 53,983,886. A round taken on 2026-09-12 sits at block 61,129,566 — 7,145,680 blocks later. In between, a QQQ/USDG pool was created that the table never saw. The $100 QQQ figure measured 6.58% against that table; measured against the chain, it is about 95.56%. One cell, one date, no error message: the table was not wrong, it was out of date. This is not the same defect as #08 — #08 was a scan that returned incomplete results, this is a complete snapshot of an earlier chain. What caught it was a question about provenance: <em>which date is that table from?</em> Nothing in the monitoring had a reason to look. The fix is not to rebuild the table in place — replaying an old block against a new table produces different rows and a different hash, so every already-published round would fail verification at once. What is needed is a versioned table: each round records which table it was replayed against, and the verifier selects by record. That is a change to the serialisation contract, so it is scheduled deliberately rather than patched in.</div>
   </div>
-  <div class="fail">
+  <div class="fail" data-found="post">
     <div class="n">11</div><div class="t">The rule that builds the pool table cannot see the pools that win at small sizes</div>
     <div class="b">The entry above is about a table that went stale. This one is about the rule that builds it, which does not go stale — it excludes pools by design. Every candidate is probed with a <code>$10,000</code> buy and dropped if it cannot fill one, so a pool that can fill <code>$300</code> and not <code>$10,000</code> is never a candidate — and <code>$100</code> and <code>$1,000</code> are exactly the sizes at which such a pool wins. Quoted against <em>every initialized QQQ/USDG pool in the v4 <code>PoolManager</code></em> rather than against the table (a second AMM deployment was outside that scan — see <b>error 12</b>), at this page's own window block 54,088,399, QQQ returns <b>99.67%</b> at <code>$100</code> and <b>98.62%</b> at <code>$1,000</code>. The table said 6.46% and 1.83%, and the sentence built on it said QQQ <em>cannot be sold at any size</em>. The pool doing that work is one contract, fee 0.30%, and its capacity — the largest notional it will quote — has been <b>$9,841 → $10,506 → $287</b> across three pinned blocks, so what QQQ can absorb is not a property of the token at all. Unlike the entry above, <b>rebuilding the table does not fix this</b> — the probe would still be there. The fix is to select pools per size rather than once, which changes the method and is scheduled as such. Found <b>2026-09-23</b>, after the ten above and after the film that names them. It was caught by a question that needed an archive endpoint to answer: <em>does that cell survive a quote against every pool on the chain, at the block it claims?</em></div>
   </div>
 
-<div class="fail">
+<div class="fail" data-found="post">
     <div class="n">12</div><div class="t">The scan covered one venue, and the sentence said it covered the chain</div>
     <div class="b">Entries 10 and 11 both rest on a phrase: <em>quoted against every initialized QQQ/USDG pool</em>. That was true of one venue and false of the chain. The pools came from the v4 <code>PoolManager</code>’s <code>Initialize</code> events — a method that finds only venues matching a pattern we already knew. Re-enumerating by <b>counterparty flow</b> (each stock token’s <code>Transfer</code> logs, asking every address that both sends and receives it what it is) found at least three more venue classes, including pools from two further factories and a reserve-based AMM that is not standard UniV2. The fee tiers are not a fixed menu either (values of 50, 150 and 250 all appear). At this page’s own window block the QQQ figures were wrong at every rung and always in the same direction: the venue absorbing the order looked far worse than it was. Corrected, using <b>the same method this page’s table uses</b> (both legs quoted against the same pinned block’s book):</div>
     <div class="tw"><table><thead><tr><th>block</th><th>$100</th><th>$1,000</th><th>$10,000</th><th>$100,000</th></tr></thead><tbody><tr><td>54,088,399</td><td>99.8999%</td><td>99.8984%</td><td>99.8837%</td><td>99.7363%</td></tr><tr><td>61,129,566</td><td>99.8999%</td><td>99.8984%</td><td>99.8839%</td><td>99.7371%</td></tr><tr><td>70,427,772</td><td>99.8999%</td><td>99.8986%</td><td>99.8857%</td><td>98.1465%</td></tr></tbody></table></div>
     <div class="b">So QQQ at 54088399 returns <b>99.8999%</b> at $100 and <b>99.7363%</b> at $100,000. <b>We do not claim this list of venues is exhaustive.</b> What we can state is which windows we searched and by what criterion. The method that found these — flow, not pattern — replaces the method that missed them; per-size pool selection remains a method change and is scheduled as such. <b>How it was nearly missed:</b> three people read the same <code>fee()</code> field within an hour and got three values, and all three assumed someone had mistyped. The field moves with the block. Separately, a quarantined dataset was read here as if it were the published series, because its quarantine lived only in a directory name that did not survive syncing.</div>
   </div>
-<div class="fail">
+<div class="fail" data-found="post">
     <div class="n">13</div><div class="t">The caption described the trade, but not the reference state</div>
     <div class="b">The table’s caption says <em>same-pool round trip: buy with USDG, sell the whole position back through the same pool</em>. The collector does do that — same pool, and it sells the amount actually bought. What it does not do is carry the buy’s effect into the sell: both legs are quoted against the <b>same pinned block</b>, so the sell leg is priced against the book as it was <em>before</em> the buy. That is why the figure is not a realised round trip, and why it is worth keeping. A realised round trip in one pool returns <code>(1−f)²</code> almost exactly — the price impact is undone by the leg that retraces it — which is why a realised round trip cannot see depth at all. Quoting both legs against a held-constant book costs roughly twice the one-sided impact plus the fees, and it degrades with size. So <b>no number in the table changes; the label does</b>. And it exposes a deeper problem with the field we proposed to the SEC: a round trip blends the buy and sell directions, while a forced seller walks one. The raw fields for the anomalous cell (block 70,427,772, $100,000): buy side 1.7354%, sell side 0.1214% — a 14.3× asymmetry, because the liquidity is lopsided. A forced seller faces the sell side only.</div>
   </div>
