@@ -87,6 +87,15 @@ recovery figures above 100%, which cannot persist. A same-pool round trip
 needs no rate assumption and carries its own sanity check: it must be
 ≤ 100%, and the shortfall is fees plus price impact.
 
+**What a round trip cannot see.** Both legs are quoted against the same pinned
+block, so the sell leg is priced against the book as it stood *before* the buy,
+and the cost is the buy-side cost **plus** the sell-side cost. At block
+54,088,399, QQQ at $100,000: 0.133% buy plus 0.131% sell = 0.264% against a
+measured round-trip cost of 0.264%. A forced seller walks **one** side, so the
+round trip is not that seller's number. This is why a second series measures the
+sell side alone (below), and why the field this project proposed to the SEC was
+corrected to one-sided depth.
+
 ## Which pools
 
 Pool selection is part of the conclusion, so it is reproducible:
@@ -137,10 +146,7 @@ The same hashes can also be anchored on-chain, by
 `IEvidenceLedger` at `0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9` on Robinhood
 Chain testnet (chainId 46630). It was deployed on 2026-09-15 and still empty on
 2026-09-16 — the film's "the ledger did not exist until the fifteenth" is that
-deployment. A second `IEvidenceLedger` went to Robinhood Chain mainnet (chainId 4663)
-at `0x7f5446b920e09531f443ce951076cbaed09dfab6` on 2026-09-23, with 850 published
-rounds backfilled through block 69,196,861 in fourteen transactions.
-On 2026-09-19 a backfill landed: 610 rounds in ten transactions, and
+deployment. On 2026-09-19 a backfill landed: 610 rounds in ten transactions, and
 `latestCommittedBlock()` has returned 64,907,249 since. Those 610 rounds are
 every published round at or below that block; everything else — later rounds,
 and the quarantined directories — returns canon 0 ("absent").
@@ -164,6 +170,26 @@ holds the repository, while the ledger can only be appended to.
 Run it from the repository root: it looks for data/ next to the script
 (or honours RHDEPTH_DATA). Quarantined v1 rounds are excluded by their
 canon field and reported as defunct (exit code 2), never as mismatches.
+
+## The pre-registrations, and the second series
+
+Two series run, each with its own pre-registration and its own canon:
+
+| series | canon | cadence | published under |
+|---|---|---|---|
+| same-pool round trip | `rhdepth-v2` | one round every 30 minutes since 2026-09-04 | `data/` |
+| sell side alone | `rhdepth-oneside-v1` | one round every hour since 2026-09-26 00:00 UTC | `data-oneside/` |
+
+The registrations are the `PREREG-*` files in this repository, written **before** the windows they
+govern: `PREREG-rtr-recovery-shape-2026-09-22.md` and `PREREG-oneside-depth-2026-09-25.md`, with
+their addenda. A registration that is adjusted afterwards to describe what happened is not one, so
+deviations are recorded rather than smoothed: `PREREG-oneside-depth-2026-09-25-addendum-3.md`
+states that the second series' first four rounds name an enumeration that was never archived, and
+that one of its per-round fields changed shape twice inside the window. The affected rounds are
+neither withdrawn nor compliant, and the addendum says so.
+
+`data-oneside/` is published by the same daily sync as `data/`, and only for complete days, so the
+second series' first day appears with the 2026-09-27 06:01 UTC sync.
 
 ## Canonical preimage `rhdepth-v2`
 
