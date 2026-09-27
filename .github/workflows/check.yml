@@ -1,0 +1,61 @@
+name: check
+
+# What this runs, and what it does not.
+#
+# It runs the two checkers that live in this repository, against this repository.
+# Both are the SAME files the publishing job on the collecting machine runs before it
+# commits -- not copies of them. A rule that exists twice drifts, and when the copies
+# disagree nothing can say which one is the rule.
+#
+# ⚠️ This is NOT a check on the publishing process. The process guards are in sync.sh
+#    and they run on one machine, once a day. What runs here is the half a reader can
+#    run without that machine: is what has been published self-consistent.
+#    A green tick here never means the collection was sound.
+#
+# ⚠️ A red run has to be seen by someone. It is: the daily publishing job asks GitHub
+#    for the conclusion of the newest run on main, and refuses to publish on top of a
+#    red one. So CI failing stops publication rather than sitting unread -- which is
+#    the whole reason this file is worth having, given the job already runs the same
+#    checks locally.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  published-tree:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # No dependencies on purpose. Both checkers are standard library only, so this
+      # job cannot break because a package moved -- and a reader can run them the same
+      # way, with nothing installed.
+      - name: the three pages carry one head
+        run: python3 code/check_heads.py
+
+      - name: the published tree is self-consistent
+        run: python3 code/check_published.py
+
+      # Belt and braces: the manifests are also checked with the system tool, so a bug
+      # in our own checker cannot hide a bad checksum behind our own arithmetic.
+      - name: manifests, checked with sha256sum rather than with our own code
+        run: |
+          set -euo pipefail
+          n=0
+          while IFS= read -r m; do
+            d=$(dirname "$m")
+            ( cd "$d" && sha256sum -c --quiet MANIFEST.sha256 )
+            n=$((n+1))
+          done < <(find data data-oneside -name MANIFEST.sha256 2>/dev/null)
+          echo "verified $n manifests"
+          test "$n" -gt 0

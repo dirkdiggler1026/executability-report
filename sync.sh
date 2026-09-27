@@ -87,6 +87,61 @@ if [ -n "$(git log origin/main..HEAD --oneline)" ] || [ -n "$(git status --porce
 fi
 git reset -q --hard origin/main || { log "FAIL: reset"; exit 1; }
 
+# ── CI 红 ⇒ 不许往上面继续堆 ─────────────────────────────────────
+# 🔴 装 CI 而没人看 CI，只是把"只在这台机器上跑"换成"只在 GitHub 上跑"——
+#    冗余缺口原样搬家。所以这里主动去问:main 最新那次结论是什么。
+#    红 = 已发布的东西自己对不上 ⇒ 在它上面再发一天,是拿新数据去掩盖旧的不一致。
+#
+# 🔴 取不到结论【不算红】。GitHub 不可达、限流、还没跑完 —— 这些都不是
+#    "发布物有问题"的证据,把它们当红会让一次 API 抖动停掉采集发布。
+#    ⇒ 只在【明确 failure】时拒绝;其余记一行日志继续。这条区分和
+#      D13(no_liquidity 与 rpc_error 不得合并)是同一条。
+ci_head=$(git rev-parse origin/main)
+#    🔴 响应写【文件】,用 argv 传进去,不要走 stdin。`python3 - arg <<'PYEOF'` 里
+#       heredoc 本身就是 stdin(程序正文从那儿来),所以 json.load(sys.stdin) 永远
+#       读到空 —— 这道闸会恒定返回 unreadable 然后放行,等于装了个从不触发的闸。
+#       写这段时就踩了一次,当场被"注入 failure 应该拒绝、实际却继续"暴露出来。
+ci_json_f="$(mktemp)"; trap 'rm -f "$ci_json_f"' EXIT
+curl -sS -m 20 -H 'Accept: application/vnd.github+json' -o "$ci_json_f" \
+  "https://api.github.com/repos/dirkdiggler1026/executability-report/actions/runs?branch=main&per_page=10" 2>/dev/null || true
+#    🔴 按 workflow 【名字】认,不能按 head_sha 取第一条。这个仓库的 main 上还有
+#       GitHub Pages 的自动部署 run,它也匹配同一个 sha。Pages 挂了是"站点没更新",
+#       判据挂了是"发布物不一致"——两件事,结论相反,合成一个信号就是 D13 那条。
+#       Pages 的结论单独记一行,不参与拒绝。
+ci_state=$(python3 - "$ci_head" "$ci_json_f" <<'PYEOF' 2>/dev/null
+import json, sys
+head = sys.argv[1]
+try:
+    runs = json.load(open(sys.argv[2])).get("workflow_runs") or []
+except Exception:
+    print("unreadable||"); raise SystemExit
+mine = pages = None
+for r in runs:
+    if r.get("head_sha") != head:
+        continue
+    if r.get("name") == "check" and mine is None:
+        mine = r
+    elif "pages" in (r.get("name") or "").lower() and pages is None:
+        pages = r
+st = (mine.get("conclusion") or mine.get("status")) if mine else "no-run-for-head"
+url = mine.get("html_url", "") if mine else ""
+pg = (pages.get("conclusion") or pages.get("status")) if pages else "-"
+print(f"{st}|{url}|{pg}")
+PYEOF
+)
+ci_pages="${ci_state##*|}"; ci_state="${ci_state%|*}"
+case "${ci_state%%|*}" in
+  failure|timed_out|startup_failure)
+    log "FAIL: main 最新 CI 结论是 ${ci_state%%|*} —— 拒绝在不一致的发布物上继续发布"
+    log "  ${ci_state#*|}"
+    log "  修法:先让 CI 变绿。要跳过这道闸,只能是人为决定,不是定时任务的决定。"
+    exit 1 ;;
+  success)      log "CI: check main@${ci_head:0:7} success（pages ${ci_pages}）" ;;
+  ""|unreadable|no-run-for-head)
+                log "CI: 取不到 check 在 main@${ci_head:0:7} 的结论（${ci_state%%|*}）—— 不当作失败,继续（pages ${ci_pages}）" ;;
+  *)            log "CI: check main@${ci_head:0:7} 状态 ${ci_state%%|*}（未完成或已取消）—— 不当作失败,继续（pages ${ci_pages}）" ;;
+esac
+
 n=0
 for d in "$SRC"/*/; do
   day=$(basename "$d")
@@ -147,33 +202,30 @@ if [ -d "$SRC2" ]; then
     cp "$SRC2"/enumerations/*.json data-oneside/enumerations/
     ( cd data-oneside/enumerations && sha256sum *.json > MANIFEST.sha256 )
   fi
-  # 🔴 发布闸门:每个 enumerated_at_block 都要指得到东西。指不到 ⇒ 必须有一条
-  #    显式的 MISSING-<block>.json。两者都没有 = 静默的断链,拒绝发布。
-  if [ -d data-oneside ]; then
-    python3 - <<'PYEOF' || { log "FAIL: data-oneside 枚举链断,拒绝发布"; exit 1; }
-import json, glob, os, sys
-have = set()
-for p in glob.glob("data-oneside/enumerations/pools-*.json"):
-    have.add(int(os.path.basename(p).split("-")[1].split(".")[0]))
-noted = set()
-for p in glob.glob("data-oneside/enumerations/MISSING-*.json"):
-    noted.add(int(os.path.basename(p).split("-")[1].split(".")[0]))
-bad = {}
-for p in glob.glob("data-oneside/*/rounds.jsonl"):
-    for line in open(p):
-        if not line.strip():
-            continue
-        eb = (json.loads(line).get("pools_source") or {}).get("enumerated_at_block")
-        if eb is not None and eb not in have and eb not in noted:
-            bad.setdefault(eb, 0)
-            bad[eb] += 1
-for eb, n in sorted(bad.items()):
-    print(f"enumerated_at_block {eb} 无存档且无 MISSING 记录（{n} 轮）", file=sys.stderr)
-sys.exit(1 if bad else 0)
-PYEOF
-  fi
   git add data-oneside/ >/dev/null 2>&1
 fi
+
+# ── 发布物一致性:和 CI 跑【同一个文件】───────────────────────────
+# 🔴 判据只能有一份。这里原来内联着一段 python(枚举链闸门),CI 里要跑同样的事
+#    就得再写一遍 —— 而两份判据一旦不一致,没有任何东西能裁决哪一份才是规则。
+#    本仓库已经因为「同一个数写两处」漂移过一次(2026-09-05,EN 12 轮 / ZH 17 轮)。
+#    ⇒ 判据搬进 code/check_published.py,这里调用它,CI 也调用它。
+#
+# 🔴 它检查的是【发布物】,不是【发布流程】。流程的守卫是本文件,只在这台机器上跑;
+#    check_published.py 是读者不需要这台机器就能跑的那一半。别把两者说成一回事。
+#
+# 🔴 文件不在 = 失败,不是跳过。同 check_heads.py 那条:一个"不在就跳过"的检查,
+#    和没有检查是同一个东西。
+if [ ! -f code/check_published.py ]; then
+  log "FAIL: code/check_published.py 不存在 —— 发布物判据无法执行,拒绝发布"
+  exit 1
+fi
+cp_out="$(python3 code/check_published.py --quiet 2>&1)" || {
+  log "FAIL: 发布物一致性判据不过,拒绝发布"
+  printf '%s\n' "$cp_out" | while IFS= read -r l; do log "  $l"; done
+  exit 1
+}
+[ -n "$cp_out" ] && printf '%s\n' "$cp_out" | while IFS= read -r l; do log "check_published: $l"; done
 
 # ── ③b 连续性指标:首页那行数字的【唯一来源】────────────────────
 # 🔴 它必须随 data/ 一起进仓库,否则本地发版侧的核对闸门看不到它,
