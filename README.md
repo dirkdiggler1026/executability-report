@@ -17,11 +17,40 @@ dirkdiggler871026@gmail.com
 Corrections get published. The quarantine section below is an example of that.
 If you think a figure here is wrong, say so.
 
-**The error archive.** Ten instrument failures over six days are written up on the
-report page, numbered, each with what it was and how it was caught — eight caught
-before anything was published, two after. Section heading: *"Our instruments lied
-to us ten times"*. Two of them (#08, #10) are about the pool table being incomplete
-or out of date; see **Limits** below for the cutoff that is still open.
+**The error archive.** Fourteen instrument failures are written up on the report page,
+numbered, each with what it was and how it was caught — seven caught before anything
+was published, seven after. Section heading: *"Our instruments lied to us fourteen
+times"*; the count there is derived from each entry's own attributes, so it cannot
+drift away from the list. Four of them (#08, #10, #11, #12) are about the pool table
+being incomplete, out of date, or built by a rule that cannot see the pools that win
+at small sizes; see **Limits** below for the cutoff that is still open.
+
+**Correction policy.** If a figure published here is found wrong, the correction is
+published, whoever is relying on it. There is no private edition of these numbers:
+anything delivered to a client carries the canonical series name, the block it was
+pinned to and the round hash, and has to recompute against the public series. If a
+delivered figure and the public record ever disagree, the disagreement is visible to
+anyone — noticing it does not require trusting the operator.
+
+## Citing this
+
+Copy the stable block; fill the volatile block at the moment you cite.
+
+```
+series   rhdepth-oneside-v1              (round trip: rhdepth-v2)
+canon    oneside registered 2026-09-25  PREREG-oneside-depth-2026-09-25.md (+4 addenda)
+method   PREREG-rtr-recovery-shape-2026-09-22.md
+         the metrics, the windows and the falsifiers are in the pre-registration
+source   github.com/dirkdiggler1026/executability-report
+anchor   0x7f5446b920e09531f443ce951076cbaed09dfab6  (chainId 4663)
+         testnet 0xc4f7c2ed489d9f521d65b43cc4929d3c642c6fb9  (chainId 46630)
+
+as of    block <N> · roundKeccak <0x…> · retrieved <UTC datetime>
+verify   python3 code/verify.py <N>   (recomputation needs an archive endpoint)
+```
+
+The stable block is the part worth copying; the volatile block is what makes a
+citation checkable at a point in time.
 
 ## Commissioned measurement
 
