@@ -216,6 +216,19 @@ fi
 #
 # 🔴 文件不在 = 失败,不是跳过。同 check_heads.py 那条:一个"不在就跳过"的检查,
 #    和没有检查是同一个东西。
+# ── depth-latest.json:同一份数据的第二种形状 ─────────────────────
+# 🔴 它【从已发布的树】生成,不从采集目录。一个指向别人下载不到的轮次的
+#    便利文件,比没有更坏。
+# 🔴 它是【派生物】:胜出者按注册是派生量、不落盘(两份同一事实迟早漂移)。
+#    所以 CI 用 --check 重跑这段推导并比对 —— 它证明这份文件确实是从
+#    已发布的行算出来的,而不是自己变成了源头。去掉那个 check,它就变成第二份拷贝。
+if [ -f code/make_depth_latest.py ]; then
+  dl_err="$(python3 code/make_depth_latest.py 2>&1 >/dev/null)" || {
+    log "FAIL: depth-latest.json 生成失败: ${dl_err}"; exit 1; }
+  [ -n "$dl_err" ] && log "make_depth_latest: ${dl_err}"
+  git add depth-latest.json >/dev/null 2>&1
+fi
+
 if [ ! -f code/check_published.py ]; then
   log "FAIL: code/check_published.py 不存在 —— 发布物判据无法执行,拒绝发布"
   exit 1

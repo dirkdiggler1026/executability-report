@@ -48,6 +48,13 @@ jobs:
 
       # Belt and braces: the manifests are also checked with the system tool, so a bug
       # in our own checker cannot hide a bad checksum behind our own arithmetic.
+      # depth-latest.json is a derivation, not a source. This re-runs the derivation
+      # against the published rows and fails if the committed file is not what comes out.
+      # Without this step the file would quietly become a second copy of the same fact --
+      # which is the thing the series registration refuses to allow.
+      - name: depth-latest.json is what the published rows produce
+        run: python3 code/make_depth_latest.py --check
+
       - name: manifests, checked with sha256sum rather than with our own code
         run: |
           set -euo pipefail

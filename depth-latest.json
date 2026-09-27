@@ -1,0 +1,604 @@
+{
+ "_read_this_first": "Every number here is derived from data-oneside/2026-09-26/quotes.jsonl.gz by code/make_depth_latest.py. Nothing here is a new measurement, and the winner of each rung is derived rather than stored -- CI re-runs the derivation and fails if this file does not match it.",
+ "citation": {
+  "series": "rhdepth-oneside-v1",
+  "registered": "2026-09-25",
+  "forward_window_opened": "2026-09-26T00:00:00Z",
+  "method": [
+   "PREREG-oneside-depth-2026-09-25.md",
+   "PREREG-oneside-depth-2026-09-25-addendum.md",
+   "PREREG-oneside-depth-2026-09-25-addendum-2.md",
+   "PREREG-oneside-depth-2026-09-25-addendum-3.md",
+   "PREREG-oneside-depth-2026-09-25-addendum-4.md"
+  ],
+  "source": "https://github.com/dirkdiggler1026/executability-report",
+  "chain": {
+   "name": "Robinhood Chain",
+   "chainId": 4663
+  },
+  "anchor": {
+   "contract": "0x7f5446b920e09531f443ce951076cbaed09dfab6",
+   "chainId": 4663,
+   "anchors_series": "rhdepth-v2",
+   "anchors_this_series": false,
+   "note": "The ledger's watermark is 69,196,861 and only moves forward; every block in rhdepth-oneside-v1 is above it, so no round of this series is committed on chain. Its integrity rests on the published checksums and on git history, not on the ledger."
+  }
+ },
+ "as_of": {
+  "block": 73459442,
+  "block_hash": "0x73e236bf70c1e959c8eab36986907d6fa425345245adeba7ab6eaf95d8acd3da",
+  "round_utc": "2026-09-26T23:01:46Z",
+  "roundKeccak": "0xd1219c35d7e06351fb979a118e8965349d03a8cd214ab395881480d89f14a841",
+  "published_day": "2026-09-26",
+  "verify": "python3 code/verify.py 73459442",
+  "staleness": "Whole days only, published once a day at 06:01 UTC, so this is between about 7 and 31 hours behind the chain. Compare round_utc to now rather than relying on the file name."
+ },
+ "statistic": {
+  "what": "For each asset and each notional rung, the sale is quoted into every enumerated pool at one pinned block and the cell is won by the largest absolute USD proceeds for an identical share count. One side of the trade -- the sell -- because a forced seller walks one side.",
+  "shortfall_vs_median_notional_pct": "1 - proceeds / (shares x median pool mid). Can be negative when the best-paying pool is priced above the median of the enumerated pools; that is dispersion, not profit. The spread across the ladder is the depth reading, the level carries the dispersion offset (addendum 1).",
+  "own_mid_slippage_pct": "1 - proceeds / (shares consumed x that pool's own mid). Non-negative by construction (addendum 1 section 4).",
+  "winner_is_a_lower_bound": "A pool that fills only part of the order loses the cell on total proceeds, and the remainder is not routed elsewhere. So the winner is a lower bound on realisable proceeds, not an optimal route (addendum 2 section 1).",
+  "venue_list_not_claimed_complete": "Venues are found by enumerating each token's Transfer counterparty flow, ranked per asset and capped. The cap and the unclassified count are recorded in the enumeration, not hidden (addendum 2 section 2.1)."
+ },
+ "venue_list": {
+  "enumerated_at_block": 72764101,
+  "age_blocks": 695341,
+  "method": "counterparty-flow",
+  "present_not_quoted": 10,
+  "unclassified": 97,
+  "archive": "data-oneside/enumerations/pools-72764101.json"
+ },
+ "quote_rows_in_round": 212,
+ "cells": 36,
+ "assets": {
+  "AAPL": {
+   "reference_mid_usd_per_share": 340.34943320931274,
+   "rungs": [
+    {
+     "size_usd": 100,
+     "proceeds_usd": 99.95156722785246,
+     "shortfall_vs_median_notional_pct": 0.048432772147533054,
+     "own_mid_slippage_pct": 0.05187545069371691,
+     "pool": "0x8bb3514e2204e1cdf3ac149efee7ff04d91b719f",
+     "quote": "WETH",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 340.36115642770426,
+     "shares_offered_raw": "293815679541621696",
+     "shares_consumed_raw": "293815679541621696",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 1000,
+     "proceeds_usd": 999.384514,
+     "shortfall_vs_median_notional_pct": 0.06154860000000539,
+     "own_mid_slippage_pct": 0.058106136067626046,
+     "pool": "0xaae0d815ee56e4092a5e5c2911e676fea50b2d6d",
+     "quote": "USDG",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 340.3377099909212,
+     "shares_offered_raw": "2938156795416216576",
+     "shares_consumed_raw": "2938156795416216576",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 10000,
+     "proceeds_usd": 9986.311697,
+     "shortfall_vs_median_notional_pct": 0.13688303000001234,
+     "own_mid_slippage_pct": 0.13344316102535947,
+     "pool": "0xaae0d815ee56e4092a5e5c2911e676fea50b2d6d",
+     "quote": "USDG",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 340.3377099909212,
+     "shares_offered_raw": "29381567954162167808",
+     "shares_consumed_raw": "29381567954162167808",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 100000,
+     "proceeds_usd": 98931.519417,
+     "shortfall_vs_median_notional_pct": 1.0684805829999977,
+     "own_mid_slippage_pct": 1.0650728036858514,
+     "pool": "0xaae0d815ee56e4092a5e5c2911e676fea50b2d6d",
+     "quote": "USDG",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 340.3377099909212,
+     "shares_offered_raw": "293815679541621653504",
+     "shares_consumed_raw": "293815679541621653504",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    }
+   ]
+  },
+  "AMC": {
+   "reference_mid_usd_per_share": 2.925952636509537,
+   "rungs": [
+    {
+     "size_usd": 100,
+     "proceeds_usd": 99.653814,
+     "shortfall_vs_median_notional_pct": 0.3461860000000039,
+     "own_mid_slippage_pct": 0.06811795736374471,
+     "pool": "0x5496c765d80b1706d6da0442be08a120c224bef8",
+     "quote": "USDG",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 2.9178109513350954,
+     "shares_offered_raw": "34176903191192186880",
+     "shares_consumed_raw": "34176903191192186880",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 1000,
+     "proceeds_usd": 996.040897,
+     "shortfall_vs_median_notional_pct": 0.39591030000000194,
+     "own_mid_slippage_pct": 0.35220602242095334,
+     "pool": "0xaa34fea710a1a737840329051d81d3b0b7c564d5",
+     "quote": "USDG",
+     "fee_at_block": 3000,
+     "pool_mid_usd_per_share": 2.924669350235905,
+     "shares_offered_raw": "341769031911921876992",
+     "shares_consumed_raw": "341769031911921876992",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 10000,
+     "proceeds_usd": 9914.822711,
+     "shortfall_vs_median_notional_pct": 0.851772889999991,
+     "own_mid_slippage_pct": 0.8082686357857694,
+     "pool": "0xaa34fea710a1a737840329051d81d3b0b7c564d5",
+     "quote": "USDG",
+     "fee_at_block": 3000,
+     "pool_mid_usd_per_share": 2.924669350235905,
+     "shares_offered_raw": "3417690319119218900992",
+     "shares_consumed_raw": "3417690319119218900992",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 100000,
+     "proceeds_usd": 95441.061025,
+     "shortfall_vs_median_notional_pct": 4.558938974999993,
+     "own_mid_slippage_pct": 4.517061350938201,
+     "pool": "0xaa34fea710a1a737840329051d81d3b0b7c564d5",
+     "quote": "USDG",
+     "fee_at_block": 3000,
+     "pool_mid_usd_per_share": 2.924669350235905,
+     "shares_offered_raw": "34176903191192190058496",
+     "shares_consumed_raw": "34176903191192190058496",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    }
+   ]
+  },
+  "GME": {
+   "reference_mid_usd_per_share": 23.624837247753504,
+   "rungs": [
+    {
+     "size_usd": 100,
+     "proceeds_usd": 99.998157,
+     "shortfall_vs_median_notional_pct": 0.001842999999990269,
+     "own_mid_slippage_pct": 0.05393478812474317,
+     "pool": "0xda0ee6b8ef5d3a2338a15621fabf6619070f1b64",
+     "quote": "USDG",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 23.63715048903802,
+     "shares_offered_raw": "4232833392725659648",
+     "shares_consumed_raw": "4232833392725659648",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 1000,
+     "proceeds_usd": 999.764398,
+     "shortfall_vs_median_notional_pct": 0.02356019999999459,
+     "own_mid_slippage_pct": 0.06225826004938595,
+     "pool": "0xe2b46c905e12ab8e2f864e4821a4325884c1b126",
+     "quote": "USDG",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 23.63398529687442,
+     "shares_offered_raw": "42328333927256596480",
+     "shares_consumed_raw": "42328333927256596480",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 10000,
+     "proceeds_usd": 9985.778443,
+     "shortfall_vs_median_notional_pct": 0.14221557000000384,
+     "own_mid_slippage_pct": 0.18086770190229862,
+     "pool": "0xe2b46c905e12ab8e2f864e4821a4325884c1b126",
+     "quote": "USDG",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 23.63398529687442,
+     "shares_offered_raw": "423283339272565948416",
+     "shares_consumed_raw": "423283339272565948416",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 100000,
+     "proceeds_usd": 97612.050234,
+     "shortfall_vs_median_notional_pct": 2.387949766000008,
+     "own_mid_slippage_pct": 1.7814248850005043,
+     "pool": "0xe9713f453adb9245b19559790c96f470a18f2fdf",
+     "quote": "USDG",
+     "fee_at_block": 10000,
+     "pool_mid_usd_per_share": 23.47894782120105,
+     "shares_offered_raw": "4232833392725659746304",
+     "shares_consumed_raw": "4232833392725659746304",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    }
+   ]
+  },
+  "GOOGL": {
+   "reference_mid_usd_per_share": 343.4935832429294,
+   "rungs": [
+    {
+     "size_usd": 100,
+     "proceeds_usd": 99.956924,
+     "shortfall_vs_median_notional_pct": 0.04307599999999745,
+     "own_mid_slippage_pct": 0.03162090630643988,
+     "pool": "0x5c0eaa89799f7b76606f4ff66c92a2654d178927",
+     "quote": "USDG",
+     "fee_at_block": 250,
+     "pool_mid_usd_per_share": 343.45422328516224,
+     "shares_offered_raw": "291126253526770752",
+     "shares_consumed_raw": "291126253526770752",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 1000,
+     "proceeds_usd": 999.448762,
+     "shortfall_vs_median_notional_pct": 0.055123800000000944,
+     "own_mid_slippage_pct": 0.0526141408464631,
+     "pool": "0x34d0dc122cf9a8eb296fc5e0d3a233625d7d19b7",
+     "quote": "USDG",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 343.4849581867765,
+     "shares_offered_raw": "2911262535267707904",
+     "shares_consumed_raw": "2911262535267707904",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 10000,
+     "proceeds_usd": 9992.135847,
+     "shortfall_vs_median_notional_pct": 0.07864153000000096,
+     "own_mid_slippage_pct": 0.07613246138685748,
+     "pool": "0x34d0dc122cf9a8eb296fc5e0d3a233625d7d19b7",
+     "quote": "USDG",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 343.4849581867765,
+     "shares_offered_raw": "29112625352677076992",
+     "shares_consumed_raw": "29112625352677076992",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 100000,
+     "proceeds_usd": 99497.507633,
+     "shortfall_vs_median_notional_pct": 0.5024923669999959,
+     "own_mid_slippage_pct": 0.49999394146503784,
+     "pool": "0x34d0dc122cf9a8eb296fc5e0d3a233625d7d19b7",
+     "quote": "USDG",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 343.4849581867765,
+     "shares_offered_raw": "291126253526770778112",
+     "shares_consumed_raw": "291126253526770778112",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    }
+   ]
+  },
+  "NVDA": {
+   "reference_mid_usd_per_share": 224.66463513463478,
+   "rungs": [
+    {
+     "size_usd": 100,
+     "proceeds_usd": 99.975597,
+     "shortfall_vs_median_notional_pct": 0.02440300000000617,
+     "own_mid_slippage_pct": 0.010578964615859388,
+     "pool": "0x18a5af4e442f8be68968cc1f00d537f8af2d12cd",
+     "quote": "USDG",
+     "fee_at_block": 102,
+     "pool_mid_usd_per_share": 224.63357413004542,
+     "shares_offered_raw": "445107882422496128",
+     "shares_consumed_raw": "445107882422496128",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 1000,
+     "proceeds_usd": 999.721887,
+     "shortfall_vs_median_notional_pct": 0.027811299999991324,
+     "own_mid_slippage_pct": 0.013987735895459874,
+     "pool": "0x18a5af4e442f8be68968cc1f00d537f8af2d12cd",
+     "quote": "USDG",
+     "fee_at_block": 102,
+     "pool_mid_usd_per_share": 224.63357413004542,
+     "shares_offered_raw": "4451078824224961024",
+     "shares_consumed_raw": "4451078824224961024",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 10000,
+     "proceeds_usd": 9994.778637,
+     "shortfall_vs_median_notional_pct": 0.05221363000000867,
+     "own_mid_slippage_pct": 0.05221363000000867,
+     "pool": "0xd4eb21209c4d6093f80b5b84f5c45cc093ea14a3",
+     "quote": "USDG",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 224.66463513463478,
+     "shares_offered_raw": "44510788242249613312",
+     "shares_consumed_raw": "44510788242249613312",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 100000,
+     "proceeds_usd": 99927.868177,
+     "shortfall_vs_median_notional_pct": 0.07213182299999898,
+     "own_mid_slippage_pct": 0.07213182299999898,
+     "pool": "0xd4eb21209c4d6093f80b5b84f5c45cc093ea14a3",
+     "quote": "USDG",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 224.66463513463478,
+     "shares_offered_raw": "445107882422496067584",
+     "shares_consumed_raw": "445107882422496067584",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    }
+   ]
+  },
+  "QQQ": {
+   "reference_mid_usd_per_share": 744.8128432338436,
+   "rungs": [
+    {
+     "size_usd": 100,
+     "proceeds_usd": 99.830379,
+     "shortfall_vs_median_notional_pct": 0.16962100000000868,
+     "own_mid_slippage_pct": 0.05026396864388216,
+     "pool": "0xd60a5d14db690b7afad71f76b108071d7175597d",
+     "quote": "USDG",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 743.9234096703932,
+     "shares_offered_raw": "134261916813649376",
+     "shares_consumed_raw": "134261916813649376",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 1000,
+     "proceeds_usd": 998.280092,
+     "shortfall_vs_median_notional_pct": 0.17199079999999922,
+     "own_mid_slippage_pct": 0.05263660197272202,
+     "pool": "0xd60a5d14db690b7afad71f76b108071d7175597d",
+     "quote": "USDG",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 743.9234096703932,
+     "shares_offered_raw": "1342619168136493824",
+     "shares_consumed_raw": "1342619168136493824",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 10000,
+     "proceeds_usd": 9980.431518,
+     "shortfall_vs_median_notional_pct": 0.1956848200000083,
+     "own_mid_slippage_pct": 0.07635895050274177,
+     "pool": "0xd60a5d14db690b7afad71f76b108071d7175597d",
+     "quote": "USDG",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 743.9234096703932,
+     "shares_offered_raw": "13426191681364938752",
+     "shares_consumed_raw": "13426191681364938752",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 100000,
+     "proceeds_usd": 99568.062589,
+     "shortfall_vs_median_notional_pct": 0.43193741100000516,
+     "own_mid_slippage_pct": 0.3128940046987605,
+     "pool": "0xd60a5d14db690b7afad71f76b108071d7175597d",
+     "quote": "USDG",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 743.9234096703932,
+     "shares_offered_raw": "134261916813649379328",
+     "shares_consumed_raw": "134261916813649379328",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    }
+   ]
+  },
+  "RDDT": {
+   "reference_mid_usd_per_share": 150.7983450942703,
+   "rungs": [
+    {
+     "size_usd": 100,
+     "proceeds_usd": 99.622822,
+     "shortfall_vs_median_notional_pct": 0.37717800000000024,
+     "own_mid_slippage_pct": 0.22749842246879703,
+     "pool": "0x3e7a328024abdc493991f44f0982c0af64b391eb",
+     "quote": "USDG",
+     "fee_at_block": 2000,
+     "pool_mid_usd_per_share": 150.57211610101834,
+     "shares_offered_raw": "663137250859655296",
+     "shares_consumed_raw": "663137250859655296",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 1000,
+     "proceeds_usd": 993.7741631825444,
+     "shortfall_vs_median_notional_pct": 0.6225836817455588,
+     "own_mid_slippage_pct": 0.3476570081420216,
+     "pool": "0x714187eed11d8fc9500ff6798734c8bb63a8a19b",
+     "quote": "WETH",
+     "fee_at_block": 3000,
+     "pool_mid_usd_per_share": 150.38231385850625,
+     "shares_offered_raw": "6631372508596552704",
+     "shares_consumed_raw": "6631372508596552704",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 10000,
+     "proceeds_usd": 9911.84217,
+     "shortfall_vs_median_notional_pct": 0.8815782999999966,
+     "own_mid_slippage_pct": 1.0788385116326626,
+     "pool": "0xa8744e76aed23b05f0126335e7bd38f7935d19fe",
+     "quote": "USDG",
+     "fee_at_block": 10000,
+     "pool_mid_usd_per_share": 151.09905439670456,
+     "shares_offered_raw": "66313725085965533184",
+     "shares_consumed_raw": "66313725085965533184",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 100000,
+     "proceeds_usd": 98364.958721,
+     "shortfall_vs_median_notional_pct": 1.6350412789999935,
+     "own_mid_slippage_pct": 1.830801988681896,
+     "pool": "0xa8744e76aed23b05f0126335e7bd38f7935d19fe",
+     "quote": "USDG",
+     "fee_at_block": 10000,
+     "pool_mid_usd_per_share": 151.09905439670456,
+     "shares_offered_raw": "663137250859655233536",
+     "shares_consumed_raw": "663137250859655233536",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    }
+   ]
+  },
+  "SPY": {
+   "reference_mid_usd_per_share": 771.5832830913281,
+   "rungs": [
+    {
+     "size_usd": 100,
+     "proceeds_usd": 100.00877641682975,
+     "shortfall_vs_median_notional_pct": -0.008776416829747724,
+     "own_mid_slippage_pct": 0.016440285402241628,
+     "pool": "0x3e1afde90341f843c941ff4077d915bde3008c7e",
+     "quote": "WETH",
+     "fee_at_block": 100,
+     "pool_mid_usd_per_share": 771.7778829430681,
+     "shares_offered_raw": "129603637340809952",
+     "shares_consumed_raw": "129603637340809952",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 1000,
+     "proceeds_usd": 999.817547,
+     "shortfall_vs_median_notional_pct": 0.018245299999997133,
+     "own_mid_slippage_pct": 0.030775750324962825,
+     "pool": "0x5ad1a528cd9de3962cb6c75ff250e434887479c1",
+     "quote": "USDG",
+     "fee_at_block": 50,
+     "pool_mid_usd_per_share": 771.6799957153672,
+     "shares_offered_raw": "1296036373408099840",
+     "shares_consumed_raw": "1296036373408099840",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 10000,
+     "proceeds_usd": 9993.422082,
+     "shortfall_vs_median_notional_pct": 0.06577918000001404,
+     "own_mid_slippage_pct": 0.058475260709334176,
+     "pool": "0x38453c115607463ac284820ce959831042f3df4e",
+     "quote": "USDG",
+     "fee_at_block": 150,
+     "pool_mid_usd_per_share": 771.5268942975765,
+     "shares_offered_raw": "12960363734080997376",
+     "shares_consumed_raw": "12960363734080997376",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 100000,
+     "proceeds_usd": 99600.035292,
+     "shortfall_vs_median_notional_pct": 0.39996470800000017,
+     "own_mid_slippage_pct": 0.3926852134169323,
+     "pool": "0x38453c115607463ac284820ce959831042f3df4e",
+     "quote": "USDG",
+     "fee_at_block": 150,
+     "pool_mid_usd_per_share": 771.5268942975765,
+     "shares_offered_raw": "129603637340809969664",
+     "shares_consumed_raw": "129603637340809969664",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    }
+   ]
+  },
+  "TSLA": {
+   "reference_mid_usd_per_share": 372.06055582447317,
+   "rungs": [
+    {
+     "size_usd": 100,
+     "proceeds_usd": 99.944244,
+     "shortfall_vs_median_notional_pct": 0.0557560000000068,
+     "own_mid_slippage_pct": 0.0557560000000068,
+     "pool": "0xc4f0172d6ac8dd294dd1137d047d5e1893760236",
+     "quote": "USDG",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 372.06055582447317,
+     "shares_offered_raw": "268773452155936000",
+     "shares_consumed_raw": "268773452155936000",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 1000,
+     "proceeds_usd": 999.046363,
+     "shortfall_vs_median_notional_pct": 0.09536369999999517,
+     "own_mid_slippage_pct": 0.07828428637804974,
+     "pool": "0x77bf6d7d6f18c2c0ca0673f95af96a8812a3cb86",
+     "quote": "USDG",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 371.99696027790003,
+     "shares_offered_raw": "2687734521559360000",
+     "shares_consumed_raw": "2687734521559360000",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 10000,
+     "proceeds_usd": 9966.091488,
+     "shortfall_vs_median_notional_pct": 0.33908512000000446,
+     "own_mid_slippage_pct": 0.32204737230163705,
+     "pool": "0x77bf6d7d6f18c2c0ca0673f95af96a8812a3cb86",
+     "quote": "USDG",
+     "fee_at_block": 500,
+     "pool_mid_usd_per_share": 371.99696027790003,
+     "shares_offered_raw": "26877345215593598976",
+     "shares_consumed_raw": "26877345215593598976",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    },
+    {
+     "size_usd": 100000,
+     "proceeds_usd": 98448.925029,
+     "shortfall_vs_median_notional_pct": 1.5510749709999994,
+     "own_mid_slippage_pct": 1.5168604085696313,
+     "pool": "0xf4acdaeeb7022862a763c9b1b885e11191c889e3",
+     "quote": "USDG",
+     "fee_at_block": 3000,
+     "pool_mid_usd_per_share": 371.93129624595093,
+     "shares_offered_raw": "268773452155936014336",
+     "shares_consumed_raw": "268773452155936014336",
+     "filled_fraction": 1.0,
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}
