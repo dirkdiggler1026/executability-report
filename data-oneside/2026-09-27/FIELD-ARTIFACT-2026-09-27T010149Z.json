@@ -1,0 +1,24 @@
+{
+ "record": "field-artifact-note",
+ "canon": "rhdepth-oneside-v1",
+ "applies_to": "refusals.jsonl",
+ "applies_to_sha256": "2c43897d20b3ae54c44745f2308ef5cd87c4ff7f1ef46a1c044e9f8581e0a3bd",
+ "applies_to_records": [
+  "2026-09-27T01:01:49Z"
+ ],
+ "written_utc": "2026-09-27T02:30:00Z",
+ "what": "The refusal record of 2026-09-27T01:01:49Z was written by the collector as it stood before 2026-09-27 02:14 UTC. Three of its fields are mislabelled by that version and are kept unchanged, because the record is the evidence that the defect existed.",
+ "mislabelled_fields": {
+  "revert_selector": "0x9240a35a is NOT a function selector. It is the first four bytes of 0x9240a35a7f8192388a0d9fcb799ad679d974de183d25caa9a8b034dbf4b107df, the stateRoot of block 73530638 -- the block this round was pinned at. The collector searched the error message (prose) for the first 0x and reported ten characters of it as a selector.",
+  "revert_selectors": "Same value, same reason. Read `kinds` instead on records written after 2026-09-27 02:14 UTC; this record predates that field.",
+  "revert_data": "Not revert data. It is the tail of the error message, prose included (\"] layer stale\\nmissing trie node ...\"). revert_data_bytes 91 counts characters of that prose, not bytes of ABI."
+ },
+ "actual_cause": "The endpoint could not serve the pinned block's state: \"missing trie node ... layer stale\". A state-pruning error on the public endpoint, not a revert and not a property of the pool. The full message is preserved verbatim in error.message (185 characters).",
+ "verify_without_a_key": {
+  "note": "Block headers are never pruned; only state is. The public endpoint answers this.",
+  "command": "curl -s -X POST https://rpc.mainnet.chain.robinhood.com -H 'content-type: application/json' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"eth_getBlockByNumber\",\"params\":[\"0x461b64e\",false]}'",
+  "expect_stateRoot": "0x9240a35a7f8192388a0d9fcb799ad679d974de183d25caa9a8b034dbf4b107df"
+ },
+ "fixed_in_collector": "From 2026-09-27 02:14 UTC revert_selector is taken from error.data only, never from error.message; `kind` is one of state_unavailable / rate_limited / revert / rpc; state_unavailable is retried. Records written after that time carry `kinds`.",
+ "registered_in": "PREREG-oneside-depth-2026-09-25-addendum-4.md"
+}
