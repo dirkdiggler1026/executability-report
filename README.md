@@ -17,13 +17,13 @@ dirkdiggler871026@gmail.com
 Corrections get published. The quarantine section below is an example of that.
 If you think a figure here is wrong, say so.
 
-**The error archive.** Fourteen instrument failures are written up on the report page,
-numbered, each with what it was and how it was caught — seven caught before anything
-was published, seven after. Section heading: *"Our instruments lied to us fourteen
-times"*; the count there is derived from each entry's own attributes, so it cannot
-drift away from the list. Four of them (#08, #10, #11, #12) are about the pool table
-being incomplete, out of date, or built by a rule that cannot see the pools that win
-at small sizes; see **Limits** below for the cutoff that is still open.
+**The error archive.** The report page carries a numbered archive of this project's
+instrument failures — what each one was, how it was caught, and which side of
+publication it landed on. **The count is not restated here**: it is derived there from
+the entries' own attributes, and a number copied into a second document is a number
+that can drift away from its list. Four of the entries are about the pool table —
+incomplete, out of date, or built by a rule that cannot see the pools that win at
+small sizes — and they are the reason for the cutoff still open in **Limits** below.
 
 **Correction policy.** If a figure published here is found wrong, the correction is
 published, whoever is relying on it. There is no private edition of these numbers:
