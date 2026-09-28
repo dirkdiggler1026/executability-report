@@ -197,6 +197,17 @@ moves forward, so what it holds it keeps holding.
 The two anchors are not redundant: git history can be rewritten by whoever
 holds the repository, while the ledger can only be appended to.
 
+**What the CI check does and does not do.** It runs the published-tree checks — the
+page heads, the manifests, the enumeration chain, and the re-derivation behind
+`depth-latest.json` — from the same file the publisher runs, so there is one set of
+criteria and not two. It is **not** a check on the publishing process: a green tick
+never means the collection was sound. And it is not advisory: if the check is red on
+the commit `main` points at, the 06:01 UTC data sync **refuses to publish**. The log
+line has the shape `CI: check main@<sha> success`; as of the 2026-09-28 06:02 UTC run
+it read `CI: check main@306eb5f success`. A failed, timed-out or unstartable check
+blocks; a result the API will not return does not — treating an API hiccup as a
+broken publication would stop collection for the wrong reason.
+
 Run it from the repository root: it looks for data/ next to the script
 (or honours RHDEPTH_DATA). Quarantined v1 rounds are excluded by their
 canon field and reported as defunct (exit code 2), never as mismatches.
