@@ -13,6 +13,13 @@ Two things this cannot do, stated up front:
   * A sample with no log at all (thin token, long gap) is reported as NO OBSERVATION, never as
     "unchanged".
 
+🔴 Fixed 2026-09-29, ~40 minutes after this file was first published: the comparison between two
+samples tested only whether the previous interval sat *above* the next one, so a multiplier that
+rose -- the normal direction -- produced no change line at all. The symptom was a printout reading
+"2 distinct sampled value(s), 0 change(s)". Detection is now symmetric and names the direction.
+Two distinct values in one asset's samples must never coexist with "0 changes" again; if they do,
+the detector is wrong, not the chain.
+
 Usage:
     python accrual_index_samples.py --since 2026-09-01T00:00:00Z --stride-blocks 133500
     python accrual_index_samples.py --assets QQQ --stride-blocks 20000 --json out.json
@@ -152,25 +159,34 @@ def main() -> int:
         changes = []
         for prev, cur in zip(observed, observed[1:]):
             p, c = prev["value"], cur["value"]
-            if p["lo_n"] * c["hi_d"] >= c["hi_n"] * p["lo_d"]:      # disjoint -> a change
+            # Disjoint intervals mean the multiplier changed in the gap. The previous interval
+            # lying entirely below the next one is a rise; entirely above it is a fall. Both are
+            # changes, and testing only one of the two is the bug this file shipped with.
+            rose = p["hi_n"] * c["lo_d"] <= c["lo_n"] * p["hi_d"]
+            fell = c["hi_n"] * p["lo_d"] <= p["lo_n"] * c["hi_d"]
+            if fell or rose:
                 changes.append({
                     "after_block": p["last_log_block"], "before_block": c["first_log_block"],
+                    "direction": "rise" if rose else "fall",
                     "k_before": dec(p["lo_n"], p["lo_d"]), "k_after": dec(c["hi_n"], c["hi_d"]),
                     "blocks": c["first_log_block"] - p["last_log_block"],
                 })
         if observed:
-            vals = {dec(x["value"]["lo_n"], x["value"]["lo_d"], 18) for x in observed}
+            vals = {dec(x["value"]["lo_n"], x["value"]["lo_d"], 12) for x in observed}
             print(f"\n{sym}: {len(observed)}/{len(samples)} samples had a log "
-                  f"({gaps} no-observation), {len(vals)} distinct sampled value(s), "
+                  f"({gaps} no-observation), {len(vals)} distinct sampled value(s) to 12 decimals, "
                   f"{len(changes)} change(s) between consecutive samples")
             for v in sorted(vals):
                 print(f"    value {v}")
+            print("    (the intervals decide whether two samples differ, not these rounded "
+                  "strings; full precision is in the JSON)")
         else:
             print(f"\n{sym}: NO OBSERVATION in any sample -- nothing claimed")
         for ch in changes:
             ta, tb = block_time(url, ch["after_block"]), block_time(url, ch["before_block"])
             ch["after_block_time"], ch["before_block_time"] = fmt(ta), fmt(tb)
-            print(f"    change: {ch['k_before'][:20]} -> {ch['k_after'][:20]}  between block "
+            print(f"    change ({ch['direction']}): {ch['k_before'][:20]} -> "
+                  f"{ch['k_after'][:20]}  between block "
                   f"{ch['after_block']:,} ({fmt(ta)}) and {ch['before_block']:,} ({fmt(tb)})")
         result["assets"][sym] = {"samples": samples, "changes": changes,
                                  "no_observation_gaps": gaps}
