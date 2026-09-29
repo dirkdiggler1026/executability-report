@@ -99,7 +99,14 @@ code/
   build_pool_table.py   reproduces the pool selection
   verify.py             independent verification
   rhchain.py evm.py     chain access, zero dependencies
+  read_accrual_index.py accrual_index_history.py accrual_index_samples.py
+                        the multiplier in the tokenised stocks' transfer logs, and when it moved
   stock_pools.json      the pool table in use
+measurements/           one directory per question, each with a README and its own JSON
+  index-priced-test/    a negative result: a 24-hour oracle cannot reference 30 minutes
+  accrual-multiplier/   the per-asset factor in the transfer logs, and one step bounded to 32 s
+  tsv-volume/           September volume for nine symbols -- a numerator with no denominator
+  oneside-depth/        one-sided exit cost, the hourly series
 ```
 
 ## What is measured
