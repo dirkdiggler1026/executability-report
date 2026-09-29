@@ -28,8 +28,14 @@ data      = (w0, w1)  with  w0 = the transferred amount   and   w1 = floor(w0 ×
 
 So the ERC-20 `Transfer` event shows one number, this log shows two, and **k is the ratio of the two**:
 `k = w1 / w0`. The event's declared name is not in the ABIs we could reach, so we treat it as
-unlabelled. We found no view call returning k; whether one exists is **OPEN** — we did not enumerate
-every selector. In practice k is readable only by decoding a transfer log.
+unlabelled. **The multiplier itself is documented by the issuer**: their developer documentation defines
+it as **ERC-8056** (Scaled UI Amount Extension), read through the token's **`uiMultiplier()`** function,
+and states that their oracle incorporates the multiplier into the price
+([docs.robinhood.com/chain/stock-tokens](https://docs.robinhood.com/chain/stock-tokens), read
+2026-09-29). A getter therefore exists and is named. This page's first version said no getter could be
+found — we had probed guessed names (`index()`, `getIndex()`, `sharePrice()`) instead of looking up the
+extension. Everything measured below stands: `uiMultiplier()` is the interface, a transfer log is where
+the value is observable per transfer, and k is the ratio of its two words.
 
 Which side is shares and which is tokens is **OPEN** (the log alone does not say). The ratio is k either
 way, and it is the ratio that breaks a 1:1 assumption.
@@ -151,15 +157,21 @@ in the repository above, which run from a plain clone against the public endpoin
 
 ## 5. What this does not say (OPEN)
 
-- **What drives it.** Dividend, withholding, fee, share-lending income — the log carries no reason
-  field, and we have not seen the operator's documentation. **OPEN.**
-- **Whether it can decrease.** Every window we scanned shows non-decreasing values. Not proven
-  monotone. **OPEN.**
+- **What drives it.** Answered by the issuer, and cited rather than measured by us: dividends and
+  stock splits, applied through this multiplier, which adjusts the shares-per-token ratio while the raw
+  balance stays static until redemption. What they do not publish is the timing and the formula —
+  which underlying event produced QQQ's 7.008 bp on 2026-09-22, and whether the steps are meant to be
+  simultaneous across assets. **Partly OPEN.**
+- **Whether it can decrease.** Every window we scanned shows non-decreasing values, and a stock split
+  would move the ratio too. Not proven monotone. **OPEN.**
 - **Whether it can change with no transfer at all.** Not observable from logs: if it changed and
   nobody transferred, nothing would be emitted, and we would see exactly what we see now. **Absence
-  of these logs is not evidence that k did not change.**
-- **Whether 1 token = 1 share.** We have not verified the issuer's terms. **OPEN**, and it matters:
-  k is only the accrual part of the token-to-share ratio.
+  of these logs is not evidence that k did not change.** (The value itself is readable at any block
+  through `uiMultiplier()`, so the mechanism for polling exists; what has no event is the token.)
+- **Whether 1 token = 1 share.** Answered by the issuer, and the answer is no: Stock Tokens are
+  **tokenised debt securities** giving economic exposure, with no legal or beneficial rights in the
+  underlying security. The multiplier maintains a shares-per-token ratio, so a token is an exposure to
+  k shares — not a claim on one share. **Their statement, cited; we have not read the terms.**
 - **Whether the market prices k.** We tried to test it and the test **failed**, for a reference-data
   reason worth knowing independently: the equity price feeds available here update on an
   86,400-second heartbeat, so comparing an on-chain price to them at 30-minute granularity compares
@@ -182,6 +194,13 @@ mistake this page most wants to prevent, because it looks right and is checkable
 Two rounding notes, so a monitor does not mislead itself: the ratio in a log reads exactly 1 for
 amounts below `1/(k−1)` wei (≈10⁻¹⁵ tokens — we saw 5 such logs out of 561 for AAPL in one window),
 and the two words only reveal k to the precision of the amount moved.
+
+**One limit on the exposure above, from the issuer's own documentation:** their oracle "automatically
+incorporates the multiplier into the price", so a protocol that values this collateral *from that
+oracle* is not carrying this drift. The exposure is to accounting that treats a token balance as a
+share count, or that reconciles balances against a NAV computed elsewhere — and to any monitor that
+expects a balance change to accompany a value change. This page's first version implied the exposure
+was wider than that; the issuer's documentation is the reason it is narrower.
 
 ---
 
