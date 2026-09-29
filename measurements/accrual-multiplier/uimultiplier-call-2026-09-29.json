@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-09-29T14:43:09Z",
+ "generated_utc": "2026-09-29T14:50:08Z",
  "function": "uiMultiplier()",
  "selector": "0xa60bf13d",
  "standard": "ERC-8056 Scaled UI Amount Extension",
@@ -76,6 +76,75 @@
   "69263499": {
    "value": 1.0007007912414054,
    "error": null
+  }
+ },
+ "bisect": {
+  "window": [
+   51274668,
+   75336022
+  ],
+  "method": "binary search on uiMultiplier() alone. Needs no transfer, so it resolves to a single block; the transfer-log route can only bracket to the nearest pair of transfers.",
+  "steps": {
+   "AAPL": {
+    "changed": false,
+    "value": 1.0005660800610925
+   },
+   "AMC": {
+    "changed": false,
+    "value": 1.0
+   },
+   "GME": {
+    "changed": false,
+    "value": 1.0
+   },
+   "GOOGL": {
+    "changed": true,
+    "from": 1.0,
+    "to": 1.0001939244141127,
+    "last_block_old": 63752472,
+    "first_block_new": 63752473,
+    "last_utc_old": "2026-09-15T15:10:26Z",
+    "first_utc_new": "2026-09-15T15:10:27Z",
+    "bracket_seconds": 1
+   },
+   "NVDA": {
+    "changed": true,
+    "from": 1.0,
+    "to": 1.0007751591646306,
+    "last_block_old": 58958492,
+    "first_block_new": 58958493,
+    "last_utc_old": "2026-09-10T00:00:29Z",
+    "first_utc_new": "2026-09-10T00:00:30Z",
+    "bracket_seconds": 1
+   },
+   "QQQ": {
+    "changed": true,
+    "from": 1.0,
+    "to": 1.0007007912414054,
+    "last_block_old": 69216815,
+    "first_block_new": 69216816,
+    "last_utc_old": "2026-09-22T00:10:33Z",
+    "first_utc_new": "2026-09-22T00:10:34Z",
+    "bracket_seconds": 1
+   },
+   "RDDT": {
+    "changed": false,
+    "value": 1.0
+   },
+   "SPY": {
+    "changed": true,
+    "from": 1.0,
+    "to": 1.001717991187472,
+    "last_block_old": 65785790,
+    "first_block_new": 65785791,
+    "last_utc_old": "2026-09-18T00:10:32Z",
+    "first_utc_new": "2026-09-18T00:10:33Z",
+    "bracket_seconds": 1
+   },
+   "TSLA": {
+    "changed": false,
+    "value": 1.0
+   }
   }
  },
  "event_scan": {

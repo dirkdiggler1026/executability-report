@@ -92,6 +92,8 @@ def main() -> int:
     ap.add_argument("--out", required=True)
     ap.add_argument("--at", type=int, nargs="*", default=[],
                     help="extra historical blocks to read QQQ at")
+    ap.add_argument("--bisect", type=int, nargs=2, metavar=("LO", "HI"),
+                    help="binary-search every token's multiplier change inside [LO,HI]")
     ap.add_argument("--event-scan", type=int, nargs=2, metavar=("LO", "HI"),
                     help="scan the QQQ token's own logs over [LO,HI]")
     a = ap.parse_args()
@@ -101,7 +103,7 @@ def main() -> int:
            "function": "uiMultiplier()", "selector": UI_MULTIPLIER,
            "standard": "ERC-8056 Scaled UI Amount Extension",
            "scale": "1e18 fixed point",
-           "latest": {}, "historical": {}, "event_scan": None,
+           "latest": {}, "historical": {}, "bisect": None, "event_scan": None,
            "note": ("Read is not notification. The two sections below answer different "
                     "questions and the second one is the one that constrains a reader.")}
 
@@ -117,6 +119,47 @@ def main() -> int:
         out["historical"][str(blk)] = {"value": (v / 1e18) if v is not None else None,
                                        "error": e or None}
         print(f"  QQQ @ {blk:,}  {(v/1e18) if v is not None else '—'}  {e}")
+
+    if a.bisect:
+        lo0, hi0 = a.bisect
+        out["bisect"] = {"window": [lo0, hi0], "method":
+                         ("binary search on uiMultiplier() alone. Needs no transfer, so it "
+                          "resolves to a single block; the transfer-log route can only "
+                          "bracket to the nearest pair of transfers."),
+                         "steps": {}}
+        for sym in sorted(TOKENS):
+            lo, hi = lo0, hi0
+            vlo, _ = read_at(url, TOKENS[sym], lo)
+            vhi, _ = read_at(url, TOKENS[sym], hi)
+            if vlo is None or vhi is None:
+                out["bisect"]["steps"][sym] = {"error": "endpoint read failed"}
+                print(f"  {sym:6} read failed"); continue
+            if vlo == vhi:
+                out["bisect"]["steps"][sym] = {"changed": False,
+                                               "value": vlo / 1e18}
+                print(f"  {sym:6} no change ({vlo/1e18})"); continue
+            while hi - lo > 1:
+                mid = (lo + hi) // 2
+                v, _ = read_at(url, TOKENS[sym], mid)
+                if v is None:
+                    out["bisect"]["steps"][sym] = {"error": f"read failed at {mid}"}
+                    break
+                lo, hi = (mid, hi) if v == vlo else (lo, mid)
+            else:
+                t0, _ = rpc(url, "eth_getBlockByNumber", [hex(lo), False])
+                t1, _ = rpc(url, "eth_getBlockByNumber", [hex(hi), False])
+                ts0 = int(t0["timestamp"], 16) if t0 else None
+                ts1 = int(t1["timestamp"], 16) if t1 else None
+                out["bisect"]["steps"][sym] = {
+                    "changed": True, "from": vlo / 1e18, "to": vhi / 1e18,
+                    "last_block_old": lo, "first_block_new": hi,
+                    "last_utc_old": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(ts0)),
+                    "first_utc_new": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(ts1)),
+                    "bracket_seconds": (ts1 - ts0) if (ts0 and ts1) else None}
+                print(f"  {sym:6} {vlo/1e18} -> {vhi/1e18}  "
+                      f"block {hi:,}  "
+                      f"{out['bisect']['steps'][sym]['first_utc_new']}  "
+                      f"({out['bisect']['steps'][sym]['bracket_seconds']}s)")
 
     if a.event_scan:
         lo, hi = a.event_scan
