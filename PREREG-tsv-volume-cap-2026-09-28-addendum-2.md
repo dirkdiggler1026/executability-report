@@ -1,5 +1,21 @@
 # Addendum 2 to `PREREG-tsv-volume-cap-2026-09-28.md`
 
+> **PARTLY CORRECTED, 2026-09-29.** Two statements in §1 did not survive the first run.
+> The **ranking claim** — "the three payers rank in the order of their dividend yields" — is
+> **withdrawn**: measured on 2026-09-15, NVDA's index is 1.000775159 against AAPL's
+> 1.000566080, and NVDA's dividend yield is far lower; QQQ and SPY were still exactly 1.0 on
+> that date and stepped later. The index is **cumulative since the token's inception**, so its
+> level is not a function of current yield. The **"zero spread"** claim is also withdrawn: it
+> was an artifact of small samples. A full scan of one day of AAPL events returns 111 distinct
+> ratios, almost all of them rounding — `n1 = round(n0 × index)` gives a relative error of
+> about `1/n0`, so small transfers deviate.
+>
+> What survives unchanged: **every dividend payer has an index above 1 and every non-payer is
+> exactly 1.000000000**, and the index steps rather than drifting.
+>
+> Nothing below this banner is edited. See the error archive and the
+> `corrections_to_prereg` field of the run artifact.
+
 **Written 2026-09-28, still before the run.** No numerator, denominator or ratio exists, and
 the collecting machine holds no volume artifact. This addendum replaces §2 ① of the
 registration, because a measurement taken while preparing the run showed the assumption behind
