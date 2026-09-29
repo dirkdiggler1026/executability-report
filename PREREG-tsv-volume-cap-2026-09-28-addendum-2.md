@@ -15,6 +15,19 @@
 >
 > Nothing below this banner is edited. See the error archive and the
 > `corrections_to_prereg` field of the run artifact.
+>
+> **ALSO CORRECTED, 2026-09-29 — the word "index" in §3.** §3's replacement text says "each
+> token carries a per-asset index, observable on chain". That reads as though a field exists.
+> **It does not.** There is no index field, no getter, and no published value: `index()`,
+> `sharePrice()`, `pricePerShare()`, `multiplier()`, `scalingFactor()`, `convertToShares()`,
+> `exchangeRate()`, `sharesPerToken()` and `assetsPerShare()` are all absent, and storage slots
+> 0–11 do not change across a step. The accurate statement is the one already written in §1 of
+> this same file: **every transfer emits a log carrying two numbers, and their ratio moves**.
+> Anyone going to look for the field will not find it. The arithmetic of §3 is unaffected — the
+> quantity is read exactly as §1 describes — only the description of where it lives was loose.
+>
+> Recorded as one error with three landing points (this file, the index-priced-test note, and
+> `code/read_accrual_index.py`), not three.
 
 **Written 2026-09-28, still before the run.** No numerator, denominator or ratio exists, and
 the collecting machine holds no volume artifact. This addendum replaces §2 ① of the
