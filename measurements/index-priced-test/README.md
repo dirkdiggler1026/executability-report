@@ -13,8 +13,16 @@ measured, why it cannot answer the question, and what would be needed to answer 
 
 Each tokenised stock on Robinhood Chain carries a per-asset index that steps: every dividend
 payer is above 1, every non-payer is exactly `1.000000000`. QQQ's index moved from
-`1.000000000` to `1.000700791` inside a 37-second window on 2026-09-22
-(blocks 69,216,761 → 69,217,129).
+`1.000000000` to `1.000700791` inside a **32-second** window on 2026-09-22: the last transfer at
+the old value is block 69,216,810 (00:10:33 UTC) and the first at the new value is block
+69,217,129 (00:11:05 UTC).
+
+> This note earlier recorded the same change as a 37-second window (block 69,216,761 → 69,217,129).
+> Both bounds hold on the same event; the tighter one comes from an exhaustive scan of every
+> transfer in the surrounding four hours (`code/accrual_index_history.py`) rather than a
+> bisection, and the value itself is the ratio of the two amounts inside the transfer log.
+> Nothing about the conclusion changes: a change with no transfer in between emits nothing, so
+> the bound is a pair of transfers, not an instant.
 
 Does the market price it? If it does, every "token price against share price" comparison must
 subtract it. If it does not, the index is an accounting quantity and the same comparisons must
