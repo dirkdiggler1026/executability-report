@@ -1,23 +1,26 @@
 #!/usr/bin/env python3
-"""Read the per-asset accrual index that tokenised stocks emit inside transfer logs.
+"""Read the per-asset accrual multiplier that tokenised stocks emit inside their transfer logs.
 
-MEASURED (2026-09-28): transfers of the tokenised stocks on Robinhood Chain (chainId 4663)
-carry a side-car log with topic0
-    0x37e7f0db430edc9dd31bc66f25f8449353aa0818f503b906747dd8f286cd3802
-whose 32-byte words include a per-asset fixed-point index (scale 1e18). There is no getter
-and no dedicated event: the value is visible only by decoding a transfer log.
+MEASURED (2026-09-28/29): a transfer of a tokenised stock on Robinhood Chain (chainId 4663) is
+accompanied by a second log from the same contract, carrying the same sender and recipient:
+    topics[0] = 0x37e7f0db430edc9dd31bc66f25f8449353aa0818f503b906747dd8f286cd3802
+    topics[1], topics[2] = from, to
+    data = (w0, w1)    w0 = the transferred amount,   w1 = floor(w0 x k)
+so the multiplier k is the RATIO of the two words. Nothing in the log is k by itself: there is no
+getter we could find and no event names it, so k is visible only by dividing the two words. (An
+earlier note in this file's history described k as a stored fixed-point word; that was wrong and
+this is the reading the ratio_report below actually establishes.)
 
-This script does not assume which word holds it. It fetches the most recent logs, groups them
-by word count (two layouts have been observed: a shorter and a longer one), and for each word
-position prints how many distinct values it took inside the window. The index is the word that
-is (a) inside [1.0, 1.01] and (b) constant across the window while transfer amounts vary.
+The script does not assume which word holds what. It groups logs by word count and, per word
+position, prints how many distinct values it took inside the window -- which is how the ratio was
+found in the first place (no single position is constant). k itself comes from ratio_report().
 
 Usage:
     python read_accrual_index.py                # all nine assets, ~20k-block window
     python read_accrual_index.py --blocks 60000 --assets SPY,AMC
     python read_accrual_index.py --samples 5    # show 5 raw logs per asset
 
-Nothing is written. The RPC URL is read from ../.env (RPC_MAINNET) and never printed.
+Nothing is written. The RPC is $RH_RPC, else RPC_MAINNET from ../.env, else the public endpoint.
 Failures are reported, never skipped silently.
 """
 from __future__ import annotations
