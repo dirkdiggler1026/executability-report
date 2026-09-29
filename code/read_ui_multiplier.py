@@ -92,12 +92,23 @@ def main() -> int:
     ap.add_argument("--out", required=True)
     ap.add_argument("--at", type=int, nargs="*", default=[],
                     help="extra historical blocks to read QQQ at")
+    ap.add_argument("--extra", nargs="*", default=[], metavar="SYM=0xADDR",
+                    help="additional tokens to read, e.g. CRWD=0xea72... "
+                         "(the nine in TOKENS are the published series; anything "
+                         "else is passed in so the table above stays the series)")
+    ap.add_argument("--only-extra", action="store_true",
+                    help="read only the --extra tokens, not the nine")
     ap.add_argument("--bisect", type=int, nargs=2, metavar=("LO", "HI"),
                     help="binary-search every token's multiplier change inside [LO,HI]")
     ap.add_argument("--event-scan", type=int, nargs=2, metavar=("LO", "HI"),
                     help="scan the QQQ token's own logs over [LO,HI]")
     a = ap.parse_args()
     url = archive_url()
+    if a.only_extra:
+        TOKENS.clear()
+    for kv in a.extra:
+        sym, addr = kv.split("=", 1)
+        TOKENS[sym] = addr
 
     out = {"generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
            "function": "uiMultiplier()", "selector": UI_MULTIPLIER,

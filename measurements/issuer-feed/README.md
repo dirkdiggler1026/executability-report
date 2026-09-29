@@ -38,6 +38,32 @@ TSLA, AMC, GME, RDDT     exactly 1.0 throughout
 Each bracketed to **one block, one second**, over the window 51,274,668 – 75,336,022
 (2026-09-01 to 2026-09-29).
 
+### The same field also carries splits, and nothing yet carries a decrease
+
+Across all 195 assets on 2026-09-29: **153 are exactly 1, 42 are above 1, and none is below
+1.** Two are not of the form 1.00x —
+
+```
+CCL    1.021486444855206408
+CRWD   4.000000000000000000     ← an integer
+```
+
+CRWD's multiplier is 1.0 up to block **1,267,584** and 4.0 from block **1,267,585**,
+**2026-07-02 13:30:00 UTC** — one block, one second, and that second is 09:30 New York, the
+opening bell. CrowdStrike pays no dividend and ran a 4-for-1 split, so the reading is that
+**dividends and splits move the same field**, which is what the issuer's own documentation
+says. That is INTERPRETED: the chain shows an integer 4 appearing at market open, not a label.
+
+🔴 **Whether the multiplier can decrease is OPEN.** A reverse split would put it below 1 and
+none of the 195 is, so nothing here settles it. The sampling in
+`../tsv-volume/` assumed nothing about direction and the change detector compares
+symmetrically, so a fall would be seen if one occurred — but not being blind to it is not the
+same as having observed it.
+
+⚠️ The nine tracked symbols are the published series; CRWD and CCL were read by passing
+`--extra` so the series table above stays the series
+(`uimultiplier-split-CRWD-2026-09-29.json`).
+
 ## 3. 🔴 Nothing announces it
 
 ```

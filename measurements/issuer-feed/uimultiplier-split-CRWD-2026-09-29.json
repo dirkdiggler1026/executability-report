@@ -1,0 +1,47 @@
+{
+ "generated_utc": "2026-09-29T15:53:23Z",
+ "function": "uiMultiplier()",
+ "selector": "0xa60bf13d",
+ "standard": "ERC-8056 Scaled UI Amount Extension",
+ "scale": "1e18 fixed point",
+ "latest": {
+  "CCL": {
+   "address": "0x9651342CeA770aE9a2969Ba2A52611523146aef9",
+   "raw": 1021486444855206408,
+   "value": 1.0214864448552063,
+   "error": null
+  },
+  "CRWD": {
+   "address": "0xea72Ecca2d0f6bFA1394DBBCff85b52CD4233931",
+   "raw": 4000000000000000000,
+   "value": 4.0,
+   "error": null
+  }
+ },
+ "historical": {},
+ "bisect": {
+  "window": [
+   1000000,
+   10000000
+  ],
+  "method": "binary search on uiMultiplier() alone. Needs no transfer, so it resolves to a single block; the transfer-log route can only bracket to the nearest pair of transfers.",
+  "steps": {
+   "CCL": {
+    "changed": false,
+    "value": 1.0
+   },
+   "CRWD": {
+    "changed": true,
+    "from": 1.0,
+    "to": 4.0,
+    "last_block_old": 1267584,
+    "first_block_new": 1267585,
+    "last_utc_old": "2026-07-02T13:29:59Z",
+    "first_utc_new": "2026-07-02T13:30:00Z",
+    "bracket_seconds": 1
+   }
+  }
+ },
+ "event_scan": null,
+ "note": "Read is not notification. The two sections below answer different questions and the second one is the one that constrains a reader."
+}
