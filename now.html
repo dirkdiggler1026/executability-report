@@ -97,7 +97,7 @@
     &nbsp;&nbsp;&nbsp;&nbsp;cast call 0x7f5446b920e09531f443ce951076cbaed09dfab6 'getRoundHash(uint64)(bytes32,uint8)' 61129566 --rpc-url https://rpc.mainnet.chain.robinhood.com<br>
     &nbsp;&nbsp;&nbsp;&nbsp;cast call 0x7f5446b920e09531f443ce951076cbaed09dfab6 'getRoundHash(uint64)(bytes32,uint8)' 53808204 --rpc-url https://rpc.mainnet.chain.robinhood.com<br>
     &nbsp;&nbsp;&nbsp;&nbsp;<span class="sub">61,129,566 is a published round in the backfill &mdash; hash, canon 2. 53,808,204 is a published round that was <b>quarantined</b> (canon rhdepth-v1) and sits below the first committed block, so it returns canon 0 and always will. Canon 0 means absent, not broken.</span><br>
-    <b>generated</b> &nbsp; 2026-09-29 06:02 UTC &nbsp;&middot;&nbsp; regenerated daily with the data, so this page cannot be older than the day it shows
+    <b>generated</b> &nbsp; 2026-09-29 11:59 UTC &nbsp;&middot;&nbsp; regenerated daily with the data, so this page cannot be older than the day it shows
   </div>
 
   <table>
@@ -127,8 +127,8 @@
     <div><b>Known limitation, stated here rather than in a footnote elsewhere.</b> Every row is the
       best route <i>among the pools in the published pool table</i>, and that table keeps the eight
       best pools per token. A pool created after it is invisible here.
-      <div class="qqq"><b>* QQQ at $100.</b> This cell is one of the ten errors in the published
-        archive. The pool table ends at block 53,983,886; a cheaper 0.05% QQQ/USDG pool was created
+      <div class="qqq"><b>* QQQ at $100.</b> This cell is one of the numbered errors in the
+        published archive. The pool table ends at block 53,983,886; a cheaper 0.05% QQQ/USDG pool was created
         at block 55,328,824, after that cutoff, so the series routes around it. Measured against
         the chain, this cell is about <b>95.6%</b>. The damage is bounded and the bound is
         checkable: that pool returns no quote above about <b>$300</b>, so the $1,000 row and every
@@ -144,7 +144,8 @@
       token has is a property of the series, not of one day; it is established in the report, not
       here.</div>
     <div><a href="https://github.com/dirkdiggler1026/executability-report">data, method, verifier and
-      error archive</a> &middot; ten published errors, eight caught before publication</div>
+      error archive</a> &middot; every entry numbered, each carrying the side of publication it landed
+      on &mdash; the count lives on the archive's own page, not here</div>
   </div>
 </body>
 </html>

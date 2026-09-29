@@ -564,12 +564,12 @@ python3 code/verify.py 54088399</td></tr>
 <section>
   <div class="sec-head">
     <div class="eyebrow">Method</div>
-    <h2>Our instruments lied to us fourteen times</h2>
+    <h2>Our instruments lied to us sixteen times</h2>
   </div>
 
   <div class="col">
     <p>This section does not usually appear in a report like this. It is here because it explains something more important: why almost nobody does independent executability measurement.</p>
-    <p>Not because it is hard, but because instruments lie quietly. Fourteen errors, each producing a precise number that looked like an insight. Seven were caught before anything was published. Seven were not — 08, 09, 10, 11, 12, 13 and 14 — and the section each one corrupted is corrected above. A process that genuinely self-corrects will eventually catch something late; what matters is which side of publication each one landed on, so each entry carries its side and this paragraph counts them.</p>
+    <p>Not because it is hard, but because instruments lie quietly. Sixteen errors, each producing a precise number that looked like an insight. Seven were caught before anything was published. Nine were not — 08, 09, 10, 11, 12, 13, 14, 15 and 16 — and what each one corrupted is corrected where it lives. A process that genuinely self-corrects will eventually catch something late; what matters is which side of publication each one landed on, so each entry carries its side and this paragraph counts them.</p>
   </div>
 
   <div class="fail" data-found="pre">
@@ -632,6 +632,15 @@ python3 code/verify.py 54088399</td></tr>
   <div class="fail" data-found="post" data-found-date="2026-09-27">
     <div class="n">14</div><div class="t">A block's state root was reported as a revert selector</div>
     <div class="b">The collector's first <code>err_record()</code> took the first <code>0x…</code> string it found in the human-readable part of a JSON-RPC error and reported ten characters of it as a <code>selector</code>. It was the leading four bytes of the <b>stateRoot</b> of the block that round was pinned to, and a 60-character truncation then in place had cut it six characters short of the closing bracket, so it did not look like the start of a bracketed string. Nothing reverted: the public endpoint was pruning the pinned block's state while the round was still running (<code>missing trie node</code> / <code>layer stale</code>), and a round takes 110–122 s against a state window this page measures at five to ten minutes. It was <b>published before it was understood</b> — in addendum 3 of the second series' pre-registration — and corrected in <a href="PREREG-oneside-depth-2026-09-25-addendum-4.md">addendum 4</a>. The collector now takes <code>selector</code> only from <code>error.data</code>, records a failure kind, and retries a state-unavailable call. Same class as the truncation itself: a quantity produced by our own parsing, read as a property of the object. <b>Found 2026-09-27, after publication.</b> The film says thirteen and card 4 shows 13 — both are dated 2026-09-26 artefacts, and this is the fourteenth.</div>
+  </div>
+
+  <div class="fail" data-found="post" data-found-date="2026-09-29">
+    <div class="n">15</div><div class="t">A description that reads as a stored field — in three published places at once</div>
+    <div class="b">Every transfer of a tokenised stock is accompanied by a second log from the same contract, with the same sender and recipient, whose two data words are the amount moved and that amount multiplied by a per-asset factor. The factor is therefore the <b>ratio of two numbers in the log</b>: no field holds it, no getter we could find returns it, and no event names it. Three published texts said otherwise — "each token carries a per-asset index, observable on chain" (pre-registration addendum 2, §3), "Each tokenised stock … carries a per-asset index" (<code>measurements/index-priced-test/README.md</code>), and a docstring in <code>code/read_accrual_index.py</code> that described the log as holding a fixed-point index in one of its words. Each reads as something a reader can go and fetch, and a reader who goes looking finds two amounts instead. The same addendum states the mechanism correctly in its §1, which is how this survived: one document, one precise passage and one loose one, and the loose one was the passage likely to be quoted. All three are corrected in place, and the docstring now says in the file which description was wrong. <b>Found 2026-09-29, after publication</b>, by writing the letter that the description was meant to support.</div>
+  </div>
+  <div class="fail" data-found="post" data-found-date="2026-09-29">
+    <div class="n">16</div><div class="t">A change detector that could only see the value fall</div>
+    <div class="b">The month-long sampler for that factor compares consecutive samples by intersecting the exact interval each sample's logs imply. Its first published version tested only whether the previous interval sat <em>above</em> the next one — a fall. The factor rises. So the detector could not fire on the event it exists to find, and would have reported "no change in September" for an asset whose own output, three lines higher, printed two different values. What caught it was that contradiction, in the script's own printout, about forty minutes after it was pushed: <b>two distinct sampled values with zero changes is not a fact about the chain, it is a broken test.</b> The comparison is now symmetric and names the direction, and the file records that it shipped otherwise. This is <b>entry 5 inverted</b> — an alert that could never fire, where that one fired for nothing — and it is why the month's figures were still unpublished when it was found: a number does not get read out of an instrument that has not been shown able to move. <b>Found 2026-09-29, after publication, before any figure used it.</b></div>
   </div>
 
 <div class="col" style="margin-top:34px">

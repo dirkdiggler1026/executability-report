@@ -329,8 +329,8 @@ def main() -> int:
     <div><b>Known limitation, stated here rather than in a footnote elsewhere.</b> Every row is the
       best route <i>among the pools in the published pool table</i>, and that table keeps the eight
       best pools per token. A pool created after it is invisible here.
-      <div class="qqq"><b>* QQQ at $100.</b> This cell is one of the ten errors in the published
-        archive. The pool table ends at block 53,983,886; a cheaper 0.05% QQQ/USDG pool was created
+      <div class="qqq"><b>* QQQ at $100.</b> This cell is one of the numbered errors in the
+        published archive. The pool table ends at block 53,983,886; a cheaper 0.05% QQQ/USDG pool was created
         at block 55,328,824, after that cutoff, so the series routes around it. Measured against
         the chain, this cell is about <b>95.6%</b>. The damage is bounded and the bound is
         checkable: that pool returns no quote above about <b>$300</b>, so the $1,000 row and every
@@ -346,7 +346,8 @@ def main() -> int:
       token has is a property of the series, not of one day; it is established in the report, not
       here.</div>
     <div><a href="https://github.com/dirkdiggler1026/executability-report">data, method, verifier and
-      error archive</a> &middot; ten published errors, eight caught before publication</div>
+      error archive</a> &middot; every entry numbered, each carrying the side of publication it landed
+      on &mdash; the count lives on the archive's own page, not here</div>
   </div>
 </body>
 </html>
