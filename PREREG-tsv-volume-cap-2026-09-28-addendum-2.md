@@ -29,6 +29,35 @@
 > Recorded as one error with three landing points (this file, the index-priced-test note, and
 > `code/read_accrual_index.py`), not three.
 
+> **CORRECTED AGAIN, 2026-09-29 — there IS a getter, and this file named the wrong reason.**
+> The banner immediately above says "no getter". That is wrong. The function is
+> **`uiMultiplier()`** (selector `0xa60bf13d`), defined by **ERC-8056, the Scaled UI Amount
+> Extension**, and documented by the issuer. Verified here by direct `eth_call` on all nine
+> tokens: it returns the multiplier as 1e18 fixed point and matches the log-ratio measurement
+> to every digit already published —
+> QQQ `1.000700791241405425`, SPY `1.001717991187472003`, AAPL `1.000566080061092436`,
+> NVDA `1.000775159164630595`, GOOGL `1.000193924414112587`, and exactly 1e18 for TSLA, AMC,
+> GME and RDDT. It is also readable at historical blocks against an archive endpoint: 1.0 at
+> block 69,216,810 and 1.000700791… at 69,217,129, which brackets the same 32-second window
+> the bisection found, by a different method.
+>
+> **How this file got it wrong is the instructive part:** the earlier banner lists nine
+> function names that were *guessed* — `index()`, `sharePrice()`, `pricePerShare()` and the
+> rest — and reports their absence as if absence of the guesses were absence of the thing.
+> The extension standard was never looked up. A search that can only fail is not evidence.
+>
+> **What survives, and it is the part that matters.** A getter you can call is not the same as
+> a change you get told about. Over the full 340-block window containing the QQQ step, the
+> token contract emitted **no event other than transfers**: 2 Transfers and their 2 companion
+> logs, nothing else. So the value is readable at any block but **a change is not announced**.
+> Anyone who must not miss one has to poll it, or infer it from the ratio inside transfer logs.
+>
+> The issuer's documentation further states that their oracle already incorporates the
+> multiplier into the price, so **a position priced off that oracle does not carry this drift
+> at all**. The exposure is narrower than this file first suggested: it falls on anyone pricing
+> these tokens off something else, or treating a token balance as a share count in accounting
+> or reconciliation.
+
 **Written 2026-09-28, still before the run.** No numerator, denominator or ratio exists, and
 the collecting machine holds no volume artifact. This addendum replaces §2 ① of the
 registration, because a measurement taken while preparing the run showed the assumption behind

@@ -69,9 +69,13 @@ numerator is 4,785 shares a day and the denominator is not in hand.**
 ## 4. How the share count is formed
 
 The denominator of §II.F is a share count, so the numerator must be one, and a token is not a
-share. Every transfer emits a second log carrying two amounts whose **ratio** differs by asset
-and moves in steps — there is no index field, no getter, and no published value (see the error
-archive, 2026-09-29). The run applies that ratio:
+share. Each token carries a per-asset multiplier that differs by asset and moves in steps; it
+is exposed by **`uiMultiplier()`** (selector `0xa60bf13d`, ERC-8056) and equals the ratio of
+the two amounts in the log that accompanies every transfer. This run reads it from the transfer
+logs, which is what a sparse historical scan can do cheaply; the getter returns the same value
+(verified on all nine tokens, matching to every digit). **A change is not announced** — over
+the 340 blocks containing the QQQ step the token emitted no event but transfers. The run
+applies the multiplier:
 
 ```
 shares(asset, day) = Σ over swaps  token_amount × ratio(asset, block)

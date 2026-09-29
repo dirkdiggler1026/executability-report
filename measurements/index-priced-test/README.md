@@ -13,9 +13,12 @@ measured, why it cannot answer the question, and what would be needed to answer 
 
 Every transfer of a tokenised stock on Robinhood Chain emits a log carrying **two numbers**,
 and their ratio moves in steps: for every dividend payer it is above 1, for every non-payer it
-is exactly `1.000000000`. There is **no index field and no getter** — the quantity is a
-quotient of two logged amounts, and it is not published anywhere on chain. "Index" below is
-shorthand for that ratio, not for a value the contract exposes. QQQ's ratio moved from
+is exactly `1.000000000`. The value is exposed by **`uiMultiplier()`** (selector
+`0xa60bf13d`, ERC-8056 Scaled UI Amount Extension), returns 1e18 fixed point, and is readable
+at historical blocks; it equals the ratio of the two logged amounts to every digit. **What is
+not available is notification:** over the 340 blocks containing the step the token emitted no
+event but transfers, so a change can be read but not subscribed to. "Index" below is shorthand
+for that multiplier. QQQ's ratio moved from
 `1.000000000` to `1.000700791` inside a **32-second** window on 2026-09-22: the last transfer at
 the old value is block 69,216,810 (00:10:33 UTC) and the first at the new value is block
 69,217,129 (00:11:05 UTC).
@@ -27,10 +30,14 @@ the old value is block 69,216,810 (00:10:33 UTC) and the first at the new value 
 > Nothing about the conclusion changes: a change with no transfer in between emits nothing, so
 > the bound is a pair of transfers, not an instant.
 >
-> **Also corrected 2026-09-29:** the opening sentence above previously read "each tokenised stock
-> … carries a per-asset index". That reads as though a field exists, and none does. Corrected in
-> place; recorded in the error archive as one entry with three landing points, of which this is
-> one. No number in this note changes.
+> **Also corrected 2026-09-29, twice.** The opening sentence first read "each tokenised stock
+> … carries a per-asset index", which reads as though a field exists. The correction then
+> over-shot and said there was **no getter**: there is one, `uiMultiplier()`, defined by
+> ERC-8056 and documented by the issuer; this project had guessed at names like `index()` and
+> `sharePrice()` rather than looking up the extension, and reported the guesses' absence as
+> the thing's absence. Both are in the error archive as one entry. No number in this note
+> changes — the measured values were right throughout; only the account of where they live
+> was wrong, first one way and then the other.
 
 Does the market price it? If it does, every "token price against share price" comparison must
 subtract it. If it does not, the index is an accounting quantity and the same comparisons must

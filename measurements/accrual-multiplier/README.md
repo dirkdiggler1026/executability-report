@@ -40,6 +40,41 @@ the value is observable per transfer, and k is the ratio of its two words.
 Which side is shares and which is tokens is **OPEN** (the log alone does not say). The ratio is k either
 way, and it is the ratio that breaks a 1:1 assumption.
 
+### The getter, called rather than cited — and the thing it does not give you
+
+`uiMultiplier()` was read directly on all nine tokens (`uimultiplier-call-2026-09-29.json`,
+produced by `code/read_ui_multiplier.py`). Selector `0xa60bf13d`, 1e18 fixed point. **Every
+value matches the log-ratio measurement to the last digit**, so the two methods are not two
+estimates of one number — they are the same number reached two ways.
+
+It is also readable at historical blocks against an archive endpoint, and that reproduces the
+step by a third route:
+
+```
+QQQ  block 69,183,271   1.000000000000000000
+     block 69,216,810   1.000000000000000000     <- last block before the step
+     block 69,217,129   1.000700791241405425     <- first block after
+     block 69,263,499   1.000700791241405425
+```
+
+which is the same 32-second bracket the transfer-log bisection found, without using transfers
+at all.
+
+🔴 **Reading is not notification, and that is the part that constrains a reader.** Over blocks
+69,216,800–69,217,140 — 340 blocks spanning the change — the token contract emitted **four
+logs in total**: two `Transfer`s and their two companion logs. **Nothing announced the
+change.** The value can be read at any block; it cannot be subscribed to. Anyone who must not
+miss a change has to poll the getter, or infer it from the ratio inside transfer logs, which
+is what this series does.
+
+The log scan runs against the **public endpoint with no key**, so that half is reproducible by
+anyone. (The keyed archive endpoint caps `eth_getLogs` at a 10-block range on its plan; it is
+used here only for historical `eth_call`, which needs archive state.)
+
+⚠️ Scope of the scan: the **token's own** logs. We did not decode every event emitted by every
+other contract in that window, so this says no announcement came from the token, not that no
+announcement exists anywhere.
+
 | token | address | k (2026-09-29) |
 |---|---|---|
 | SPY | `0x117cc2133c37b721f49de2a7a74833232b3b4c0c` | 1.001717991187472003 |

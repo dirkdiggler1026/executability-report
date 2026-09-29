@@ -404,10 +404,13 @@ def main() -> int:
              "status": "corrected in addendum 5",
              "why": "those counts describe MISSING-71909188.json, a different artifact."},
         ],
-        "quantity": ("There is no index field and no getter. Every transfer emits a log "
-                     "carrying two amounts; the quantity used here is their ratio, which "
-                     "moves in steps. \"index\" below is shorthand for that ratio, not for "
-                     "a value any contract exposes."),
+        "quantity": ("Per-asset multiplier, exposed by uiMultiplier() (selector "
+                     "0xa60bf13d, ERC-8056 Scaled UI Amount Extension) and equal to the "
+                     "ratio of the two amounts in the log accompanying every transfer. "
+                     "This run reads it from the logs; the getter returns the same value. "
+                     "A CHANGE IS NOT ANNOUNCED: over the 340 blocks containing the QQQ "
+                     "step the token emitted no event but transfers, so the value can be "
+                     "read at any block but not subscribed to."),
         "survives_unchanged": ("every dividend payer has a ratio above 1 and every "
                                "non-payer is exactly 1.000000000; the ratio steps."),
     }
