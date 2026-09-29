@@ -84,10 +84,22 @@ def main() -> int:
     pend = s.get("pending_multiplier_nonempty") or []
     if pend:
         alerted = True
-        rows = (cur["endpoints"]["assets"].get("body") or {}).get("assets") or []
+        # 🔴 .unchanged.json 没有 endpoints 段（只写哈希）。这里直接下标会 KeyError，
+        #    而崩掉的正是【要报告答案的那一行】—— 今天已经栽过一次这个形状。
+        rows = (((cur.get("endpoints") or {}).get("assets") or {}).get("body")
+                or {}).get("assets") or []
         by = {r["tokenSymbol"]: r for r in rows}
-        detail = "\n".join(f"  {t}  current={by.get(t,{}).get('currentMultiplier')}  "
-                           f"pending={by.get(t,{}).get('pendingMultiplier')}" for t in pend)
+        # 精简记录没有 endpoints，但 summary.tracked 里带着值 —— 用它兜底，
+        # 免得告警响了却印出一串 None（响而无内容 ≈ 没响）
+        tr = s.get("tracked") or {}
+        def val(t, key, alt):
+            r = by.get(t)
+            if r and r.get(key) is not None:
+                return r[key]
+            return (tr.get(t) or {}).get(alt, "?")
+        detail = "\n".join(
+            f"  {t}  current={val(t,'currentMultiplier','current')}  "
+            f"pending={val(t,'pendingMultiplier','pending')}" for t in pend)
         fire("pending", "🟢 rhj-feed:pendingMultiplier 出现非空 —— 这是那个问题的答案\n"
                         f"{detail}\n快照 {cur['fetched_utc']}\n{files[-1]}")
     else:

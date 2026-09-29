@@ -87,9 +87,27 @@ def main() -> int:
                                        "pending": r.get("pendingMultiplier")}
                     for r in rows if r.get("tokenSymbol") in TRACKED},
     }
-    p = os.path.join(d, f"rhj-{stamp}.json")
-    json.dump(out, open(p, "w"), indent=1)
-    print(f"  {p}  assets={len(rows)}  pending非空={len(pend)} {pend or ''}")
+    # 🔴 只在【内容变了】时写全量。信里承诺了这条序列在跑，所以频率要够密
+    #    (30 分钟)，但 195 个资产的响应约 160 KB，密写会把 $10 的盘撑爆。
+    #    没变的那些轮次写一条只有哈希的小记录 —— 序列仍然连续、仍可证明当时读过、
+    #    仍能区分"没变"和"没跑"，而这正是空记录做不到的事。
+    sig = "|".join(out["endpoints"][k]["sha256"] for k in
+                   ("assets", "corporate_actions", "price_deviations"))
+    last_f = os.path.join(a.out, "_last_sig")
+    prev = open(last_f).read().strip() if os.path.exists(last_f) else ""
+    if sig == prev:
+        p = os.path.join(d, f"rhj-{stamp}.unchanged.json")
+        json.dump({"canon": out["canon"], "fetched_utc": out["fetched_utc"],
+                   "unchanged": True, "sig": sig,
+                   "note": ("三个端点的响应逐字节与上一轮相同。全量只在变化时写；"
+                            "这条记录证明这一轮确实读到了，而不是没跑。"),
+                   "summary": out["summary"]}, open(p, "w"), indent=1)
+    else:
+        p = os.path.join(d, f"rhj-{stamp}.json")
+        json.dump(out, open(p, "w"), indent=1)
+        open(last_f, "w").write(sig)
+    print(f"  {p}  assets={len(rows)}  pending非空={len(pend)} {pend or ''}"
+          f"{'  (unchanged)' if sig == prev else '  (CHANGED)'}")
     return 0
 
 
