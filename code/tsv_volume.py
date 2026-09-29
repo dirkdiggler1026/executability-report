@@ -404,8 +404,12 @@ def main() -> int:
              "status": "corrected in addendum 5",
              "why": "those counts describe MISSING-71909188.json, a different artifact."},
         ],
-        "survives_unchanged": ("every dividend payer has an index above 1 and every "
-                               "non-payer is exactly 1.000000000; the index steps."),
+        "quantity": ("There is no index field and no getter. Every transfer emits a log "
+                     "carrying two amounts; the quantity used here is their ratio, which "
+                     "moves in steps. \"index\" below is shorthand for that ratio, not for "
+                     "a value any contract exposes."),
+        "survives_unchanged": ("every dividend payer has a ratio above 1 and every "
+                               "non-payer is exactly 1.000000000; the ratio steps."),
     }
     p = os.path.join(a.out, f"tsv-volume-{a.d0}_{a.d1}.json")
     json.dump(out, open(p, "w"), indent=1)

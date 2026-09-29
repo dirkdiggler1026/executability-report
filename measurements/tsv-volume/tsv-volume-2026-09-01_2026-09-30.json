@@ -1,0 +1,7447 @@
+{
+ "prereg": [
+  "PREREG-tsv-volume-cap-2026-09-28.md",
+  "PREREG-tsv-volume-cap-2026-09-28-addendum.md",
+  "PREREG-tsv-volume-cap-2026-09-28-addendum-2.md",
+  "PREREG-tsv-volume-cap-2026-09-28-addendum-3.md",
+  "PREREG-tsv-volume-cap-2026-09-28-addendum-4.md",
+  "PREREG-tsv-volume-cap-2026-09-28-addendum-5.md"
+ ],
+ "generated_utc": "2026-09-29T11:26:56Z",
+ "window": {
+  "from": "2026-09-01",
+  "to": "2026-09-30",
+  "block_from": 51274668,
+  "block_to": 75576907
+ },
+ "pool_set": {
+  "rule": "union of every archived enumeration, deduped on (asset,pool,quote)",
+  "files": [
+   "pools-72764101.json",
+   "pools-73619413.json",
+   "pools-74476245.json",
+   "pools-75336022.json"
+  ],
+  "count": 66,
+  "by_quote": {
+   "USDG": 47,
+   "WETH": 19
+  },
+  "seen_in_n_enumerations": {
+   "4": 53,
+   "1": 10,
+   "3": 2,
+   "2": 1
+  }
+ },
+ "not_a_bound": "An estimate over the stated pool set. Pool-to-venue attribution is not observable on chain, so this is neither an upper nor a lower bound on the quantity section II.F caps. It cannot be used to say a threshold was not exceeded.",
+ "index_sampling": {
+  "AAPL": {
+   "samples": 27,
+   "span": 1500,
+   "gap_blocks": 934701,
+   "steps_bisected": 0,
+   "values": [
+    1.000566080061
+   ]
+  },
+  "AMC": {
+   "samples": 24,
+   "span": 1500,
+   "gap_blocks": 934701,
+   "steps_bisected": 0,
+   "values": [
+    1.0
+   ]
+  },
+  "GME": {
+   "samples": 27,
+   "span": 1500,
+   "gap_blocks": 934701,
+   "steps_bisected": 0,
+   "values": [
+    1.0
+   ]
+  },
+  "GOOGL": {
+   "samples": 27,
+   "span": 1500,
+   "gap_blocks": 934701,
+   "steps_bisected": 1,
+   "values": [
+    1.0,
+    1.000193924414
+   ]
+  },
+  "NVDA": {
+   "samples": 27,
+   "span": 1500,
+   "gap_blocks": 934701,
+   "steps_bisected": 1,
+   "values": [
+    1.0,
+    1.000775159165
+   ]
+  },
+  "QQQ": {
+   "samples": 26,
+   "span": 1500,
+   "gap_blocks": 934701,
+   "steps_bisected": 1,
+   "values": [
+    1.0,
+    1.000700791241
+   ]
+  },
+  "RDDT": {
+   "samples": 21,
+   "span": 1500,
+   "gap_blocks": 934701,
+   "steps_bisected": 0,
+   "values": [
+    1.0
+   ]
+  },
+  "SPY": {
+   "samples": 27,
+   "span": 1500,
+   "gap_blocks": 934701,
+   "steps_bisected": 1,
+   "values": [
+    1.0,
+    1.001717991187
+   ]
+  },
+  "TSLA": {
+   "samples": 27,
+   "span": 1500,
+   "gap_blocks": 934701,
+   "steps_bisected": 0,
+   "values": [
+    1.0
+   ]
+  }
+ },
+ "rows": [
+  {
+   "day": "2026-09-01",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 51274668,
+   "block_to": 52129822,
+   "swaps": 61039,
+   "tokens_raw": 36444.47154081624,
+   "shares_index_adjusted": 36465.10202949221,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 61039
+   }
+  },
+  {
+   "day": "2026-09-01",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 51274668,
+   "block_to": 52129822,
+   "swaps": 14616,
+   "tokens_raw": 8410.071112350395,
+   "shares_index_adjusted": 8414.831885919471,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 14616
+   }
+  },
+  {
+   "day": "2026-09-01",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 51274668,
+   "block_to": 52129822,
+   "swaps": 3589,
+   "tokens_raw": 543803.483904767,
+   "shares_index_adjusted": 543803.4839047671,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3589
+   }
+  },
+  {
+   "day": "2026-09-01",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 51274668,
+   "block_to": 52129822,
+   "swaps": 56947,
+   "tokens_raw": 447494.65740640776,
+   "shares_index_adjusted": 447494.6574064056,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 56947
+   }
+  },
+  {
+   "day": "2026-09-01",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 51274668,
+   "block_to": 52129822,
+   "swaps": 6670,
+   "tokens_raw": 24696.690051344853,
+   "shares_index_adjusted": 24696.690051344776,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6670
+   }
+  },
+  {
+   "day": "2026-09-01",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 51274668,
+   "block_to": 52129822,
+   "swaps": 8857,
+   "tokens_raw": 4207.787776501914,
+   "shares_index_adjusted": 4207.787776501894,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 8857
+   }
+  },
+  {
+   "day": "2026-09-01",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 51274668,
+   "block_to": 52129822,
+   "swaps": 945,
+   "tokens_raw": 153.34717641439087,
+   "shares_index_adjusted": 153.34717641439082,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 945
+   }
+  },
+  {
+   "day": "2026-09-01",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 51274668,
+   "block_to": 52129822,
+   "swaps": 112169,
+   "tokens_raw": 192262.3935661849,
+   "shares_index_adjusted": 192262.3935661871,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 112169
+   }
+  },
+  {
+   "day": "2026-09-01",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 51274668,
+   "block_to": 52129822,
+   "swaps": 24327,
+   "tokens_raw": 32304.10480452458,
+   "shares_index_adjusted": 32304.104804524617,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 24327
+   }
+  },
+  {
+   "day": "2026-09-01",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 51274668,
+   "block_to": 52129822,
+   "swaps": 54009,
+   "tokens_raw": 9659.13720363745,
+   "shares_index_adjusted": 9659.137203637474,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 54009
+   }
+  },
+  {
+   "day": "2026-09-01",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 51274668,
+   "block_to": 52129822,
+   "swaps": 3057,
+   "tokens_raw": 615.9670268470928,
+   "shares_index_adjusted": 615.9670268470927,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3057
+   }
+  },
+  {
+   "day": "2026-09-01",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 51274668,
+   "block_to": 52129822,
+   "swaps": 33392,
+   "tokens_raw": 32993.987565499876,
+   "shares_index_adjusted": 32993.98756549994,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 33392
+   }
+  },
+  {
+   "day": "2026-09-01",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 51274668,
+   "block_to": 52129822,
+   "swaps": 36206,
+   "tokens_raw": 23167.300729835308,
+   "shares_index_adjusted": 23167.30072983519,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 36206
+   }
+  },
+  {
+   "day": "2026-09-01",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 51274668,
+   "block_to": 52129822,
+   "swaps": 50495,
+   "tokens_raw": 19775.041750600645,
+   "shares_index_adjusted": 19775.041750600627,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 50495
+   }
+  },
+  {
+   "day": "2026-09-01",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 51274668,
+   "block_to": 52129822,
+   "swaps": 65388,
+   "tokens_raw": 32101.430540530026,
+   "shares_index_adjusted": 32101.430540530037,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 65388
+   }
+  },
+  {
+   "day": "2026-09-01",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 51274668,
+   "block_to": 52129822,
+   "swaps": 10151,
+   "tokens_raw": 5968.638197858885,
+   "shares_index_adjusted": 5968.638197858867,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 10151
+   }
+  },
+  {
+   "day": "2026-09-01",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 51274668,
+   "block_to": 52129822,
+   "swaps": 3073,
+   "tokens_raw": 1324.3873531584038,
+   "shares_index_adjusted": 1324.3873531584034,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3073
+   }
+  },
+  {
+   "day": "2026-09-02",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 52129823,
+   "block_to": 52978928,
+   "swaps": 56064,
+   "tokens_raw": 39460.3380602106,
+   "shares_index_adjusted": 39482.675770790294,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 56064
+   }
+  },
+  {
+   "day": "2026-09-02",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 52129823,
+   "block_to": 52978928,
+   "swaps": 16094,
+   "tokens_raw": 9324.24510326049,
+   "shares_index_adjusted": 9329.523372498179,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 16094
+   }
+  },
+  {
+   "day": "2026-09-02",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 52129823,
+   "block_to": 52978928,
+   "swaps": 9024,
+   "tokens_raw": 578358.7135843072,
+   "shares_index_adjusted": 578358.7135843053,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 9024
+   }
+  },
+  {
+   "day": "2026-09-02",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 52129823,
+   "block_to": 52978928,
+   "swaps": 56562,
+   "tokens_raw": 417082.6502335444,
+   "shares_index_adjusted": 417082.65023354423,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 56562
+   }
+  },
+  {
+   "day": "2026-09-02",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 52129823,
+   "block_to": 52978928,
+   "swaps": 7045,
+   "tokens_raw": 24732.38022008599,
+   "shares_index_adjusted": 24732.380220085965,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 7045
+   }
+  },
+  {
+   "day": "2026-09-02",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 52129823,
+   "block_to": 52978928,
+   "swaps": 44646,
+   "tokens_raw": 20393.955394769426,
+   "shares_index_adjusted": 20393.95539476952,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 44646
+   }
+  },
+  {
+   "day": "2026-09-02",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 52129823,
+   "block_to": 52978928,
+   "swaps": 6369,
+   "tokens_raw": 1293.2290843811418,
+   "shares_index_adjusted": 1293.2290843811465,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6369
+   }
+  },
+  {
+   "day": "2026-09-02",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 52129823,
+   "block_to": 52978928,
+   "swaps": 130523,
+   "tokens_raw": 164431.70508606118,
+   "shares_index_adjusted": 164431.70508606432,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 130523
+   }
+  },
+  {
+   "day": "2026-09-02",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 52129823,
+   "block_to": 52978928,
+   "swaps": 25865,
+   "tokens_raw": 26478.88798384234,
+   "shares_index_adjusted": 26478.887983842193,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 25865
+   }
+  },
+  {
+   "day": "2026-09-02",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 52129823,
+   "block_to": 52978928,
+   "swaps": 112750,
+   "tokens_raw": 21321.39928482756,
+   "shares_index_adjusted": 21321.399284827578,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 112750
+   }
+  },
+  {
+   "day": "2026-09-02",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 52129823,
+   "block_to": 52978928,
+   "swaps": 4828,
+   "tokens_raw": 825.0661133170041,
+   "shares_index_adjusted": 825.0661133170042,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4828
+   }
+  },
+  {
+   "day": "2026-09-02",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 52129823,
+   "block_to": 52978928,
+   "swaps": 29876,
+   "tokens_raw": 27649.75935772937,
+   "shares_index_adjusted": 27649.759357729392,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 29876
+   }
+  },
+  {
+   "day": "2026-09-02",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 52129823,
+   "block_to": 52978928,
+   "swaps": 31250,
+   "tokens_raw": 22012.946056357967,
+   "shares_index_adjusted": 22012.946056357978,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 31250
+   }
+  },
+  {
+   "day": "2026-09-02",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 52129823,
+   "block_to": 52978928,
+   "swaps": 85296,
+   "tokens_raw": 29320.127026524424,
+   "shares_index_adjusted": 29320.12702652474,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 85296
+   }
+  },
+  {
+   "day": "2026-09-02",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 52129823,
+   "block_to": 52978928,
+   "swaps": 99446,
+   "tokens_raw": 40121.71922833053,
+   "shares_index_adjusted": 40121.71922833078,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 99446
+   }
+  },
+  {
+   "day": "2026-09-02",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 52129823,
+   "block_to": 52978928,
+   "swaps": 17840,
+   "tokens_raw": 11878.066720844789,
+   "shares_index_adjusted": 11878.066720844867,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 17840
+   }
+  },
+  {
+   "day": "2026-09-02",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 52129823,
+   "block_to": 52978928,
+   "swaps": 7593,
+   "tokens_raw": 4077.765323414351,
+   "shares_index_adjusted": 4077.7653234143604,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 7593
+   }
+  },
+  {
+   "day": "2026-09-03",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 52978929,
+   "block_to": 53821288,
+   "swaps": 34983,
+   "tokens_raw": 28605.7508437271,
+   "shares_index_adjusted": 28621.943988912077,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 34983
+   }
+  },
+  {
+   "day": "2026-09-03",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 52978929,
+   "block_to": 53821288,
+   "swaps": 10909,
+   "tokens_raw": 9365.507158680693,
+   "shares_index_adjusted": 9370.8087855453,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 10909
+   }
+  },
+  {
+   "day": "2026-09-03",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 52978929,
+   "block_to": 53821288,
+   "swaps": 9716,
+   "tokens_raw": 875892.4936405361,
+   "shares_index_adjusted": 875892.4936405392,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 9716
+   }
+  },
+  {
+   "day": "2026-09-03",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 52978929,
+   "block_to": 53821288,
+   "swaps": 61439,
+   "tokens_raw": 452511.9268482047,
+   "shares_index_adjusted": 452511.9268482079,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 61439
+   }
+  },
+  {
+   "day": "2026-09-03",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 52978929,
+   "block_to": 53821288,
+   "swaps": 6593,
+   "tokens_raw": 25954.39808073614,
+   "shares_index_adjusted": 25954.398080736202,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6593
+   }
+  },
+  {
+   "day": "2026-09-03",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 52978929,
+   "block_to": 53821288,
+   "swaps": 41328,
+   "tokens_raw": 20729.17419340768,
+   "shares_index_adjusted": 20729.1741934077,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 41328
+   }
+  },
+  {
+   "day": "2026-09-03",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 52978929,
+   "block_to": 53821288,
+   "swaps": 7522,
+   "tokens_raw": 1888.3375691710798,
+   "shares_index_adjusted": 1888.3375691710824,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 7522
+   }
+  },
+  {
+   "day": "2026-09-03",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 52978929,
+   "block_to": 53821288,
+   "swaps": 307471,
+   "tokens_raw": 289988.2410909499,
+   "shares_index_adjusted": 289988.2410909484,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 307471
+   }
+  },
+  {
+   "day": "2026-09-03",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 52978929,
+   "block_to": 53821288,
+   "swaps": 37342,
+   "tokens_raw": 39842.69808784451,
+   "shares_index_adjusted": 39842.698087844874,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 37342
+   }
+  },
+  {
+   "day": "2026-09-03",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 52978929,
+   "block_to": 53821288,
+   "swaps": 27062,
+   "tokens_raw": 6911.980479039694,
+   "shares_index_adjusted": 6911.980479039693,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 27062
+   }
+  },
+  {
+   "day": "2026-09-03",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 52978929,
+   "block_to": 53821288,
+   "swaps": 2240,
+   "tokens_raw": 328.7832968149577,
+   "shares_index_adjusted": 328.78329681495705,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2240
+   }
+  },
+  {
+   "day": "2026-09-03",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 52978929,
+   "block_to": 53821288,
+   "swaps": 17428,
+   "tokens_raw": 15389.45670908553,
+   "shares_index_adjusted": 15389.456709085447,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 17428
+   }
+  },
+  {
+   "day": "2026-09-03",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 52978929,
+   "block_to": 53821288,
+   "swaps": 13504,
+   "tokens_raw": 10002.232437789598,
+   "shares_index_adjusted": 10002.232437789628,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 13504
+   }
+  },
+  {
+   "day": "2026-09-03",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 52978929,
+   "block_to": 53821288,
+   "swaps": 64907,
+   "tokens_raw": 23388.53924569076,
+   "shares_index_adjusted": 23388.539245690627,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 64907
+   }
+  },
+  {
+   "day": "2026-09-03",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 52978929,
+   "block_to": 53821288,
+   "swaps": 60399,
+   "tokens_raw": 33783.410605196965,
+   "shares_index_adjusted": 33783.41060519674,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 60399
+   }
+  },
+  {
+   "day": "2026-09-03",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 52978929,
+   "block_to": 53821288,
+   "swaps": 18365,
+   "tokens_raw": 10061.34441701462,
+   "shares_index_adjusted": 10061.344417014647,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 18365
+   }
+  },
+  {
+   "day": "2026-09-03",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 52978929,
+   "block_to": 53821288,
+   "swaps": 5805,
+   "tokens_raw": 2358.825143764749,
+   "shares_index_adjusted": 2358.8251437647555,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 5805
+   }
+  },
+  {
+   "day": "2026-09-04",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 53821289,
+   "block_to": 54675543,
+   "swaps": 25729,
+   "tokens_raw": 20791.206181909067,
+   "shares_index_adjusted": 20802.97566917481,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 25729
+   }
+  },
+  {
+   "day": "2026-09-04",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 53821289,
+   "block_to": 54675543,
+   "swaps": 12069,
+   "tokens_raw": 9938.057575038432,
+   "shares_index_adjusted": 9943.683311277655,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 12069
+   }
+  },
+  {
+   "day": "2026-09-04",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 53821289,
+   "block_to": 54675543,
+   "swaps": 262265,
+   "tokens_raw": 34280713.39175959,
+   "shares_index_adjusted": 34280713.39175918,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 262265
+   }
+  },
+  {
+   "day": "2026-09-04",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 53821289,
+   "block_to": 54675543,
+   "swaps": 3912,
+   "tokens_raw": 315033.28564529686,
+   "shares_index_adjusted": 315033.28564529686,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3912
+   }
+  },
+  {
+   "day": "2026-09-04",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 53821289,
+   "block_to": 54675543,
+   "swaps": 250023,
+   "tokens_raw": 2605893.344884403,
+   "shares_index_adjusted": 2605893.3448844166,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 250023
+   }
+  },
+  {
+   "day": "2026-09-04",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 53821289,
+   "block_to": 54675543,
+   "swaps": 34106,
+   "tokens_raw": 316252.79963031365,
+   "shares_index_adjusted": 316252.7996303138,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 34106
+   }
+  },
+  {
+   "day": "2026-09-04",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 53821289,
+   "block_to": 54675543,
+   "swaps": 26485,
+   "tokens_raw": 12887.561341749039,
+   "shares_index_adjusted": 12887.561341749033,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 26485
+   }
+  },
+  {
+   "day": "2026-09-04",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 53821289,
+   "block_to": 54675543,
+   "swaps": 10957,
+   "tokens_raw": 3547.6845395623745,
+   "shares_index_adjusted": 3547.6845395623777,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 10957
+   }
+  },
+  {
+   "day": "2026-09-04",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 53821289,
+   "block_to": 54675543,
+   "swaps": 139844,
+   "tokens_raw": 166778.9080871396,
+   "shares_index_adjusted": 166778.90808713838,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 139844
+   }
+  },
+  {
+   "day": "2026-09-04",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 53821289,
+   "block_to": 54675543,
+   "swaps": 41417,
+   "tokens_raw": 42155.56249490688,
+   "shares_index_adjusted": 42155.56249490703,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 41417
+   }
+  },
+  {
+   "day": "2026-09-04",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 53821289,
+   "block_to": 54675543,
+   "swaps": 27833,
+   "tokens_raw": 6504.357442963012,
+   "shares_index_adjusted": 6504.357442962991,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 27833
+   }
+  },
+  {
+   "day": "2026-09-04",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 53821289,
+   "block_to": 54675543,
+   "swaps": 1631,
+   "tokens_raw": 402.10349276724884,
+   "shares_index_adjusted": 402.10349276724884,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1631
+   }
+  },
+  {
+   "day": "2026-09-04",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 53821289,
+   "block_to": 54675543,
+   "swaps": 15195,
+   "tokens_raw": 11706.746837337612,
+   "shares_index_adjusted": 11706.746837337592,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 15195
+   }
+  },
+  {
+   "day": "2026-09-04",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 53821289,
+   "block_to": 54675543,
+   "swaps": 17459,
+   "tokens_raw": 11768.915851677664,
+   "shares_index_adjusted": 11768.91585167768,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 17459
+   }
+  },
+  {
+   "day": "2026-09-04",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 53821289,
+   "block_to": 54675543,
+   "swaps": 70299,
+   "tokens_raw": 25514.34124425281,
+   "shares_index_adjusted": 25514.341244252937,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 70299
+   }
+  },
+  {
+   "day": "2026-09-04",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 53821289,
+   "block_to": 54675543,
+   "swaps": 98696,
+   "tokens_raw": 30195.04145993624,
+   "shares_index_adjusted": 30195.041459936227,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 98696
+   }
+  },
+  {
+   "day": "2026-09-04",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 53821289,
+   "block_to": 54675543,
+   "swaps": 28516,
+   "tokens_raw": 12604.646355972953,
+   "shares_index_adjusted": 12604.646355973011,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 28516
+   }
+  },
+  {
+   "day": "2026-09-04",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 53821289,
+   "block_to": 54675543,
+   "swaps": 6707,
+   "tokens_raw": 3525.3437427832228,
+   "shares_index_adjusted": 3525.343742783214,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6707
+   }
+  },
+  {
+   "day": "2026-09-05",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 54675544,
+   "block_to": 55532249,
+   "swaps": 15171,
+   "tokens_raw": 9918.71908955215,
+   "shares_index_adjusted": 9924.333878660329,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 15171
+   }
+  },
+  {
+   "day": "2026-09-05",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 54675544,
+   "block_to": 55532249,
+   "swaps": 7210,
+   "tokens_raw": 3989.215502622029,
+   "shares_index_adjusted": 3991.473717977464,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 7210
+   }
+  },
+  {
+   "day": "2026-09-05",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 54675544,
+   "block_to": 55532249,
+   "swaps": 9457,
+   "tokens_raw": 3573729.6487897015,
+   "shares_index_adjusted": 3573729.6487897015,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 9457
+   }
+  },
+  {
+   "day": "2026-09-05",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 54675544,
+   "block_to": 55532249,
+   "swaps": 762,
+   "tokens_raw": 88459.60641626397,
+   "shares_index_adjusted": 88459.6064162641,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 762
+   }
+  },
+  {
+   "day": "2026-09-05",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 54675544,
+   "block_to": 55532249,
+   "swaps": 100904,
+   "tokens_raw": 613901.6933599173,
+   "shares_index_adjusted": 613901.6933599247,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 100904
+   }
+  },
+  {
+   "day": "2026-09-05",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 54675544,
+   "block_to": 55532249,
+   "swaps": 16677,
+   "tokens_raw": 97389.58511593471,
+   "shares_index_adjusted": 97389.58511593394,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 16677
+   }
+  },
+  {
+   "day": "2026-09-05",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 54675544,
+   "block_to": 55532249,
+   "swaps": 24179,
+   "tokens_raw": 9195.227198054492,
+   "shares_index_adjusted": 9195.227198054496,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 24179
+   }
+  },
+  {
+   "day": "2026-09-05",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 54675544,
+   "block_to": 55532249,
+   "swaps": 6066,
+   "tokens_raw": 1484.7294920877025,
+   "shares_index_adjusted": 1484.7294920877043,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6066
+   }
+  },
+  {
+   "day": "2026-09-05",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 54675544,
+   "block_to": 55532249,
+   "swaps": 138385,
+   "tokens_raw": 107643.54286136146,
+   "shares_index_adjusted": 107643.54286136091,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 138385
+   }
+  },
+  {
+   "day": "2026-09-05",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 54675544,
+   "block_to": 55532249,
+   "swaps": 35219,
+   "tokens_raw": 25901.982041903946,
+   "shares_index_adjusted": 25901.982041903928,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 35219
+   }
+  },
+  {
+   "day": "2026-09-05",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 54675544,
+   "block_to": 55532249,
+   "swaps": 52834,
+   "tokens_raw": 10078.098563116875,
+   "shares_index_adjusted": 10078.09856311687,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 52834
+   }
+  },
+  {
+   "day": "2026-09-05",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 54675544,
+   "block_to": 55532249,
+   "swaps": 2328,
+   "tokens_raw": 465.91924743489363,
+   "shares_index_adjusted": 465.9192474348939,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2328
+   }
+  },
+  {
+   "day": "2026-09-05",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 54675544,
+   "block_to": 55532249,
+   "swaps": 10054,
+   "tokens_raw": 7340.062055382266,
+   "shares_index_adjusted": 7340.062055382272,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 10054
+   }
+  },
+  {
+   "day": "2026-09-05",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 54675544,
+   "block_to": 55532249,
+   "swaps": 12955,
+   "tokens_raw": 7864.608863081292,
+   "shares_index_adjusted": 7864.608863081326,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 12955
+   }
+  },
+  {
+   "day": "2026-09-05",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 54675544,
+   "block_to": 55532249,
+   "swaps": 57219,
+   "tokens_raw": 18005.340511348517,
+   "shares_index_adjusted": 18005.340511348524,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 57219
+   }
+  },
+  {
+   "day": "2026-09-05",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 54675544,
+   "block_to": 55532249,
+   "swaps": 94281,
+   "tokens_raw": 20638.065107693386,
+   "shares_index_adjusted": 20638.06510769332,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 94281
+   }
+  },
+  {
+   "day": "2026-09-05",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 54675544,
+   "block_to": 55532249,
+   "swaps": 61246,
+   "tokens_raw": 28484.128263503746,
+   "shares_index_adjusted": 28484.12826350379,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 61246
+   }
+  },
+  {
+   "day": "2026-09-05",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 54675544,
+   "block_to": 55532249,
+   "swaps": 6129,
+   "tokens_raw": 2280.970271301135,
+   "shares_index_adjusted": 2280.970271301134,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6129
+   }
+  },
+  {
+   "day": "2026-09-06",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 55532250,
+   "block_to": 56389056,
+   "swaps": 18254,
+   "tokens_raw": 9439.761287069226,
+   "shares_index_adjusted": 9445.104947715285,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 18254
+   }
+  },
+  {
+   "day": "2026-09-06",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 55532250,
+   "block_to": 56389056,
+   "swaps": 7669,
+   "tokens_raw": 4925.4631419481975,
+   "shares_index_adjusted": 4928.2513484245055,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 7669
+   }
+  },
+  {
+   "day": "2026-09-06",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 55532250,
+   "block_to": 56389056,
+   "swaps": 20761,
+   "tokens_raw": 6476916.327658879,
+   "shares_index_adjusted": 6476916.327658886,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 20761
+   }
+  },
+  {
+   "day": "2026-09-06",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 55532250,
+   "block_to": 56389056,
+   "swaps": 1070,
+   "tokens_raw": 232864.12330723062,
+   "shares_index_adjusted": 232864.12330723077,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1070
+   }
+  },
+  {
+   "day": "2026-09-06",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 55532250,
+   "block_to": 56389056,
+   "swaps": 40496,
+   "tokens_raw": 458777.32164431433,
+   "shares_index_adjusted": 458777.32164431614,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 40496
+   }
+  },
+  {
+   "day": "2026-09-06",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 55532250,
+   "block_to": 56389056,
+   "swaps": 8563,
+   "tokens_raw": 87667.86197915017,
+   "shares_index_adjusted": 87667.86197915043,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 8563
+   }
+  },
+  {
+   "day": "2026-09-06",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 55532250,
+   "block_to": 56389056,
+   "swaps": 14353,
+   "tokens_raw": 5050.116867240672,
+   "shares_index_adjusted": 5050.116867240681,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 14353
+   }
+  },
+  {
+   "day": "2026-09-06",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 55532250,
+   "block_to": 56389056,
+   "swaps": 4206,
+   "tokens_raw": 1046.213213962447,
+   "shares_index_adjusted": 1046.2132139624457,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4206
+   }
+  },
+  {
+   "day": "2026-09-06",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 55532250,
+   "block_to": 56389056,
+   "swaps": 107529,
+   "tokens_raw": 82466.98276502134,
+   "shares_index_adjusted": 82466.98276502197,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 107529
+   }
+  },
+  {
+   "day": "2026-09-06",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 55532250,
+   "block_to": 56389056,
+   "swaps": 28908,
+   "tokens_raw": 27823.604510288438,
+   "shares_index_adjusted": 27823.60451028867,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 28908
+   }
+  },
+  {
+   "day": "2026-09-06",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 55532250,
+   "block_to": 56389056,
+   "swaps": 18585,
+   "tokens_raw": 2856.969744606708,
+   "shares_index_adjusted": 2856.9697446067044,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 18585
+   }
+  },
+  {
+   "day": "2026-09-06",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 55532250,
+   "block_to": 56389056,
+   "swaps": 865,
+   "tokens_raw": 209.11494314226923,
+   "shares_index_adjusted": 209.11494314226914,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 865
+   }
+  },
+  {
+   "day": "2026-09-06",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 55532250,
+   "block_to": 56389056,
+   "swaps": 11691,
+   "tokens_raw": 8623.105076766265,
+   "shares_index_adjusted": 8623.105076766276,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 11691
+   }
+  },
+  {
+   "day": "2026-09-06",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 55532250,
+   "block_to": 56389056,
+   "swaps": 12535,
+   "tokens_raw": 7489.101089871372,
+   "shares_index_adjusted": 7489.101089871382,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 12535
+   }
+  },
+  {
+   "day": "2026-09-06",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 55532250,
+   "block_to": 56389056,
+   "swaps": 46132,
+   "tokens_raw": 17231.401042335532,
+   "shares_index_adjusted": 17231.401042335572,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 46132
+   }
+  },
+  {
+   "day": "2026-09-06",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 55532250,
+   "block_to": 56389056,
+   "swaps": 89624,
+   "tokens_raw": 21800.94628060721,
+   "shares_index_adjusted": 21800.946280606877,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 89624
+   }
+  },
+  {
+   "day": "2026-09-06",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 55532250,
+   "block_to": 56389056,
+   "swaps": 23906,
+   "tokens_raw": 10408.256674963463,
+   "shares_index_adjusted": 10408.256674963464,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 23906
+   }
+  },
+  {
+   "day": "2026-09-06",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 55532250,
+   "block_to": 56389056,
+   "swaps": 5038,
+   "tokens_raw": 2123.5169934317873,
+   "shares_index_adjusted": 2123.5169934317805,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 5038
+   }
+  },
+  {
+   "day": "2026-09-07",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 56389057,
+   "block_to": 57245357,
+   "swaps": 28229,
+   "tokens_raw": 11328.311632366234,
+   "shares_index_adjusted": 11334.724363707235,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 28229
+   }
+  },
+  {
+   "day": "2026-09-07",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 56389057,
+   "block_to": 57245357,
+   "swaps": 9873,
+   "tokens_raw": 5219.695129466201,
+   "shares_index_adjusted": 5222.6498948039925,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 9873
+   }
+  },
+  {
+   "day": "2026-09-07",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 56389057,
+   "block_to": 57245357,
+   "swaps": 10232,
+   "tokens_raw": 1351056.2163232227,
+   "shares_index_adjusted": 1351056.216323219,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 10232
+   }
+  },
+  {
+   "day": "2026-09-07",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 56389057,
+   "block_to": 57245357,
+   "swaps": 645,
+   "tokens_raw": 65989.93484592563,
+   "shares_index_adjusted": 65989.93484592563,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 645
+   }
+  },
+  {
+   "day": "2026-09-07",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 56389057,
+   "block_to": 57245357,
+   "swaps": 35475,
+   "tokens_raw": 349285.77978990326,
+   "shares_index_adjusted": 349285.7797899015,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 35475
+   }
+  },
+  {
+   "day": "2026-09-07",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 56389057,
+   "block_to": 57245357,
+   "swaps": 6549,
+   "tokens_raw": 59388.701468392384,
+   "shares_index_adjusted": 59388.70146839256,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6549
+   }
+  },
+  {
+   "day": "2026-09-07",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 56389057,
+   "block_to": 57245357,
+   "swaps": 29231,
+   "tokens_raw": 11281.382382146065,
+   "shares_index_adjusted": 11281.382382145955,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 29231
+   }
+  },
+  {
+   "day": "2026-09-07",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 56389057,
+   "block_to": 57245357,
+   "swaps": 6004,
+   "tokens_raw": 1393.1213138172086,
+   "shares_index_adjusted": 1393.1213138172097,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6004
+   }
+  },
+  {
+   "day": "2026-09-07",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 56389057,
+   "block_to": 57245357,
+   "swaps": 146600,
+   "tokens_raw": 121061.36849847088,
+   "shares_index_adjusted": 121061.36849847033,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 146600
+   }
+  },
+  {
+   "day": "2026-09-07",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 56389057,
+   "block_to": 57245357,
+   "swaps": 31360,
+   "tokens_raw": 28980.689250389863,
+   "shares_index_adjusted": 28980.689250389856,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 31360
+   }
+  },
+  {
+   "day": "2026-09-07",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 56389057,
+   "block_to": 57245357,
+   "swaps": 39063,
+   "tokens_raw": 6654.973100157974,
+   "shares_index_adjusted": 6654.973100157999,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 39063
+   }
+  },
+  {
+   "day": "2026-09-07",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 56389057,
+   "block_to": 57245357,
+   "swaps": 2203,
+   "tokens_raw": 434.3187393623594,
+   "shares_index_adjusted": 434.3187393623592,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2203
+   }
+  },
+  {
+   "day": "2026-09-07",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 56389057,
+   "block_to": 57245357,
+   "swaps": 5528,
+   "tokens_raw": 3949.4506701687133,
+   "shares_index_adjusted": 3949.4506701687123,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 5528
+   }
+  },
+  {
+   "day": "2026-09-07",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 56389057,
+   "block_to": 57245357,
+   "swaps": 4878,
+   "tokens_raw": 3518.8828201826686,
+   "shares_index_adjusted": 3518.882820182674,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4878
+   }
+  },
+  {
+   "day": "2026-09-07",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 56389057,
+   "block_to": 57245357,
+   "swaps": 43495,
+   "tokens_raw": 12900.588520697784,
+   "shares_index_adjusted": 12900.588520697822,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 43495
+   }
+  },
+  {
+   "day": "2026-09-07",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 56389057,
+   "block_to": 57245357,
+   "swaps": 93688,
+   "tokens_raw": 20606.0880285546,
+   "shares_index_adjusted": 20606.08802855414,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 93688
+   }
+  },
+  {
+   "day": "2026-09-07",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 56389057,
+   "block_to": 57245357,
+   "swaps": 37872,
+   "tokens_raw": 12551.581332446558,
+   "shares_index_adjusted": 12551.58133244663,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 37872
+   }
+  },
+  {
+   "day": "2026-09-07",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 56389057,
+   "block_to": 57245357,
+   "swaps": 4677,
+   "tokens_raw": 1852.3602605086878,
+   "shares_index_adjusted": 1852.3602605086915,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4677
+   }
+  },
+  {
+   "day": "2026-09-08",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 57245358,
+   "block_to": 58101710,
+   "swaps": 20568,
+   "tokens_raw": 12332.156753743779,
+   "shares_index_adjusted": 12339.137741792103,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 20568
+   }
+  },
+  {
+   "day": "2026-09-08",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 57245358,
+   "block_to": 58101710,
+   "swaps": 8262,
+   "tokens_raw": 5958.24957908514,
+   "shares_index_adjusted": 5961.622425370876,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 8262
+   }
+  },
+  {
+   "day": "2026-09-08",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 57245358,
+   "block_to": 58101710,
+   "swaps": 9285,
+   "tokens_raw": 1662938.1234852038,
+   "shares_index_adjusted": 1662938.1234851982,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 9285
+   }
+  },
+  {
+   "day": "2026-09-08",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 57245358,
+   "block_to": 58101710,
+   "swaps": 435,
+   "tokens_raw": 75773.2823468776,
+   "shares_index_adjusted": 75773.28234687765,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 435
+   }
+  },
+  {
+   "day": "2026-09-08",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 57245358,
+   "block_to": 58101710,
+   "swaps": 34903,
+   "tokens_raw": 490494.30083860125,
+   "shares_index_adjusted": 490494.30083861446,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 34903
+   }
+  },
+  {
+   "day": "2026-09-08",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 57245358,
+   "block_to": 58101710,
+   "swaps": 8382,
+   "tokens_raw": 69765.64127046416,
+   "shares_index_adjusted": 69765.64127046429,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 8382
+   }
+  },
+  {
+   "day": "2026-09-08",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 57245358,
+   "block_to": 58101710,
+   "swaps": 11605,
+   "tokens_raw": 5861.811923973268,
+   "shares_index_adjusted": 5861.811923973268,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 11605
+   }
+  },
+  {
+   "day": "2026-09-08",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 57245358,
+   "block_to": 58101710,
+   "swaps": 5066,
+   "tokens_raw": 1952.7396683950544,
+   "shares_index_adjusted": 1952.7396683950576,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 5066
+   }
+  },
+  {
+   "day": "2026-09-08",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 57245358,
+   "block_to": 58101710,
+   "swaps": 154973,
+   "tokens_raw": 187339.3654818168,
+   "shares_index_adjusted": 187339.36548181594,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 154973
+   }
+  },
+  {
+   "day": "2026-09-08",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 57245358,
+   "block_to": 58101710,
+   "swaps": 41731,
+   "tokens_raw": 31698.44812677136,
+   "shares_index_adjusted": 31698.448126771418,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 41731
+   }
+  },
+  {
+   "day": "2026-09-08",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 57245358,
+   "block_to": 58101710,
+   "swaps": 12690,
+   "tokens_raw": 5080.763507139094,
+   "shares_index_adjusted": 5080.763507139075,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 12690
+   }
+  },
+  {
+   "day": "2026-09-08",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 57245358,
+   "block_to": 58101710,
+   "swaps": 1007,
+   "tokens_raw": 218.60342010912936,
+   "shares_index_adjusted": 218.60342010912922,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1007
+   }
+  },
+  {
+   "day": "2026-09-08",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 57245358,
+   "block_to": 58101710,
+   "swaps": 4770,
+   "tokens_raw": 6329.882511000237,
+   "shares_index_adjusted": 6329.882511000241,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4770
+   }
+  },
+  {
+   "day": "2026-09-08",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 57245358,
+   "block_to": 58101710,
+   "swaps": 6714,
+   "tokens_raw": 6936.956107790477,
+   "shares_index_adjusted": 6936.9561077904855,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6714
+   }
+  },
+  {
+   "day": "2026-09-08",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 57245358,
+   "block_to": 58101710,
+   "swaps": 27240,
+   "tokens_raw": 16891.874045439246,
+   "shares_index_adjusted": 16891.87404543915,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 27240
+   }
+  },
+  {
+   "day": "2026-09-08",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 57245358,
+   "block_to": 58101710,
+   "swaps": 58365,
+   "tokens_raw": 23871.12740432073,
+   "shares_index_adjusted": 23871.1274043205,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 58365
+   }
+  },
+  {
+   "day": "2026-09-08",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 57245358,
+   "block_to": 58101710,
+   "swaps": 8319,
+   "tokens_raw": 6950.176336690184,
+   "shares_index_adjusted": 6950.176336690214,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 8319
+   }
+  },
+  {
+   "day": "2026-09-08",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 57245358,
+   "block_to": 58101710,
+   "swaps": 2201,
+   "tokens_raw": 1686.1070288963151,
+   "shares_index_adjusted": 1686.1070288963188,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2201
+   }
+  },
+  {
+   "day": "2026-09-09",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 58101711,
+   "block_to": 58958195,
+   "swaps": 41651,
+   "tokens_raw": 24673.8465859076,
+   "shares_index_adjusted": 24687.813958490853,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 41651
+   }
+  },
+  {
+   "day": "2026-09-09",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 58101711,
+   "block_to": 58958195,
+   "swaps": 15226,
+   "tokens_raw": 9183.802065920445,
+   "shares_index_adjusted": 9189.000833154934,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 15226
+   }
+  },
+  {
+   "day": "2026-09-09",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 58101711,
+   "block_to": 58958195,
+   "swaps": 5019,
+   "tokens_raw": 1667509.819459668,
+   "shares_index_adjusted": 1667509.8194596674,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 5019
+   }
+  },
+  {
+   "day": "2026-09-09",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 58101711,
+   "block_to": 58958195,
+   "swaps": 287,
+   "tokens_raw": 50255.64010844815,
+   "shares_index_adjusted": 50255.640108448126,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 287
+   }
+  },
+  {
+   "day": "2026-09-09",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 58101711,
+   "block_to": 58958195,
+   "swaps": 53281,
+   "tokens_raw": 509764.0780520195,
+   "shares_index_adjusted": 509764.0780520227,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 53281
+   }
+  },
+  {
+   "day": "2026-09-09",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 58101711,
+   "block_to": 58958195,
+   "swaps": 6613,
+   "tokens_raw": 47711.51040075784,
+   "shares_index_adjusted": 47711.510400757725,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6613
+   }
+  },
+  {
+   "day": "2026-09-09",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 58101711,
+   "block_to": 58958195,
+   "swaps": 12330,
+   "tokens_raw": 5767.598967075965,
+   "shares_index_adjusted": 5767.598967075976,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 12330
+   }
+  },
+  {
+   "day": "2026-09-09",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 58101711,
+   "block_to": 58958195,
+   "swaps": 2558,
+   "tokens_raw": 650.8403730617117,
+   "shares_index_adjusted": 650.8403730617125,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2558
+   }
+  },
+  {
+   "day": "2026-09-09",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 58101711,
+   "block_to": 58958195,
+   "swaps": 134011,
+   "tokens_raw": 144191.6382784557,
+   "shares_index_adjusted": 144191.6382784557,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 134011
+   }
+  },
+  {
+   "day": "2026-09-09",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 58101711,
+   "block_to": 58958195,
+   "swaps": 31764,
+   "tokens_raw": 29288.1984792624,
+   "shares_index_adjusted": 29288.198479262504,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 31764
+   }
+  },
+  {
+   "day": "2026-09-09",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 58101711,
+   "block_to": 58958195,
+   "swaps": 19596,
+   "tokens_raw": 5406.7771209895745,
+   "shares_index_adjusted": 5406.777120989581,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 19596
+   }
+  },
+  {
+   "day": "2026-09-09",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 58101711,
+   "block_to": 58958195,
+   "swaps": 1339,
+   "tokens_raw": 204.10435760460365,
+   "shares_index_adjusted": 204.10435760460382,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1339
+   }
+  },
+  {
+   "day": "2026-09-09",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 58101711,
+   "block_to": 58958195,
+   "swaps": 3252,
+   "tokens_raw": 3679.471727817291,
+   "shares_index_adjusted": 3679.4717278173,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3252
+   }
+  },
+  {
+   "day": "2026-09-09",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 58101711,
+   "block_to": 58958195,
+   "swaps": 2345,
+   "tokens_raw": 2715.346528710582,
+   "shares_index_adjusted": 2715.346528710572,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2345
+   }
+  },
+  {
+   "day": "2026-09-09",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 58101711,
+   "block_to": 58958195,
+   "swaps": 16262,
+   "tokens_raw": 10726.003994582663,
+   "shares_index_adjusted": 10726.003994582614,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 16262
+   }
+  },
+  {
+   "day": "2026-09-09",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 58101711,
+   "block_to": 58958195,
+   "swaps": 36549,
+   "tokens_raw": 16661.100081563985,
+   "shares_index_adjusted": 16661.100081563964,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 36549
+   }
+  },
+  {
+   "day": "2026-09-09",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 58101711,
+   "block_to": 58958195,
+   "swaps": 8500,
+   "tokens_raw": 5798.5559521302885,
+   "shares_index_adjusted": 5798.555952130284,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 8500
+   }
+  },
+  {
+   "day": "2026-09-09",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 58101711,
+   "block_to": 58958195,
+   "swaps": 1535,
+   "tokens_raw": 1085.0152717986205,
+   "shares_index_adjusted": 1085.0152717986207,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1535
+   }
+  },
+  {
+   "day": "2026-09-10",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 58958196,
+   "block_to": 59814886,
+   "swaps": 24389,
+   "tokens_raw": 28640.744985176207,
+   "shares_index_adjusted": 28656.957939847318,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 24389
+   }
+  },
+  {
+   "day": "2026-09-10",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 58958196,
+   "block_to": 59814886,
+   "swaps": 10868,
+   "tokens_raw": 7146.798371334208,
+   "shares_index_adjusted": 7150.844031392825,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 10868
+   }
+  },
+  {
+   "day": "2026-09-10",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 58958196,
+   "block_to": 59814886,
+   "swaps": 2338,
+   "tokens_raw": 1046903.8573200685,
+   "shares_index_adjusted": 1046903.8573200684,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2338
+   }
+  },
+  {
+   "day": "2026-09-10",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 58958196,
+   "block_to": 59814886,
+   "swaps": 365,
+   "tokens_raw": 114441.61701523041,
+   "shares_index_adjusted": 114441.61701523045,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 365
+   }
+  },
+  {
+   "day": "2026-09-10",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 58958196,
+   "block_to": 59814886,
+   "swaps": 26265,
+   "tokens_raw": 383444.1160053894,
+   "shares_index_adjusted": 383444.1160053909,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 26265
+   }
+  },
+  {
+   "day": "2026-09-10",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 58958196,
+   "block_to": 59814886,
+   "swaps": 4993,
+   "tokens_raw": 30767.262761150087,
+   "shares_index_adjusted": 30767.262761150087,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4993
+   }
+  },
+  {
+   "day": "2026-09-10",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 58958196,
+   "block_to": 59814886,
+   "swaps": 67690,
+   "tokens_raw": 34264.84303327526,
+   "shares_index_adjusted": 34264.843033275334,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 67690
+   }
+  },
+  {
+   "day": "2026-09-10",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 58958196,
+   "block_to": 59814886,
+   "swaps": 3318,
+   "tokens_raw": 325.5026707300952,
+   "shares_index_adjusted": 325.5026707300954,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3318
+   }
+  },
+  {
+   "day": "2026-09-10",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 58958196,
+   "block_to": 59814886,
+   "swaps": 200297,
+   "tokens_raw": 216759.6700464633,
+   "shares_index_adjusted": 216927.0185154945,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 200296,
+    "observed": 1
+   }
+  },
+  {
+   "day": "2026-09-10",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 58958196,
+   "block_to": 59814886,
+   "swaps": 48372,
+   "tokens_raw": 45708.993561166935,
+   "shares_index_adjusted": 45744.377201942254,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 48372
+   }
+  },
+  {
+   "day": "2026-09-10",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 58958196,
+   "block_to": 59814886,
+   "swaps": 13573,
+   "tokens_raw": 2885.935457434839,
+   "shares_index_adjusted": 2885.9354574348313,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 13573
+   }
+  },
+  {
+   "day": "2026-09-10",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 58958196,
+   "block_to": 59814886,
+   "swaps": 645,
+   "tokens_raw": 147.1563447066153,
+   "shares_index_adjusted": 147.15634470661536,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 645
+   }
+  },
+  {
+   "day": "2026-09-10",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 58958196,
+   "block_to": 59814886,
+   "swaps": 1840,
+   "tokens_raw": 5127.324374893016,
+   "shares_index_adjusted": 5127.324374893015,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1840
+   }
+  },
+  {
+   "day": "2026-09-10",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 58958196,
+   "block_to": 59814886,
+   "swaps": 1689,
+   "tokens_raw": 3379.671989910913,
+   "shares_index_adjusted": 3379.671989910913,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1689
+   }
+  },
+  {
+   "day": "2026-09-10",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 58958196,
+   "block_to": 59814886,
+   "swaps": 19428,
+   "tokens_raw": 9522.373307699518,
+   "shares_index_adjusted": 9522.373307699465,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 19428
+   }
+  },
+  {
+   "day": "2026-09-10",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 58958196,
+   "block_to": 59814886,
+   "swaps": 44301,
+   "tokens_raw": 19352.905636453666,
+   "shares_index_adjusted": 19352.905636453663,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 44301
+   }
+  },
+  {
+   "day": "2026-09-10",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 58958196,
+   "block_to": 59814886,
+   "swaps": 7229,
+   "tokens_raw": 4715.9468375407705,
+   "shares_index_adjusted": 4715.946837540775,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 7229
+   }
+  },
+  {
+   "day": "2026-09-10",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 58958196,
+   "block_to": 59814886,
+   "swaps": 1771,
+   "tokens_raw": 1330.6295258383793,
+   "shares_index_adjusted": 1330.6295258383789,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1771
+   }
+  },
+  {
+   "day": "2026-09-11",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 59814887,
+   "block_to": 60663725,
+   "swaps": 24484,
+   "tokens_raw": 26366.135984216602,
+   "shares_index_adjusted": 26381.061328085354,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 24484
+   }
+  },
+  {
+   "day": "2026-09-11",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 59814887,
+   "block_to": 60663725,
+   "swaps": 11950,
+   "tokens_raw": 11378.137731056173,
+   "shares_index_adjusted": 11384.578667958156,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 11950
+   }
+  },
+  {
+   "day": "2026-09-11",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 59814887,
+   "block_to": 60663725,
+   "swaps": 3233,
+   "tokens_raw": 1103264.4615088506,
+   "shares_index_adjusted": 1103264.4615088515,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3233
+   }
+  },
+  {
+   "day": "2026-09-11",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 59814887,
+   "block_to": 60663725,
+   "swaps": 538,
+   "tokens_raw": 125638.75095078346,
+   "shares_index_adjusted": 125638.75095078346,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 538
+   }
+  },
+  {
+   "day": "2026-09-11",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 59814887,
+   "block_to": 60663725,
+   "swaps": 96516,
+   "tokens_raw": 906934.7628623736,
+   "shares_index_adjusted": 906934.762862361,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 96516
+   }
+  },
+  {
+   "day": "2026-09-11",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 59814887,
+   "block_to": 60663725,
+   "swaps": 13433,
+   "tokens_raw": 102352.49231198037,
+   "shares_index_adjusted": 102352.49231198004,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 13433
+   }
+  },
+  {
+   "day": "2026-09-11",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 59814887,
+   "block_to": 60663725,
+   "swaps": 233541,
+   "tokens_raw": 122677.96554369421,
+   "shares_index_adjusted": 122677.96554369191,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 233541
+   }
+  },
+  {
+   "day": "2026-09-11",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 59814887,
+   "block_to": 60663725,
+   "swaps": 9152,
+   "tokens_raw": 1246.124068732851,
+   "shares_index_adjusted": 1246.1240687328495,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 9152
+   }
+  },
+  {
+   "day": "2026-09-11",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 59814887,
+   "block_to": 60663725,
+   "swaps": 130432,
+   "tokens_raw": 150509.85930648958,
+   "shares_index_adjusted": 150626.52840329587,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 130432
+   }
+  },
+  {
+   "day": "2026-09-11",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 59814887,
+   "block_to": 60663725,
+   "swaps": 33080,
+   "tokens_raw": 46813.49978529605,
+   "shares_index_adjusted": 46849.787698682514,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 33080
+   }
+  },
+  {
+   "day": "2026-09-11",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 59814887,
+   "block_to": 60663725,
+   "swaps": 30973,
+   "tokens_raw": 9568.918040154747,
+   "shares_index_adjusted": 9568.918040154724,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 30973
+   }
+  },
+  {
+   "day": "2026-09-11",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 59814887,
+   "block_to": 60663725,
+   "swaps": 2804,
+   "tokens_raw": 802.8842475004337,
+   "shares_index_adjusted": 802.8842475004361,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2804
+   }
+  },
+  {
+   "day": "2026-09-11",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 59814887,
+   "block_to": 60663725,
+   "swaps": 3011,
+   "tokens_raw": 3885.7519767830595,
+   "shares_index_adjusted": 3885.7519767830604,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3011
+   }
+  },
+  {
+   "day": "2026-09-11",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 59814887,
+   "block_to": 60663725,
+   "swaps": 2900,
+   "tokens_raw": 5922.318613930447,
+   "shares_index_adjusted": 5922.318613930445,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2900
+   }
+  },
+  {
+   "day": "2026-09-11",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 59814887,
+   "block_to": 60663725,
+   "swaps": 27651,
+   "tokens_raw": 16116.382819218294,
+   "shares_index_adjusted": 16116.382819218337,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 27651
+   }
+  },
+  {
+   "day": "2026-09-11",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 59814887,
+   "block_to": 60663725,
+   "swaps": 54482,
+   "tokens_raw": 26764.590329973264,
+   "shares_index_adjusted": 26764.590329973038,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 54482
+   }
+  },
+  {
+   "day": "2026-09-11",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 59814887,
+   "block_to": 60663725,
+   "swaps": 7384,
+   "tokens_raw": 4729.889175351568,
+   "shares_index_adjusted": 4729.889175351555,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 7384
+   }
+  },
+  {
+   "day": "2026-09-11",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 59814887,
+   "block_to": 60663725,
+   "swaps": 2130,
+   "tokens_raw": 2904.1820860951707,
+   "shares_index_adjusted": 2904.182086095169,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2130
+   }
+  },
+  {
+   "day": "2026-09-12",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 60663726,
+   "block_to": 61513740,
+   "swaps": 29130,
+   "tokens_raw": 14487.075318143494,
+   "shares_index_adjusted": 14495.276162624632,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 29130
+   }
+  },
+  {
+   "day": "2026-09-12",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 60663726,
+   "block_to": 61513740,
+   "swaps": 10162,
+   "tokens_raw": 4912.587770927513,
+   "shares_index_adjusted": 4915.368688913003,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 10162
+   }
+  },
+  {
+   "day": "2026-09-12",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 60663726,
+   "block_to": 61513740,
+   "swaps": 1876,
+   "tokens_raw": 309988.6096128777,
+   "shares_index_adjusted": 309988.60961287766,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1876
+   }
+  },
+  {
+   "day": "2026-09-12",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 60663726,
+   "block_to": 61513740,
+   "swaps": 302,
+   "tokens_raw": 17510.782892236868,
+   "shares_index_adjusted": 17510.782892236864,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 302
+   }
+  },
+  {
+   "day": "2026-09-12",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 60663726,
+   "block_to": 61513740,
+   "swaps": 14727,
+   "tokens_raw": 95644.5323274192,
+   "shares_index_adjusted": 95644.53232741973,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 14727
+   }
+  },
+  {
+   "day": "2026-09-12",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 60663726,
+   "block_to": 61513740,
+   "swaps": 4114,
+   "tokens_raw": 17380.95332431634,
+   "shares_index_adjusted": 17380.953324316335,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4114
+   }
+  },
+  {
+   "day": "2026-09-12",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 60663726,
+   "block_to": 61513740,
+   "swaps": 54585,
+   "tokens_raw": 21643.28052575317,
+   "shares_index_adjusted": 21643.280525753224,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 54585
+   }
+  },
+  {
+   "day": "2026-09-12",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 60663726,
+   "block_to": 61513740,
+   "swaps": 6513,
+   "tokens_raw": 993.3232628251826,
+   "shares_index_adjusted": 993.3232628251861,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6513
+   }
+  },
+  {
+   "day": "2026-09-12",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 60663726,
+   "block_to": 61513740,
+   "swaps": 112475,
+   "tokens_raw": 82919.74324613572,
+   "shares_index_adjusted": 82984.01924504258,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 112475
+   }
+  },
+  {
+   "day": "2026-09-12",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 60663726,
+   "block_to": 61513740,
+   "swaps": 27176,
+   "tokens_raw": 20256.36502340717,
+   "shares_index_adjusted": 20272.066930397385,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 27176
+   }
+  },
+  {
+   "day": "2026-09-12",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 60663726,
+   "block_to": 61513740,
+   "swaps": 9927,
+   "tokens_raw": 1858.7322702848605,
+   "shares_index_adjusted": 1858.7322702848626,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 9927
+   }
+  },
+  {
+   "day": "2026-09-12",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 60663726,
+   "block_to": 61513740,
+   "swaps": 587,
+   "tokens_raw": 100.46192991971793,
+   "shares_index_adjusted": 100.46192991971789,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 587
+   }
+  },
+  {
+   "day": "2026-09-12",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 60663726,
+   "block_to": 61513740,
+   "swaps": 3929,
+   "tokens_raw": 3282.261755347914,
+   "shares_index_adjusted": 3282.2617553479217,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3929
+   }
+  },
+  {
+   "day": "2026-09-12",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 60663726,
+   "block_to": 61513740,
+   "swaps": 2840,
+   "tokens_raw": 2217.83307618613,
+   "shares_index_adjusted": 2217.8330761861307,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2840
+   }
+  },
+  {
+   "day": "2026-09-12",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 60663726,
+   "block_to": 61513740,
+   "swaps": 11489,
+   "tokens_raw": 4964.043054215039,
+   "shares_index_adjusted": 4964.043054215043,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 11489
+   }
+  },
+  {
+   "day": "2026-09-12",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 60663726,
+   "block_to": 61513740,
+   "swaps": 27046,
+   "tokens_raw": 6536.783271958544,
+   "shares_index_adjusted": 6536.783271958523,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 27046
+   }
+  },
+  {
+   "day": "2026-09-12",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 60663726,
+   "block_to": 61513740,
+   "swaps": 17525,
+   "tokens_raw": 5983.112799675266,
+   "shares_index_adjusted": 5983.112799675284,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 17525
+   }
+  },
+  {
+   "day": "2026-09-12",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 60663726,
+   "block_to": 61513740,
+   "swaps": 2133,
+   "tokens_raw": 689.9052300727757,
+   "shares_index_adjusted": 689.9052300727767,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2133
+   }
+  },
+  {
+   "day": "2026-09-13",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 61513741,
+   "block_to": 62365502,
+   "swaps": 11250,
+   "tokens_raw": 9110.486763302239,
+   "shares_index_adjusted": 9115.644028205761,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 11250
+   }
+  },
+  {
+   "day": "2026-09-13",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 61513741,
+   "block_to": 62365502,
+   "swaps": 6108,
+   "tokens_raw": 4010.2918666749656,
+   "shares_index_adjusted": 4012.562012939845,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6108
+   }
+  },
+  {
+   "day": "2026-09-13",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 61513741,
+   "block_to": 62365502,
+   "swaps": 2875,
+   "tokens_raw": 642457.8321317231,
+   "shares_index_adjusted": 642457.8321317238,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2875
+   }
+  },
+  {
+   "day": "2026-09-13",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 61513741,
+   "block_to": 62365502,
+   "swaps": 299,
+   "tokens_raw": 20824.61248046368,
+   "shares_index_adjusted": 20824.612480463675,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 299
+   }
+  },
+  {
+   "day": "2026-09-13",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 61513741,
+   "block_to": 62365502,
+   "swaps": 10787,
+   "tokens_raw": 85747.34146168742,
+   "shares_index_adjusted": 85747.34146168697,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 10787
+   }
+  },
+  {
+   "day": "2026-09-13",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 61513741,
+   "block_to": 62365502,
+   "swaps": 4265,
+   "tokens_raw": 24826.296810158303,
+   "shares_index_adjusted": 24826.296810158292,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4265
+   }
+  },
+  {
+   "day": "2026-09-13",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 61513741,
+   "block_to": 62365502,
+   "swaps": 15373,
+   "tokens_raw": 11338.560237636742,
+   "shares_index_adjusted": 11338.560237636784,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 15373
+   }
+  },
+  {
+   "day": "2026-09-13",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 61513741,
+   "block_to": 62365502,
+   "swaps": 2739,
+   "tokens_raw": 349.44592013631126,
+   "shares_index_adjusted": 349.4459201363105,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2739
+   }
+  },
+  {
+   "day": "2026-09-13",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 61513741,
+   "block_to": 62365502,
+   "swaps": 61436,
+   "tokens_raw": 62166.98087400284,
+   "shares_index_adjusted": 62215.17017896391,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 61436
+   }
+  },
+  {
+   "day": "2026-09-13",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 61513741,
+   "block_to": 62365502,
+   "swaps": 18422,
+   "tokens_raw": 18695.9141849088,
+   "shares_index_adjusted": 18710.40649413037,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 18422
+   }
+  },
+  {
+   "day": "2026-09-13",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 61513741,
+   "block_to": 62365502,
+   "swaps": 51631,
+   "tokens_raw": 7700.64368254156,
+   "shares_index_adjusted": 7700.643682541593,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 51631
+   }
+  },
+  {
+   "day": "2026-09-13",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 61513741,
+   "block_to": 62365502,
+   "swaps": 2085,
+   "tokens_raw": 252.61206546363584,
+   "shares_index_adjusted": 252.61206546363587,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2085
+   }
+  },
+  {
+   "day": "2026-09-13",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 61513741,
+   "block_to": 62365502,
+   "swaps": 3850,
+   "tokens_raw": 2980.68461318058,
+   "shares_index_adjusted": 2980.68461318057,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3850
+   }
+  },
+  {
+   "day": "2026-09-13",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 61513741,
+   "block_to": 62365502,
+   "swaps": 4634,
+   "tokens_raw": 2518.4460404663328,
+   "shares_index_adjusted": 2518.4460404663337,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4634
+   }
+  },
+  {
+   "day": "2026-09-13",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 61513741,
+   "block_to": 62365502,
+   "swaps": 11249,
+   "tokens_raw": 6376.714782847038,
+   "shares_index_adjusted": 6376.714782847048,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 11249
+   }
+  },
+  {
+   "day": "2026-09-13",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 61513741,
+   "block_to": 62365502,
+   "swaps": 26521,
+   "tokens_raw": 8964.07809367134,
+   "shares_index_adjusted": 8964.07809367132,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 26521
+   }
+  },
+  {
+   "day": "2026-09-13",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 61513741,
+   "block_to": 62365502,
+   "swaps": 7331,
+   "tokens_raw": 3386.798040383106,
+   "shares_index_adjusted": 3386.7980403831016,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 7331
+   }
+  },
+  {
+   "day": "2026-09-13",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 61513741,
+   "block_to": 62365502,
+   "swaps": 2176,
+   "tokens_raw": 1099.9237341600665,
+   "shares_index_adjusted": 1099.9237341600676,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2176
+   }
+  },
+  {
+   "day": "2026-09-14",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 62365503,
+   "block_to": 63215954,
+   "swaps": 17445,
+   "tokens_raw": 25503.59050892222,
+   "shares_index_adjusted": 25518.027582995623,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 17445
+   }
+  },
+  {
+   "day": "2026-09-14",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 62365503,
+   "block_to": 63215954,
+   "swaps": 9246,
+   "tokens_raw": 8202.261914840075,
+   "shares_index_adjusted": 8206.905051765923,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 9246
+   }
+  },
+  {
+   "day": "2026-09-14",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 62365503,
+   "block_to": 63215954,
+   "swaps": 2001,
+   "tokens_raw": 588528.0355547799,
+   "shares_index_adjusted": 588528.0355547792,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2001
+   }
+  },
+  {
+   "day": "2026-09-14",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 62365503,
+   "block_to": 63215954,
+   "swaps": 517,
+   "tokens_raw": 68250.90694880177,
+   "shares_index_adjusted": 68250.90694880178,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 517
+   }
+  },
+  {
+   "day": "2026-09-14",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 62365503,
+   "block_to": 63215954,
+   "swaps": 14490,
+   "tokens_raw": 210942.75935904204,
+   "shares_index_adjusted": 210942.75935904103,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 14490
+   }
+  },
+  {
+   "day": "2026-09-14",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 62365503,
+   "block_to": 63215954,
+   "swaps": 8552,
+   "tokens_raw": 64186.648460899865,
+   "shares_index_adjusted": 64186.64846089989,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 8552
+   }
+  },
+  {
+   "day": "2026-09-14",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 62365503,
+   "block_to": 63215954,
+   "swaps": 31705,
+   "tokens_raw": 24804.479192902232,
+   "shares_index_adjusted": 24804.479192902265,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 31705
+   }
+  },
+  {
+   "day": "2026-09-14",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 62365503,
+   "block_to": 63215954,
+   "swaps": 2622,
+   "tokens_raw": 610.5360855127507,
+   "shares_index_adjusted": 610.5360855127506,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2622
+   }
+  },
+  {
+   "day": "2026-09-14",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 62365503,
+   "block_to": 63215954,
+   "swaps": 82824,
+   "tokens_raw": 129774.28976198212,
+   "shares_index_adjusted": 129874.88549202506,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 82824
+   }
+  },
+  {
+   "day": "2026-09-14",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 62365503,
+   "block_to": 63215954,
+   "swaps": 23934,
+   "tokens_raw": 30502.714307394057,
+   "shares_index_adjusted": 30526.35876593536,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 23934
+   }
+  },
+  {
+   "day": "2026-09-14",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 62365503,
+   "block_to": 63215954,
+   "swaps": 19985,
+   "tokens_raw": 3483.886881461886,
+   "shares_index_adjusted": 3483.8868814618754,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 19985
+   }
+  },
+  {
+   "day": "2026-09-14",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 62365503,
+   "block_to": 63215954,
+   "swaps": 1853,
+   "tokens_raw": 502.91832472712963,
+   "shares_index_adjusted": 502.9183247271287,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1853
+   }
+  },
+  {
+   "day": "2026-09-14",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 62365503,
+   "block_to": 63215954,
+   "swaps": 2703,
+   "tokens_raw": 5654.345713475207,
+   "shares_index_adjusted": 5654.3457134752125,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2703
+   }
+  },
+  {
+   "day": "2026-09-14",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 62365503,
+   "block_to": 63215954,
+   "swaps": 3019,
+   "tokens_raw": 4256.745225212404,
+   "shares_index_adjusted": 4256.745225212398,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3019
+   }
+  },
+  {
+   "day": "2026-09-14",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 62365503,
+   "block_to": 63215954,
+   "swaps": 18303,
+   "tokens_raw": 12007.045283181935,
+   "shares_index_adjusted": 12007.045283181908,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 18303
+   }
+  },
+  {
+   "day": "2026-09-14",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 62365503,
+   "block_to": 63215954,
+   "swaps": 32579,
+   "tokens_raw": 13487.493163530857,
+   "shares_index_adjusted": 13487.493163530842,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 32579
+   }
+  },
+  {
+   "day": "2026-09-14",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 62365503,
+   "block_to": 63215954,
+   "swaps": 13463,
+   "tokens_raw": 6131.571523751077,
+   "shares_index_adjusted": 6131.571523751048,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 13463
+   }
+  },
+  {
+   "day": "2026-09-14",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 62365503,
+   "block_to": 63215954,
+   "swaps": 2513,
+   "tokens_raw": 2061.9655339286264,
+   "shares_index_adjusted": 2061.965533928628,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2513
+   }
+  },
+  {
+   "day": "2026-09-15",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 63215955,
+   "block_to": 64062375,
+   "swaps": 11657,
+   "tokens_raw": 11863.214912187534,
+   "shares_index_adjusted": 11869.930441609824,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 11657
+   }
+  },
+  {
+   "day": "2026-09-15",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 63215955,
+   "block_to": 64062375,
+   "swaps": 7643,
+   "tokens_raw": 5181.199580471442,
+   "shares_index_adjusted": 5184.132554246504,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 7643
+   }
+  },
+  {
+   "day": "2026-09-15",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 63215955,
+   "block_to": 64062375,
+   "swaps": 11836,
+   "tokens_raw": 1501162.5806646193,
+   "shares_index_adjusted": 1501162.580664614,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 11836
+   }
+  },
+  {
+   "day": "2026-09-15",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 63215955,
+   "block_to": 64062375,
+   "swaps": 714,
+   "tokens_raw": 62949.66867658423,
+   "shares_index_adjusted": 62949.66867658421,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 714
+   }
+  },
+  {
+   "day": "2026-09-15",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 63215955,
+   "block_to": 64062375,
+   "swaps": 27536,
+   "tokens_raw": 226991.98251597284,
+   "shares_index_adjusted": 226991.9825159718,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 27536
+   }
+  },
+  {
+   "day": "2026-09-15",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 63215955,
+   "block_to": 64062375,
+   "swaps": 8492,
+   "tokens_raw": 42462.927535830815,
+   "shares_index_adjusted": 42462.927535830895,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 8492
+   }
+  },
+  {
+   "day": "2026-09-15",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 63215955,
+   "block_to": 64062375,
+   "swaps": 15826,
+   "tokens_raw": 19506.817105320315,
+   "shares_index_adjusted": 19507.65825043982,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 15825,
+    "observed": 1
+   }
+  },
+  {
+   "day": "2026-09-15",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 63215955,
+   "block_to": 64062375,
+   "swaps": 2068,
+   "tokens_raw": 250.46424189624014,
+   "shares_index_adjusted": 250.47518239331495,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2068
+   }
+  },
+  {
+   "day": "2026-09-15",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 63215955,
+   "block_to": 64062375,
+   "swaps": 72562,
+   "tokens_raw": 109577.65656627365,
+   "shares_index_adjusted": 109662.59669100025,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 72562
+   }
+  },
+  {
+   "day": "2026-09-15",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 63215955,
+   "block_to": 64062375,
+   "swaps": 22865,
+   "tokens_raw": 37477.783833836584,
+   "shares_index_adjusted": 37506.835081445526,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 22865
+   }
+  },
+  {
+   "day": "2026-09-15",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 63215955,
+   "block_to": 64062375,
+   "swaps": 6301,
+   "tokens_raw": 1520.1631282648254,
+   "shares_index_adjusted": 1520.1631282648252,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6301
+   }
+  },
+  {
+   "day": "2026-09-15",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 63215955,
+   "block_to": 64062375,
+   "swaps": 1268,
+   "tokens_raw": 481.42258058845715,
+   "shares_index_adjusted": 481.4225805884566,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1268
+   }
+  },
+  {
+   "day": "2026-09-15",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 63215955,
+   "block_to": 64062375,
+   "swaps": 3097,
+   "tokens_raw": 5185.120616212797,
+   "shares_index_adjusted": 5185.12061621279,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3097
+   }
+  },
+  {
+   "day": "2026-09-15",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 63215955,
+   "block_to": 64062375,
+   "swaps": 2393,
+   "tokens_raw": 1935.3200144859336,
+   "shares_index_adjusted": 1935.3200144859272,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2393
+   }
+  },
+  {
+   "day": "2026-09-15",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 63215955,
+   "block_to": 64062375,
+   "swaps": 14701,
+   "tokens_raw": 8935.320848059951,
+   "shares_index_adjusted": 8935.320848059993,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 14701
+   }
+  },
+  {
+   "day": "2026-09-15",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 63215955,
+   "block_to": 64062375,
+   "swaps": 33512,
+   "tokens_raw": 17136.923532275112,
+   "shares_index_adjusted": 17136.92353227509,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 33512
+   }
+  },
+  {
+   "day": "2026-09-15",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 63215955,
+   "block_to": 64062375,
+   "swaps": 8833,
+   "tokens_raw": 5710.799377124717,
+   "shares_index_adjusted": 5710.799377124707,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 8833
+   }
+  },
+  {
+   "day": "2026-09-15",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 63215955,
+   "block_to": 64062375,
+   "swaps": 2299,
+   "tokens_raw": 2641.398718034648,
+   "shares_index_adjusted": 2641.3987180346467,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2299
+   }
+  },
+  {
+   "day": "2026-09-16",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 64062376,
+   "block_to": 64920682,
+   "swaps": 11758,
+   "tokens_raw": 21806.711176946323,
+   "shares_index_adjusted": 21819.055521341637,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 11758
+   }
+  },
+  {
+   "day": "2026-09-16",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 64062376,
+   "block_to": 64920682,
+   "swaps": 8221,
+   "tokens_raw": 6165.701533948098,
+   "shares_index_adjusted": 6169.19181464912,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 8221
+   }
+  },
+  {
+   "day": "2026-09-16",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 64062376,
+   "block_to": 64920682,
+   "swaps": 3817,
+   "tokens_raw": 908103.8121827735,
+   "shares_index_adjusted": 908103.8121827722,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3817
+   }
+  },
+  {
+   "day": "2026-09-16",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 64062376,
+   "block_to": 64920682,
+   "swaps": 326,
+   "tokens_raw": 13512.13324673213,
+   "shares_index_adjusted": 13512.133246732132,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 326
+   }
+  },
+  {
+   "day": "2026-09-16",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 64062376,
+   "block_to": 64920682,
+   "swaps": 5347,
+   "tokens_raw": 125309.47000467464,
+   "shares_index_adjusted": 125309.4700046746,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 5347
+   }
+  },
+  {
+   "day": "2026-09-16",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 64062376,
+   "block_to": 64920682,
+   "swaps": 3592,
+   "tokens_raw": 24032.940693769062,
+   "shares_index_adjusted": 24032.940693769066,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3592
+   }
+  },
+  {
+   "day": "2026-09-16",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 64062376,
+   "block_to": 64920682,
+   "swaps": 28467,
+   "tokens_raw": 24069.05429902583,
+   "shares_index_adjusted": 24073.721876279127,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 28467
+   }
+  },
+  {
+   "day": "2026-09-16",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 64062376,
+   "block_to": 64920682,
+   "swaps": 1886,
+   "tokens_raw": 280.60554657572254,
+   "shares_index_adjusted": 280.65996284193864,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1886
+   }
+  },
+  {
+   "day": "2026-09-16",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 64062376,
+   "block_to": 64920682,
+   "swaps": 35877,
+   "tokens_raw": 104551.56811885918,
+   "shares_index_adjusted": 104632.61222506256,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 35877
+   }
+  },
+  {
+   "day": "2026-09-16",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 64062376,
+   "block_to": 64920682,
+   "swaps": 22032,
+   "tokens_raw": 47023.548999191975,
+   "shares_index_adjusted": 47059.9997341519,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 22032
+   }
+  },
+  {
+   "day": "2026-09-16",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 64062376,
+   "block_to": 64920682,
+   "swaps": 2307,
+   "tokens_raw": 1417.8638527207509,
+   "shares_index_adjusted": 1417.8638527207495,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2307
+   }
+  },
+  {
+   "day": "2026-09-16",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 64062376,
+   "block_to": 64920682,
+   "swaps": 1018,
+   "tokens_raw": 394.64606602084206,
+   "shares_index_adjusted": 394.6460660208423,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1018
+   }
+  },
+  {
+   "day": "2026-09-16",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 64062376,
+   "block_to": 64920682,
+   "swaps": 1024,
+   "tokens_raw": 1355.179295596723,
+   "shares_index_adjusted": 1355.1792955967235,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1024
+   }
+  },
+  {
+   "day": "2026-09-16",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 64062376,
+   "block_to": 64920682,
+   "swaps": 910,
+   "tokens_raw": 694.1915481497883,
+   "shares_index_adjusted": 694.1915481497883,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 910
+   }
+  },
+  {
+   "day": "2026-09-16",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 64062376,
+   "block_to": 64920682,
+   "swaps": 17529,
+   "tokens_raw": 11358.234930295466,
+   "shares_index_adjusted": 11358.234930295559,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 17529
+   }
+  },
+  {
+   "day": "2026-09-16",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 64062376,
+   "block_to": 64920682,
+   "swaps": 26226,
+   "tokens_raw": 13779.930835200223,
+   "shares_index_adjusted": 13779.930835200159,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 26226
+   }
+  },
+  {
+   "day": "2026-09-16",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 64062376,
+   "block_to": 64920682,
+   "swaps": 4697,
+   "tokens_raw": 3310.089980489592,
+   "shares_index_adjusted": 3310.0899804895835,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4697
+   }
+  },
+  {
+   "day": "2026-09-16",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 64062376,
+   "block_to": 64920682,
+   "swaps": 2019,
+   "tokens_raw": 1814.9042550580452,
+   "shares_index_adjusted": 1814.9042550580443,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2019
+   }
+  },
+  {
+   "day": "2026-09-17",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 64920683,
+   "block_to": 65779485,
+   "swaps": 10681,
+   "tokens_raw": 14735.345924018648,
+   "shares_index_adjusted": 14743.687309539542,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 10681
+   }
+  },
+  {
+   "day": "2026-09-17",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 64920683,
+   "block_to": 65779485,
+   "swaps": 6931,
+   "tokens_raw": 5306.026729229294,
+   "shares_index_adjusted": 5309.0303651643335,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6931
+   }
+  },
+  {
+   "day": "2026-09-17",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 64920683,
+   "block_to": 65779485,
+   "swaps": 4325,
+   "tokens_raw": 1076884.4938270773,
+   "shares_index_adjusted": 1076884.4938270776,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4325
+   }
+  },
+  {
+   "day": "2026-09-17",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 64920683,
+   "block_to": 65779485,
+   "swaps": 375,
+   "tokens_raw": 15243.304087601568,
+   "shares_index_adjusted": 15243.30408760156,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 375
+   }
+  },
+  {
+   "day": "2026-09-17",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 64920683,
+   "block_to": 65779485,
+   "swaps": 7115,
+   "tokens_raw": 126406.13474485688,
+   "shares_index_adjusted": 126406.134744857,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 7115
+   }
+  },
+  {
+   "day": "2026-09-17",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 64920683,
+   "block_to": 65779485,
+   "swaps": 3499,
+   "tokens_raw": 23422.78838565442,
+   "shares_index_adjusted": 23422.788385654432,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3499
+   }
+  },
+  {
+   "day": "2026-09-17",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 64920683,
+   "block_to": 65779485,
+   "swaps": 19730,
+   "tokens_raw": 34579.7167798578,
+   "shares_index_adjusted": 34586.422631173955,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 19730
+   }
+  },
+  {
+   "day": "2026-09-17",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 64920683,
+   "block_to": 65779485,
+   "swaps": 1374,
+   "tokens_raw": 139.56874748394486,
+   "shares_index_adjusted": 139.595813271529,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1374
+   }
+  },
+  {
+   "day": "2026-09-17",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 64920683,
+   "block_to": 65779485,
+   "swaps": 54603,
+   "tokens_raw": 104760.93228825965,
+   "shares_index_adjusted": 104842.13868501679,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 54603
+   }
+  },
+  {
+   "day": "2026-09-17",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 64920683,
+   "block_to": 65779485,
+   "swaps": 20762,
+   "tokens_raw": 34144.07430327363,
+   "shares_index_adjusted": 34170.54139538733,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 20762
+   }
+  },
+  {
+   "day": "2026-09-17",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 64920683,
+   "block_to": 65779485,
+   "swaps": 4045,
+   "tokens_raw": 4183.972217048417,
+   "shares_index_adjusted": 4183.97221704841,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4045
+   }
+  },
+  {
+   "day": "2026-09-17",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 64920683,
+   "block_to": 65779485,
+   "swaps": 876,
+   "tokens_raw": 263.54835715756195,
+   "shares_index_adjusted": 263.5483571575619,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 876
+   }
+  },
+  {
+   "day": "2026-09-17",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 64920683,
+   "block_to": 65779485,
+   "swaps": 2766,
+   "tokens_raw": 4669.523904069522,
+   "shares_index_adjusted": 4669.523904069517,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2766
+   }
+  },
+  {
+   "day": "2026-09-17",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 64920683,
+   "block_to": 65779485,
+   "swaps": 2419,
+   "tokens_raw": 3777.3067862913435,
+   "shares_index_adjusted": 3777.306786291342,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2419
+   }
+  },
+  {
+   "day": "2026-09-17",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 64920683,
+   "block_to": 65779485,
+   "swaps": 27021,
+   "tokens_raw": 13612.799955662671,
+   "shares_index_adjusted": 13612.799955662718,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 27021
+   }
+  },
+  {
+   "day": "2026-09-17",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 64920683,
+   "block_to": 65779485,
+   "swaps": 74797,
+   "tokens_raw": 24555.337828719938,
+   "shares_index_adjusted": 24555.33782871999,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 74797
+   }
+  },
+  {
+   "day": "2026-09-17",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 64920683,
+   "block_to": 65779485,
+   "swaps": 7055,
+   "tokens_raw": 5303.320828896696,
+   "shares_index_adjusted": 5303.320828896688,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 7055
+   }
+  },
+  {
+   "day": "2026-09-17",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 64920683,
+   "block_to": 65779485,
+   "swaps": 2073,
+   "tokens_raw": 1741.4153841361829,
+   "shares_index_adjusted": 1741.4153841361833,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2073
+   }
+  },
+  {
+   "day": "2026-09-18",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 65779486,
+   "block_to": 66636922,
+   "swaps": 12614,
+   "tokens_raw": 16736.529566200523,
+   "shares_index_adjusted": 16746.003781879834,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 12614
+   }
+  },
+  {
+   "day": "2026-09-18",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 65779486,
+   "block_to": 66636922,
+   "swaps": 8854,
+   "tokens_raw": 7103.063726046265,
+   "shares_index_adjusted": 7107.0846287942495,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 8854
+   }
+  },
+  {
+   "day": "2026-09-18",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 65779486,
+   "block_to": 66636922,
+   "swaps": 3942,
+   "tokens_raw": 516444.76127896574,
+   "shares_index_adjusted": 516444.7612789665,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3942
+   }
+  },
+  {
+   "day": "2026-09-18",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 65779486,
+   "block_to": 66636922,
+   "swaps": 356,
+   "tokens_raw": 16243.07366464806,
+   "shares_index_adjusted": 16243.073664648058,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 356
+   }
+  },
+  {
+   "day": "2026-09-18",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 65779486,
+   "block_to": 66636922,
+   "swaps": 4906,
+   "tokens_raw": 75340.93235887816,
+   "shares_index_adjusted": 75340.93235887826,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4906
+   }
+  },
+  {
+   "day": "2026-09-18",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 65779486,
+   "block_to": 66636922,
+   "swaps": 3562,
+   "tokens_raw": 24944.131190236145,
+   "shares_index_adjusted": 24944.13119023618,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3562
+   }
+  },
+  {
+   "day": "2026-09-18",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 65779486,
+   "block_to": 66636922,
+   "swaps": 16746,
+   "tokens_raw": 20184.180103754927,
+   "shares_index_adjusted": 20188.09430905579,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 16746
+   }
+  },
+  {
+   "day": "2026-09-18",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 65779486,
+   "block_to": 66636922,
+   "swaps": 1500,
+   "tokens_raw": 911.1948658097642,
+   "shares_index_adjusted": 911.3715687402597,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1500
+   }
+  },
+  {
+   "day": "2026-09-18",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 65779486,
+   "block_to": 66636922,
+   "swaps": 37670,
+   "tokens_raw": 131940.18105061696,
+   "shares_index_adjusted": 132042.45569114052,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 37670
+   }
+  },
+  {
+   "day": "2026-09-18",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 65779486,
+   "block_to": 66636922,
+   "swaps": 21156,
+   "tokens_raw": 36067.2777884642,
+   "shares_index_adjusted": 36095.23566938524,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 21156
+   }
+  },
+  {
+   "day": "2026-09-18",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 65779486,
+   "block_to": 66636922,
+   "swaps": 3356,
+   "tokens_raw": 4922.343241998729,
+   "shares_index_adjusted": 4922.343241998736,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3356
+   }
+  },
+  {
+   "day": "2026-09-18",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 65779486,
+   "block_to": 66636922,
+   "swaps": 830,
+   "tokens_raw": 277.76952673494196,
+   "shares_index_adjusted": 277.7695267349421,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 830
+   }
+  },
+  {
+   "day": "2026-09-18",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 65779486,
+   "block_to": 66636922,
+   "swaps": 865,
+   "tokens_raw": 1394.610605627705,
+   "shares_index_adjusted": 1394.6106056277033,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 865
+   }
+  },
+  {
+   "day": "2026-09-18",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 65779486,
+   "block_to": 66636922,
+   "swaps": 931,
+   "tokens_raw": 2221.475070906728,
+   "shares_index_adjusted": 2221.4750709067284,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 931
+   }
+  },
+  {
+   "day": "2026-09-18",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 65779486,
+   "block_to": 66636922,
+   "swaps": 20820,
+   "tokens_raw": 16476.164326180915,
+   "shares_index_adjusted": 16504.241982647836,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 20819,
+    "observed": 1
+   }
+  },
+  {
+   "day": "2026-09-18",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 65779486,
+   "block_to": 66636922,
+   "swaps": 30926,
+   "tokens_raw": 17922.060791711243,
+   "shares_index_adjusted": 17952.59000542783,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 30925,
+    "observed": 1
+   }
+  },
+  {
+   "day": "2026-09-18",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 65779486,
+   "block_to": 66636922,
+   "swaps": 5354,
+   "tokens_raw": 4391.359571707855,
+   "shares_index_adjusted": 4391.359571707865,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 5354
+   }
+  },
+  {
+   "day": "2026-09-18",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 65779486,
+   "block_to": 66636922,
+   "swaps": 2184,
+   "tokens_raw": 2162.8632066195178,
+   "shares_index_adjusted": 2162.86320661952,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2184
+   }
+  },
+  {
+   "day": "2026-09-19",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 66636923,
+   "block_to": 67494667,
+   "swaps": 3392,
+   "tokens_raw": 3722.51083647873,
+   "shares_index_adjusted": 3724.6180756404556,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3392
+   }
+  },
+  {
+   "day": "2026-09-19",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 66636923,
+   "block_to": 67494667,
+   "swaps": 4049,
+   "tokens_raw": 2789.853208528891,
+   "shares_index_adjusted": 2791.4324888036126,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4049
+   }
+  },
+  {
+   "day": "2026-09-19",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 66636923,
+   "block_to": 67494667,
+   "swaps": 1270,
+   "tokens_raw": 156569.0801273121,
+   "shares_index_adjusted": 156569.0801273121,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1270
+   }
+  },
+  {
+   "day": "2026-09-19",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 66636923,
+   "block_to": 67494667,
+   "swaps": 99,
+   "tokens_raw": 2815.603245317659,
+   "shares_index_adjusted": 2815.60324531766,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 99
+   }
+  },
+  {
+   "day": "2026-09-19",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 66636923,
+   "block_to": 67494667,
+   "swaps": 3644,
+   "tokens_raw": 31745.883769728996,
+   "shares_index_adjusted": 31745.883769728956,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3644
+   }
+  },
+  {
+   "day": "2026-09-19",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 66636923,
+   "block_to": 67494667,
+   "swaps": 1760,
+   "tokens_raw": 9303.244267535025,
+   "shares_index_adjusted": 9303.244267535,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1760
+   }
+  },
+  {
+   "day": "2026-09-19",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 66636923,
+   "block_to": 67494667,
+   "swaps": 9064,
+   "tokens_raw": 5195.956167512625,
+   "shares_index_adjusted": 5196.9637902681725,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 9064
+   }
+  },
+  {
+   "day": "2026-09-19",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 66636923,
+   "block_to": 67494667,
+   "swaps": 752,
+   "tokens_raw": 104.58613620902558,
+   "shares_index_adjusted": 104.60641801421413,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 752
+   }
+  },
+  {
+   "day": "2026-09-19",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 66636923,
+   "block_to": 67494667,
+   "swaps": 84632,
+   "tokens_raw": 133838.55006050237,
+   "shares_index_adjusted": 133942.29623916192,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 84632
+   }
+  },
+  {
+   "day": "2026-09-19",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 66636923,
+   "block_to": 67494667,
+   "swaps": 16565,
+   "tokens_raw": 18050.01742214668,
+   "shares_index_adjusted": 18064.00905857317,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 16565
+   }
+  },
+  {
+   "day": "2026-09-19",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 66636923,
+   "block_to": 67494667,
+   "swaps": 1296,
+   "tokens_raw": 686.7426002922009,
+   "shares_index_adjusted": 686.742600292201,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1296
+   }
+  },
+  {
+   "day": "2026-09-19",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 66636923,
+   "block_to": 67494667,
+   "swaps": 415,
+   "tokens_raw": 78.5380837709795,
+   "shares_index_adjusted": 78.53808377097957,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 415
+   }
+  },
+  {
+   "day": "2026-09-19",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 66636923,
+   "block_to": 67494667,
+   "swaps": 306,
+   "tokens_raw": 216.03070698040494,
+   "shares_index_adjusted": 216.03070698040497,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 306
+   }
+  },
+  {
+   "day": "2026-09-19",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 66636923,
+   "block_to": 67494667,
+   "swaps": 296,
+   "tokens_raw": 213.27970389446108,
+   "shares_index_adjusted": 213.279703894461,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 296
+   }
+  },
+  {
+   "day": "2026-09-19",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 66636923,
+   "block_to": 67494667,
+   "swaps": 8661,
+   "tokens_raw": 4439.290764088357,
+   "shares_index_adjusted": 4446.91742649968,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 8661
+   }
+  },
+  {
+   "day": "2026-09-19",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 66636923,
+   "block_to": 67494667,
+   "swaps": 10848,
+   "tokens_raw": 5125.680703049892,
+   "shares_index_adjusted": 5134.4865773275105,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 10848
+   }
+  },
+  {
+   "day": "2026-09-19",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 66636923,
+   "block_to": 67494667,
+   "swaps": 1801,
+   "tokens_raw": 820.1348436612266,
+   "shares_index_adjusted": 820.1348436612267,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1801
+   }
+  },
+  {
+   "day": "2026-09-19",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 66636923,
+   "block_to": 67494667,
+   "swaps": 825,
+   "tokens_raw": 284.61627842045584,
+   "shares_index_adjusted": 284.61627842045556,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 825
+   }
+  },
+  {
+   "day": "2026-09-20",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 67494668,
+   "block_to": 68351203,
+   "swaps": 3539,
+   "tokens_raw": 3567.1050105109116,
+   "shares_index_adjusted": 3569.1242775331852,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3539
+   }
+  },
+  {
+   "day": "2026-09-20",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 67494668,
+   "block_to": 68351203,
+   "swaps": 4450,
+   "tokens_raw": 3726.9458849016955,
+   "shares_index_adjusted": 3729.055634655909,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4450
+   }
+  },
+  {
+   "day": "2026-09-20",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 67494668,
+   "block_to": 68351203,
+   "swaps": 1487,
+   "tokens_raw": 277665.2151589755,
+   "shares_index_adjusted": 277665.21515897557,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1487
+   }
+  },
+  {
+   "day": "2026-09-20",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 67494668,
+   "block_to": 68351203,
+   "swaps": 106,
+   "tokens_raw": 4801.9274910283875,
+   "shares_index_adjusted": 4801.927491028387,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 106
+   }
+  },
+  {
+   "day": "2026-09-20",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 67494668,
+   "block_to": 68351203,
+   "swaps": 2470,
+   "tokens_raw": 24412.217747960603,
+   "shares_index_adjusted": 24412.21774796061,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2470
+   }
+  },
+  {
+   "day": "2026-09-20",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 67494668,
+   "block_to": 68351203,
+   "swaps": 2108,
+   "tokens_raw": 12879.353881822044,
+   "shares_index_adjusted": 12879.353881822062,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2108
+   }
+  },
+  {
+   "day": "2026-09-20",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 67494668,
+   "block_to": 68351203,
+   "swaps": 10489,
+   "tokens_raw": 6040.162762348184,
+   "shares_index_adjusted": 6041.334097373035,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 10489
+   }
+  },
+  {
+   "day": "2026-09-20",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 67494668,
+   "block_to": 68351203,
+   "swaps": 1023,
+   "tokens_raw": 590.5712894162222,
+   "shares_index_adjusted": 590.6858156075148,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1023
+   }
+  },
+  {
+   "day": "2026-09-20",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 67494668,
+   "block_to": 68351203,
+   "swaps": 37550,
+   "tokens_raw": 51897.294499731346,
+   "shares_index_adjusted": 51937.52316318247,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 37550
+   }
+  },
+  {
+   "day": "2026-09-20",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 67494668,
+   "block_to": 68351203,
+   "swaps": 13160,
+   "tokens_raw": 18625.322032062402,
+   "shares_index_adjusted": 18639.759621129742,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 13160
+   }
+  },
+  {
+   "day": "2026-09-20",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 67494668,
+   "block_to": 68351203,
+   "swaps": 1308,
+   "tokens_raw": 1034.4231121158684,
+   "shares_index_adjusted": 1034.4231121158675,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1308
+   }
+  },
+  {
+   "day": "2026-09-20",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 67494668,
+   "block_to": 68351203,
+   "swaps": 577,
+   "tokens_raw": 168.90851357903676,
+   "shares_index_adjusted": 168.90851357903685,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 577
+   }
+  },
+  {
+   "day": "2026-09-20",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 67494668,
+   "block_to": 68351203,
+   "swaps": 339,
+   "tokens_raw": 368.0134950791219,
+   "shares_index_adjusted": 368.01349507912215,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 339
+   }
+  },
+  {
+   "day": "2026-09-20",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 67494668,
+   "block_to": 68351203,
+   "swaps": 389,
+   "tokens_raw": 261.6323363050871,
+   "shares_index_adjusted": 261.63233630508705,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 389
+   }
+  },
+  {
+   "day": "2026-09-20",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 67494668,
+   "block_to": 68351203,
+   "swaps": 8190,
+   "tokens_raw": 5125.325024485907,
+   "shares_index_adjusted": 5134.1302877109,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 8190
+   }
+  },
+  {
+   "day": "2026-09-20",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 67494668,
+   "block_to": 68351203,
+   "swaps": 15005,
+   "tokens_raw": 8119.904624625884,
+   "shares_index_adjusted": 8133.854549214122,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 15005
+   }
+  },
+  {
+   "day": "2026-09-20",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 67494668,
+   "block_to": 68351203,
+   "swaps": 2064,
+   "tokens_raw": 1189.5159831165233,
+   "shares_index_adjusted": 1189.5159831165247,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2064
+   }
+  },
+  {
+   "day": "2026-09-20",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 67494668,
+   "block_to": 68351203,
+   "swaps": 786,
+   "tokens_raw": 418.5588612945875,
+   "shares_index_adjusted": 418.558861294588,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 786
+   }
+  },
+  {
+   "day": "2026-09-21",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 68351204,
+   "block_to": 69210497,
+   "swaps": 11167,
+   "tokens_raw": 11336.71604023818,
+   "shares_index_adjusted": 11343.133529146846,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 11167
+   }
+  },
+  {
+   "day": "2026-09-21",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 68351204,
+   "block_to": 69210497,
+   "swaps": 8975,
+   "tokens_raw": 6435.702594670884,
+   "shares_index_adjusted": 6439.345717588844,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 8975
+   }
+  },
+  {
+   "day": "2026-09-21",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 68351204,
+   "block_to": 69210497,
+   "swaps": 2629,
+   "tokens_raw": 681291.8175159731,
+   "shares_index_adjusted": 681291.8175159747,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2629
+   }
+  },
+  {
+   "day": "2026-09-21",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 68351204,
+   "block_to": 69210497,
+   "swaps": 448,
+   "tokens_raw": 28418.436650679305,
+   "shares_index_adjusted": 28418.43665067931,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 448
+   }
+  },
+  {
+   "day": "2026-09-21",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 68351204,
+   "block_to": 69210497,
+   "swaps": 67104,
+   "tokens_raw": 785965.4410640849,
+   "shares_index_adjusted": 785965.441064097,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 67104
+   }
+  },
+  {
+   "day": "2026-09-21",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 68351204,
+   "block_to": 69210497,
+   "swaps": 11169,
+   "tokens_raw": 80399.87972803552,
+   "shares_index_adjusted": 80399.87972803532,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 11169
+   }
+  },
+  {
+   "day": "2026-09-21",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 68351204,
+   "block_to": 69210497,
+   "swaps": 10863,
+   "tokens_raw": 12137.777056359942,
+   "shares_index_adjusted": 12140.13086766423,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 10863
+   }
+  },
+  {
+   "day": "2026-09-21",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 68351204,
+   "block_to": 69210497,
+   "swaps": 751,
+   "tokens_raw": 688.3662060973277,
+   "shares_index_adjusted": 688.4996971105394,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 751
+   }
+  },
+  {
+   "day": "2026-09-21",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 68351204,
+   "block_to": 69210497,
+   "swaps": 64309,
+   "tokens_raw": 122998.15829787287,
+   "shares_index_adjusted": 123093.50144751105,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 64309
+   }
+  },
+  {
+   "day": "2026-09-21",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 68351204,
+   "block_to": 69210497,
+   "swaps": 26397,
+   "tokens_raw": 37339.697140489385,
+   "shares_index_adjusted": 37368.641348932215,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 26397
+   }
+  },
+  {
+   "day": "2026-09-21",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 68351204,
+   "block_to": 69210497,
+   "swaps": 4483,
+   "tokens_raw": 1488.3231129035041,
+   "shares_index_adjusted": 1488.3231129034996,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4483
+   }
+  },
+  {
+   "day": "2026-09-21",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 68351204,
+   "block_to": 69210497,
+   "swaps": 1020,
+   "tokens_raw": 237.4875464898365,
+   "shares_index_adjusted": 237.48754648983646,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1020
+   }
+  },
+  {
+   "day": "2026-09-21",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 68351204,
+   "block_to": 69210497,
+   "swaps": 915,
+   "tokens_raw": 2760.6321643180454,
+   "shares_index_adjusted": 2760.6321643180445,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 915
+   }
+  },
+  {
+   "day": "2026-09-21",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 68351204,
+   "block_to": 69210497,
+   "swaps": 680,
+   "tokens_raw": 475.2966464714619,
+   "shares_index_adjusted": 475.2966464714618,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 680
+   }
+  },
+  {
+   "day": "2026-09-21",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 68351204,
+   "block_to": 69210497,
+   "swaps": 23192,
+   "tokens_raw": 15593.429933176792,
+   "shares_index_adjusted": 15620.219308384507,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 23192
+   }
+  },
+  {
+   "day": "2026-09-21",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 68351204,
+   "block_to": 69210497,
+   "swaps": 29682,
+   "tokens_raw": 13831.496516903264,
+   "shares_index_adjusted": 13855.25890602897,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 29682
+   }
+  },
+  {
+   "day": "2026-09-21",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 68351204,
+   "block_to": 69210497,
+   "swaps": 3779,
+   "tokens_raw": 3154.426379571752,
+   "shares_index_adjusted": 3154.426379571747,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3779
+   }
+  },
+  {
+   "day": "2026-09-21",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 68351204,
+   "block_to": 69210497,
+   "swaps": 1870,
+   "tokens_raw": 1161.8427610734698,
+   "shares_index_adjusted": 1161.8427610734705,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1870
+   }
+  },
+  {
+   "day": "2026-09-22",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 69210498,
+   "block_to": 70067733,
+   "swaps": 6586,
+   "tokens_raw": 10422.583080770148,
+   "shares_index_adjusted": 10428.483097237244,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6586
+   }
+  },
+  {
+   "day": "2026-09-22",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 69210498,
+   "block_to": 70067733,
+   "swaps": 6020,
+   "tokens_raw": 5576.184408321286,
+   "shares_index_adjusted": 5579.3409751318095,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6020
+   }
+  },
+  {
+   "day": "2026-09-22",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 69210498,
+   "block_to": 70067733,
+   "swaps": 1383,
+   "tokens_raw": 207567.75465720132,
+   "shares_index_adjusted": 207567.754657201,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1383
+   }
+  },
+  {
+   "day": "2026-09-22",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 69210498,
+   "block_to": 70067733,
+   "swaps": 275,
+   "tokens_raw": 17025.437822192755,
+   "shares_index_adjusted": 17025.43782219276,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 275
+   }
+  },
+  {
+   "day": "2026-09-22",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 69210498,
+   "block_to": 70067733,
+   "swaps": 11293,
+   "tokens_raw": 199576.7051724907,
+   "shares_index_adjusted": 199576.70517249068,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 11293
+   }
+  },
+  {
+   "day": "2026-09-22",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 69210498,
+   "block_to": 70067733,
+   "swaps": 4685,
+   "tokens_raw": 46242.05614131614,
+   "shares_index_adjusted": 46242.05614131613,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4685
+   }
+  },
+  {
+   "day": "2026-09-22",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 69210498,
+   "block_to": 70067733,
+   "swaps": 9464,
+   "tokens_raw": 11678.92018317704,
+   "shares_index_adjusted": 11681.185010931009,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 9464
+   }
+  },
+  {
+   "day": "2026-09-22",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 69210498,
+   "block_to": 70067733,
+   "swaps": 601,
+   "tokens_raw": 459.91531422876756,
+   "shares_index_adjusted": 460.00450303662126,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 601
+   }
+  },
+  {
+   "day": "2026-09-22",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 69210498,
+   "block_to": 70067733,
+   "swaps": 50630,
+   "tokens_raw": 93562.27143315715,
+   "shares_index_adjusted": 93634.797085322,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 50630
+   }
+  },
+  {
+   "day": "2026-09-22",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 69210498,
+   "block_to": 70067733,
+   "swaps": 19631,
+   "tokens_raw": 25648.74201179106,
+   "shares_index_adjusted": 25668.623869222785,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 19631
+   }
+  },
+  {
+   "day": "2026-09-22",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 69210498,
+   "block_to": 70067733,
+   "swaps": 2168,
+   "tokens_raw": 739.6855207950625,
+   "shares_index_adjusted": 740.19594778058,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2168
+   }
+  },
+  {
+   "day": "2026-09-22",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 69210498,
+   "block_to": 70067733,
+   "swaps": 831,
+   "tokens_raw": 263.97036068802254,
+   "shares_index_adjusted": 264.1551665726632,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 830,
+    "observed": 1
+   }
+  },
+  {
+   "day": "2026-09-22",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 69210498,
+   "block_to": 70067733,
+   "swaps": 782,
+   "tokens_raw": 2513.774178615829,
+   "shares_index_adjusted": 2513.77417861583,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 782
+   }
+  },
+  {
+   "day": "2026-09-22",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 69210498,
+   "block_to": 70067733,
+   "swaps": 611,
+   "tokens_raw": 824.6849397556615,
+   "shares_index_adjusted": 824.6849397556615,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 611
+   }
+  },
+  {
+   "day": "2026-09-22",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 69210498,
+   "block_to": 70067733,
+   "swaps": 14377,
+   "tokens_raw": 7591.101170097462,
+   "shares_index_adjusted": 7604.142615010889,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 14377
+   }
+  },
+  {
+   "day": "2026-09-22",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 69210498,
+   "block_to": 70067733,
+   "swaps": 17774,
+   "tokens_raw": 8921.169302586966,
+   "shares_index_adjusted": 8936.495792830741,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 17774
+   }
+  },
+  {
+   "day": "2026-09-22",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 69210498,
+   "block_to": 70067733,
+   "swaps": 3652,
+   "tokens_raw": 2419.578653847102,
+   "shares_index_adjusted": 2419.5786538470943,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3652
+   }
+  },
+  {
+   "day": "2026-09-22",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 69210498,
+   "block_to": 70067733,
+   "swaps": 1347,
+   "tokens_raw": 785.565741985258,
+   "shares_index_adjusted": 785.565741985259,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1347
+   }
+  },
+  {
+   "day": "2026-09-23",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 70067734,
+   "block_to": 70925528,
+   "swaps": 6370,
+   "tokens_raw": 8566.122077286303,
+   "shares_index_adjusted": 8570.971188195175,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6370
+   }
+  },
+  {
+   "day": "2026-09-23",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 70067734,
+   "block_to": 70925528,
+   "swaps": 4972,
+   "tokens_raw": 4107.692452575331,
+   "shares_index_adjusted": 4110.017735369829,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4972
+   }
+  },
+  {
+   "day": "2026-09-23",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 70067734,
+   "block_to": 70925528,
+   "swaps": 1604,
+   "tokens_raw": 158052.4037956403,
+   "shares_index_adjusted": 158052.40379564013,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1604
+   }
+  },
+  {
+   "day": "2026-09-23",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 70067734,
+   "block_to": 70925528,
+   "swaps": 373,
+   "tokens_raw": 7809.388931171967,
+   "shares_index_adjusted": 7809.388931171977,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 373
+   }
+  },
+  {
+   "day": "2026-09-23",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 70067734,
+   "block_to": 70925528,
+   "swaps": 29948,
+   "tokens_raw": 278051.3236384973,
+   "shares_index_adjusted": 278051.3236384965,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 29948
+   }
+  },
+  {
+   "day": "2026-09-23",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 70067734,
+   "block_to": 70925528,
+   "swaps": 5242,
+   "tokens_raw": 38408.80168007295,
+   "shares_index_adjusted": 38408.80168007309,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 5242
+   }
+  },
+  {
+   "day": "2026-09-23",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 70067734,
+   "block_to": 70925528,
+   "swaps": 6907,
+   "tokens_raw": 9132.398785163241,
+   "shares_index_adjusted": 9134.169780247077,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6907
+   }
+  },
+  {
+   "day": "2026-09-23",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 70067734,
+   "block_to": 70925528,
+   "swaps": 429,
+   "tokens_raw": 83.0852141003236,
+   "shares_index_adjusted": 83.10132635178948,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 429
+   }
+  },
+  {
+   "day": "2026-09-23",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 70067734,
+   "block_to": 70925528,
+   "swaps": 30601,
+   "tokens_raw": 75096.3891560691,
+   "shares_index_adjusted": 75154.600810354,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 30601
+   }
+  },
+  {
+   "day": "2026-09-23",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 70067734,
+   "block_to": 70925528,
+   "swaps": 15449,
+   "tokens_raw": 23213.289352510288,
+   "shares_index_adjusted": 23231.283346493314,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 15449
+   }
+  },
+  {
+   "day": "2026-09-23",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 70067734,
+   "block_to": 70925528,
+   "swaps": 4367,
+   "tokens_raw": 1938.7244012125668,
+   "shares_index_adjusted": 1940.0830422924373,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4367
+   }
+  },
+  {
+   "day": "2026-09-23",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 70067734,
+   "block_to": 70925528,
+   "swaps": 876,
+   "tokens_raw": 274.4801692538319,
+   "shares_index_adjusted": 274.6725225523844,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 876
+   }
+  },
+  {
+   "day": "2026-09-23",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 70067734,
+   "block_to": 70925528,
+   "swaps": 902,
+   "tokens_raw": 2115.2708882583197,
+   "shares_index_adjusted": 2115.270888258319,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 902
+   }
+  },
+  {
+   "day": "2026-09-23",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 70067734,
+   "block_to": 70925528,
+   "swaps": 710,
+   "tokens_raw": 936.9249471552477,
+   "shares_index_adjusted": 936.9249471552469,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 710
+   }
+  },
+  {
+   "day": "2026-09-23",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 70067734,
+   "block_to": 70925528,
+   "swaps": 15541,
+   "tokens_raw": 9260.146219890026,
+   "shares_index_adjusted": 9276.055069490494,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 15541
+   }
+  },
+  {
+   "day": "2026-09-23",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 70067734,
+   "block_to": 70925528,
+   "swaps": 19974,
+   "tokens_raw": 10465.00535791992,
+   "shares_index_adjusted": 10482.984144901659,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 19974
+   }
+  },
+  {
+   "day": "2026-09-23",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 70067734,
+   "block_to": 70925528,
+   "swaps": 3585,
+   "tokens_raw": 1974.1679868321235,
+   "shares_index_adjusted": 1974.1679868321185,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3585
+   }
+  },
+  {
+   "day": "2026-09-23",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 70067734,
+   "block_to": 70925528,
+   "swaps": 1610,
+   "tokens_raw": 952.4290919053527,
+   "shares_index_adjusted": 952.4290919053526,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1610
+   }
+  },
+  {
+   "day": "2026-09-24",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 70925529,
+   "block_to": 71782333,
+   "swaps": 8873,
+   "tokens_raw": 7456.71358933492,
+   "shares_index_adjusted": 7460.934686219129,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 8873
+   }
+  },
+  {
+   "day": "2026-09-24",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 70925529,
+   "block_to": 71782333,
+   "swaps": 5629,
+   "tokens_raw": 4112.240645384934,
+   "shares_index_adjusted": 4114.568502820701,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 5629
+   }
+  },
+  {
+   "day": "2026-09-24",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 70925529,
+   "block_to": 71782333,
+   "swaps": 1782,
+   "tokens_raw": 233081.09318400858,
+   "shares_index_adjusted": 233081.09318400812,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1782
+   }
+  },
+  {
+   "day": "2026-09-24",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 70925529,
+   "block_to": 71782333,
+   "swaps": 234,
+   "tokens_raw": 12269.235436828321,
+   "shares_index_adjusted": 12269.235436828318,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 234
+   }
+  },
+  {
+   "day": "2026-09-24",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 70925529,
+   "block_to": 71782333,
+   "swaps": 5788,
+   "tokens_raw": 99058.43530011852,
+   "shares_index_adjusted": 99058.435300119,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 5788
+   }
+  },
+  {
+   "day": "2026-09-24",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 70925529,
+   "block_to": 71782333,
+   "swaps": 3346,
+   "tokens_raw": 34378.00796614624,
+   "shares_index_adjusted": 34378.00796614622,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3346
+   }
+  },
+  {
+   "day": "2026-09-24",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 70925529,
+   "block_to": 71782333,
+   "swaps": 8740,
+   "tokens_raw": 11261.40126669487,
+   "shares_index_adjusted": 11263.585127337594,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 8740
+   }
+  },
+  {
+   "day": "2026-09-24",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 70925529,
+   "block_to": 71782333,
+   "swaps": 361,
+   "tokens_raw": 33.2434676071468,
+   "shares_index_adjusted": 33.24991432712559,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 361
+   }
+  },
+  {
+   "day": "2026-09-24",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 70925529,
+   "block_to": 71782333,
+   "swaps": 26119,
+   "tokens_raw": 105038.92376283223,
+   "shares_index_adjusted": 105120.34564722991,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 26119
+   }
+  },
+  {
+   "day": "2026-09-24",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 70925529,
+   "block_to": 71782333,
+   "swaps": 12719,
+   "tokens_raw": 21803.178710633296,
+   "shares_index_adjusted": 21820.07964442896,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 12719
+   }
+  },
+  {
+   "day": "2026-09-24",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 70925529,
+   "block_to": 71782333,
+   "swaps": 2534,
+   "tokens_raw": 1832.5054243611,
+   "shares_index_adjusted": 1833.7896281123212,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2534
+   }
+  },
+  {
+   "day": "2026-09-24",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 70925529,
+   "block_to": 71782333,
+   "swaps": 735,
+   "tokens_raw": 264.78111382688223,
+   "shares_index_adjusted": 264.9666701123418,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 735
+   }
+  },
+  {
+   "day": "2026-09-24",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 70925529,
+   "block_to": 71782333,
+   "swaps": 569,
+   "tokens_raw": 629.0877835901915,
+   "shares_index_adjusted": 629.0877835901907,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 569
+   }
+  },
+  {
+   "day": "2026-09-24",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 70925529,
+   "block_to": 71782333,
+   "swaps": 572,
+   "tokens_raw": 837.9423341707766,
+   "shares_index_adjusted": 837.9423341707769,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 572
+   }
+  },
+  {
+   "day": "2026-09-24",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 70925529,
+   "block_to": 71782333,
+   "swaps": 13457,
+   "tokens_raw": 7641.167561159172,
+   "shares_index_adjusted": 7654.295019691258,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 13457
+   }
+  },
+  {
+   "day": "2026-09-24",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 70925529,
+   "block_to": 71782333,
+   "swaps": 18327,
+   "tokens_raw": 9923.347031022087,
+   "shares_index_adjusted": 9940.395253771585,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 18327
+   }
+  },
+  {
+   "day": "2026-09-24",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 70925529,
+   "block_to": 71782333,
+   "swaps": 5264,
+   "tokens_raw": 2128.29497055358,
+   "shares_index_adjusted": 2128.2949705535784,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 5264
+   }
+  },
+  {
+   "day": "2026-09-24",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 70925529,
+   "block_to": 71782333,
+   "swaps": 1460,
+   "tokens_raw": 825.2331375889453,
+   "shares_index_adjusted": 825.2331375889432,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1460
+   }
+  },
+  {
+   "day": "2026-09-25",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 71782334,
+   "block_to": 72639310,
+   "swaps": 4766,
+   "tokens_raw": 5917.555384448496,
+   "shares_index_adjusted": 5920.90519456202,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4766
+   }
+  },
+  {
+   "day": "2026-09-25",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 71782334,
+   "block_to": 72639310,
+   "swaps": 4928,
+   "tokens_raw": 3872.5376070005973,
+   "shares_index_adjusted": 3874.7297733257446,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4928
+   }
+  },
+  {
+   "day": "2026-09-25",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 71782334,
+   "block_to": 72639310,
+   "swaps": 1273,
+   "tokens_raw": 119669.56864336577,
+   "shares_index_adjusted": 119669.56864336583,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1273
+   }
+  },
+  {
+   "day": "2026-09-25",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 71782334,
+   "block_to": 72639310,
+   "swaps": 170,
+   "tokens_raw": 8776.854384228449,
+   "shares_index_adjusted": 8776.85438422845,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 170
+   }
+  },
+  {
+   "day": "2026-09-25",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 71782334,
+   "block_to": 72639310,
+   "swaps": 7325,
+   "tokens_raw": 109064.86595119607,
+   "shares_index_adjusted": 109064.86595119623,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 7325
+   }
+  },
+  {
+   "day": "2026-09-25",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 71782334,
+   "block_to": 72639310,
+   "swaps": 3646,
+   "tokens_raw": 30417.37128835722,
+   "shares_index_adjusted": 30417.37128835716,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3646
+   }
+  },
+  {
+   "day": "2026-09-25",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 71782334,
+   "block_to": 72639310,
+   "swaps": 5719,
+   "tokens_raw": 6192.9632938699615,
+   "shares_index_adjusted": 6194.164260648334,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 5719
+   }
+  },
+  {
+   "day": "2026-09-25",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 71782334,
+   "block_to": 72639310,
+   "swaps": 301,
+   "tokens_raw": 24.388865528016176,
+   "shares_index_adjusted": 24.39359512447455,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 301
+   }
+  },
+  {
+   "day": "2026-09-25",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 71782334,
+   "block_to": 72639310,
+   "swaps": 27575,
+   "tokens_raw": 98561.25188753322,
+   "shares_index_adjusted": 98637.65254521079,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 27575
+   }
+  },
+  {
+   "day": "2026-09-25",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 71782334,
+   "block_to": 72639310,
+   "swaps": 13587,
+   "tokens_raw": 19644.51546539459,
+   "shares_index_adjusted": 19659.743091592463,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 13587
+   }
+  },
+  {
+   "day": "2026-09-25",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 71782334,
+   "block_to": 72639310,
+   "swaps": 4878,
+   "tokens_raw": 2253.9474570103384,
+   "shares_index_adjusted": 2255.527003646802,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4878
+   }
+  },
+  {
+   "day": "2026-09-25",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 71782334,
+   "block_to": 72639310,
+   "swaps": 1044,
+   "tokens_raw": 335.1842401149821,
+   "shares_index_adjusted": 335.41913429471225,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1044
+   }
+  },
+  {
+   "day": "2026-09-25",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 71782334,
+   "block_to": 72639310,
+   "swaps": 584,
+   "tokens_raw": 1624.8281125607207,
+   "shares_index_adjusted": 1624.82811256072,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 584
+   }
+  },
+  {
+   "day": "2026-09-25",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 71782334,
+   "block_to": 72639310,
+   "swaps": 664,
+   "tokens_raw": 904.46835751588,
+   "shares_index_adjusted": 904.4683575158798,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 664
+   }
+  },
+  {
+   "day": "2026-09-25",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 71782334,
+   "block_to": 72639310,
+   "swaps": 12328,
+   "tokens_raw": 6649.722314018398,
+   "shares_index_adjusted": 6661.146478352999,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 12328
+   }
+  },
+  {
+   "day": "2026-09-25",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 71782334,
+   "block_to": 72639310,
+   "swaps": 17379,
+   "tokens_raw": 8434.543504817599,
+   "shares_index_adjusted": 8449.033976229224,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 17379
+   }
+  },
+  {
+   "day": "2026-09-25",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 71782334,
+   "block_to": 72639310,
+   "swaps": 5481,
+   "tokens_raw": 3491.9901054788256,
+   "shares_index_adjusted": 3491.990105478825,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 5481
+   }
+  },
+  {
+   "day": "2026-09-25",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 71782334,
+   "block_to": 72639310,
+   "swaps": 2700,
+   "tokens_raw": 1783.7302632118058,
+   "shares_index_adjusted": 1783.7302632118035,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2700
+   }
+  },
+  {
+   "day": "2026-09-26",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 72639311,
+   "block_to": 73495001,
+   "swaps": 1785,
+   "tokens_raw": 1313.834499430931,
+   "shares_index_adjusted": 1314.578234944635,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1785
+   }
+  },
+  {
+   "day": "2026-09-26",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 72639311,
+   "block_to": 73495001,
+   "swaps": 2022,
+   "tokens_raw": 1222.6331834138532,
+   "shares_index_adjusted": 1223.3252916810156,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2022
+   }
+  },
+  {
+   "day": "2026-09-26",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 72639311,
+   "block_to": 73495001,
+   "swaps": 742,
+   "tokens_raw": 49567.97907002979,
+   "shares_index_adjusted": 49567.97907002972,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 742
+   }
+  },
+  {
+   "day": "2026-09-26",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 72639311,
+   "block_to": 73495001,
+   "swaps": 73,
+   "tokens_raw": 576.7184186565775,
+   "shares_index_adjusted": 576.7184186565772,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 73
+   }
+  },
+  {
+   "day": "2026-09-26",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 72639311,
+   "block_to": 73495001,
+   "swaps": 3097,
+   "tokens_raw": 33009.71588374244,
+   "shares_index_adjusted": 33009.71588374248,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3097
+   }
+  },
+  {
+   "day": "2026-09-26",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 72639311,
+   "block_to": 73495001,
+   "swaps": 1582,
+   "tokens_raw": 10090.537244581954,
+   "shares_index_adjusted": 10090.537244581954,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1582
+   }
+  },
+  {
+   "day": "2026-09-26",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 72639311,
+   "block_to": 73495001,
+   "swaps": 2058,
+   "tokens_raw": 1475.9153548600573,
+   "shares_index_adjusted": 1476.2015708805286,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2058
+   }
+  },
+  {
+   "day": "2026-09-26",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 72639311,
+   "block_to": 73495001,
+   "swaps": 197,
+   "tokens_raw": 3.7964140266617834,
+   "shares_index_adjusted": 3.797150244027633,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 197
+   }
+  },
+  {
+   "day": "2026-09-26",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 72639311,
+   "block_to": 73495001,
+   "swaps": 19047,
+   "tokens_raw": 38998.05252612646,
+   "shares_index_adjusted": 39028.28222394509,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 19047
+   }
+  },
+  {
+   "day": "2026-09-26",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 72639311,
+   "block_to": 73495001,
+   "swaps": 6335,
+   "tokens_raw": 4936.996650031893,
+   "shares_index_adjusted": 4940.823608230913,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6335
+   }
+  },
+  {
+   "day": "2026-09-26",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 72639311,
+   "block_to": 73495001,
+   "swaps": 783,
+   "tokens_raw": 440.36631079980225,
+   "shares_index_adjusted": 440.6749156534213,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 783
+   }
+  },
+  {
+   "day": "2026-09-26",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 72639311,
+   "block_to": 73495001,
+   "swaps": 251,
+   "tokens_raw": 58.83203010577036,
+   "shares_index_adjusted": 58.87325907718262,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 251
+   }
+  },
+  {
+   "day": "2026-09-26",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 72639311,
+   "block_to": 73495001,
+   "swaps": 133,
+   "tokens_raw": 145.97344807674781,
+   "shares_index_adjusted": 145.9734480767477,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 133
+   }
+  },
+  {
+   "day": "2026-09-26",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 72639311,
+   "block_to": 73495001,
+   "swaps": 296,
+   "tokens_raw": 344.86223690652105,
+   "shares_index_adjusted": 344.86223690652105,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 296
+   }
+  },
+  {
+   "day": "2026-09-26",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 72639311,
+   "block_to": 73495001,
+   "swaps": 9010,
+   "tokens_raw": 3309.128328151334,
+   "shares_index_adjusted": 3314.813381457323,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 9010
+   }
+  },
+  {
+   "day": "2026-09-26",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 72639311,
+   "block_to": 73495001,
+   "swaps": 8727,
+   "tokens_raw": 2923.032295712606,
+   "shares_index_adjusted": 2928.0540394373306,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 8727
+   }
+  },
+  {
+   "day": "2026-09-26",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 72639311,
+   "block_to": 73495001,
+   "swaps": 1376,
+   "tokens_raw": 458.53421298304795,
+   "shares_index_adjusted": 458.53421298304806,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1376
+   }
+  },
+  {
+   "day": "2026-09-26",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 72639311,
+   "block_to": 73495001,
+   "swaps": 508,
+   "tokens_raw": 155.05372476814713,
+   "shares_index_adjusted": 155.05372476814713,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 508
+   }
+  },
+  {
+   "day": "2026-09-27",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 73495002,
+   "block_to": 74350993,
+   "swaps": 1839,
+   "tokens_raw": 1124.7783336165585,
+   "shares_index_adjusted": 1125.4150482043656,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1839
+   }
+  },
+  {
+   "day": "2026-09-27",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 73495002,
+   "block_to": 74350993,
+   "swaps": 2511,
+   "tokens_raw": 1631.0619569862984,
+   "shares_index_adjusted": 1631.9852686385564,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2511
+   }
+  },
+  {
+   "day": "2026-09-27",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 73495002,
+   "block_to": 74350993,
+   "swaps": 724,
+   "tokens_raw": 43159.85396968874,
+   "shares_index_adjusted": 43159.85396968872,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 724
+   }
+  },
+  {
+   "day": "2026-09-27",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 73495002,
+   "block_to": 74350993,
+   "swaps": 108,
+   "tokens_raw": 1116.4992629699184,
+   "shares_index_adjusted": 1116.4992629699184,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 108
+   }
+  },
+  {
+   "day": "2026-09-27",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 73495002,
+   "block_to": 74350993,
+   "swaps": 4727,
+   "tokens_raw": 37118.64132837444,
+   "shares_index_adjusted": 37118.64132837444,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4727
+   }
+  },
+  {
+   "day": "2026-09-27",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 73495002,
+   "block_to": 74350993,
+   "swaps": 1965,
+   "tokens_raw": 13208.059505475769,
+   "shares_index_adjusted": 13208.059505475787,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1965
+   }
+  },
+  {
+   "day": "2026-09-27",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 73495002,
+   "block_to": 74350993,
+   "swaps": 2914,
+   "tokens_raw": 1984.8395897873077,
+   "shares_index_adjusted": 1985.22449864186,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2914
+   }
+  },
+  {
+   "day": "2026-09-27",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 73495002,
+   "block_to": 74350993,
+   "swaps": 210,
+   "tokens_raw": 14.084743997802502,
+   "shares_index_adjusted": 14.0874753735302,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 210
+   }
+  },
+  {
+   "day": "2026-09-27",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 73495002,
+   "block_to": 74350993,
+   "swaps": 18440,
+   "tokens_raw": 49752.61743141537,
+   "shares_index_adjusted": 49791.18362878156,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 18440
+   }
+  },
+  {
+   "day": "2026-09-27",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 73495002,
+   "block_to": 74350993,
+   "swaps": 7971,
+   "tokens_raw": 8172.437224045406,
+   "shares_index_adjusted": 8178.772163656959,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 7971
+   }
+  },
+  {
+   "day": "2026-09-27",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 73495002,
+   "block_to": 74350993,
+   "swaps": 1274,
+   "tokens_raw": 397.54898675062816,
+   "shares_index_adjusted": 397.8275855985727,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1274
+   }
+  },
+  {
+   "day": "2026-09-27",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 73495002,
+   "block_to": 74350993,
+   "swaps": 679,
+   "tokens_raw": 178.77723060288253,
+   "shares_index_adjusted": 178.90251612025173,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 679
+   }
+  },
+  {
+   "day": "2026-09-27",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 73495002,
+   "block_to": 74350993,
+   "swaps": 236,
+   "tokens_raw": 166.1355294989286,
+   "shares_index_adjusted": 166.13552949892858,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 236
+   }
+  },
+  {
+   "day": "2026-09-27",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 73495002,
+   "block_to": 74350993,
+   "swaps": 390,
+   "tokens_raw": 256.8976399670231,
+   "shares_index_adjusted": 256.8976399670231,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 390
+   }
+  },
+  {
+   "day": "2026-09-27",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 73495002,
+   "block_to": 74350993,
+   "swaps": 10911,
+   "tokens_raw": 3401.4984319727196,
+   "shares_index_adjusted": 3407.342176303059,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 10911
+   }
+  },
+  {
+   "day": "2026-09-27",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 73495002,
+   "block_to": 74350993,
+   "swaps": 12165,
+   "tokens_raw": 4237.036021800881,
+   "shares_index_adjusted": 4244.315212347335,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 12165
+   }
+  },
+  {
+   "day": "2026-09-27",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 73495002,
+   "block_to": 74350993,
+   "swaps": 2095,
+   "tokens_raw": 808.8324388653546,
+   "shares_index_adjusted": 808.8324388653573,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2095
+   }
+  },
+  {
+   "day": "2026-09-27",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 73495002,
+   "block_to": 74350993,
+   "swaps": 872,
+   "tokens_raw": 249.4683707163188,
+   "shares_index_adjusted": 249.46837071631893,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 872
+   }
+  },
+  {
+   "day": "2026-09-28",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 74350994,
+   "block_to": 75210573,
+   "swaps": 5446,
+   "tokens_raw": 5739.044821549437,
+   "shares_index_adjusted": 5742.293580392612,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 5446
+   }
+  },
+  {
+   "day": "2026-09-28",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 74350994,
+   "block_to": 75210573,
+   "swaps": 7274,
+   "tokens_raw": 5579.391619414609,
+   "shares_index_adjusted": 5582.550001763385,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 7274
+   }
+  },
+  {
+   "day": "2026-09-28",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 74350994,
+   "block_to": 75210573,
+   "swaps": 5654,
+   "tokens_raw": 369004.92153568234,
+   "shares_index_adjusted": 369004.9215356816,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 5654
+   }
+  },
+  {
+   "day": "2026-09-28",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 74350994,
+   "block_to": 75210573,
+   "swaps": 773,
+   "tokens_raw": 33288.525934189056,
+   "shares_index_adjusted": 33288.52593418909,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 773
+   }
+  },
+  {
+   "day": "2026-09-28",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 74350994,
+   "block_to": 75210573,
+   "swaps": 7150,
+   "tokens_raw": 111718.42252266587,
+   "shares_index_adjusted": 111718.42252266563,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 7150
+   }
+  },
+  {
+   "day": "2026-09-28",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 74350994,
+   "block_to": 75210573,
+   "swaps": 5079,
+   "tokens_raw": 36899.00847278833,
+   "shares_index_adjusted": 36899.00847278826,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 5079
+   }
+  },
+  {
+   "day": "2026-09-28",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 74350994,
+   "block_to": 75210573,
+   "swaps": 6067,
+   "tokens_raw": 5793.130337649478,
+   "shares_index_adjusted": 5794.253767056077,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 6067
+   }
+  },
+  {
+   "day": "2026-09-28",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 74350994,
+   "block_to": 75210573,
+   "swaps": 287,
+   "tokens_raw": 24.201591767540297,
+   "shares_index_adjusted": 24.206285047044407,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 287
+   }
+  },
+  {
+   "day": "2026-09-28",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 74350994,
+   "block_to": 75210573,
+   "swaps": 47952,
+   "tokens_raw": 166908.96160615716,
+   "shares_index_adjusted": 167038.34261740537,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 47952
+   }
+  },
+  {
+   "day": "2026-09-28",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 74350994,
+   "block_to": 75210573,
+   "swaps": 22083,
+   "tokens_raw": 27508.26372365323,
+   "shares_index_adjusted": 27529.58700638173,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 22083
+   }
+  },
+  {
+   "day": "2026-09-28",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 74350994,
+   "block_to": 75210573,
+   "swaps": 2439,
+   "tokens_raw": 2035.5875374104191,
+   "shares_index_adjusted": 2037.0140593277506,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 2439
+   }
+  },
+  {
+   "day": "2026-09-28",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 74350994,
+   "block_to": 75210573,
+   "swaps": 822,
+   "tokens_raw": 314.7269361490062,
+   "shares_index_adjusted": 314.9474940292942,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 822
+   }
+  },
+  {
+   "day": "2026-09-28",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 74350994,
+   "block_to": 75210573,
+   "swaps": 589,
+   "tokens_raw": 1840.7326023875473,
+   "shares_index_adjusted": 1840.732602387546,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 589
+   }
+  },
+  {
+   "day": "2026-09-28",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 74350994,
+   "block_to": 75210573,
+   "swaps": 615,
+   "tokens_raw": 516.6344171946131,
+   "shares_index_adjusted": 516.6344171946133,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 615
+   }
+  },
+  {
+   "day": "2026-09-28",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 74350994,
+   "block_to": 75210573,
+   "swaps": 21816,
+   "tokens_raw": 9764.854222985081,
+   "shares_index_adjusted": 9781.63015648702,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 21816
+   }
+  },
+  {
+   "day": "2026-09-28",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 74350994,
+   "block_to": 75210573,
+   "swaps": 28401,
+   "tokens_raw": 11651.028932697645,
+   "shares_index_adjusted": 11671.045297728984,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 28401
+   }
+  },
+  {
+   "day": "2026-09-28",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 74350994,
+   "block_to": 75210573,
+   "swaps": 3878,
+   "tokens_raw": 1968.0994467518378,
+   "shares_index_adjusted": 1968.0994467518371,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 3878
+   }
+  },
+  {
+   "day": "2026-09-28",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 74350994,
+   "block_to": 75210573,
+   "swaps": 1449,
+   "tokens_raw": 622.6550524616631,
+   "shares_index_adjusted": 622.6550524616625,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1449
+   }
+  },
+  {
+   "day": "2026-09-29",
+   "asset": "AAPL",
+   "quote": "USDG",
+   "block_from": 75210574,
+   "block_to": 75576906,
+   "swaps": 1128,
+   "tokens_raw": 658.3451708157077,
+   "shares_index_adjusted": 658.7178468902208,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1128
+   }
+  },
+  {
+   "day": "2026-09-29",
+   "asset": "AAPL",
+   "quote": "WETH",
+   "block_from": 75210574,
+   "block_to": 75576906,
+   "swaps": 1950,
+   "tokens_raw": 1438.2440738048565,
+   "shares_index_adjusted": 1439.058235098018,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1950
+   }
+  },
+  {
+   "day": "2026-09-29",
+   "asset": "AMC",
+   "quote": "USDG",
+   "block_from": 75210574,
+   "block_to": 75576906,
+   "swaps": 869,
+   "tokens_raw": 55786.283983259484,
+   "shares_index_adjusted": 55786.28398325948,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 869
+   }
+  },
+  {
+   "day": "2026-09-29",
+   "asset": "AMC",
+   "quote": "WETH",
+   "block_from": 75210574,
+   "block_to": 75576906,
+   "swaps": 186,
+   "tokens_raw": 7689.3229844119605,
+   "shares_index_adjusted": 7689.32298441196,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 186
+   }
+  },
+  {
+   "day": "2026-09-29",
+   "asset": "GME",
+   "quote": "USDG",
+   "block_from": 75210574,
+   "block_to": 75576906,
+   "swaps": 807,
+   "tokens_raw": 8748.30286439453,
+   "shares_index_adjusted": 8748.302864394534,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 807
+   }
+  },
+  {
+   "day": "2026-09-29",
+   "asset": "GME",
+   "quote": "WETH",
+   "block_from": 75210574,
+   "block_to": 75576906,
+   "swaps": 1141,
+   "tokens_raw": 7641.448833736766,
+   "shares_index_adjusted": 7641.448833736758,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1141
+   }
+  },
+  {
+   "day": "2026-09-29",
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "block_from": 75210574,
+   "block_to": 75576906,
+   "swaps": 1947,
+   "tokens_raw": 2276.6522949357004,
+   "shares_index_adjusted": 2277.0937933981363,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 1947
+   }
+  },
+  {
+   "day": "2026-09-29",
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "block_from": 75210574,
+   "block_to": 75576906,
+   "swaps": 144,
+   "tokens_raw": 13.426462083723766,
+   "shares_index_adjusted": 13.429065802516954,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 144
+   }
+  },
+  {
+   "day": "2026-09-29",
+   "asset": "NVDA",
+   "quote": "USDG",
+   "block_from": 75210574,
+   "block_to": 75576906,
+   "swaps": 9985,
+   "tokens_raw": 31965.889139363735,
+   "shares_index_adjusted": 31990.66779128577,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 9985
+   }
+  },
+  {
+   "day": "2026-09-29",
+   "asset": "NVDA",
+   "quote": "WETH",
+   "block_from": 75210574,
+   "block_to": 75576906,
+   "swaps": 5646,
+   "tokens_raw": 6324.0277919333985,
+   "shares_index_adjusted": 6328.929920033689,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 5646
+   }
+  },
+  {
+   "day": "2026-09-29",
+   "asset": "QQQ",
+   "quote": "USDG",
+   "block_from": 75210574,
+   "block_to": 75576906,
+   "swaps": 895,
+   "tokens_raw": 510.1183400412802,
+   "shares_index_adjusted": 510.475826506061,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 895
+   }
+  },
+  {
+   "day": "2026-09-29",
+   "asset": "QQQ",
+   "quote": "WETH",
+   "block_from": 75210574,
+   "block_to": 75576906,
+   "swaps": 373,
+   "tokens_raw": 136.0097339897198,
+   "shares_index_adjusted": 136.10504842004562,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 373
+   }
+  },
+  {
+   "day": "2026-09-29",
+   "asset": "RDDT",
+   "quote": "USDG",
+   "block_from": 75210574,
+   "block_to": 75576906,
+   "swaps": 77,
+   "tokens_raw": 47.9907900921275,
+   "shares_index_adjusted": 47.99079009212749,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 77
+   }
+  },
+  {
+   "day": "2026-09-29",
+   "asset": "RDDT",
+   "quote": "WETH",
+   "block_from": 75210574,
+   "block_to": 75576906,
+   "swaps": 76,
+   "tokens_raw": 16.805644308207107,
+   "shares_index_adjusted": 16.80564430820711,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 76
+   }
+  },
+  {
+   "day": "2026-09-29",
+   "asset": "SPY",
+   "quote": "USDG",
+   "block_from": 75210574,
+   "block_to": 75576906,
+   "swaps": 4783,
+   "tokens_raw": 2060.1808397193904,
+   "shares_index_adjusted": 2063.7202122466333,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 4783
+   }
+  },
+  {
+   "day": "2026-09-29",
+   "asset": "SPY",
+   "quote": "WETH",
+   "block_from": 75210574,
+   "block_to": 75576906,
+   "swaps": 7769,
+   "tokens_raw": 3357.746967888938,
+   "shares_index_adjusted": 3363.5155475895253,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 7769
+   }
+  },
+  {
+   "day": "2026-09-29",
+   "asset": "TSLA",
+   "quote": "USDG",
+   "block_from": 75210574,
+   "block_to": 75576906,
+   "swaps": 688,
+   "tokens_raw": 296.28937959059226,
+   "shares_index_adjusted": 296.2893795905926,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 688
+   }
+  },
+  {
+   "day": "2026-09-29",
+   "asset": "TSLA",
+   "quote": "WETH",
+   "block_from": 75210574,
+   "block_to": 75576906,
+   "swaps": 285,
+   "tokens_raw": 95.30700699239249,
+   "shares_index_adjusted": 95.30700699239252,
+   "tokens_without_index": 0.0,
+   "index_source": {
+    "carried": 285
+   }
+  }
+ ],
+ "failures": [],
+ "failures_by_reading": {
+  "A_all_pools": 0,
+  "B_usdg_only": 0
+ },
+ "failure_note": "A cell with failures is INCOMPLETE, not small. Read this before reading any figure for the assets listed here.",
+ "corrections_to_prereg": [
+  {
+   "file": "PREREG-tsv-volume-cap-2026-09-28-addendum-2.md",
+   "claim": "the three payers rank in the order of their dividend yields",
+   "status": "withdrawn",
+   "why": "measured 2026-09-15: NVDA 1.000775159 above AAPL 1.000566080 while NVDA's yield is far lower, and QQQ and SPY were still exactly 1.0 that day. The index is cumulative since inception, so its level is not a function of current yield."
+  },
+  {
+   "file": "PREREG-tsv-volume-cap-2026-09-28-addendum-2.md",
+   "claim": "zero spread across every event at a given moment",
+   "status": "withdrawn",
+   "why": "an artifact of small samples. A full scan of one day of AAPL events returns 111 distinct ratios, almost all rounding: n1 = round(n0 x index) gives a relative error of about 1/n0. The run therefore reads the index from the largest transfer in each sample window."
+  },
+  {
+   "file": "PREREG-tsv-volume-cap-2026-09-28.md",
+   "claim": "every pool in the enumeration (41 rows) / USDG only (27 rows)",
+   "status": "corrected in addendum 5",
+   "why": "those counts describe MISSING-71909188.json, a different artifact."
+  }
+ ],
+ "quantity": "There is no index field and no getter. Every transfer emits a log carrying two amounts; the quantity used here is their ratio, which moves in steps. \"index\" below is shorthand for that ratio, not for a value any contract exposes.",
+ "survives_unchanged": "every dividend payer has a ratio above 1 and every non-payer is exactly 1.000000000; the ratio steps.",
+ "completeness": {
+  "registered_window": "2026-09-01 .. 2026-09-30 (calendar month, per PREREG \u00a72\u2464)",
+  "complete_days": "2026-09-01 .. 2026-09-28",
+  "partial": {
+   "2026-09-29": "the run day; blocks only up to 11:26 UTC"
+  },
+  "absent": {
+   "2026-09-30": "had not happened when the run was made"
+  },
+  "note": "The registered window is a calendar month and the run was made inside it. This is not a gap in the data: 28 of the 30 days are complete and the other two could not exist yet. Any month figure must be recomputed on or after 2026-10-01; the 28-day figures below do not change when it is."
+ },
+ "metadata_backpatched": {
+  "when": "2026-09-29",
+  "fields": [
+   "quantity",
+   "survives_unchanged",
+   "completeness"
+  ],
+  "why": "The run predates the correction of the word \"index\" (error archive, 2026-09-29). The two wording fields were taken verbatim out of code/tsv_volume.py by parsing its source, so a full regeneration produces the same strings. No measured value was touched.",
+  "generator_sha256": "04050dc8b474a5704db4efd382ced8e8da701c12ab2c562dfdbb20b3c6877939"
+ }
+}
