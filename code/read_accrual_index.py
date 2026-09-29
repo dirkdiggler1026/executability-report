@@ -180,8 +180,14 @@ def main() -> int:
         print("FATAL eth_blockNumber:", err)
         return 2
     head = int(head_r, 16)
-    print(f"head {head:,}  window {args.blocks:,} blocks  "
-          f"({args.blocks / 267_000:.1f} days at ~267k blocks/day)")
+    # 🔴 This line used to convert blocks to days at "~267k blocks/day" and was wrong by 3.2x: that
+    # figure came from reading block 69,196,861 as the start of the 2026-09-04 series, when it is
+    # the END of a backfill (2026-09-21ish). Measured over 2026-09-01 00:00Z -> 2026-09-29 11:58Z
+    # (blocks 51,274,668 -> 75,638,069) this chain produces about 855,000 blocks/day, ~9.9/s.
+    # It is the same class as error 6 in the archive: a block count is not a duration until
+    # someone converts it, and the conversion is a measurement, not a memory.
+    print(f"head {head:,}  window {args.blocks:,} blocks "
+          f"(~{args.blocks / 855_000 * 24:.1f} h at the measured ~855k blocks/day)")
 
     failures: list[str] = []
     for sym in [s.strip().upper() for s in args.assets.split(",") if s.strip()]:
