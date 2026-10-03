@@ -5,7 +5,7 @@ tokenized stocks on Robinhood Chain, and prediction markets.
 
 **Report:** https://dirkdiggler1026.github.io/executability-report/
 
-**Weekly:** a machine-readable depth figure, published every Monday — [data/weekly/latest.json](data/weekly/latest.json)
+**Weekly:** a machine-readable depth figure, published every Monday — [weekly/latest.json](weekly/latest.json)
 
 ## Contact
 
