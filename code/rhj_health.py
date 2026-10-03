@@ -29,9 +29,26 @@ import time
 
 ROOT = os.environ.get("RHJ_DATA", "/root/predict-data/dexfeed_data/rhj_assets")
 STATE = os.path.join(ROOT, "_health_state.json")
+# 🔴 周期路径也要留痕。否则"通知器坏了"与"没东西可发"长得一样:
+#    49 次"无需告警"只存在于 journal 里,而 journal 会轮转、也不是我们的判据来源。
+#    有记录 = 查过;没记录 = 没查(与覆盖层同一条约定)。
+#    ⚠️ 落盘包在 try 里:健康检查自己不能成为故障源。
+CHECK_LOG = os.environ.get("RHJ_CHECK_LOG",
+                           "/root/predict-data/dexfeed/logs/rhj-health-checks.log")
 REPEAT_S = int(os.environ.get("RHJ_ALERT_REPEAT_S", "21600"))
 STALE_H = float(os.environ.get("RHJ_STALE_H", "6"))
 DRILL = os.environ.get("RHJ_DRILL", "0") == "1"
+
+
+def log_check(reason: str, detail: str = "") -> None:
+    try:
+        import time as _t
+        with open(CHECK_LOG, "a", encoding="utf-8") as f:
+            f.write(f"{_t.strftime('%Y-%m-%dT%H:%M:%SZ', _t.gmtime())} | "
+                    f"reason={reason}{' | ' + detail if detail else ''}"
+                    f"{' | DRILL' if DRILL else ''}\n")
+    except Exception:                                          # noqa: BLE001
+        pass
 
 
 def snapshots():
@@ -69,11 +86,15 @@ def main() -> int:
         st = {}
     now = int(time.time())
 
+    fired: list[str] = []          # 记【哪一条】响了,不是只记"响过"
+
     def fire(key: str, text: str) -> None:
         if now - int(st.get(key, 0)) < REPEAT_S:
             print(f"  ({key} 在去重窗口内,不重复发)")
+            fired.append(f"{key}:deduped")   # 被去重也要留痕 —— 否则"压住了"看不出来
             return
         send(text)
+        fired.append(key)
         if not DRILL:
             st[key] = now
 
@@ -133,6 +154,9 @@ def main() -> int:
         json.dump(st, open(STATE, "w"), indent=1)
     if not alerted:
         print("  ✅ 无需告警")
+        log_check("no_alert", f"snapshot_age_h={age_h:.1f}")
+    else:
+        log_check("alerted", ",".join(fired) if fired else "flag_set_without_fire")
     return 0
 
 
