@@ -1027,9 +1027,9 @@
     "note": "the public endpoint retains only minutes of state, so every historical round in this series needs an archive endpoint; no rolling provable window exists on this chain"
   },
   "corrections_url": "https://dirkdiggler1026.github.io/executability-report/#errors",
-  "feed_url": "https://raw.githubusercontent.com/dirkdiggler1026/executability-report/main/data/weekly/latest.json",
-  "generated_utc": "2026-10-02T16:12:20Z",
-  "generator_version": "weekly_publish/1.1",
+  "feed_url": "https://raw.githubusercontent.com/dirkdiggler1026/executability-report/main/weekly/latest.json",
+  "generated_utc": "2026-10-03T06:00:49Z",
+  "generator_version": "weekly_publish/1.2",
   "inputs_sha256": [
     {
       "path": "data/2026-09-25/quotes.jsonl.gz",

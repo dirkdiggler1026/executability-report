@@ -8,4 +8,4 @@ Also this window: GOOGL $100 ended a 138-round identical run at block 75,715,239
 Window: blocks 71,786,931 to 77,773,806, 336 rounds, 2026-09-25T00:07:43Z to 2026-10-01T23:37:34Z. Canon rhdepth-v2.
 Caliber: same-pool round trip, direct quoter calls; routes from a pool table frozen at block 53,983,886; recovery is not a fee.
 Verification: the Robinhood Chain public endpoint retains about 5-10 minutes of state, so every historical round here needs an archive endpoint (retention measured 2026-09-11; derived).
-Feed: https://raw.githubusercontent.com/dirkdiggler1026/executability-report/main/data/weekly/latest.json
+Feed: https://raw.githubusercontent.com/dirkdiggler1026/executability-report/main/weekly/latest.json
