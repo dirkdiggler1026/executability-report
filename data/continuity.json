@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-03T06:00:41Z",
+ "generated_utc": "2026-10-04T06:01:39Z",
  "since": "2026-08-29",
- "until": "2026-10-02",
- "days": 35,
+ "until": "2026-10-03",
+ "days": 36,
  "venues": 4,
  "venue_list": [
   "pm/kalshi",
@@ -30,176 +30,181 @@
  "tradeoff_curve": [
   {
    "since": "2026-08-29",
-   "days": 35,
+   "days": 36,
    "venues": 4
   },
   {
    "since": "2026-08-30",
-   "days": 34,
+   "days": 35,
    "venues": 9
   },
   {
    "since": "2026-08-31",
-   "days": 33,
+   "days": 34,
    "venues": 10
   },
   {
    "since": "2026-09-01",
-   "days": 32,
+   "days": 33,
    "venues": 10
   },
   {
    "since": "2026-09-02",
-   "days": 31,
+   "days": 32,
    "venues": 10
   },
   {
    "since": "2026-09-03",
-   "days": 30,
+   "days": 31,
    "venues": 10
   },
   {
    "since": "2026-09-04",
-   "days": 29,
+   "days": 30,
    "venues": 12
   },
   {
    "since": "2026-09-05",
-   "days": 28,
+   "days": 29,
    "venues": 12
   },
   {
    "since": "2026-09-06",
-   "days": 27,
+   "days": 28,
    "venues": 12
   },
   {
    "since": "2026-09-07",
-   "days": 26,
+   "days": 27,
    "venues": 12
   },
   {
    "since": "2026-09-08",
-   "days": 25,
+   "days": 26,
    "venues": 12
   },
   {
    "since": "2026-09-09",
-   "days": 24,
+   "days": 25,
    "venues": 12
   },
   {
    "since": "2026-09-10",
-   "days": 23,
+   "days": 24,
    "venues": 12
   },
   {
    "since": "2026-09-11",
-   "days": 22,
+   "days": 23,
    "venues": 12
   },
   {
    "since": "2026-09-12",
-   "days": 21,
+   "days": 22,
    "venues": 12
   },
   {
    "since": "2026-09-13",
-   "days": 20,
+   "days": 21,
    "venues": 12
   },
   {
    "since": "2026-09-14",
-   "days": 19,
+   "days": 20,
    "venues": 12
   },
   {
    "since": "2026-09-15",
-   "days": 18,
+   "days": 19,
    "venues": 12
   },
   {
    "since": "2026-09-16",
-   "days": 17,
+   "days": 18,
    "venues": 12
   },
   {
    "since": "2026-09-17",
-   "days": 16,
+   "days": 17,
    "venues": 12
   },
   {
    "since": "2026-09-18",
-   "days": 15,
+   "days": 16,
    "venues": 12
   },
   {
    "since": "2026-09-19",
-   "days": 14,
+   "days": 15,
    "venues": 12
   },
   {
    "since": "2026-09-20",
-   "days": 13,
+   "days": 14,
    "venues": 12
   },
   {
    "since": "2026-09-21",
-   "days": 12,
+   "days": 13,
    "venues": 12
   },
   {
    "since": "2026-09-22",
-   "days": 11,
+   "days": 12,
    "venues": 12
   },
   {
    "since": "2026-09-23",
-   "days": 10,
+   "days": 11,
    "venues": 12
   },
   {
    "since": "2026-09-24",
-   "days": 9,
+   "days": 10,
    "venues": 12
   },
   {
    "since": "2026-09-25",
-   "days": 8,
+   "days": 9,
    "venues": 12
   },
   {
    "since": "2026-09-26",
-   "days": 7,
+   "days": 8,
    "venues": 12
   },
   {
    "since": "2026-09-27",
-   "days": 6,
+   "days": 7,
    "venues": 12
   },
   {
    "since": "2026-09-28",
-   "days": 5,
+   "days": 6,
    "venues": 12
   },
   {
    "since": "2026-09-29",
-   "days": 4,
+   "days": 5,
    "venues": 13
   },
   {
    "since": "2026-09-30",
-   "days": 3,
+   "days": 4,
    "venues": 13
   },
   {
    "since": "2026-10-01",
-   "days": 2,
+   "days": 3,
    "venues": 13
   },
   {
    "since": "2026-10-02",
+   "days": 2,
+   "venues": 13
+  },
+  {
+   "since": "2026-10-03",
    "days": 1,
    "venues": 13
   }
@@ -208,11 +213,11 @@
   "per_chain": {
    "ethereum": {
     "sources_max": 4,
-    "groups": 82358,
-    "full": 72001,
+    "groups": 84985,
+    "full": 72478,
     "dropped_rounds": 0,
     "dropped_groups": 0,
-    "rate": 0.8742,
+    "rate": 0.8528,
     "sources_by_day": {
      "2026-08-30": [
       "cow",
@@ -386,6 +391,11 @@
       "paraswap"
      ],
      "2026-10-02": [
+      "cow",
+      "kyberswap",
+      "paraswap"
+     ],
+     "2026-10-03": [
       "cow",
       "kyberswap",
       "paraswap"
@@ -394,8 +404,8 @@
    },
    "solana": {
     "sources_max": 1,
-    "groups": 53996,
-    "full": 53996,
+    "groups": 55749,
+    "full": 55749,
     "dropped_rounds": 0,
     "dropped_groups": 0,
     "rate": 1.0,
@@ -501,13 +511,16 @@
      ],
      "2026-10-02": [
       "jupiter"
+     ],
+     "2026-10-03": [
+      "jupiter"
      ]
     }
    },
    "robinhood": {
     "sources_max": 1,
-    "groups": 49572,
-    "full": 49572,
+    "groups": 51300,
+    "full": 51300,
     "dropped_rounds": 0,
     "dropped_groups": 0,
     "rate": 1.0,
@@ -598,11 +611,14 @@
      ],
      "2026-10-02": [
       "uniswap_v4_rh"
+     ],
+     "2026-10-03": [
+      "uniswap_v4_rh"
      ]
     }
    }
   },
-  "worst": 0.8742,
+  "worst": 0.8528,
   "bucket_s": 1800,
   "slow_excluded": [
    "lifi",
@@ -615,17 +631,17 @@
  },
  "headline": {
   "since": "2026-08-30",
-  "days": 34,
+  "days": 35,
   "venues": 9,
   "quorum": {
    "per_chain": {
     "ethereum": {
      "sources_max": 4,
-     "groups": 82358,
-     "full": 72001,
+     "groups": 84985,
+     "full": 72478,
      "dropped_rounds": 0,
      "dropped_groups": 0,
-     "rate": 0.8742,
+     "rate": 0.8528,
      "sources_by_day": {
       "2026-08-30": [
        "cow",
@@ -799,6 +815,11 @@
        "paraswap"
       ],
       "2026-10-02": [
+       "cow",
+       "kyberswap",
+       "paraswap"
+      ],
+      "2026-10-03": [
        "cow",
        "kyberswap",
        "paraswap"
@@ -807,8 +828,8 @@
     },
     "solana": {
      "sources_max": 1,
-     "groups": 53996,
-     "full": 53996,
+     "groups": 55749,
+     "full": 55749,
      "dropped_rounds": 0,
      "dropped_groups": 0,
      "rate": 1.0,
@@ -914,13 +935,16 @@
       ],
       "2026-10-02": [
        "jupiter"
+      ],
+      "2026-10-03": [
+       "jupiter"
       ]
      }
     },
     "robinhood": {
      "sources_max": 1,
-     "groups": 49572,
-     "full": 49572,
+     "groups": 51300,
+     "full": 51300,
      "dropped_rounds": 0,
      "dropped_groups": 0,
      "rate": 1.0,
@@ -1011,11 +1035,14 @@
       ],
       "2026-10-02": [
        "uniswap_v4_rh"
+      ],
+      "2026-10-03": [
+       "uniswap_v4_rh"
       ]
      }
     }
    },
-   "worst": 0.8742,
+   "worst": 0.8528,
    "bucket_s": 1800,
    "slow_excluded": [
     "lifi",
