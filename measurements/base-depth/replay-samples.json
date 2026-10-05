@@ -1,0 +1,127 @@
+{
+  "head": 52159423,
+  "utc": "2026-10-04T10:03:50Z",
+  "endpoint": "https://mainnet.base.org",
+  "samples": [
+    {
+      "pool": "0x97f35d1e92795327614be000cd18cba1be2c1931",
+      "label": "AAPLc/USDC·0x33128a",
+      "block": 52159074,
+      "log_index": 477,
+      "tx": "0x7847bd489eb10a836d84b25ebb5f80b04218011d34fee0c1af3a8b188f5096d4",
+      "pre_from": "pair",
+      "pre": {
+        "pool": "0x97f35d1e92795327614be000cd18cba1be2c1931",
+        "label": "AAPLc/USDC·0x33128a",
+        "block": 52158046,
+        "log_index": 501,
+        "tx": "0xea4d76232b58f20435bce22885dcf682d606a51a1b776d3910d789fa3b7d8cea"
+      }
+    },
+    {
+      "pool": "0x7f030e5fd657795c0937a3e8af2929fd90da91c7",
+      "label": "AMZNc/USDC·0x33128a",
+      "block": 51902641,
+      "log_index": 704,
+      "tx": "0x5b3f0dd3cce23b2315e65ecb656d0ac441242ccdb7f71e7fdf56a7d6bcb8ca2b",
+      "pre_from": "pair",
+      "pre": {
+        "pool": "0x7f030e5fd657795c0937a3e8af2929fd90da91c7",
+        "label": "AMZNc/USDC·0x33128a",
+        "block": 51902636,
+        "log_index": 374,
+        "tx": "0xe95e0913dbf36f9d320523c737dffd998b5310968a79e79b227842db8b23c548"
+      }
+    },
+    {
+      "pool": "0x8634ee4145a63e40e44e12a6bb1b905fcb8856a6",
+      "label": "GOOGLc/USDC·0x33128a",
+      "block": 51902750,
+      "log_index": 796,
+      "tx": "0x9e9cd67c7aea4930a7336ede2f44cb2c6d10402943111174c582180b5229889d",
+      "pre_from": "pair",
+      "pre": {
+        "pool": "0x8634ee4145a63e40e44e12a6bb1b905fcb8856a6",
+        "label": "GOOGLc/USDC·0x33128a",
+        "block": 51902632,
+        "log_index": 103,
+        "tx": "0xfefdee1858e35238b112c7ded72b4f8f36908497a9716ebfbf2aac9c05206f86"
+      }
+    },
+    {
+      "pool": "0x1f52f46bac657564c31122b12b43a459e09273c8",
+      "label": "GOOGLc/USDC·0x33128a",
+      "block": 51902808,
+      "log_index": 136,
+      "tx": "0x64a279246923bc3827dc98c9b8c634e1ea9b31472fcceafc46a1736d539bd019",
+      "pre_from": "pair",
+      "pre": {
+        "pool": "0x1f52f46bac657564c31122b12b43a459e09273c8",
+        "label": "GOOGLc/USDC·0x33128a",
+        "block": 51902591,
+        "log_index": 381,
+        "tx": "0xf153db3ce1450ed085bacea809a5ff6e9020f24bc3f16f0591d1f754224b6e59"
+      }
+    },
+    {
+      "pool": "0x583919ec1975a1238c50e1940911894ee6912476",
+      "label": "METAc/USDC·0x33128a",
+      "block": 52157936,
+      "log_index": 432,
+      "tx": "0xf8a032989c8bac6d9f483c9ed47407c613451db8084b7ca5cfa3f8f1f51a3e48",
+      "pre_from": "pair",
+      "pre": {
+        "pool": "0x583919ec1975a1238c50e1940911894ee6912476",
+        "label": "METAc/USDC·0x33128a",
+        "block": 52157509,
+        "log_index": 233,
+        "tx": "0xa120577ab71ba52d78527b58450d749add56cc7530a20dd4a403507c53a6ce41"
+      }
+    },
+    {
+      "pool": "0xd73cbecc0f62c7c1704332ed119514d6d84dc607",
+      "label": "MSFTc/USDC·0x33128a",
+      "block": 52158286,
+      "log_index": 674,
+      "tx": "0x28a25e788311cb153c333bca7854500d1db73b5dbf2e18fdb5c1af9b9c01cff9",
+      "pre_from": "pair",
+      "pre": {
+        "pool": "0xd73cbecc0f62c7c1704332ed119514d6d84dc607",
+        "label": "MSFTc/USDC·0x33128a",
+        "block": 52157817,
+        "log_index": 622,
+        "tx": "0xd70976d37661f7351be5b4f48b4f4fd56754db6667573663d822c95b1e74fe0b"
+      }
+    },
+    {
+      "pool": "0x60661b315553eb81872deea9a66d567cf0ccd33b",
+      "label": "NVDAc/USDC·0x33128a",
+      "block": 52159219,
+      "log_index": 245,
+      "tx": "0x97b65e6412009147b412661812764e1cbdd07a1664ce88deb391815b6bc504c1",
+      "pre_from": "pair",
+      "pre": {
+        "pool": "0x60661b315553eb81872deea9a66d567cf0ccd33b",
+        "label": "NVDAc/USDC·0x33128a",
+        "block": 52159159,
+        "log_index": 400,
+        "tx": "0xa1f736cd63f2ce2aa3b116739f48302010295a3101a3b4c59004362e8dcf89a8"
+      }
+    },
+    {
+      "pool": "0x8e740d5fa742b763cd82159894b9919ed57e4f70",
+      "label": "NVDAc/WETH",
+      "block": 50876715,
+      "log_index": 297,
+      "tx": "0xb0f10b4104ae6fb3e56b2221e3a19eaf2bbe31cab8d0c194377a10862c33cbc5",
+      "pre_from": "pair",
+      "pre": {
+        "pool": "0x8e740d5fa742b763cd82159894b9919ed57e4f70",
+        "label": "NVDAc/WETH",
+        "block": 50876692,
+        "log_index": 744,
+        "tx": "0xb3f6a24e36054fabf60ecd1508eaa9953afc563a547b57de8e98248c7a1cb79b"
+      }
+    }
+  ]
+}
