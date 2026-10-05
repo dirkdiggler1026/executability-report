@@ -57,13 +57,32 @@ REPO=/opt/rh-report
 TODAY=$(date -u +%F)
 log() { echo "$(date -u '+%F %T') | $*"; }
 
+# 凭据来自 /etc/digest.env(单元里是 EnvironmentFile=-,不存在也照常跑)。
+# 两套命名都接,与 backup.sh 同一条链路。未配置 ⇒ 静默跳过:报警器自己不能成为故障源。
+TG_TOKEN="${TG_BOT_TOKEN:-${TELEGRAM_BOT_TOKEN:-}}"
+TG_CHAT="${TG_CHAT_ID:-${TELEGRAM_CHAT_ID:-}}"
+tg_send() {
+  [ -n "$TG_TOKEN" ] && [ -n "$TG_CHAT" ] || return 0
+  curl -sS -m 20 -X POST -H 'Content-Type: application/json' \
+    -d "$(printf '{"chat_id":"%s","text":%s}' "$TG_CHAT" \
+          "$(printf '%s' "$1" | python3 -c 'import json,sys;print(json.dumps(sys.stdin.read()))')")" \
+    "https://api.telegram.org/bot${TG_TOKEN}/sendMessage" >/dev/null 2>&1 || true
+}
+
 cd "$REPO" || { log "FAIL: 仓库不存在"; exit 1; }
 
 # 拉一次,避免人工发版后本地落后导致 push 冲突
 #
 # 🔴 **这一行每天 06:03 会静默销毁 /opt/rh-report 里任何未推送的本地改动。**
 #    `reset --hard` 不是 merge —— 它把工作区和索引都扔回 origin/main。
-#    未跟踪文件不受影响(本脚本自己就是未跟踪的,所以它活得下来),
+#    未跟踪文件不受影响。
+#    ⚠️ 2026-10-05 更正:这里原先写"本脚本自己就是未跟踪的,所以它活得下来" —— 那已不成立。
+#       sync.sh 在 749dbf3「publish sync.sh」时被提交进仓库(三法交叉验证:ls-files /
+#       ls-tree origin/main / log --follow 都命中)⇒ reset --hard 会把它一起改写。
+#       它仍然活得下来,但理由换了:bash 在执行前已把这个尺寸的脚本整段读进缓冲
+#       (实测:25 KB 的运行中脚本在偏移 4.5 KB 处被换成另一份 37 KB 文件,
+#        之后 600 行仍全部按原内容执行,0 行落到新内容上)。
+#       ⇒ 那是 bash 的实现细节,不是保证 ⇒ 这个文件显著变大时要重测。
 #    但对【已跟踪文件】的任何本地编辑,只要没在 06:03 前推上去,就没了,而且不报错。
 #    ⇒ 在这台机器上改 code/ 或 index.html:**改完立刻推**,不要过夜。
 #    这条写在这里而不是写在某个规范文档里,因为要读到它的人,
@@ -74,7 +93,10 @@ git fetch -q origin main || { log "FAIL: fetch"; exit 1; }
 #    「在这台机器上做过一次手工提交的人」—— 那个人没有理由读 sync.sh。
 #    所以改成让机器去读:有未推的提交、或已跟踪文件有未提交改动 ⇒
 #    先把现状存成分支(信息零丢失)，再拒绝运行(systemd 看得见失败)。
-#    -uno:未跟踪文件 reset 不动，不该拿它们报警(本脚本自己就是未跟踪的)。
+#    -uno:未跟踪文件 reset 不动，不该拿它们报警。
+#    ⚠️ 同上更正:sync.sh 本身是【已跟踪】的 ⇒ 对它的未提交改动会被这道闸抓到并存成分支。
+#       那是好事(改动不会被 reset 静默吞掉),但代价是:在这台机器上手改 sync.sh
+#       会让当天的发布被拒绝 ⇒ 改它只能走 commit + push,让 06:01 的 pull 带进来。
 if [ -n "$(git log origin/main..HEAD --oneline)" ] || [ -n "$(git status --porcelain -uno)" ]; then
   save="sync-save-$(date -u +%Y%m%dT%H%M%SZ)"
   git stash -q -u >/dev/null 2>&1 && stashed=1 || stashed=0
@@ -137,8 +159,20 @@ case "${ci_state%%|*}" in
     log "  修法:先让 CI 变绿。要跳过这道闸,只能是人为决定,不是定时任务的决定。"
     exit 1 ;;
   success)      log "CI: check main@${ci_head:0:7} success（pages ${ci_pages}）" ;;
-  ""|unreadable|no-run-for-head)
-                log "CI: 取不到 check 在 main@${ci_head:0:7} 的结论（${ci_state%%|*}）—— 不当作失败,继续（pages ${ci_pages}）" ;;
+  no-run-for-head)
+                # 🔴 这一支与"API 读不到"不是一回事,所以不能共用一个分支:
+                #    读不到 = 瞬时故障 ⇒ 继续是对的。
+                #    该 head 没有 run = 结构性:【没有任何东西检查过这个提交】。
+                #    行为仍然继续(一次 API 异常不该停掉每日发布),但必须出声 ——
+                #    否则 workflow 哪天不再触发(改名/Actions 被关),这道闸会在
+                #    无人察觉时停止把关,而日志里只有一行没人看的"取不到"。
+                #    与 backup.sh 同一条约定:【没有信号本身就是信号】。
+                log "CI: main@${ci_head:0:7} 没有 check 的 run —— 不当作失败,继续,但已推 TG（pages ${ci_pages}）"
+                tg_send "⚠️ rh-report:main@${ci_head:0:7} 上没有 check 的 CI run
+发布照常继续,但这个提交【没有被任何检查验证过】。
+去确认 workflow 还在触发(改名 / Actions 被关 / 文件被删都会长这样)。" ;;
+  ""|unreadable)
+                log "CI: 取不到 check 在 main@${ci_head:0:7} 的结论（${ci_state%%|*}）—— 瞬时故障,不当作失败,继续（pages ${ci_pages}）" ;;
   *)            log "CI: check main@${ci_head:0:7} 状态 ${ci_state%%|*}（未完成或已取消）—— 不当作失败,继续（pages ${ci_pages}）" ;;
 esac
 
