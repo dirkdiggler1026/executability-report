@@ -1,0 +1,2122 @@
+{
+ "canon": "rhdepth-oneside-v1",
+ "enumerated_at_block": 81316275,
+ "block_hash": "0x7b8b0580763ca11725222a12666508547fed397e3e54f67082e4eeb24bf7f424",
+ "enumerated_at_utc": "2026-10-06T03:58:28Z",
+ "method": "counterparty-flow",
+ "windows": [
+  [
+   "rolling",
+   80416275,
+   81316275
+  ]
+ ],
+ "window_blocks": 900000,
+ "failed_windows": [
+  [
+   "NVDA",
+   80791275,
+   80803774
+  ]
+ ],
+ "per_asset_candidates": {
+  "AAPL": {
+   "two_way": 327,
+   "taken": 40,
+   "truncated": 287
+  },
+  "AMC": {
+   "two_way": 114,
+   "taken": 40,
+   "truncated": 74
+  },
+  "GME": {
+   "two_way": 199,
+   "taken": 40,
+   "truncated": 159
+  },
+  "GOOGL": {
+   "two_way": 200,
+   "taken": 40,
+   "truncated": 160
+  },
+  "NVDA": {
+   "two_way": 948,
+   "taken": 40,
+   "truncated": 908
+  },
+  "QQQ": {
+   "two_way": 128,
+   "taken": 40,
+   "truncated": 88
+  },
+  "RDDT": {
+   "two_way": 80,
+   "taken": 40,
+   "truncated": 40
+  },
+  "SPY": {
+   "two_way": 489,
+   "taken": 40,
+   "truncated": 449
+  },
+  "TSLA": {
+   "two_way": 403,
+   "taken": 40,
+   "truncated": 363
+  }
+ },
+ "per_asset_cap": 40,
+ "carried_from_previous": 13,
+ "conversion_pool": "0xfae65eaa11943f45e83d5b45dc7a7c801c51bfb0",
+ "pools": [
+  {
+   "asset": "AAPL",
+   "quote": "USDG",
+   "pool": "0x19d55aba3e5d2c389b7011c634725136dfdcae33",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1ac9db4a2608ba45d6127b1737949b51bb54b7f3",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "AAPL",
+   "quote": "USDG",
+   "pool": "0x3714aa8105de1f384481b425788af413748c1837",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": false,
+   "retained_from": "unknown@72764101"
+  },
+  {
+   "asset": "AAPL",
+   "quote": "USDG",
+   "pool": "0x6f7368f0dd18a4e1db631095363d109e6ade9293",
+   "kind": "concentrated-liquidity",
+   "factory": "0xe0c4ceb92d08ca985bb70fe0a22feb121a9854a8",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "AAPL",
+   "quote": "USDG",
+   "pool": "0x783c9bbb765047cfdd2b84b92b2ca9f11d34b7ed",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": false,
+   "retained_from": "flow@77912381"
+  },
+  {
+   "asset": "AAPL",
+   "quote": "USDG",
+   "pool": "0xaae0d815ee56e4092a5e5c2911e676fea50b2d6d",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "AAPL",
+   "quote": "WETH",
+   "pool": "0x8bb3514e2204e1cdf3ac149efee7ff04d91b719f",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "AMC",
+   "quote": "USDG",
+   "pool": "0x5496c765d80b1706d6da0442be08a120c224bef8",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1ac9db4a2608ba45d6127b1737949b51bb54b7f3",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "AMC",
+   "quote": "USDG",
+   "pool": "0xaa34fea710a1a737840329051d81d3b0b7c564d5",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "AMC",
+   "quote": "USDG",
+   "pool": "0xc97894fc00c6eeb060838559d905b4c2253fd429",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": true,
+   "retained_from": "unknown@72764101"
+  },
+  {
+   "asset": "AMC",
+   "quote": "USDG",
+   "pool": "0xff54652b940f0717cd618e790ebdece9d4c4d2f6",
+   "kind": "concentrated-liquidity",
+   "factory": "0xe0c4ceb92d08ca985bb70fe0a22feb121a9854a8",
+   "stock_is_token0": true,
+   "retained_from": "unknown@72764101"
+  },
+  {
+   "asset": "AMC",
+   "quote": "WETH",
+   "pool": "0xcf38764ae8c92222af4358a701871a6235cfc7b7",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "GME",
+   "quote": "USDG",
+   "pool": "0x0a0675689c2ad2a3ade86539bcbd27b6c0764e9d",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "GME",
+   "quote": "USDG",
+   "pool": "0xda0ee6b8ef5d3a2338a15621fabf6619070f1b64",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1ac9db4a2608ba45d6127b1737949b51bb54b7f3",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "GME",
+   "quote": "USDG",
+   "pool": "0xe2b46c905e12ab8e2f864e4821a4325884c1b126",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "GME",
+   "quote": "USDG",
+   "pool": "0xe9713f453adb9245b19559790c96f470a18f2fdf",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "GME",
+   "quote": "WETH",
+   "pool": "0xc6bcc95043dc48c204bb2d57fb264a10efe0a607",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "pool": "0x34d0dc122cf9a8eb296fc5e0d3a233625d7d19b7",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "pool": "0x553e9a453425cd9b90919f317061fbc3794cc57a",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": true,
+   "retained_from": "flow@74476245"
+  },
+  {
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "pool": "0x5c0eaa89799f7b76606f4ff66c92a2654d178927",
+   "kind": "concentrated-liquidity",
+   "factory": "0xe0c4ceb92d08ca985bb70fe0a22feb121a9854a8",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "pool": "0xa6e2e2ceac575d25353401d862bf73620a3d2196",
+   "kind": "concentrated-liquidity",
+   "factory": "0xece6ecd61177336ea6fb9b17937ac439d85ee20b",
+   "stock_is_token0": true,
+   "retained_from": "flow@78767869"
+  },
+  {
+   "asset": "GOOGL",
+   "quote": "USDG",
+   "pool": "0xe279774b0bf7e23e4f4aaf3c7bbc552bc5a92a28",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1ac9db4a2608ba45d6127b1737949b51bb54b7f3",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "pool": "0x8c2b4303fa0b99d07a5d3e9411497a277e65b673",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": false,
+   "retained_from": "flow@78767869"
+  },
+  {
+   "asset": "GOOGL",
+   "quote": "WETH",
+   "pool": "0x8fb9301586f27e2cff85312f7c1d0f16c6167cde",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "NVDA",
+   "quote": "USDG",
+   "pool": "0x18a5af4e442f8be68968cc1f00d537f8af2d12cd",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1ac9db4a2608ba45d6127b1737949b51bb54b7f3",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "NVDA",
+   "quote": "USDG",
+   "pool": "0xb75d2d02b0ec3de50d32e40a4f1a8dae8acc4333",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": false,
+   "retained_from": "unknown@72764101"
+  },
+  {
+   "asset": "NVDA",
+   "quote": "USDG",
+   "pool": "0xb944cec30bd4175855215d767adc81f39e5f7e2b",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": false,
+   "retained_from": "unknown@72764101"
+  },
+  {
+   "asset": "NVDA",
+   "quote": "USDG",
+   "pool": "0xd4eb21209c4d6093f80b5b84f5c45cc093ea14a3",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "NVDA",
+   "quote": "USDG",
+   "pool": "0xdac1904d823f7d6bcaaf431ceee40c934fed321b",
+   "kind": "concentrated-liquidity",
+   "factory": "0xe0c4ceb92d08ca985bb70fe0a22feb121a9854a8",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "NVDA",
+   "quote": "USDG",
+   "pool": "0xf28521367b68a68ffc85ed6fad4af73c5ff7b24a",
+   "kind": "concentrated-liquidity",
+   "factory": "0xece6ecd61177336ea6fb9b17937ac439d85ee20b",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "NVDA",
+   "quote": "WETH",
+   "pool": "0x62ab521f71431f78ac374cdbadc6cda3c8916b6c",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "NVDA",
+   "quote": "WETH",
+   "pool": "0x8b6a6416a5d1040efcfa6234da6aa1265dfe123e",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": false,
+   "retained_from": "unknown@72764101"
+  },
+  {
+   "asset": "NVDA",
+   "quote": "WETH",
+   "pool": "0xc0be1cb0f674d9737c72b2a63fc542361185b807",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "NVDA",
+   "quote": "WETH",
+   "pool": "0xf8996e22ac7a67fae741830ad83b3b4d5e5de203",
+   "kind": "concentrated-liquidity",
+   "factory": "0xe0c4ceb92d08ca985bb70fe0a22feb121a9854a8",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "QQQ",
+   "quote": "USDG",
+   "pool": "0x425c43d331921953901f455b30b5a39f8e403b7f",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1ac9db4a2608ba45d6127b1737949b51bb54b7f3",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "QQQ",
+   "quote": "USDG",
+   "pool": "0xd60a5d14db690b7afad71f76b108071d7175597d",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "QQQ",
+   "quote": "USDG",
+   "pool": "0xebd78dcfc8a6b3a696f1e191ad1ff321f9579f79",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "QQQ",
+   "quote": "WETH",
+   "pool": "0xa40d00a55d43ba2d188039dcf88bd68f4f133e78",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "RDDT",
+   "quote": "USDG",
+   "pool": "0x19d3acb5d32dbd902a3fa8fb511709ba8d860996",
+   "kind": "concentrated-liquidity",
+   "factory": "0xe0c4ceb92d08ca985bb70fe0a22feb121a9854a8",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "RDDT",
+   "quote": "USDG",
+   "pool": "0x1a774e182159d2880dbc646eb89a8defe569f97c",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "RDDT",
+   "quote": "USDG",
+   "pool": "0x3e7a328024abdc493991f44f0982c0af64b391eb",
+   "kind": "concentrated-liquidity",
+   "factory": "0xece6ecd61177336ea6fb9b17937ac439d85ee20b",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "RDDT",
+   "quote": "USDG",
+   "pool": "0x518a291f27ce1c476f0c9d215a1bc02f35e37cae",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1ac9db4a2608ba45d6127b1737949b51bb54b7f3",
+   "stock_is_token0": true,
+   "retained_from": "flow@73619413"
+  },
+  {
+   "asset": "RDDT",
+   "quote": "USDG",
+   "pool": "0x5f37e5501681afda99879033ee66033ee15c0e66",
+   "kind": "concentrated-liquidity",
+   "factory": "0xe0c4ceb92d08ca985bb70fe0a22feb121a9854a8",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "RDDT",
+   "quote": "USDG",
+   "pool": "0xa8744e76aed23b05f0126335e7bd38f7935d19fe",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "RDDT",
+   "quote": "WETH",
+   "pool": "0x714187eed11d8fc9500ff6798734c8bb63a8a19b",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "RDDT",
+   "quote": "WETH",
+   "pool": "0xa541143f20d7b0643123064abf25f423e375b531",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "SPY",
+   "quote": "USDG",
+   "pool": "0x38453c115607463ac284820ce959831042f3df4e",
+   "kind": "concentrated-liquidity",
+   "factory": "0xe0c4ceb92d08ca985bb70fe0a22feb121a9854a8",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "SPY",
+   "quote": "USDG",
+   "pool": "0x5ad1a528cd9de3962cb6c75ff250e434887479c1",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1ac9db4a2608ba45d6127b1737949b51bb54b7f3",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "SPY",
+   "quote": "USDG",
+   "pool": "0xa43b424bc609495aed4bcd88d654934b510b0ad9",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": true,
+   "retained_from": "unknown@72764101"
+  },
+  {
+   "asset": "SPY",
+   "quote": "USDG",
+   "pool": "0xa7bb1ac63bbab0c44316e6c8c455213441689167",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "SPY",
+   "quote": "USDG",
+   "pool": "0xabe817af4fe3420152ab1464a45dc971e7eaaeae",
+   "kind": "concentrated-liquidity",
+   "factory": "0xece6ecd61177336ea6fb9b17937ac439d85ee20b",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "SPY",
+   "quote": "WETH",
+   "pool": "0x3e1afde90341f843c941ff4077d915bde3008c7e",
+   "kind": "concentrated-liquidity",
+   "factory": "0xe0c4ceb92d08ca985bb70fe0a22feb121a9854a8",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "SPY",
+   "quote": "WETH",
+   "pool": "0xddcbba3666f578e3f09516f21ff85bfee859ab5e",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "TSLA",
+   "quote": "USDG",
+   "pool": "0x77bf6d7d6f18c2c0ca0673f95af96a8812a3cb86",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1ac9db4a2608ba45d6127b1737949b51bb54b7f3",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "TSLA",
+   "quote": "USDG",
+   "pool": "0xb349fb08c2712f3a70bad40a4d006b68d67e888b",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": true,
+   "retained_from": "unknown@72764101"
+  },
+  {
+   "asset": "TSLA",
+   "quote": "USDG",
+   "pool": "0xc4f0172d6ac8dd294dd1137d047d5e1893760236",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "TSLA",
+   "quote": "USDG",
+   "pool": "0xf4acdaeeb7022862a763c9b1b885e11191c889e3",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": true,
+   "discovered_by": "flow@81316275"
+  },
+  {
+   "asset": "TSLA",
+   "quote": "WETH",
+   "pool": "0xa953ca88ff430e9487c60ca34d757414f4efda07",
+   "kind": "concentrated-liquidity",
+   "factory": "0x1f7d7550b1b028f7571e69a784071f0205fd2efa",
+   "stock_is_token0": false,
+   "discovered_by": "flow@81316275"
+  }
+ ],
+ "unclassified": [
+  {
+   "address": "0x8366a39cc670b4001a1121b8f6a443a643e40951",
+   "code_bytes": 24009,
+   "push4": [
+    "01ffc9a7",
+    "095bcdb6",
+    "0b0d9c09",
+    "11da60b4",
+    "156e29f6",
+    "1e2eaeaf",
+    "234266d7",
+    "2d771389",
+    "35fd631a",
+    "3dd45adb",
+    "426a8493",
+    "48c89491"
+   ]
+  },
+  {
+   "address": "0x278d858f05b94576c1e6f73285886876ff6ef8d2",
+   "code_bytes": 609,
+   "push4": [
+    "b2b958b8",
+    "dffad664",
+    "ee89462a",
+    "a79e0863",
+    "4300081c"
+   ]
+  },
+  {
+   "address": "0x6aa80dbbed9ae5ab45fbf61f9644fada3b29326e",
+   "code_bytes": 19872,
+   "push4": [
+    "06b8524c",
+    "1fff991f",
+    "70a08231",
+    "1a15a3cc",
+    "b7e59b04",
+    "f9ade075",
+    "4e487b71",
+    "e758b8d5",
+    "5149e795",
+    "3c74eed6",
+    "931997d3",
+    "d272fc20"
+   ]
+  },
+  {
+   "address": "0xd93c252aab9b506d29e233ee44b4a323cee4fffe",
+   "code_bytes": 2839,
+   "push4": [
+    "16c38b3c",
+    "23452b9c",
+    "238ac933",
+    "5c975abb",
+    "6b0509b1",
+    "6c19e783",
+    "79ba5097",
+    "8da5cb5b",
+    "cc3c0f06",
+    "cd2f5546",
+    "d9caed12",
+    "e30c3978"
+   ]
+  },
+  {
+   "address": "0x203bffa697bee74d39d255c1c028e3efa689b5f7",
+   "code_bytes": 126,
+   "push4": [
+    "4300081c"
+   ]
+  },
+  {
+   "address": "0x51c72848c68a965f66fa7a88855f9f7784502a7f",
+   "code_bytes": 20099,
+   "push4": [
+    "029074ce",
+    "0329dd62",
+    "09b0d50a",
+    "10a43720",
+    "1132fb89",
+    "122067ed",
+    "1626ba7e",
+    "1c02708d",
+    "1ce9ae07",
+    "1e6934b6",
+    "2197159c",
+    "22f3e2d4"
+   ]
+  },
+  {
+   "address": "0xc94135b63772b91d79d0a2daab2a8801f32359bd",
+   "code_bytes": 24232,
+   "push4": [
+    "87bd89b1",
+    "d211a726",
+    "f2fde38b",
+    "f392bc6f",
+    "fa461e33",
+    "fc42375e",
+    "fcd02701",
+    "da2dbd02",
+    "e1a45218",
+    "e30c3978",
+    "e7bb3361",
+    "ad5c4648"
+   ]
+  },
+  {
+   "address": "0x8f10b468b06c6fd214b65f87778827f7d113f996",
+   "code_bytes": 13529,
+   "push4": [
+    "01ffc9a7",
+    "022d63fb",
+    "0aa6220b",
+    "248a9ca3",
+    "25b9eb6a",
+    "2f2ff15d",
+    "36035eba",
+    "36568abe",
+    "3b0f3289",
+    "46b5cb59",
+    "631ffbf3",
+    "634e93da"
+   ]
+  },
+  {
+   "address": "0x3d90f66b534dd8482b181e24655a9e8265316be9",
+   "code_bytes": 2206,
+   "push4": [
+    "64d3180d",
+    "587086bd",
+    "070d7c69",
+    "a39f25e5",
+    "616e6e6f",
+    "6b20746f",
+    "b6e8ee11",
+    "616c6c20",
+    "6f6e7472",
+    "74000000",
+    "4e487b71",
+    "43000811"
+   ]
+  },
+  {
+   "address": "0x6f02324d20cc679d0e585290caa6b16bacbc0f77",
+   "code_bytes": 14564,
+   "push4": [
+    "09f2c019",
+    "167d1604",
+    "1928b3cb",
+    "33a6ab88",
+    "47933f49",
+    "5a6f4c5f",
+    "6f174dca",
+    "a480ca79",
+    "b43df6e3",
+    "c6bbd5a7",
+    "cc0d7e37",
+    "cdb5303f"
+   ]
+  },
+  {
+   "address": "0xc33acc93942105c57602e59e8e448c20ba718a85",
+   "code_bytes": 10346,
+   "push4": [
+    "57806055",
+    "57806194",
+    "0c000000",
+    "15e2b6cd",
+    "17f8f44d",
+    "23a69e75",
+    "24000000",
+    "2c8958f6",
+    "2de6ca25",
+    "3ab1a494",
+    "53b03a83",
+    "5ca7ab59"
+   ]
+  },
+  {
+   "address": "0x65050a9b7e5075a2ba5ced7b1b64ee66262c40dc",
+   "code_bytes": 752,
+   "push4": [
+    "278f7943",
+    "34ad5dbb",
+    "4e487b71",
+    "b398979f",
+    "4c9c8ce3",
+    "9996b315",
+    "d6bda275",
+    "1b22e851",
+    "4300081c"
+   ]
+  },
+  {
+   "address": "0xe5e702641ea86f4ae6cc3cdaed2b886f976be044",
+   "code_bytes": 15167,
+   "push4": [
+    "21d0ee70",
+    "259982e5",
+    "2ce8b029",
+    "359b4f30",
+    "3d61055e",
+    "41541148",
+    "48332680",
+    "49127e2a",
+    "54faf9c3",
+    "575e24b4",
+    "5bb47808",
+    "5cbe8117"
+   ]
+  },
+  {
+   "address": "0x9b169052ee1569ec5bdf51dbf48d2962526cf6d9",
+   "code_bytes": 171,
+   "push4": [
+    "43000706"
+   ]
+  },
+  {
+   "address": "0x39adb8acd07427d338b5f1afab436a04abfdb7c4",
+   "code_bytes": 14724,
+   "push4": [
+    "0ed0cf42",
+    "16c38b3c",
+    "226b876c",
+    "22a90082",
+    "24cc0dbe",
+    "2c937df7",
+    "2e4d5644",
+    "36a0b9ef",
+    "38b0789d",
+    "50bd8781",
+    "55234ec0",
+    "562cad23"
+   ]
+  },
+  {
+   "address": "0x907d1d174569b11624bdcefd20dcef27600237f8",
+   "code_bytes": 3981,
+   "push4": [
+    "0329dd62",
+    "11e534a4",
+    "1c02708d",
+    "1ce9ae07",
+    "22f3e2d4",
+    "23ff2958",
+    "2c88026b",
+    "321eb4d2",
+    "338ae908",
+    "481c42a2",
+    "59733e7f",
+    "6b410e34"
+   ]
+  },
+  {
+   "address": "0xec9aa0a6c2372131a0502aba6188269ab52cacb5",
+   "code_bytes": 15922,
+   "push4": [
+    "985f61a1",
+    "ffa1ad74",
+    "4e487b71",
+    "ffffffff",
+    "d37ac04b",
+    "a9059cbb",
+    "f7a632f5",
+    "10309b7d",
+    "0240bc6b",
+    "022c0d9f",
+    "70a08231",
+    "02515961"
+   ]
+  },
+  {
+   "address": "0xd750615e5900f2aa09083e95c0dbb4958b173800",
+   "code_bytes": 17504,
+   "push4": [
+    "09c5eabe",
+    "13e7c9d8",
+    "1cc0e23a",
+    "23a69e75",
+    "2c8958f6",
+    "35884857",
+    "558a7297",
+    "8da5cb5b",
+    "91dd7346",
+    "ab6291fe",
+    "bd8e62d6",
+    "c4d66de8"
+   ]
+  },
+  {
+   "address": "0xcef7501b9b060a599a81735bead6641c0e6baf46",
+   "code_bytes": 171,
+   "push4": [
+    "43000706"
+   ]
+  },
+  {
+   "address": "0xa1d65242d367501d9a261389a69005e584f4786a",
+   "code_bytes": 10054,
+   "push4": [
+    "0f9cd729",
+    "249d39e9",
+    "2a0ca473",
+    "3cf0a865",
+    "57660f0d",
+    "5de5ed1a",
+    "5f838b78",
+    "6493d40a",
+    "64df049e",
+    "ab884852",
+    "b9df2051",
+    "bc529c43"
+   ]
+  },
+  {
+   "address": "0x14eea32eaafb58c2c33206bec86c7689ce44887e",
+   "code_bytes": 20024,
+   "push4": [
+    "0f743953",
+    "1e2eaeaf",
+    "1f21638c",
+    "35fd631a",
+    "372aa224",
+    "3ff20c8a",
+    "5dd9a4c5",
+    "658b6cb7",
+    "943f3b1a",
+    "97962ef9",
+    "bcdb4dad",
+    "d8306786"
+   ]
+  },
+  {
+   "address": "0xe25e9bc31d24bb652fb6e2e466d7c9c89701173e",
+   "code_bytes": 291,
+   "push4": [
+    "5c60da1b",
+    "4e487b71",
+    "43000823"
+   ]
+  },
+  {
+   "address": "0x006102b16a04c20306a28b652745d3973d7d24fa",
+   "code_bytes": 130,
+   "push4": [
+    "4300081b"
+   ]
+  },
+  {
+   "address": "0x4e3468951d49f2eea976ed0d6e75ffcb44a9a544",
+   "code_bytes": 25533,
+   "push4": [
+    "0cf756c2",
+    "1564cf6c",
+    "1bab58f5",
+    "1cab59a4",
+    "21d0ee70",
+    "259982e5",
+    "2b1fd599",
+    "51ef8284",
+    "575e24b4",
+    "5a302347",
+    "5ebb58fb",
+    "5ec5db32"
+   ]
+  },
+  {
+   "address": "0x0005ea38eb0a69d1253508ebdbdb9ea8cb26b5ef",
+   "code_bytes": 163,
+   "push4": [
+    "f8fde9e1",
+    "4300081b"
+   ]
+  },
+  {
+   "address": "0xbd665831a520182e944af92b23a317791c5d8efa",
+   "code_bytes": 4612,
+   "push4": [
+    "30e6ae31",
+    "4369c226",
+    "6f7929f2",
+    "91dd7346",
+    "ad5c4648",
+    "9fab988d",
+    "70a08231",
+    "4e487b71",
+    "72656469",
+    "3cf36453",
+    "efd1fc6a",
+    "988d2590"
+   ]
+  },
+  {
+   "address": "0x6e2a35a7ad683cf634d91492d73bb7ff774c6919",
+   "code_bytes": 13322,
+   "push4": [
+    "8da5cb5b",
+    "b8815477",
+    "ba0863ab",
+    "e1bb5133",
+    "f2c42696",
+    "f2fde38b",
+    "fa461e33",
+    "9871efa4",
+    "98d2ac62",
+    "b187bd26",
+    "b80c2f09",
+    "2cc1cd9e"
+   ]
+  },
+  {
+   "address": "0xf0b7eaaf868191adc00065ca13391ef436ce8faf",
+   "code_bytes": 33121,
+   "push4": [
+    "05c8011e",
+    "13abb0ca",
+    "17700f01",
+    "23a69e75",
+    "2c8958f6",
+    "34f1549f",
+    "39ecce49",
+    "3ccfd60b",
+    "4dfa26e1",
+    "654b6487",
+    "7454f502",
+    "89476069"
+   ]
+  },
+  {
+   "address": "0xb5e643d7e30846c45ac605aa92eecbce88f19cf5",
+   "code_bytes": 23111,
+   "push4": [
+    "213a2ba3",
+    "3e780894",
+    "7bbf4a3f",
+    "91dd7346",
+    "ab6291fe",
+    "d9caed12",
+    "94e8d985",
+    "0b0d9c09",
+    "0476982d",
+    "29610465",
+    "4e487b71",
+    "9fab988d"
+   ]
+  },
+  {
+   "address": "0x9689992f5b5c09447f15906d8d11214944488341",
+   "code_bytes": 100,
+   "push4": [
+    "4300081a"
+   ]
+  },
+  {
+   "address": "0xd3afeb2a57f70ef218aa82451c51b2fb0416ac9e",
+   "code_bytes": 1932,
+   "push4": [
+    "09ad4dd9",
+    "1698755f",
+    "32f289cf",
+    "379607f5",
+    "4e71d92d",
+    "70a08231",
+    "d5d44d80",
+    "f59e38b7",
+    "4e487b71",
+    "23b872dd",
+    "5274afe7",
+    "d92e233d"
+   ]
+  },
+  {
+   "address": "0x2a7f3d7486641c77600b9b9256132755c8aebb4f",
+   "code_bytes": 3055,
+   "push4": [
+    "23a69e75",
+    "2c8958f6",
+    "30e6ae31",
+    "5bee97a3",
+    "6118b15d",
+    "654b6487",
+    "6d2cc304",
+    "6f7929f2",
+    "86cbcd52",
+    "9feb758b",
+    "ad5c4648",
+    "ae067e0f"
+   ]
+  },
+  {
+   "address": "0x18d7ae5f7d23ba2443b657575f4ef4dec89a3f13",
+   "code_bytes": 3044,
+   "push4": [
+    "30e6ae31",
+    "6f7929f2",
+    "8823151b",
+    "c3251075",
+    "a9059cbb",
+    "fb7f5079",
+    "2b6653dc",
+    "56324164",
+    "616e2063",
+    "616c6c62",
+    "6b60a01b",
+    "4e487b71"
+   ]
+  },
+  {
+   "address": "0x1149133ed99dd48a2029eb27c15edbb38f572fb1",
+   "code_bytes": 541,
+   "push4": [
+    "3659cfe6",
+    "f2fde38b",
+    "4300060c"
+   ]
+  },
+  {
+   "address": "0x81902740ce67f686ee351161a3e17a3e42f1bf8c",
+   "code_bytes": 19077,
+   "push4": [
+    "1e2eaeaf",
+    "c815641c",
+    "90bfb865",
+    "73747279",
+    "08c379a0",
+    "baddead2",
+    "baddead1",
+    "baddead0",
+    "baddead3",
+    "17bd6123",
+    "822d8ce0",
+    "3e3a10c4"
+   ]
+  },
+  {
+   "address": "0xcedb799b8eed839b10add695e7c7803dd82b79c8",
+   "code_bytes": 130,
+   "push4": [
+    "4300081b"
+   ]
+  },
+  {
+   "address": "0x8876789976decbfcbbbe364623c63652db8c0904",
+   "code_bytes": 24546,
+   "push4": [
+    "1a27b201",
+    "24856bc3",
+    "3593564c",
+    "44684dc3",
+    "8021fef7",
+    "817122dc",
+    "84b0196e",
+    "91dd7346",
+    "d04d79a2",
+    "d0c9f6cb",
+    "d737d0c7",
+    "dc4c90d3"
+   ]
+  },
+  {
+   "address": "0xfa686b40541334a8983b3d28902f832e23f9cd1f",
+   "code_bytes": 16054,
+   "push4": [
+    "4e487b71",
+    "fa461e33",
+    "d3487997",
+    "48eeb9a3",
+    "01489923",
+    "36b87bd7",
+    "79ba5097",
+    "ce09c715",
+    "558a7297",
+    "06b7c759",
+    "f2fde38b",
+    "efc908a1"
+   ]
+  },
+  {
+   "address": "0x0e867974275cd31c25015c2753c9d75f9f355379",
+   "code_bytes": 20486,
+   "push4": [
+    "ab6291fe",
+    "f2fde38b",
+    "fa461e33",
+    "fd58a2dd",
+    "ba3f2165",
+    "e9406cf4",
+    "8da5cb5b",
+    "91dd7346",
+    "9cbd7f62",
+    "6be92b89",
+    "715018a6",
+    "7c939f12"
+   ]
+  },
+  {
+   "address": "0x2f4579ca81717d3d61bf8b6f06571877bbe54a07",
+   "code_bytes": 5914,
+   "push4": [
+    "519af30e",
+    "85535cc5",
+    "f57f2e12",
+    "ffa1ad74",
+    "67170281",
+    "1072cbea",
+    "12f351a3",
+    "1f57256f",
+    "404177c0",
+    "01352646",
+    "91906115",
+    "70a08231"
+   ]
+  },
+  {
+   "address": "0x7ddbd3952d9fd58cc7d344ad0931d08db072114a",
+   "code_bytes": 126,
+   "push4": [
+    "4300081c"
+   ]
+  },
+  {
+   "address": "0x24776b26702970a0017cb41b47568604b318a5b0",
+   "code_bytes": 2598,
+   "push4": [
+    "30e6ae31",
+    "6f7929f2",
+    "8823151b",
+    "ad5c4648",
+    "fa461e33",
+    "34324e9f",
+    "28af8d0b",
+    "9fab988d",
+    "0d0e30db",
+    "a9059cbb",
+    "4e487b71",
+    "fb7f5079"
+   ]
+  },
+  {
+   "address": "0x66b570d1b419209c54cf9a85c04c64557c038edf",
+   "code_bytes": 130,
+   "push4": [
+    "40ac6d42",
+    "4300081a"
+   ]
+  },
+  {
+   "address": "0x9982538f41f2ae29ddb9d3d9307010052984fdbb",
+   "code_bytes": 17609,
+   "push4": [
+    "09f2c019",
+    "1564cf6c",
+    "167d1604",
+    "1928b3cb",
+    "2b1fd599",
+    "33a6ab88",
+    "47933f49",
+    "5a302347",
+    "5a6f4c5f",
+    "5ebb58fb",
+    "6f174dca",
+    "817db73b"
+   ]
+  },
+  {
+   "address": "0x4f922d5b15e6691e0469663e4f5c4177f23c5faf",
+   "code_bytes": 9260,
+   "push4": [
+    "01ffc9a7",
+    "0b0d9c09",
+    "11da60b4",
+    "15dacbea",
+    "17a1d80f",
+    "20d9cd95",
+    "322c3620",
+    "36223ce9",
+    "3dd45adb",
+    "558a7297",
+    "57bb1c06",
+    "5d4e0ced"
+   ]
+  },
+  {
+   "address": "0xcb4d2ebf88de5235723be83ef96ccc24af2df473",
+   "code_bytes": 23,
+   "push4": [
+    "c0c19a28"
+   ]
+  },
+  {
+   "address": "0x09ad820aac5779683b481c4674208a4e1b024afa",
+   "code_bytes": 7570,
+   "push4": [
+    "79ba5097",
+    "9b19251a",
+    "ac9650d8",
+    "e30c3978",
+    "f2fde38b",
+    "8456cb59",
+    "8da5cb5b",
+    "0d392cd9",
+    "158f6894",
+    "24217062",
+    "3f4ba83a",
+    "5c975abb"
+   ]
+  },
+  {
+   "address": "0xa18dd1bd636b63a2c880a000b0a4635ead7e0de1",
+   "code_bytes": 19793,
+   "push4": [
+    "01e33667",
+    "0885f732",
+    "0a9e99d9",
+    "150b7a02",
+    "17f33340",
+    "4025feb2",
+    "4b4408ac",
+    "4f35ea5a",
+    "570ca735",
+    "61707707",
+    "649c6e86",
+    "715018a6"
+   ]
+  },
+  {
+   "address": "0x69460570c93f9de5e2edbc3052bf10125f0ca22d",
+   "code_bytes": 5208,
+   "push4": [
+    "ffffffff",
+    "43000810"
+   ]
+  },
+  {
+   "address": "0x56fa7200217f1c86f4066406d4aae3bdf249c00a",
+   "code_bytes": 19793,
+   "push4": [
+    "01e33667",
+    "0885f732",
+    "0a9e99d9",
+    "150b7a02",
+    "17f33340",
+    "4025feb2",
+    "4b4408ac",
+    "4f35ea5a",
+    "570ca735",
+    "61707707",
+    "649c6e86",
+    "715018a6"
+   ]
+  },
+  {
+   "address": "0x36dc95f1f088e11c0066dc19173f745655002bc2",
+   "code_bytes": 6752,
+   "push4": [
+    "30e6ae31",
+    "6f7929f2",
+    "91dd7346",
+    "ad5c4648",
+    "dc4c90d3",
+    "feb336e6",
+    "9fab988d",
+    "570c1085",
+    "029a949d",
+    "48c89491",
+    "ffffffff",
+    "20a2d33d"
+   ]
+  },
+  {
+   "address": "0x66f709d6850f8ab0692f50f0af85406c23dd8d7a",
+   "code_bytes": 22255,
+   "push4": [
+    "23a69e75",
+    "2c8958f6",
+    "62c06767",
+    "654b6487",
+    "8be883d1",
+    "8da5cb5b",
+    "91dd7346",
+    "ab6291fe",
+    "fa461e33",
+    "fa483e72",
+    "c7600160",
+    "0b0d9c09"
+   ]
+  },
+  {
+   "address": "0x111116053f09d34a7eae8102887004445176ca11",
+   "code_bytes": 21567,
+   "push4": [
+    "07e5c0d2",
+    "10c3405f",
+    "163af3a2",
+    "1c6eced5",
+    "20b04554",
+    "23a69e75",
+    "26367361",
+    "2636f7f8",
+    "26678dcd",
+    "26f079f1",
+    "2c8958f6",
+    "3dd5cfd1"
+   ]
+  },
+  {
+   "address": "0x656111ac221ac16a6d6094f759a6a2228114c871",
+   "code_bytes": 23927,
+   "push4": [
+    "083362b1",
+    "090b93dc",
+    "13e48fe5",
+    "183a4f6e",
+    "1c10893f",
+    "1cd64df4",
+    "225b8fd1",
+    "23a69e75",
+    "25692962",
+    "273ed13c",
+    "2c8958f6",
+    "2de94807"
+   ]
+  },
+  {
+   "address": "0x1195c074f898b7644ba732407619c9804dfe6dce",
+   "code_bytes": 1831,
+   "push4": [
+    "1b2ce7f3",
+    "278f7943",
+    "08f28397",
+    "03e14691",
+    "5c60da1b",
+    "616e6e6f",
+    "6b20746f",
+    "4e487b71",
+    "616c6c60",
+    "616c6c20",
+    "6f6e7472",
+    "74000000"
+   ]
+  },
+  {
+   "address": "0x00000000000014aa86c5d3c41765bb24e11bd701",
+   "code_bytes": 18797,
+   "push4": [
+    "0e7f2639",
+    "101e8952",
+    "12e103f1",
+    "17c5da6a",
+    "187437a1",
+    "380eb4e0",
+    "3ccfd60b",
+    "5ebb0909",
+    "66e064a8",
+    "79b45a07",
+    "c0530244",
+    "cb48dadf"
+   ]
+  },
+  {
+   "address": "0x114d574247342eafea95b7a9234e62984d48cd9e",
+   "code_bytes": 22123,
+   "push4": [
+    "0556b674",
+    "0acfa356",
+    "0c0bb54f",
+    "186f0354",
+    "20800a00",
+    "35b4036b",
+    "3f4ba83a",
+    "4e9ac45b",
+    "570ca735",
+    "5c975abb",
+    "5780635d",
+    "708b9447"
+   ]
+  },
+  {
+   "address": "0x204faca1764b154221e35c0d20abb3c525710498",
+   "code_bytes": 24380,
+   "push4": [
+    "1a27b201",
+    "24856bc3",
+    "3593564c",
+    "44684dc3",
+    "8021fef7",
+    "817122dc",
+    "84b0196e",
+    "91dd7346",
+    "d04d79a2",
+    "d0c9f6cb",
+    "d737d0c7",
+    "dc4c90d3"
+   ]
+  },
+  {
+   "address": "0x49154eba8c82ead309fd1a033f9da7f040c20a48",
+   "code_bytes": 291,
+   "push4": [
+    "5c60da1b",
+    "4e487b71",
+    "43000823"
+   ]
+  },
+  {
+   "address": "0xcaf681a66d020601342297493863e78c959e5cb2",
+   "code_bytes": 24497,
+   "push4": [
+    "9b2c0a37",
+    "dee00f35",
+    "f100b205",
+    "f2d5d56b",
+    "f3995c67",
+    "fa461e33",
+    "f25801a7",
+    "e0e189a0",
+    "e90a182f",
+    "efdeed8e",
+    "df2ab5bb",
+    "b858183f"
+   ]
+  },
+  {
+   "address": "0x2f2c0aa37625b0bbea08be9009054711a81ca25c",
+   "code_bytes": 291,
+   "push4": [
+    "5c60da1b",
+    "4e487b71",
+    "43000823"
+   ]
+  },
+  {
+   "address": "0x28df563f52cd1e94c25cecb8947aed5ac091d181",
+   "code_bytes": 13847,
+   "push4": [
+    "01681a62",
+    "10d1e85c",
+    "117803e3",
+    "23a69e75",
+    "2c8958f6",
+    "31f57072",
+    "32fe7b26",
+    "5b2e9917",
+    "79f7ded3",
+    "7b334154",
+    "91dd7346",
+    "9a7bff79"
+   ]
+  },
+  {
+   "address": "0xb92fe925dc43a0ecde6c8b1a2709c170ec4fff4f",
+   "code_bytes": 4720,
+   "push4": [
+    "150b7a02",
+    "5d1fe6a2",
+    "73b7bb2f",
+    "9bb43718",
+    "a6bd8c96",
+    "bc197c81",
+    "cd6e13f7",
+    "f23a6e61",
+    "5c46a7ef",
+    "0a85bd01",
+    "f36675c3",
+    "3204506f"
+   ]
+  },
+  {
+   "address": "0x73318e03ba5293ae754d377868f60949e0a7475a",
+   "code_bytes": 130,
+   "push4": [
+    "4300081b"
+   ]
+  },
+  {
+   "address": "0x62fc80823e766e4cc7cce3ca745d6bb39fbcf4ca",
+   "code_bytes": 41737,
+   "push4": [
+    "0d0e30db",
+    "0f4d14e9",
+    "0f59d152",
+    "10d1e85c",
+    "13af4035",
+    "23a69e75",
+    "2688f892",
+    "2c8958f6",
+    "3a1c453c",
+    "4460d3cf",
+    "4b58a6e8",
+    "542de23a"
+   ]
+  },
+  {
+   "address": "0x794c44d963ec3644aceffc40d7591f907066f74a",
+   "code_bytes": 19793,
+   "push4": [
+    "01e33667",
+    "0885f732",
+    "0a9e99d9",
+    "150b7a02",
+    "17f33340",
+    "4025feb2",
+    "4b4408ac",
+    "4f35ea5a",
+    "570ca735",
+    "61707707",
+    "649c6e86",
+    "715018a6"
+   ]
+  },
+  {
+   "address": "0x3ef05070609abd1df0adeed3bbe7507f8cbeeca7",
+   "code_bytes": 291,
+   "push4": [
+    "5c60da1b",
+    "4e487b71",
+    "43000823"
+   ]
+  },
+  {
+   "address": "0x8e36d9aad5b9fa591761a366276faac29025f7b8",
+   "code_bytes": 72,
+   "push4": [
+    "e032a58b"
+   ]
+  },
+  {
+   "address": "0x066f9f70ac7736d0e65ae8ae6aa1f8837fd3f5c5",
+   "code_bytes": 7041,
+   "push4": [
+    "03fd2a45",
+    "0a4d85cd",
+    "20ff430b",
+    "2e6f0471",
+    "2ffa85df",
+    "3d958f46",
+    "3f4ba83a",
+    "44097c48",
+    "4d900d95",
+    "5c975abb",
+    "618bb079",
+    "61d027b3"
+   ]
+  },
+  {
+   "address": "0xe492912f37c2a4eca45d42dc67548f4c6cd7ce2b",
+   "code_bytes": 784,
+   "push4": [
+    "68f7aa7e",
+    "278f7943",
+    "34ad5dbb",
+    "4e487b71",
+    "b398979f",
+    "4c9c8ce3",
+    "d6bda275",
+    "9996b315",
+    "4300081c"
+   ]
+  },
+  {
+   "address": "0xbb1b19f138db3925883a96ff7a304277460e0c99",
+   "code_bytes": 171,
+   "push4": [
+    "43000706"
+   ]
+  },
+  {
+   "address": "0x09215a470bd585e59eb3f4b612fbd2678131ff9e",
+   "code_bytes": 22390,
+   "push4": [
+    "01ffc9a7",
+    "095bcdb6",
+    "0c1a0ee7",
+    "12261ee7",
+    "1d452e46",
+    "21bd166a",
+    "24788429",
+    "248a9ca3",
+    "2f2ff15d",
+    "33967285",
+    "36568abe",
+    "3c226834"
+   ]
+  },
+  {
+   "address": "0xe04fba61fd54ba78dd450a30d8af40167af5d3ec",
+   "code_bytes": 11071,
+   "push4": [
+    "7687d1e0",
+    "c483acdf",
+    "e4a774d5",
+    "f5cb8298",
+    "f845e3ef",
+    "fa33fd29",
+    "fa764f19",
+    "ede68a9f",
+    "f2fde38b",
+    "c653f08f",
+    "cd7d2e8d",
+    "d010d2d7"
+   ]
+  },
+  {
+   "address": "0x424f0d6cee21e6227239f4ae6e14acd2c3d51424",
+   "code_bytes": 8915,
+   "push4": [
+    "67c37b60",
+    "c09d401b",
+    "f2fde38b",
+    "f5cb8298",
+    "f845e3ef",
+    "fa33fd29",
+    "c483acdf",
+    "c653f08f",
+    "dfcdc8c0",
+    "a34031b9",
+    "abbb4695",
+    "af6e6238"
+   ]
+  },
+  {
+   "address": "0x6c9c7c9cb0995b018cb19065db44f85da39c16af",
+   "code_bytes": 12292,
+   "push4": [
+    "052698fd",
+    "1be15578",
+    "7f329af6",
+    "873150d8",
+    "8f4b39e5",
+    "ca159827",
+    "e367ec1f",
+    "30856114",
+    "e76c01e4",
+    "3850c7bd",
+    "0902f1ac",
+    "3e3a10c4"
+   ]
+  },
+  {
+   "address": "0x31f914ae52f235c006b4f2e2d9b284560a8439ae",
+   "code_bytes": 3309,
+   "push4": [
+    "06fdde03",
+    "095ea7b3",
+    "18160ddd",
+    "23b872dd",
+    "313ce567",
+    "70a08231",
+    "71a97305",
+    "7bde82f2",
+    "95d89b41",
+    "a9059cbb",
+    "b696a6ad",
+    "c9d4623f"
+   ]
+  },
+  {
+   "address": "0xa86b814c7e6e4cf7ad56720170ada05f0aa85c68",
+   "code_bytes": 2403,
+   "push4": [
+    "048d372c",
+    "129f5502",
+    "3ed743b6",
+    "63453ae1",
+    "715018a6",
+    "79ba5097",
+    "8bcca6eb",
+    "8da5cb5b",
+    "e30c3978",
+    "e5d1d260",
+    "e60bff71",
+    "f2fde38b"
+   ]
+  },
+  {
+   "address": "0xe4d3b90ab2279a871b0db517446a9f854ab4b962",
+   "code_bytes": 19630,
+   "push4": [
+    "01e33667",
+    "0885f732",
+    "0a9e99d9",
+    "150b7a02",
+    "17f33340",
+    "4025feb2",
+    "4b4408ac",
+    "4f35ea5a",
+    "570ca735",
+    "61707707",
+    "649c6e86",
+    "715018a6"
+   ]
+  },
+  {
+   "address": "0x040234dfd2d32336e3cd9534fa1909adab002cea",
+   "code_bytes": 130,
+   "push4": [
+    "4300081b"
+   ]
+  },
+  {
+   "address": "0xcfaece2151502da2a21d47234ae1f08618a60a94",
+   "code_bytes": 45,
+   "push4": [
+    "8fa7164d"
+   ]
+  },
+  {
+   "address": "0x24e62dd5c7058cc41ad9c5375c137460ea1da2fe",
+   "code_bytes": 8601,
+   "push4": [
+    "91dd7346",
+    "d1571e47",
+    "f3f2afc1",
+    "f4145a83",
+    "f5b91b7b",
+    "f735530f",
+    "dc4c90d3",
+    "f2fde38b",
+    "b18d108e",
+    "b85c470d",
+    "be121757",
+    "c34c08e5"
+   ]
+  },
+  {
+   "address": "0x01779b73f3bc23d5ffa03938fcffc2c3f56afea6",
+   "code_bytes": 19630,
+   "push4": [
+    "01e33667",
+    "0885f732",
+    "0a9e99d9",
+    "150b7a02",
+    "17f33340",
+    "4025feb2",
+    "4b4408ac",
+    "4f35ea5a",
+    "570ca735",
+    "61707707",
+    "649c6e86",
+    "715018a6"
+   ]
+  },
+  {
+   "address": "0x8ca86ea297ff3270155cc0e911bf7099c2395e22",
+   "code_bytes": 1435,
+   "push4": [
+    "5c60da1b",
+    "6dbf2fa0",
+    "83f94db7",
+    "ac9650d8",
+    "532d3ec5",
+    "4e487b71",
+    "43000821"
+   ]
+  },
+  {
+   "address": "0x53e078910c9617f3958179fa199dfc03bf17d7b6",
+   "code_bytes": 24058,
+   "push4": [
+    "0ddf0e73",
+    "0e8cc705",
+    "1865a32a",
+    "1b73ecaa",
+    "2b3f2cfb",
+    "2d2af9a0",
+    "3f3204d2",
+    "5465a4f1",
+    "61874181",
+    "65e0e5a3",
+    "66a0040a",
+    "6d2cc304"
+   ]
+  },
+  {
+   "address": "0xc603c8fb07e1f182ac34c41e176e4244606e734b",
+   "code_bytes": 291,
+   "push4": [
+    "5c60da1b",
+    "4e487b71",
+    "43000823"
+   ]
+  },
+  {
+   "address": "0x8b35ff398f339a061092964c2d8e361e51ad4878",
+   "code_bytes": 11748,
+   "push4": [
+    "7ef59d01",
+    "b8ca8dd8",
+    "c6223fc5",
+    "d9f66db1",
+    "e30c3978",
+    "ea2d4eac",
+    "f2fde38b",
+    "8da5cb5b",
+    "95dd87c6",
+    "9b60436f",
+    "a773a59b",
+    "541e992e"
+   ]
+  },
+  {
+   "address": "0x57e12f146fdbc0189f3f05c0f8eb50f22a9c753d",
+   "code_bytes": 20024,
+   "push4": [
+    "0f743953",
+    "1e2eaeaf",
+    "1f21638c",
+    "35fd631a",
+    "372aa224",
+    "3ff20c8a",
+    "5dd9a4c5",
+    "658b6cb7",
+    "943f3b1a",
+    "97962ef9",
+    "bcdb4dad",
+    "d8306786"
+   ]
+  },
+  {
+   "address": "0xf26606c68a16cb95b5b0d59e2f10b263c4efb61f",
+   "code_bytes": 20024,
+   "push4": [
+    "0f743953",
+    "1e2eaeaf",
+    "1f21638c",
+    "35fd631a",
+    "372aa224",
+    "3ff20c8a",
+    "5dd9a4c5",
+    "658b6cb7",
+    "943f3b1a",
+    "97962ef9",
+    "bcdb4dad",
+    "d8306786"
+   ]
+  },
+  {
+   "address": "0x60a6623393926f3ca6eae6a4a15768b85a177588",
+   "code_bytes": 8799,
+   "push4": [
+    "12261ee7",
+    "227c394d",
+    "46c403aa",
+    "5dab2420",
+    "8da5cb5b",
+    "9a8a0592",
+    "b07c411f",
+    "b85d13a1",
+    "f5b91b7b",
+    "f6ba0a92",
+    "f887ea40",
+    "fb8b535a"
+   ]
+  },
+  {
+   "address": "0x3cf569a986051429c01ef89b37773fd81a81166f",
+   "code_bytes": 45,
+   "push4": [
+    "8fa7164d"
+   ]
+  },
+  {
+   "address": "0x2bbde60108c1528d210913f7f9e6e16221ffb2e7",
+   "code_bytes": 291,
+   "push4": [
+    "5c60da1b",
+    "4e487b71",
+    "43000823"
+   ]
+  },
+  {
+   "address": "0x8168762be8d09804d5b17d3bd4c10807d4f8cf3a",
+   "code_bytes": 8068,
+   "push4": [
+    "8da5cb5b",
+    "d1571e47",
+    "dc4c90d3",
+    "f2fde38b",
+    "f3f2afc1",
+    "f4145a83",
+    "f5b91b7b",
+    "91dd7346",
+    "963d0c78",
+    "b18d108e",
+    "be121757",
+    "c34c08e5"
+   ]
+  },
+  {
+   "address": "0x22f4c70254cebbe7bfcdc88d437f1d9882ef096a",
+   "code_bytes": 23,
+   "push4": [
+    "c0c19a28"
+   ]
+  },
+  {
+   "address": "0x1615dec6c8f4a416589ef66a8453e2d871d8dc32",
+   "code_bytes": 291,
+   "push4": [
+    "5c60da1b",
+    "4e487b71",
+    "43000823"
+   ]
+  },
+  {
+   "address": "0xcb3d2a42022741b06f9b38459e3dd1ee9a64d129",
+   "code_bytes": 14558,
+   "push4": [
+    "01ffc9a7",
+    "1459457a",
+    "150b7a02",
+    "1cff79cd",
+    "248a9ca3",
+    "27ac0c58",
+    "2f2ff15d",
+    "2f622e6b",
+    "340ed32a",
+    "34a3905c",
+    "3644e515",
+    "36568abe"
+   ]
+  },
+  {
+   "address": "0x17eedd7ecc9793744422edb45a4385fe6ef5ca0c",
+   "code_bytes": 7012,
+   "push4": [
+    "13e7c9d8",
+    "23a69e75",
+    "2c8958f6",
+    "3fc8cef3",
+    "481c6a75",
+    "5001f3b5",
+    "558a7297",
+    "59efcb15",
+    "62c06767",
+    "8da5cb5b",
+    "91dd7346",
+    "fa461e33"
+   ]
+  },
+  {
+   "address": "0xc00d713c311e328dddeffd6fec0cbc398f609f77",
+   "code_bytes": 9081,
+   "push4": [
+    "0d532f40",
+    "120aa877",
+    "238ac933",
+    "2d81d35b",
+    "2ffaf759",
+    "31a067ac",
+    "3b4d2b8c",
+    "3c65378d",
+    "3dc595d4",
+    "413e6c50",
+    "4b1533b2",
+    "4eb2babd"
+   ]
+  }
+ ],
+ "present_not_quoted": [
+  {
+   "asset": "SPY",
+   "quote": "USDG",
+   "pool": "0x05e146f995aa70d0bf8481ee3d27368a537a8e0d",
+   "kind": "reserve-based",
+   "reason": "no quoting path: swap signature and fee() are not those of a concentrated-liquidity pool"
+  },
+  {
+   "asset": "SPY",
+   "quote": "WETH",
+   "pool": "0x43343e5881c9382bbdc7b8fb44e837d7a6c254ad",
+   "kind": "reserve-based",
+   "reason": "no quoting path: swap signature and fee() are not those of a concentrated-liquidity pool"
+  },
+  {
+   "asset": "AAPL",
+   "quote": "USDG",
+   "pool": "0xf9bb10a8277b44d30d5a4338a73e1c30d8e659d5",
+   "kind": "reserve-based",
+   "reason": "no quoting path: swap signature and fee() are not those of a concentrated-liquidity pool"
+  },
+  {
+   "asset": "TSLA",
+   "quote": "WETH",
+   "pool": "0x352771b68da27e3bece96eb2c8532d7faed1de1b",
+   "kind": "reserve-based",
+   "reason": "no quoting path: swap signature and fee() are not those of a concentrated-liquidity pool"
+  },
+  {
+   "asset": "TSLA",
+   "quote": "USDG",
+   "pool": "0x3f62c18272bafbedf255cd5c999da1ee1ed7a004",
+   "kind": "reserve-based",
+   "reason": "no quoting path: swap signature and fee() are not those of a concentrated-liquidity pool"
+  },
+  {
+   "asset": "GME",
+   "quote": "USDG",
+   "pool": "0xbde4b6e7f65d8944712d8b87b9820fddcbe93b60",
+   "kind": "reserve-based",
+   "reason": "no quoting path: swap signature and fee() are not those of a concentrated-liquidity pool"
+  },
+  {
+   "asset": "GME",
+   "quote": "WETH",
+   "pool": "0xeacb8b6bbd646d01c0ca8a77193bcfdc11ce60f9",
+   "kind": "reserve-based",
+   "reason": "no quoting path: swap signature and fee() are not those of a concentrated-liquidity pool"
+  },
+  {
+   "asset": "RDDT",
+   "quote": "USDG",
+   "pool": "0x9e21c68ea2f6315b35cd4d2a727a0d253cd998cb",
+   "kind": "reserve-based",
+   "reason": "no quoting path: swap signature and fee() are not those of a concentrated-liquidity pool"
+  },
+  {
+   "asset": "AMC",
+   "quote": "WETH",
+   "pool": "0x0d1164324085fc7825f296065c53a26257e38305",
+   "kind": "reserve-based",
+   "reason": "no quoting path: swap signature and fee() are not those of a concentrated-liquidity pool"
+  },
+  {
+   "asset": "RDDT",
+   "quote": "WETH",
+   "pool": "0x2da0f858c20398854301fcdc64a9c2899c61de01",
+   "kind": "reserve-based",
+   "reason": "no quoting path: swap signature and fee() are not those of a concentrated-liquidity pool"
+  }
+ ]
+}
