@@ -1,3 +1,10 @@
+# Disclosure - Base exit-depth
+
+**Current run: pinned block 52175000.** The current table, its row counts and its Panel B
+holdings bounds are generated in README.md from the artifacts of that run. Everything below this
+paragraph describes the earlier run and is kept as history rather than deleted - the repository's
+practice is that a superseded number stays readable next to the reason it was superseded.
+
 # Disclosure — Base exit-depth
 
 - Pinned block `52170281`. The pool set is the set on **that block**; the same pool may have no liquidity on another block.
