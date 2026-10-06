@@ -39,3 +39,43 @@ The bitmap read enters these rows **only** through the claim that the next initi
 | NVDAc/USDC | USDC | 500 | 100000 | 0.000167 | **0.000168** | yes |
 
 _Reading Panel B: any amount entering that pool cannot return more than the bound, because that is all the pool holds. The walk figure is shown alongside, marked, and is not the published fact._
+
+## Current table - validated run (2026-10-06)
+Pinned block `52175000` (`0xbdc05b988f40295dd6e28b987bdfa41ef3e6e0f89a31fcc32724cf5292dcc13d`), reads pinned by block hash with `requireCanonical`, a failed read raises instead of defaulting, and every read failure is recorded per (pool, size, fee, spacing, leg, selector).
+Row set 43: **38 rows read cleanly in both of two independent runs and were identical across them (0 disagreements)**; 5 rows failed to read in at least one run and are recorded as having no number.
+**Publishable 18** (Panel A 15 - the input was absorbed inside the current range; Panel B 3 - claim is the on-chain holdings bound) - sealed 20.
+
+| pool | size | recovery % | band | fee | sentinel |
+|---|---|---|---|---|---|
+| GOOGLc/USDC | 100 | 97.989431 | 2 | 10000 | False |
+| GOOGLc/USDC | 1000 | 97.804702 | 2 | 10000 | False |
+| NVDAc/USDC | 100 | 99.312878 | 2 | 3000 | False |
+| GOOGLc/USDC | 100 | 99.892155 | 2 | 500 | False |
+| GOOGLc/USDC | 100 | 99.287611 | 2 | 3000 | False |
+| NVDAc/WETH | 0.000001 | 99.400900 | 2 | 3000 | False |
+| NVDAc/WETH | 0.00001 | 99.400896 | 2 | 3000 | False |
+| NVDAc/WETH | 0.0001 | 99.400856 | 2 | 3000 | False |
+| NVDAc/WETH | 0.001 | 99.400463 | 2 | 3000 | False |
+| NVDAc/WETH | 0.01 | 99.396530 | 2 | 3000 | False |
+| NVDAc/WETH | 0.1 | 99.357222 | 2 | 3000 | False |
+| NVDAc/WETH | 1 | 98.965838 | 2 | 3000 | False |
+| AAPLc/USDC | 100 | 99.386674 | 2 | 3000 | False |
+| AAPLc/USDC | 1000 | 99.258827 | 2 | 3000 | False |
+| NVDAc/USDC | 100 | 0.166811 | 0 | 500 | True |
+| NVDAc/USDC | 1000 | 0.016681 | 0 | 500 | True |
+| NVDAc/USDC | 10000 | 0.001668 | 0 | 500 | True |
+| MSFTc/USDC | 100 | 97.347499 | 2 | 10000 | False |
+
+Rows excluded this run (failed to read in at least one of the two runs; no number published):
+
+| pool | size | run1 | run2 |
+|---|---|---|---|
+| 0x60661b315553eb81872deea9a66d567cf0ccd33b | 100000 | read_failed | absorbed_in_range |
+| 0x8634ee4145a63e40e44e12a6bb1b905fcb8856a6 | 10000 | sentinel | read_failed |
+| 0x97f35d1e92795327614be000cd18cba1be2c1931 | 10000 | absorbed_in_range | read_failed |
+| 0x97f35d1e92795327614be000cd18cba1be2c1931 | 100000 | read_failed | read_failed |
+| 0xa079011895452e7fd1e4dc4b5546124d10a47203 | 100000 | read_failed | sentinel |
+
+Counts are this run's result, not a property of the measurement; a different block yields a different row set.
+
+Method disclosure, including why the 2026-10-04 table was provisional and how it was replaced: see DISCLOSURE.md.

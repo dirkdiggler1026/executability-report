@@ -1,0 +1,224 @@
+{
+  "block": 52175000,
+  "block_hash": "0xbdc05b988f40295dd6e28b987bdfa41ef3e6e0f89a31fcc32724cf5292dcc13d",
+  "both_ok": 38,
+  "errors": 5,
+  "publishable": 18,
+  "panel_a": 15,
+  "panel_b": 3,
+  "sealed": 20,
+  "errors_detail": [
+    {
+      "pool": "0x60661b315553eb81872deea9a66d567cf0ccd33b",
+      "size": "100000",
+      "run1": "read_failed",
+      "run2": "absorbed_in_range"
+    },
+    {
+      "pool": "0x8634ee4145a63e40e44e12a6bb1b905fcb8856a6",
+      "size": "10000",
+      "run1": "sentinel",
+      "run2": "read_failed"
+    },
+    {
+      "pool": "0x97f35d1e92795327614be000cd18cba1be2c1931",
+      "size": "10000",
+      "run1": "absorbed_in_range",
+      "run2": "read_failed"
+    },
+    {
+      "pool": "0x97f35d1e92795327614be000cd18cba1be2c1931",
+      "size": "100000",
+      "run1": "read_failed",
+      "run2": "read_failed"
+    },
+    {
+      "pool": "0xa079011895452e7fd1e4dc4b5546124d10a47203",
+      "size": "100000",
+      "run1": "read_failed",
+      "run2": "sentinel"
+    }
+  ],
+  "publishable_rows": [
+    {
+      "pool": "0x1f52f46bac657564c31122b12b43a459e09273c8",
+      "size": "100",
+      "label": "GOOGLc/USDC",
+      "recovery_pct": "97.989431",
+      "band": 2,
+      "fee": 10000,
+      "sentinel_hit": false,
+      "termination_reason": "absorbed_in_range"
+    },
+    {
+      "pool": "0x1f52f46bac657564c31122b12b43a459e09273c8",
+      "size": "1000",
+      "label": "GOOGLc/USDC",
+      "recovery_pct": "97.804702",
+      "band": 2,
+      "fee": 10000,
+      "sentinel_hit": false,
+      "termination_reason": "absorbed_in_range"
+    },
+    {
+      "pool": "0x60661b315553eb81872deea9a66d567cf0ccd33b",
+      "size": "100",
+      "label": "NVDAc/USDC",
+      "recovery_pct": "99.312878",
+      "band": 2,
+      "fee": 3000,
+      "sentinel_hit": false,
+      "termination_reason": "absorbed_in_range"
+    },
+    {
+      "pool": "0x69dec50977fc57ececa472105c26f188ff2012ec",
+      "size": "100",
+      "label": "GOOGLc/USDC",
+      "recovery_pct": "99.892155",
+      "band": 2,
+      "fee": 500,
+      "sentinel_hit": false,
+      "termination_reason": "absorbed_in_range"
+    },
+    {
+      "pool": "0x8634ee4145a63e40e44e12a6bb1b905fcb8856a6",
+      "size": "100",
+      "label": "GOOGLc/USDC",
+      "recovery_pct": "99.287611",
+      "band": 2,
+      "fee": 3000,
+      "sentinel_hit": false,
+      "termination_reason": "absorbed_in_range"
+    },
+    {
+      "pool": "0x8e740d5fa742b763cd82159894b9919ed57e4f70",
+      "size": "0.000001",
+      "label": "NVDAc/WETH",
+      "recovery_pct": "99.400900",
+      "band": 2,
+      "fee": 3000,
+      "sentinel_hit": false,
+      "termination_reason": "absorbed_in_range"
+    },
+    {
+      "pool": "0x8e740d5fa742b763cd82159894b9919ed57e4f70",
+      "size": "0.00001",
+      "label": "NVDAc/WETH",
+      "recovery_pct": "99.400896",
+      "band": 2,
+      "fee": 3000,
+      "sentinel_hit": false,
+      "termination_reason": "absorbed_in_range"
+    },
+    {
+      "pool": "0x8e740d5fa742b763cd82159894b9919ed57e4f70",
+      "size": "0.0001",
+      "label": "NVDAc/WETH",
+      "recovery_pct": "99.400856",
+      "band": 2,
+      "fee": 3000,
+      "sentinel_hit": false,
+      "termination_reason": "absorbed_in_range"
+    },
+    {
+      "pool": "0x8e740d5fa742b763cd82159894b9919ed57e4f70",
+      "size": "0.001",
+      "label": "NVDAc/WETH",
+      "recovery_pct": "99.400463",
+      "band": 2,
+      "fee": 3000,
+      "sentinel_hit": false,
+      "termination_reason": "absorbed_in_range"
+    },
+    {
+      "pool": "0x8e740d5fa742b763cd82159894b9919ed57e4f70",
+      "size": "0.01",
+      "label": "NVDAc/WETH",
+      "recovery_pct": "99.396530",
+      "band": 2,
+      "fee": 3000,
+      "sentinel_hit": false,
+      "termination_reason": "absorbed_in_range"
+    },
+    {
+      "pool": "0x8e740d5fa742b763cd82159894b9919ed57e4f70",
+      "size": "0.1",
+      "label": "NVDAc/WETH",
+      "recovery_pct": "99.357222",
+      "band": 2,
+      "fee": 3000,
+      "sentinel_hit": false,
+      "termination_reason": "absorbed_in_range"
+    },
+    {
+      "pool": "0x8e740d5fa742b763cd82159894b9919ed57e4f70",
+      "size": "1",
+      "label": "NVDAc/WETH",
+      "recovery_pct": "98.965838",
+      "band": 2,
+      "fee": 3000,
+      "sentinel_hit": false,
+      "termination_reason": "absorbed_in_range"
+    },
+    {
+      "pool": "0x97f35d1e92795327614be000cd18cba1be2c1931",
+      "size": "100",
+      "label": "AAPLc/USDC",
+      "recovery_pct": "99.386674",
+      "band": 2,
+      "fee": 3000,
+      "sentinel_hit": false,
+      "termination_reason": "absorbed_in_range"
+    },
+    {
+      "pool": "0x97f35d1e92795327614be000cd18cba1be2c1931",
+      "size": "1000",
+      "label": "AAPLc/USDC",
+      "recovery_pct": "99.258827",
+      "band": 2,
+      "fee": 3000,
+      "sentinel_hit": false,
+      "termination_reason": "absorbed_in_range"
+    },
+    {
+      "pool": "0xa079011895452e7fd1e4dc4b5546124d10a47203",
+      "size": "100",
+      "label": "NVDAc/USDC",
+      "recovery_pct": "0.166811",
+      "band": 0,
+      "fee": 500,
+      "sentinel_hit": true,
+      "termination_reason": "sentinel"
+    },
+    {
+      "pool": "0xa079011895452e7fd1e4dc4b5546124d10a47203",
+      "size": "1000",
+      "label": "NVDAc/USDC",
+      "recovery_pct": "0.016681",
+      "band": 0,
+      "fee": 500,
+      "sentinel_hit": true,
+      "termination_reason": "sentinel"
+    },
+    {
+      "pool": "0xa079011895452e7fd1e4dc4b5546124d10a47203",
+      "size": "10000",
+      "label": "NVDAc/USDC",
+      "recovery_pct": "0.001668",
+      "band": 0,
+      "fee": 500,
+      "sentinel_hit": true,
+      "termination_reason": "sentinel"
+    },
+    {
+      "pool": "0xd73cbecc0f62c7c1704332ed119514d6d84dc607",
+      "size": "100",
+      "label": "MSFTc/USDC",
+      "recovery_pct": "97.347499",
+      "band": 2,
+      "fee": 10000,
+      "sentinel_hit": false,
+      "termination_reason": "absorbed_in_range"
+    }
+  ]
+}
