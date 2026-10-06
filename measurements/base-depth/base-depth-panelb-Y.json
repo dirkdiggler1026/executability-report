@@ -1,0 +1,44 @@
+[
+  {
+    "pool": "0xa079011895452e7fd1e4dc4b5546124d10a47203",
+    "size": "100",
+    "label": "NVDAc/USDC",
+    "recovery_pct": "0.166811",
+    "band": 0,
+    "fee": 500,
+    "sentinel_hit": true,
+    "termination_reason": "sentinel",
+    "upper_bound_pct": "0.167746",
+    "holding_raw": 72733,
+    "walk_within_bound": true,
+    "bound_block": 52175000
+  },
+  {
+    "pool": "0xa079011895452e7fd1e4dc4b5546124d10a47203",
+    "size": "1000",
+    "label": "NVDAc/USDC",
+    "recovery_pct": "0.016681",
+    "band": 0,
+    "fee": 500,
+    "sentinel_hit": true,
+    "termination_reason": "sentinel",
+    "upper_bound_pct": "0.016775",
+    "holding_raw": 72733,
+    "walk_within_bound": true,
+    "bound_block": 52175000
+  },
+  {
+    "pool": "0xa079011895452e7fd1e4dc4b5546124d10a47203",
+    "size": "10000",
+    "label": "NVDAc/USDC",
+    "recovery_pct": "0.001668",
+    "band": 0,
+    "fee": 500,
+    "sentinel_hit": true,
+    "termination_reason": "sentinel",
+    "upper_bound_pct": "0.001677",
+    "holding_raw": 72733,
+    "walk_within_bound": true,
+    "bound_block": 52175000
+  }
+]
