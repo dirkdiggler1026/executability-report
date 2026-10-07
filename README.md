@@ -13,8 +13,8 @@ reproduces it.
   the same underlying in two pools differing by roughly 600x on a USD 100 exit, with the reason.
 - A machine-readable figure is published every Monday at [weekly/latest.json](weekly/latest.json)
   (stable URL; the weekly file for each ISO week is also kept).
-- Corrections are published as normal, rather than quietly: see [ERRATA](errata/) if present, and
-  each measurement directory carries its own disclosure.
+- Corrections are published as normal, rather than quietly: each measurement directory carries its
+  own disclosure, and superseded numbers are kept next to the reason they were superseded.
 
 ---
 
