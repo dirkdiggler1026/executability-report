@@ -82,6 +82,13 @@ The checks, and the failure each exists for:
                                  A directory with no GENERATED.json claims nothing and is
                                  noted, not skipped silently -- the declaration is what
                                  makes the absence of a check visible.
+                                 What H establishes is provenance, never correctness: that
+                                 the committed file is what the generator produces, and
+                                 nothing about whether the generator is right. A generator
+                                 printing 61300% because a percentage was multiplied twice
+                                 passes H, and did so in draft here. Reading a green H as
+                                 "the numbers are right" is the mistake this paragraph
+                                 exists to refuse.
   I  a published link with a    The weekly feed publishes corrections_url, the one
      fragment lands on it       machine-readable pointer that says "the corrections are
                                 here". It pointed at a fragment while no page in this tree
