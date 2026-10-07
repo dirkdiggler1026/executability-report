@@ -1,84 +1,83 @@
-# Findings
+# Findings — what has been measured here, and where each one lives
 
-One line per finding, with the block it was measured at, the artifact that carries it, and the
-command that reproduces it. Everything here is checkable without asking us anything.
+An index, not a summary. One entry per question, each pointing at the directory that holds
+the measurement, the raw reads, and the limits. **No figure is restated on this page.** Every
+number lives in exactly one list, next to the block it was pinned to; a number copied into a
+second document is a number that can drift away from its list.
 
-**What this repository measures:** what a position actually realises when it exits - not the mark,
-not TVL, not a price-impact quote. Same pinned block, both legs priced against the same state, a
-size ladder, a failure class per row, and the raw reads shipped alongside.
-
----
-
-## Tokenized equities
-
-### F1 - The same underlying is not the same venue (Base, Coinbase-issued wrappers)
-
-At pinned block `52175000`, two `NVDAc/USDC` pools differ by roughly **600x** on a USD 100 exit:
-one returns **99.31%**, the other **cannot return more than 0.168%** - because that is all it holds.
-The bound is an on-chain holdings bound (`balanceOf`), not a walk result. A cap sized from TVL or
-from a 2%-impact figure sees neither the difference nor its direction.
-
-- Artifact: `measurements/base-depth/` (README with both tables, DISCLOSURE, raw read logs)
-- Reproduce: `python base_ladder.py --block 52175000` (twice) then `python publish_from_pair.py`
-- Exact rows: `measurements/base-depth/base-depth-publishable-Y.json`
-
-### F2 - Read failures look like values (the reason F1 needed a validated reader)
-
-A failed `ticks()` read returned 0 - which the walk reads as "no liquidity change here" - and a
-failed `tickBitmap` read returned a sentinel - read as "nothing initialised in this direction".
-Four runs pinned to the same block hash disagreed on 7 of 43 rows, by up to **3.49x**; and the
-majority across runs pointed at the **corrupted** value (3:1). Both defaults now raise instead of
-defaulting, every read failure is recorded per (pool, size, fee, spacing, leg, selector), and a row
-that failed to read is published as *having no number* rather than a wrong one.
-
-- Artifact: `measurements/base-depth/DISCLOSURE.md`, `reads-Y1.json`, `reads-Y2.json`
-- Drill: `drill_readfailed.py` (two arms; the arms must differ or the drill has no power)
-
-### F3 - Method boundaries must not be published as asset properties
-
-`exhausted` / `sentinel` / `iteration_cap` are our reader's boundaries, not facts about an asset.
-They are recorded per row, and rows whose claim depends on a bitmap read are published with an
-on-chain holdings bound as the claim instead.
-
-- Artifact: `measurements/base-depth/README.md` (Panel A vs Panel B)
-
-### F4 - xStocks have no on-chain enumerable registry (Monad)
-
-The seven xStock tokens exist on Monad at byte-identical EIP-1967 proxy code, decimals 18 - but
-every wrapped xStock reports `totalAssets() == 0`, no real pool was found, and no on-chain registry
-could be enumerated (Monad's token list, Chainlink's feed directory, the proxy admin, DEX factory
-enumeration: all negative). The token addresses came only from the issuer's off-chain API, made
-checkable by cross-chain address identity (9,296/9,296 comparisons, 0 differences).
-
-- Artifact: this file; reproduction notes in `docs/` on request
-- Why it matters: an asset whose address cannot be derived on-chain cannot have its depth
-  independently verified either
+Subjects covered: executable exit depth for tokenized equities (Base, Robinhood Chain),
+Uniswap v3 and v4 pool measurement, prediction-market order books, and the accounting
+factors that sit between a wrapper token and the share it references.
 
 ---
 
-## Method notes (for anyone writing a v3 / CL reader)
+## Tokenized equities on Base — exit depth
 
-- **A transport failure must never be a value.** Defaulting on error turns silence into a number.
-  Raise, and record the failure against the row it touched.
-- **Pin reads by block hash, not by block number** (`{"blockHash": ..., "requireCanonical": true}`).
-  A backend that cannot serve that block then errors instead of quietly answering with another one.
-- **Retry only to satisfy validation - never to agree with another result.** If the retry's stop
-  condition mentions a comparison with another read, it is a vote, and voting selects the corrupted
-  value when failures are biased.
-- **Two-arm drills.** Every check needs an input that should fail and a control that should pass,
-  and the two arms must differ; otherwise the check has no discriminating power even when it
-  "passes".
-- **A criterion needs a lower bound.** A check that iterates a set must assert the set is non-empty
-  (or above a stated floor), or an input failure reports as a pass.
-- **An artifact without a failure log has "provisional" as its ceiling.** If failures were not
-  recorded, how much of the table was affected cannot be stated afterwards.
+**[measurements/base-depth/](measurements/base-depth/)**
 
-## Known gaps, stated rather than implied
+What a holder of a Coinbase-issued equity wrapper on Base (chain 8453) actually gets back
+on exit, measured pool by pool at a single pinned block, with a size ladder and a failure
+class on every row.
 
-- `measurements/base-depth`: rows whose legs cross more than one liquidity range are measured but
-  withheld - multi-range accumulation has not been validated against a real swap (no suitable
-  sample found in recent history).
-- The round-trip composition (leg 1's output, minus fee, as leg 2's input, both against the same
-  pinned state) is defined by the method, not validated by replay; each leg separately is.
-- One earlier table (block `52170281`, published 2026-10-04) was produced before the read
-  validation and is kept, with its reason, in `measurements/base-depth/DISCLOSURE.md`.
+The finding worth the click: **two pools for the same pair, at the same block, answer the
+same question differently by orders of magnitude** — and the two answers are published as
+*different classes of evidence*, not as two numbers in one column. One is a measured path
+through the pool's liquidity. The other is an upper bound derived from what the pool holds,
+because a pool cannot return more than its own balance; the walk figure is printed beside
+that bound, marked, and is not the claim.
+
+Method, in the words that make it checkable: reads pinned by block **hash** with
+`requireCanonical: true`, both legs of each round trip priced against the same pinned state,
+the composition rule stated rather than implied, two independent runs required to agree
+bit-for-bit before a row is publishable, and rows that failed a read published as failures
+with their reason instead of dropped. `DISCLOSURE.md` in that directory carries what is
+withheld and why.
+
+## Tokenized equities on Robinhood Chain
+
+**[measurements/oneside-depth/](measurements/oneside-depth/)** — one-sided exit cost as an
+hourly series, which is the half a round-trip figure hides. These are the artifacts the
+report's cards cite by name, published so that a card points at a file a reader can open.
+
+**[measurements/accrual-multiplier/](measurements/accrual-multiplier/)** — the per-asset
+factor in the transfer logs, and what it does to any accounting that assumes one token is
+one share. Includes when it last moved, bounded.
+
+**[measurements/issuer-feed/](measurements/issuer-feed/)** — three public issuer endpoints
+read against the chain. The multiplier is published three ways; *when it changes* is not.
+That asymmetry is the finding.
+
+**[measurements/tsv-volume/](measurements/tsv-volume/)** — September 2026 volume for nine
+symbols: the numerator of the ratio capped by §II.F of the tokenized-stock exemption, with
+the denominator explicitly absent rather than estimated.
+
+## Across issuers
+
+**[measurements/wrapper-multipliers/](measurements/wrapper-multipliers/)** — the same
+underlying, two issuers, two different multipliers. Reproducible from the script in the
+directory.
+
+## Negative results, published as such
+
+**[measurements/index-priced-test/](measurements/index-priced-test/)** — a 24-hour oracle
+cannot be the reference for a 30-minute comparison. Published because the design fault is
+the useful part.
+
+---
+
+## The recurring series
+
+- **Daily:** `data/<date>/` — one row per measurement, a canonical hash per round, checksums.
+- **Weekly:** [weekly/latest.json](weekly/latest.json) — a machine-readable depth figure per
+  asset and size. See the cadence note in the top-level README for what this feed does and
+  does not yet guarantee.
+
+## How to cite, and how to correct
+
+The citation format — stable block plus volatile block — is in the top-level
+[README](README.md), along with the contact address and the correction policy. Corrections
+are published whoever is relying on the figure, and the report page carries a numbered
+archive of this project's own instrument failures: what each one was, how it was caught, and
+which side of publication it landed on.
+
+If a number here is wrong, the useful thing you can do is say so.

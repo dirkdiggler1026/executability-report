@@ -11,9 +11,12 @@ reproduces it.
 
 - Measured so far: [Base equities venues](measurements/base-depth/) at pinned block `52175000` -
   the same underlying in two pools differing by roughly 600x on a USD 100 exit, with the reason.
-- A machine-readable figure is published every Monday at [weekly/latest.json](weekly/latest.json)
-  (stable URL; the weekly file for each ISO week is also kept).
+- A machine-readable figure per asset and size is at [weekly/latest.json](weekly/latest.json)
+  (stable URL; the weekly file for each ISO week is also kept). The intended cadence is one issue
+  per UTC week; generation is not yet scheduled, so read the `window` field - and `reason`, when
+  the window is empty - rather than assuming the file is current.
 - Corrections are published as normal, rather than quietly: each measurement directory carries its
+  own disclosure, and superseded numbers are kept next to the reason they were superseded.
 
 ### Sections by question
 
@@ -22,7 +25,6 @@ reproduces it.
 - **What are the limits?** - [Limits](#limits), plus each measurement directory's own disclosure
 - **All findings, one line each** - [FINDINGS.md](FINDINGS.md)
 - **What does a measurement cost?** - [Commissioned measurement](#commissioned-measurement)
-  own disclosure, and superseded numbers are kept next to the reason they were superseded.
 
 ---
 
@@ -33,7 +35,7 @@ tokenized stocks on Robinhood Chain, and prediction markets.
 
 **Report:** https://dirkdiggler1026.github.io/executability-report/
 
-**Weekly:** a machine-readable depth figure, published every Monday — [weekly/latest.json](weekly/latest.json)
+**Weekly:** a machine-readable depth figure per asset and size — [weekly/latest.json](weekly/latest.json). The intended cadence is one issue per UTC week; generation is not yet scheduled, so read the `window` field (and `reason`, when the window is empty) rather than assuming the file is current.
 
 ## Contact
 
@@ -137,6 +139,9 @@ measurements/           one directory per question, each with a README and its o
   accrual-multiplier/   the per-asset factor in the transfer logs, and one step bounded to 32 s
   tsv-volume/           September volume for nine symbols -- a numerator with no denominator
   oneside-depth/        one-sided exit cost, the hourly series
+  base-depth/           exit depth for Coinbase-issued equity wrappers on Base, by pool
+  issuer-feed/          the multiplier is published three ways; when it changes is not
+  wrapper-multipliers/  same underlying, two issuers, two different multipliers
 ```
 
 ## What is measured
