@@ -263,6 +263,78 @@ if [ -f code/make_depth_latest.py ]; then
   git add depth-latest.json >/dev/null 2>&1
 fi
 
+# ── 周发布:挂在本文件里,而【不是】另装一个定时器 ──────────────────
+# 🔴 为什么不另装定时器:本文件独占 fetch→reset --hard→commit→push 这一条链,
+#    而它开头的脏树守卫会拒绝在有未提交改动时启动。第二个进程往同一个工作树里
+#    写产物,要么把这里的守卫绊住(本轮数据同步整个不跑),要么两边同时 push
+#    而其中一边被 non-fast-forward 拒掉。一个工作树只能有一个提交者。
+#    ⇒ 周发布就放在这里,用同一次 commit/push 带出去。
+#
+# 🔴 落点在【判据之前】:这样 check_published.py 的判据 G 是跑在新产物上的,
+#    而不是跑在上一周的产物上再把新的提交出去。
+#
+# 🔴 什么时候算"该出一期" —— 一条规则,不是两条:
+#      窗口 = 上一个【完整 UTC ISO 周】(周一到周日),through = 那个周日
+#      该出一期 ⟺ weekly/<那一周的 ISO 名>.json 还不存在
+#    这一条同时给到四件事,而"周一 + 落后 N 天"两条规则给不到:
+#      · 幂等:窗口由【周】决定,不由运行在哪一天决定 ⇒ 周三跑和周一跑得到同一份
+#      · 自愈:漏掉一个周一,下一轮算出的还是同一周,照样补上
+#      · 存档不可变:同一个 ISO 名永远对应同一个窗口 ⇒ 不会改写已发布的存档
+#      · 一周最多一期:存档在了就不做事
+#
+# 🔴 为什么非得这样 —— 这是测出来的,不是设计出来的。第一版用"到昨天的 7 天"
+#    当窗口,于是:10-09 跑得到 through 10-08 → 存成 W41(窗口 10-02..10-08);
+#    10-12 跑得到 through 10-11 → 还是 W41,但窗口是 10-05..10-11
+#    ⇒ 同一个文件名,不同窗口的数据,静默覆盖。生成器幂等性一验就露出来了。
+#
+# ⚠️ 已发布的 2026-W40.json 的窗口是 09-25..10-01(生成器默认"到昨天"留下的,
+#    没有对齐到周)。按上面这条规则它已经存在 ⇒ 不会被改写,这是对的;
+#    代价是 10-02..10-04 这三天不落在任何一期里。改写一份已发布的存档比留一个
+#    缺口更坏,所以留缺口,并把它写在这里。
+#
+# 🔴 周发布失败【不中止本轮数据同步】:日更与周更是两件事,让周更的故障
+#    连带把当天的数据也压住,是把一个问题放大成两个。失败就告警并保持
+#    weekly/ 原样 —— 判据 G3 的 10 天上限最终会把它变成红的,不会沉默。
+# 生产值是默认值,但可被环境覆盖 —— 否则这一段【无法在不碰真产物的前提下演练】:
+# 写死路径的代码块只能连同真生成器一起跑,于是注入的失败永远不生效,演练会变成
+# 一个必然通过、什么也没测到的东西。(2026-10-07 第一版就是这样,被下限断言拦住。)
+WEEKLY_GEN="${WEEKLY_GEN:-/root/predict-data/tools/weekly_publish.py}"
+WEEKLY_OUT="${WEEKLY_OUT:-/root/predict-data/dexfeed_data/weekly}"
+if [ -f "$WEEKLY_GEN" ]; then
+  # through = 今天 - ISO 周序号 ⇒ 上一个完整周的周日(周一跑得周日,周日跑得上周日)
+  wk_through="$(date -u -d "$(date -u +%F) - $(date -u +%u) days" +%F)"
+  wk_iso="$(date -u -d "$wk_through" +%G-W%V)"
+  if [ -z "$wk_through" ] || [ -z "$wk_iso" ]; then
+    log "周发布 FAIL:算不出窗口($wk_through / $wk_iso)—— 跳过,weekly/ 保持原样"
+  elif [ -f "weekly/${wk_iso}.json" ]; then
+    log "周发布:${wk_iso} 已发布,无需出期"
+  else
+    log "周发布:该出一期 ${wk_iso}(窗口 7 天,through ${wk_through})"
+    if wk_err="$(python3 "$WEEKLY_GEN" --through "$wk_through" --days 7 2>&1 >/dev/null)"; then
+      mkdir -p weekly
+      # 只拷【这一期】的三个文件 + 稳定名。整目录同步会把早先各周的产物一起带进来,
+      # 而那些存档一旦已发布就不该再被本机的副本覆盖。
+      wk_n=0
+      for f in "$WEEKLY_OUT/latest.json" "$WEEKLY_OUT/${wk_iso}.json" "$WEEKLY_OUT/${wk_iso}.txt"; do
+        [ -f "$f" ] || continue
+        cp "$f" weekly/ && wk_n=$((wk_n + 1))
+      done
+      if [ "$wk_n" -lt 2 ]; then
+        log "周发布 FAIL:生成器退出 0,却没写出 ${wk_iso} 的产物(拷到 ${wk_n} 个)—— weekly/ 可能不完整"
+        tg_send "⚠️ rh-report 周发布:生成器报成功,但 ${wk_iso} 的产物只找到 ${wk_n} 个($(date -u +%F))"
+      else
+        git add weekly/ >/dev/null 2>&1
+        log "周发布:${wk_iso} 已暂存 ${wk_n} 个文件"
+      fi
+    else
+      log "周发布 FAIL:生成器失败,weekly/ 保持原样"
+      printf '%s\n' "$wk_err" | tail -5 | while IFS= read -r l; do log "  weekly: $l"; done
+      tg_send "⚠️ rh-report 周发布失败($(date -u +%F),目标 ${wk_iso}):weekly/ 未更新。判据 G3 会在窗口超过 10 天时让 CI 变红。
+$(printf '%s' "$wk_err" | tail -3)"
+    fi
+  fi
+fi
+
 if [ ! -f code/check_published.py ]; then
   log "FAIL: code/check_published.py 不存在 —— 发布物判据无法执行,拒绝发布"
   exit 1

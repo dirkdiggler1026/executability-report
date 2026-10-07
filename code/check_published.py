@@ -178,7 +178,12 @@ def check_weekly() -> None:
         except ValueError:
             fail("G3", f"{latest}: window.through {through!r} is not a date")
         else:
-            if age > STALE_DAYS and not reason:
+            # A window ending in the future is not staleness, it is a wrong clock or a
+            # --through passed by hand. Found by a test that forced a future window and
+            # watched the staleness check pass it without comment.
+            if age < 0:
+                fail("G3", f"{latest}: window ends {through}, {-age} days in the future")
+            elif age > STALE_DAYS and not reason:
                 fail("G3", f"{latest}: window ends {through}, {age} days ago "
                            f"(limit {STALE_DAYS}) and the file gives no reason")
             else:
