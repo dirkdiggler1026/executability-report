@@ -37,9 +37,27 @@ The checks, and the failure each exists for:
                                  venue list it used, and that name has to point at a file
                                  that still exists -- or at an explicit record that it
                                  does not (MISSING-<block>.json).
+  G  the weekly feed is generated weekly/latest.json is the subscribed URL, so it is the
+                                 file most worth writing by hand under time pressure --
+                                 and a hand-written feed is indistinguishable from a
+                                 generated one by eye. Three sub-checks make it
+                                 distinguishable by machine:
+                                 G1 latest.json is byte-identical to one of the archived
+                                    weekly/<ISO-week>.json files. A file typed into the
+                                    stable name, matching no archive, fails here.
+                                 G2 exactly one of: a window with rounds, or a reason.
+                                    The specification requires that a week with no data
+                                    still publish the file, carrying the reason -- silence
+                                    is never the same as health.
+                                 G3 a non-empty window ends no more than STALE_DAYS ago,
+                                    or the file says why. The cadence is one issue per UTC
+                                    week; this is what notices that it stopped.
+                                 What G cannot see: whether generation is scheduled at
+                                 all. That is a fact about a host, not about this tree.
 """
 from __future__ import annotations
 
+import datetime as dt
 import glob
 import gzip
 import hashlib
@@ -50,6 +68,10 @@ import sys
 
 DAY = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 CANON = {"data": "rhdepth-v2", "data-oneside": "rhdepth-oneside-v1"}
+WEEKLY = "weekly"           # root-level: data/ holds only YYYY-MM-DD directories
+STALE_DAYS = 10             # one issue per UTC week leaves the window at most 7 days
+                            # behind just before the next run; 10 is that plus slack,
+                            # so this fires on a cadence that stopped, not on a late run.
 
 fails: list[str] = []
 notes: list[str] = []
@@ -108,6 +130,59 @@ def rounds_of(path: str):
     for line in open(path):
         if line.strip():
             yield json.loads(line)
+
+
+def check_weekly() -> None:
+    """Check G. See the module docstring for what each sub-check exists for."""
+    latest = os.path.join(WEEKLY, "latest.json")
+    if not os.path.isdir(WEEKLY) or not os.path.exists(latest):
+        note(f"{WEEKLY}/latest.json not present, G skipped")
+        return
+
+    # G1 -- the stable name must be a copy of an archive, not a file someone typed.
+    want = sha256(latest)
+    archives = sorted(p for p in glob.glob(os.path.join(WEEKLY, "*.json"))
+                      if os.path.basename(p) != "latest.json")
+    match = [p for p in archives if sha256(p) == want]
+    if not archives:
+        fail("G1", f"{latest}: no archived weekly/<ISO-week>.json to be a copy of")
+    elif not match:
+        fail("G1", f"{latest}: byte-identical to none of the {len(archives)} archived "
+                   f"week file(s) -- a feed under the stable name that no generator "
+                   f"produced")
+    else:
+        note(f"G  latest.json == {os.path.basename(match[0])}")
+
+    try:
+        feed = json.load(open(latest, encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        fail("G2", f"{latest}: unreadable as JSON ({exc})")
+        return
+
+    win = feed.get("window") or {}
+    rounds = win.get("rounds") or 0
+    reason = (feed.get("reason") or "").strip()
+
+    # G2 -- exactly one. Both means the file contradicts itself about whether it has
+    # data; neither means an empty week was published without saying why.
+    if bool(rounds) == bool(reason):
+        fail("G2", f"{latest}: window rounds={rounds!r} and reason={'set' if reason else 'absent'}"
+                   f" -- exactly one of the two is required")
+
+    # G3 -- a window that stopped moving. Measured against today, because that is what
+    # a reader checking the feed has; the generator stamps generated_utc separately.
+    through = win.get("through")
+    if rounds and through:
+        try:
+            age = (dt.date.today() - dt.date.fromisoformat(through)).days
+        except ValueError:
+            fail("G3", f"{latest}: window.through {through!r} is not a date")
+        else:
+            if age > STALE_DAYS and not reason:
+                fail("G3", f"{latest}: window ends {through}, {age} days ago "
+                           f"(limit {STALE_DAYS}) and the file gives no reason")
+            else:
+                note(f"G  window ends {through}, {age} days ago (limit {STALE_DAYS})")
 
 
 def main() -> int:
@@ -181,6 +256,8 @@ def main() -> int:
             else:
                 fail("F", f"enumerated_at_block {eb:,} resolves to nothing "
                           f"({n} rounds claim it)")
+
+    check_weekly()
 
     if not quiet:
         for n in notes:
