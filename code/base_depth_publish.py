@@ -163,11 +163,17 @@ def main() -> int:
     ap.add_argument("--out-dir", required=True,
                     help="directory holding the inputs; outputs are written here")
     a = ap.parse_args()
-    d = os.path.abspath(a.out_dir)
+    # 🔴 inputs and outputs are two different directories, and conflating them is what made the
+    # check report not_exercised: check H runs this generator with the measurement directory as
+    # cwd and passes a *temporary* directory as --out-dir. Reading inputs from --out-dir then
+    # looked for them in the temp directory. Inputs are relative to the measurement directory
+    # (cwd, as GENERATED.json declares); outputs go where --out-dir points.
+    in_dir = os.getcwd()
+    out_dir = os.path.abspath(a.out_dir)
     try:
-        lad = load(os.path.join(d, a.ladder), "ladder artifact")
-        pub = load(os.path.join(d, "base-depth-publishable-Y.json"), "publishable set")
-        bounds = load(os.path.join(d, "base-depth-panelb-Y.json"), "Panel B bounds")
+        lad = load(os.path.join(in_dir, a.ladder), "ladder artifact")
+        pub = load(os.path.join(in_dir, "base-depth-publishable-Y.json"), "publishable set")
+        bounds = load(os.path.join(in_dir, "base-depth-panelb-Y.json"), "Panel B bounds")
         prov = need(lad, "provable_until", a.ladder)
         both_ok = need(pub, "both_ok", "publishable")
         errors = need(pub, "errors", "publishable")
@@ -189,13 +195,14 @@ def main() -> int:
             provable_chain=need(prov, "chain", "provable_until"),
             provable_window_blocks=need(prov, "window_blocks", "provable_until"),
             provable_measured=need(prov, "window_measured_utc", "provable_until"))
-        with open(os.path.join(d, "DISCLOSURE.md"), "w", encoding="utf-8", newline="\n") as fh:
+        with open(os.path.join(out_dir, "DISCLOSURE.md"), "w", encoding="utf-8",
+                  newline="\n") as fh:
             fh.write(text)
-        write_readme(d, pub, bounds)
+        write_readme(out_dir, pub, bounds)
     except InputError as exc:
         print(f"input error: {exc}", file=sys.stderr)
         return 3
-    print(f"wrote README.md and DISCLOSURE.md in {d}")
+    print(f"wrote README.md and DISCLOSURE.md in {out_dir} (inputs from {in_dir})")
     return 0
 
 
