@@ -1,21 +1,54 @@
-# Disclosure - Base exit-depth
-
-**Current run: pinned block 52175000.** The current table, its row counts and its Panel B
-holdings bounds are generated in README.md from the artifacts of that run. Everything below this
-paragraph describes the earlier run and is kept as history rather than deleted - the repository's
-practice is that a superseded number stays readable next to the reason it was superseded.
-
 # Disclosure — Base exit-depth
 
-- Pinned block `52170281`. The pool set is the set on **that block**; the same pool may have no liquidity on another block.
-- Script hashes (sha256, first 16): `base_ladder.py` `9c6c2488c9c78282…`, `tickwalk_b.py` `c1b10b9f5a2beff0…`, `base_discovery.py` `8cf422aa45964cfe…`
-- Sealed rows: 24. Reasons: a leg traversed more than one liquidity range (multi-range accumulation is not replay-validated); the round-trip composition is defined by the canon, not replay-validated.
-- Rows whose answer depends on a bitmap read are published **with the holdings bound as the claim**; the walk figure is shown alongside, marked, and is not the published fact.
-- **Open, unadjudicated:** two runs at the same pinned block returned different tick-bitmap reads on tick-heavy rows. A quiet probe did not reproduce a silent fallback to `latest`; a load-triggered fallback is not excluded. Until this is adjudicated (block-hash-pinned reads, or a storage proof anchored to the block hash), Panel A's claim stays as narrow as worded above.
-- Method boundary, not an asset property: `exhausted` / `iteration_cap` / `sentinel` termination reasons are recorded per row.
+**Canon `basedepth-v3-1` at pinned block `52175000`**, block hash
+`0xbdc05b988f40295dd6e28b987bdfa41ef3e6e0f89a31fcc32724cf5292dcc13d`, reads pinned by that hash with `requireCanonical`. No date appears in this
+file on purpose: the hash is the time anchor, and anyone can resolve it with
+`eth_getBlockByHash` rather than trusting a date copied in here. The endpoint read was
+`https://mainnet.base.org`.
 
-**Update, 2026-10-06 — these figures are under re-verification.** Four runs pinned to the same block hash at a later block (`52171860`, `0x507273064355aca42df816f523019f0e4f49129f0c7190d738dd39313a1ed7b5`, `requireCanonical: true`) disagreed with each other on **7 of 43 rows** in at least one recorded field, and on the recovery figure itself in 3 of them. The cause is in my own reader, not in the chain or the endpoint: a failed `ticks()` read returned 0 and a failed `tickBitmap` read returned a sentinel, so a transport failure silently read as "no liquidity change here" or "nothing initialised in this direction". The largest disagreement was a factor of 3.49 on one row (`NVDAc/USDC` fee 3000 at $100,000: 5.646941% vs 19.712807%), and the lower value is the corrupted one, so a majority vote across runs would have selected the wrong number. A third default has the same shape in the identity layer: a failed `token1()` read returned the zero address while the row kept its label. Those runs were not of the table below — they were of a later block — so the inference here is indirect: the same reader produced this table, and that run carried no read-failure log, so I cannot state which of its rows were affected, only that small, low-crossing rows have the smallest exposure. All reads are being changed to propagate failure instead of defaulting, and the table will be replaced by a run with that validation in place. Until then, treat every figure here as provisional.
+## What this run established
 
-**Replacement record, 2026-10-06.** The table published on 2026-10-04 at block 52,170,281 was produced before the read validation described below. It has been replaced by a run at block 52,175,000 with that validation in effect: reads pinned by block hash with requireCanonical, a failed read raising instead of defaulting, and every read failure recorded per (pool, size, fee, spacing, leg, selector). In that run the row set was 43: 38 rows read cleanly in both of two independent runs and were identical across them (0 disagreements), and 5 rows failed to read in at least one of the two runs - those are recorded as having no number rather than a wrong one. The reason the earlier table was provisional is preserved below.
+- **38 of 43 rows** read cleanly in both of two independent runs and were
+  **identical across them**, with **0 disagreements**. Rows that were not identical in both
+  runs are not published.
+- **18 rows are publishable** — Panel A 15 (claim: the measured curve),
+  Panel B 3 (claim: the on-chain holdings bound). **20 rows are sealed.**
+- A failed read raises instead of returning a default, and every read failure is recorded per
+  (pool, size, fee, spacing, leg, selector).
 
-**Superseded table (history).** The 2026-10-04 table was published at pinned block `52,170,281` with 19 publishable rows (Panel A 15 / Panel B 4) and 24 sealed, before read validation existed. Its artifacts remain in this directory as `base-ladder.json` and `base-ladder-gated.json`; the current README is generated from the validated run at `52175000` and no longer carries those numbers in its head.
+## What this run did not establish
+
+- **5 rows have no figure.** Those rows issue the most reads and failed with
+  HTTP 429 on `tickBitmap(int16)` in each run, and the two runs lost different rows. Their
+  absence is a property of our read budget in that run, not of the pool. The rows:
+
+  | pool | size | run 1 | run 2 |
+  |---|---|---|---|
+  | `0x60661b31…` | 100000 | read_failed | absorbed_in_range |
+  | `0x8634ee41…` | 10000 | sentinel | read_failed |
+  | `0x97f35d1e…` | 10000 | absorbed_in_range | read_failed |
+  | `0x97f35d1e…` | 100000 | read_failed | read_failed |
+  | `0xa0790118…` | 100000 | read_failed | sentinel |
+- **Two runs agreeing on the same block hash cannot exclude a deterministic degradation.** A
+  fallback triggered by load would make both runs give the same answer. Excluding it needs a
+  check that does not depend on the endpoint agreeing with itself — a storage proof anchored
+  to the block hash — and that has not been done.
+- **Multi-range accumulation is not replay-validated** (`multi_cross_validated`:
+  `false`), and **the round-trip composition is not replay-validated**
+  (`roundtrip_composition_validated`: `false`). Each leg was
+  checked separately against real swaps; their composition was not. Rows depending on either
+  are sealed rather than published.
+- Termination reasons (`exhausted` / `iteration_cap` / `sentinel`) are recorded per row. They
+  are a boundary of the method, never a property of the asset.
+
+## Provable window
+
+`base-8453`, about `1283204` blocks, measured
+`2026-10-01` and marked derived. Verifying anything older than that window needs an
+archival endpoint.
+
+---
+
+Earlier statements about this measurement, what was superseded and why, and one promise that
+was made and not kept, are in [HISTORY.md](HISTORY.md). Nothing in this file is history: it
+describes the current run only.
