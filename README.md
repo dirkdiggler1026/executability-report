@@ -1,3 +1,23 @@
+# Start here
+
+This repository measures **what a position actually realises when it exits** - not the mark, not
+TVL, not a price-impact quote. Same pinned block, both legs priced against the same state, a size
+ladder, a failure class per row, and the raw reads shipped alongside.
+
+If you arrived looking for **tokenized equity exit depth**, **xStock liquidity**, or **AAPLc /
+NVDAc / QQQx pool depth** on a specific chain, the index is [FINDINGS.md](FINDINGS.md): one line per
+finding with the block it was measured at, the artifact that carries it and the command that
+reproduces it.
+
+- Measured so far: [Base equities venues](measurements/base-depth/) at pinned block `52175000` -
+  the same underlying in two pools differing by roughly 600x on a USD 100 exit, with the reason.
+- A machine-readable figure is published every Monday at [weekly/latest.json](weekly/latest.json)
+  (stable URL; the weekly file for each ISO week is also kept).
+- Corrections are published as normal, rather than quietly: see [ERRATA](errata/) if present, and
+  each measurement directory carries its own disclosure.
+
+---
+
 # Executability — data and verification
 
 Independent measurement of executable depth across on-chain aggregators,
