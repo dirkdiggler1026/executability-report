@@ -63,6 +63,15 @@ directory.
 cannot be the reference for a 30-minute comparison. Published because the design fault is
 the useful part.
 
+## Methods, generalised past this project
+
+**[SILENT-DEFAULTS-NOTE.md](SILENT-DEFAULTS-NOTE.md)** — how a reader against Uniswap v3-shaped
+state produces clean, plausible, repeatable wrong answers: failed reads that return a legal
+value, a length check off by the prefix, why pinning a block number is not reproducibility, why
+"retry until two runs agree" selected the wrong number here, why naming the round-trip
+convention has to precede writing the formula, and the four ways a drill can report green while
+testing nothing. Written for anyone building the same kind of reader.
+
 ---
 
 ## The recurring series
