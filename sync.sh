@@ -339,11 +339,24 @@ if [ ! -f code/check_published.py ]; then
   log "FAIL: code/check_published.py 不存在 —— 发布物判据无法执行,拒绝发布"
   exit 1
 fi
-cp_out="$(python3 code/check_published.py --quiet 2>&1)" || {
+# 🔴 退出码三分:0 通过 / 1 判据不过 / 3 有判据【未执行】。
+#    3 也拒绝发布,但要分开报 —— "我们没看" 和 "我们看了没问题" 不能同码,
+#    而 "我们没看" 和 "我们看了发现问题" 的处置也不同:前者查这台机器的依赖,
+#    后者查被改动的文件。两者都报成同一句话,下一次就会按错的方向去查。
+cp_out="$(python3 code/check_published.py --quiet 2>&1)"
+cp_rc=$?
+if [ "$cp_rc" = 3 ]; then
+  log "FAIL: 发布物判据有一项【未执行】(不是通过、也不是失败),拒绝发布"
+  printf '%s\n' "$cp_out" | while IFS= read -r l; do log "  $l"; done
+  tg_send "⚠️ rh-report:发布物判据有一项未执行($(date -u +%F)),本轮拒绝发布。
+未执行 ≠ 通过 —— 查这台机器的依赖/输入,不是查被改动的文件。
+$(printf '%s' "$cp_out" | tail -3)"
+  exit 1
+elif [ "$cp_rc" != 0 ]; then
   log "FAIL: 发布物一致性判据不过,拒绝发布"
   printf '%s\n' "$cp_out" | while IFS= read -r l; do log "  $l"; done
   exit 1
-}
+fi
 [ -n "$cp_out" ] && printf '%s\n' "$cp_out" | while IFS= read -r l; do log "check_published: $l"; done
 
 # ── ③b 连续性指标:首页那行数字的【唯一来源】────────────────────

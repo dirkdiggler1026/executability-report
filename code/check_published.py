@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Check that the published tree is internally consistent. Exit 0 clean, 1 on any failure.
+"""Check that the published tree is internally consistent.
+
+Exit 0 clean, 1 on any failure, 3 when a check could not be carried out at all -- that
+last one is never folded into either of the others, because "we did not look" and "we
+looked and it was fine" must not arrive at the same exit code.
 
 Run from the repository root:
 
@@ -54,6 +58,30 @@ The checks, and the failure each exists for:
                                     week; this is what notices that it stopped.
                                  What G cannot see: whether generation is scheduled at
                                  all. That is a fact about a host, not about this tree.
+  H  a generated file is what    Several files here say in prose that they are generated
+     its generator produces      from the artifacts beside them. Prose is not enforced, so
+                                 a hand edit survives in a file that claims nobody typed
+                                 it. H makes the claim machine-readable and checks it: a
+                                 directory declares its generated files in GENERATED.json,
+                                 and H re-runs the generator into a temporary directory and
+                                 compares byte for byte against what is committed.
+                                 Two rules this check lives by:
+                                 - it regenerates to a temp path and compares; it never
+                                   writes over the committed file. A check that regenerates
+                                   in place is a generator, and it hides the thing it was
+                                   built to catch.
+                                 - if the generator cannot run -- missing dependency, no
+                                   network, a crash -- that is `not exercised` and exits 3.
+                                   It is never reported as a pass. A failed run and a
+                                   clean run must not be the same outcome downstream.
+                                 No masking of volatile fields is offered. A generated
+                                 artifact that embeds its own generation time cannot be
+                                 reproduced by anyone else, which defeats the point of
+                                 saying it was generated; if a timestamp is needed it has
+                                 to come from the input data, not from the clock.
+                                 A directory with no GENERATED.json claims nothing and is
+                                 noted, not skipped silently -- the declaration is what
+                                 makes the absence of a check visible.
 """
 from __future__ import annotations
 
@@ -64,7 +92,9 @@ import hashlib
 import json
 import os
 import re
+import subprocess
 import sys
+import tempfile
 
 DAY = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 CANON = {"data": "rhdepth-v2", "data-oneside": "rhdepth-oneside-v1"}
@@ -75,10 +105,16 @@ STALE_DAYS = 10             # one issue per UTC week leaves the window at most 7
 
 fails: list[str] = []
 notes: list[str] = []
+unexercised: list[str] = []
 
 
 def fail(check: str, msg: str) -> None:
     fails.append(f"{check}  {msg}")
+
+
+def not_exercised(check: str, msg: str) -> None:
+    """The check could not be carried out. Never the same as passing: exit code 3."""
+    unexercised.append(f"{check}  {msg}")
 
 
 def note(msg: str) -> None:
@@ -130,6 +166,108 @@ def rounds_of(path: str):
     for line in open(path):
         if line.strip():
             yield json.loads(line)
+
+
+def _safe_rel(p: str) -> bool:
+    """A declared path must stay inside the tree: relative, no .., no leading slash."""
+    if not p or p.startswith(("/", "\\")) or os.path.isabs(p):
+        return False
+    parts = p.replace("\\", "/").split("/")
+    return ".." not in parts and "" not in parts[:-1]
+
+
+def check_generated_dir(decl_path: str) -> None:
+    """Check H for one GENERATED.json. See the module docstring."""
+    d = os.path.dirname(decl_path) or "."
+    try:
+        decl = json.load(open(decl_path, encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        fail("H", f"{decl_path}: unreadable as JSON ({exc})")
+        return
+
+    gen = decl.get("generator")
+    outs = decl.get("outputs") or []
+    ins = decl.get("inputs") or []
+    argv = decl.get("argv") or []
+    if not isinstance(gen, str) or not outs:
+        fail("H", f"{decl_path}: needs a 'generator' path and a non-empty 'outputs' list")
+        return
+    for p in [gen, *outs, *ins]:
+        if not isinstance(p, str) or not _safe_rel(p):
+            fail("H", f"{decl_path}: declared path {p!r} is not a safe relative path")
+            return
+
+    # The generator being absent is a failure, not a skip: the declaration says it exists.
+    if not os.path.exists(gen):
+        fail("H", f"{decl_path}: declares generator {gen} and it is not in the tree")
+        return
+    for p in ins:
+        if not os.path.exists(os.path.join(d, p)):
+            fail("H", f"{decl_path}: declared input {p} is not in {d}")
+            return
+    missing = [p for p in outs if not os.path.exists(os.path.join(d, p))]
+    if missing:
+        fail("H", f"{decl_path}: declared output(s) {missing} are not in {d}")
+        return
+
+    # Regenerate into a temp directory. Never over the committed file: a check that
+    # regenerates in place is a generator, and it hides what it was built to catch.
+    with tempfile.TemporaryDirectory() as td:
+        # The generator path is relative to the repository root; the inputs are relative
+        # to the measurement directory. So resolve the generator to an absolute path and
+        # run it with the directory as cwd -- without the abspath it is looked for under
+        # the measurement directory, every launch fails, and every row of this check
+        # degrades to "not exercised" while looking like a transport problem.
+        cmd = [sys.executable, os.path.abspath(gen)] + [a.replace("{outdir}", td) for a in argv]
+        if not any("{outdir}" in a for a in argv):
+            fail("H", f"{decl_path}: argv has no {{outdir}} placeholder, so the regeneration "
+                      f"has nowhere to go but over the committed files")
+            return
+        try:
+            p = subprocess.run(cmd, cwd=d, capture_output=True, text=True, timeout=900)
+        except (OSError, subprocess.SubprocessError) as exc:
+            not_exercised("H", f"{decl_path}: generator could not be launched ({exc})")
+            return
+        if p.returncode != 0:
+            tail = (p.stderr or p.stdout or "").strip().splitlines()[-3:]
+            not_exercised("H", f"{decl_path}: generator exited {p.returncode} -- cannot tell a "
+                               f"broken generator from a missing dependency, so this is not a "
+                               f"pass: " + " | ".join(tail))
+            return
+
+        for name in outs:
+            produced = os.path.join(td, name)
+            committed = os.path.join(d, name)
+            if not os.path.exists(produced):
+                not_exercised("H", f"{decl_path}: generator exited 0 but wrote no {name} into "
+                                   f"the temp directory")
+                return
+            a = open(produced, "rb").read()
+            b = open(committed, "rb").read()
+            if a != b:
+                off = next((i for i, (x, y) in enumerate(zip(a, b)) if x != y),
+                           min(len(a), len(b)))
+                fail("H", f"{d}/{name}: committed file is not what the generator produces "
+                          f"(first difference at byte {off}; committed {len(b)} bytes, "
+                          f"regenerated {len(a)} bytes)")
+            else:
+                note(f"H  {d}/{name} == regenerated ({len(b)} bytes)")
+
+
+def check_generated() -> None:
+    decls = sorted(glob.glob(os.path.join("measurements", "*", "GENERATED.json")))
+    if not decls:
+        # Noted, not silent. A directory that claims generation only in prose has no
+        # machine-readable claim for H to check, and that absence should be visible.
+        prose = sorted(
+            os.path.dirname(p) for p in glob.glob(os.path.join("measurements", "*", "README.md"))
+            if "generated by" in open(p, encoding="utf-8", errors="replace").read(400).lower()
+        )
+        note(f"H  no GENERATED.json anywhere; generation is claimed in prose only by "
+             f"{len(prose)}: {', '.join(prose) if prose else '(none)'}")
+        return
+    for p in decls:
+        check_generated_dir(p)
 
 
 def check_weekly() -> None:
@@ -263,6 +401,7 @@ def main() -> int:
                           f"({n} rounds claim it)")
 
     check_weekly()
+    check_generated()
 
     if not quiet:
         for n in notes:
@@ -274,6 +413,15 @@ def main() -> int:
         for f in fails:
             print(f"  {f}", file=sys.stderr)
         return 1
+    # A check that could not be carried out is not a pass. Exit 3 so a caller that only
+    # tests for zero still treats it as a problem, and a caller that reads the code can
+    # tell "not exercised" from "failed".
+    if unexercised:
+        print(f"\nNOT EXERCISED: {len(unexercised)} check(s) could not be carried out",
+              file=sys.stderr)
+        for u in unexercised:
+            print(f"  {u}", file=sys.stderr)
+        return 3
     if not quiet:
         print("\nok -- published tree is self-consistent")
     return 0

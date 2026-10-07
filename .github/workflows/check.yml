@@ -43,6 +43,10 @@ jobs:
       - name: the three pages carry one head
         run: python3 code/check_heads.py
 
+      # Exit codes here are three-way: 0 clean, 1 a check failed, 3 a check could not be
+      # carried out at all -- check H's generator failing to run, for instance. 3 fails
+      # this job on purpose, because "we did not look" must not be green, and the code
+      # stays in the output so a reader can tell it from an actual failure.
       - name: the published tree is self-consistent
         run: python3 code/check_published.py
 
