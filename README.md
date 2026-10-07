@@ -14,11 +14,19 @@ reproduces it.
 - A machine-readable figure is published every Monday at [weekly/latest.json](weekly/latest.json)
   (stable URL; the weekly file for each ISO week is also kept).
 - Corrections are published as normal, rather than quietly: each measurement directory carries its
+
+### Sections by question
+
+- **How is it measured?** - [What is measured](#what-is-measured) and [Verify it yourself](#verify-it-yourself)
+- **Which pools and venues?** - [Which pools](#which-pools), and the Base equities venues in [measurements/base-depth](measurements/base-depth/)
+- **What are the limits?** - [Limits](#limits), plus each measurement directory's own disclosure
+- **All findings, one line each** - [FINDINGS.md](FINDINGS.md)
+- **What does a measurement cost?** - [Commissioned measurement](#commissioned-measurement)
   own disclosure, and superseded numbers are kept next to the reason they were superseded.
 
 ---
 
-# Executability — data and verification
+# Robinhood-chain depth series (rhdepth-v2) - data and verification
 
 Independent measurement of executable depth across on-chain aggregators,
 tokenized stocks on Robinhood Chain, and prediction markets.
