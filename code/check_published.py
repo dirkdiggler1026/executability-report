@@ -82,6 +82,16 @@ The checks, and the failure each exists for:
                                  A directory with no GENERATED.json claims nothing and is
                                  noted, not skipped silently -- the declaration is what
                                  makes the absence of a check visible.
+  I  a published link with a    The weekly feed publishes corrections_url, the one
+     fragment lands on it       machine-readable pointer that says "the corrections are
+                                here". It pointed at a fragment while no page in this tree
+                                had a single id attribute, so everyone following that
+                                pointer landed on the top of the report. The generator
+                                already checked that the URL resolves to a real artifact,
+                                and it did -- "exists" is not "arrives", and nothing was
+                                checking the second one. Off-site links are recorded as not
+                                checked, because resolving them needs the network and this
+                                file deliberately does not use it.
 """
 from __future__ import annotations
 
@@ -102,6 +112,7 @@ WEEKLY = "weekly"           # root-level: data/ holds only YYYY-MM-DD directorie
 STALE_DAYS = 10             # one issue per UTC week leaves the window at most 7 days
                             # behind just before the next run; 10 is that plus slack,
                             # so this fires on a cadence that stopped, not on a late run.
+SITE = "https://dirkdiggler1026.github.io/executability-report/"   # the published pages
 
 fails: list[str] = []
 notes: list[str] = []
@@ -166,6 +177,49 @@ def rounds_of(path: str):
     for line in open(path):
         if line.strip():
             yield json.loads(line)
+
+
+def check_urls() -> None:
+    """Check I. A published link carrying a fragment has to land on that fragment.
+
+    The weekly feed carries corrections_url, which is the one machine-readable pointer that
+    says "the corrections are here". It pointed at .../#errors while no page in this tree
+    held a single id attribute, so every reader following that pointer arrived at the top of
+    the report instead. The generator already checks that a published URL resolves to a real
+    artifact, and it does: "exists" is not "arrives", and nothing was checking the second.
+    """
+    with_fragment = 0
+    for path in sorted(glob.glob(os.path.join(WEEKLY, "*.json"))):
+        try:
+            feed = json.load(open(path, encoding="utf-8"))
+        except (OSError, ValueError):
+            continue                      # G2 already reports a feed that will not parse
+        base = os.path.basename(path)
+        for key, url in sorted(feed.items()):
+            if not key.endswith("_url") or not isinstance(url, str):
+                continue
+            if not url.startswith(SITE):
+                # Off-site. Resolving it needs the network, which this checker does not use,
+                # so record that it was not checked rather than implying that it passed.
+                note(f"I  {base}:{key} is off-site, not checked here")
+                continue
+            page, _, frag = url[len(SITE):].partition("#")
+            page = page or "index.html"
+            if not _safe_rel(page) or not os.path.exists(page):
+                fail("I", f"{path}:{key} points at {page} and that file is not in the tree")
+            elif not frag:
+                note(f"I  {base}:{key} -> {page}, no fragment")
+            else:
+                body = open(page, encoding="utf-8", errors="replace").read()
+                if f'id="{frag}"' in body or f"id='{frag}'" in body:
+                    note(f"I  {base}:{key} -> {page}#{frag} lands on an id")
+                    with_fragment += 1
+                else:
+                    fail("I", f"{path}:{key} points at {page}#{frag} and {page} carries no "
+                              f'id="{frag}" -- the link resolves to the top of the page, so a '
+                              f"reader following it never reaches what it promises")
+    if not with_fragment:
+        note("I  no on-site link with a fragment was available to check")
 
 
 def _safe_rel(p: str) -> bool:
@@ -402,6 +456,7 @@ def main() -> int:
 
     check_weekly()
     check_generated()
+    check_urls()
 
     if not quiet:
         for n in notes:
