@@ -51,4 +51,5 @@ archival endpoint.
 
 Earlier statements about this measurement, what was superseded and why, and one promise that
 was made and not kept, are in [HISTORY.md](HISTORY.md). Nothing in this file is history: it
-describes the current run only.
+describes the current run only. Instrument properties measured on a different run pair are in
+[INSTRUMENT.md](INSTRUMENT.md).

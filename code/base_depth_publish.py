@@ -152,8 +152,52 @@ archival endpoint.
 
 Earlier statements about this measurement, what was superseded and why, and one promise that
 was made and not kept, are in [HISTORY.md](HISTORY.md). Nothing in this file is history: it
-describes the current run only.
+describes the current run only. Instrument properties measured on a different run pair are in
+[INSTRUMENT.md](INSTRUMENT.md).
 """
+
+INSTRUMENT_TEMPLATE = """# Instrument properties — Base exit-depth
+
+This file describes the **instrument**, not the asset, and it belongs to the run pair named below.
+The scope line is printed from the input rather than written here, so it cannot be dropped in a
+later rewrite.
+
+> {scope}
+
+- Block `{block}` · run pair `{run_a}` / `{run_b}` · rows in R (completed and bit-identical in both): **{r_size}**
+- **Non-memo row-attributed reads are the reproducible quantity: `{non_memo}` in both runs.**
+  Memoisation takes it to `{memo_a}` / `{memo_b}` ({pct_a}% / {pct_b}% fewer).
+- On the two selectors `ranges_of` issues ({sel_a}, {sel_b}) the ratio is **{ratio_a}× / {ratio_b}×**,
+  and every cache hit lies on those two selectors (`{hits_a}` / `{hits_b}`).
+- One row's issued/hit split differs between the runs: `{diff_row}` by {diff_calls} calls — the row
+  that failed in one run completed in the other, its crossings matched, so the same memo key was
+  filled by one and hit by the other. The split therefore follows cross-row cache fill order; the
+  total does not move.
+"""
+
+
+def write_instrument(out_dir, memo):
+    """Render INSTRUMENT.md from memo-check.json. Every value comes from the input; none is typed."""
+    with open(os.path.join(out_dir, "INSTRUMENT.md"), "w", encoding="utf-8", newline="\n") as fh:
+        fh.write(INSTRUMENT_TEMPLATE.format(
+            scope=need(memo, "scope", "memo-check"),
+            block=need(memo, "block", "memo-check"),
+            run_a=need(memo, "run_a", "memo-check"),
+            run_b=need(memo, "run_b", "memo-check"),
+            r_size=need(memo, "r_size", "memo-check"),
+            non_memo=need(memo, "non_memo_reads", "memo-check"),
+            memo_a=need(memo, "memo_reads_run_a", "memo-check"),
+            memo_b=need(memo, "memo_reads_run_b", "memo-check"),
+            pct_a=f"{100.0 * need(memo, 'saved_run_a', 'memo-check') / (need(memo, 'memo_reads_run_a', 'memo-check') + need(memo, 'saved_run_a', 'memo-check')):.1f}",
+            pct_b=f"{100.0 * need(memo, 'saved_run_b', 'memo-check') / (need(memo, 'memo_reads_run_b', 'memo-check') + need(memo, 'saved_run_b', 'memo-check')):.1f}",
+            sel_a=need(memo, "selectors", "memo-check")[0],
+            sel_b=need(memo, "selectors", "memo-check")[1],
+            ratio_a=need(memo, "ratio_run_a", "memo-check"),
+            ratio_b=need(memo, "ratio_run_b", "memo-check"),
+            hits_a=need(memo, "cache_hits_run_a", "memo-check"),
+            hits_b=need(memo, "cache_hits_run_b", "memo-check"),
+            diff_row=need(memo, "differing_row", "memo-check"),
+            diff_calls=need(memo, "differing_calls", "memo-check")))
 
 
 def main() -> int:
@@ -199,6 +243,8 @@ def main() -> int:
                   newline="\n") as fh:
             fh.write(text)
         write_readme(out_dir, pub, bounds)
+        write_instrument(out_dir, load(os.path.join(in_dir, "memo-check.json"),
+                                      "instrument properties"))
     except InputError as exc:
         print(f"input error: {exc}", file=sys.stderr)
         return 3

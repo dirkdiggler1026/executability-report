@@ -1,0 +1,19 @@
+{
+  "block": 52175000,
+  "run_a": "Y5",
+  "run_b": "Y6",
+  "r_size": 42,
+  "non_memo_reads": 3071,
+  "memo_reads_run_a": 2458,
+  "memo_reads_run_b": 2450,
+  "saved_run_a": 613,
+  "saved_run_b": 621,
+  "cache_hits_run_a": 613,
+  "cache_hits_run_b": 621,
+  "selectors": ["0x5339c296", "0xf30dba93"],
+  "ratio_run_a": 1.26,
+  "ratio_run_b": 1.26,
+  "differing_row": "0x7f030e5f…|100000 (AMZNc/USDC)",
+  "differing_calls": 8,
+  "scope": "runs Y5 and Y6 at block 52175000; does not describe the read volume of the published table, whose logs are Y1/Y2 and carry no cache_hits field"
+}
