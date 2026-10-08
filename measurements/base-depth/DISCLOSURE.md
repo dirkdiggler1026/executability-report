@@ -41,6 +41,14 @@ file on purpose: the hash is the time anchor, and anyone can resolve it with
 - Termination reasons (`exhausted` / `iteration_cap` / `sentinel`) are recorded per row. They
   are a boundary of the method, never a property of the asset.
 
+## The evidence files beside this table
+
+reads-Y1.json and reads-Y2.json are a sample of the reads, not an archive of them. Each run issued about 2,450 calls and each file keeps the first 400, and each entry keeps the head of the response rather than the whole response. They are enough to show which rows failed and why, and they are not enough to recompute this run's figures. The reads of this run cannot be recovered: what was not kept at the time does not exist now.
+
+The table can be recomputed by re-reading the chain at block 52175000 by block hash, which needs an endpoint that still serves that block: the provable window on this chain is about 30 days and slides. Past that, this run is not independently recomputable, and no file here changes that.
+
+From the next run on, the complete read list is kept, each entry carrying the request parameters and the sha256 of the full response, with one sha256 over the whole list, and the full responses shipped separately. That makes a later run checkable against its own logs for having been unaltered - anchored in git history, which is a weaker claim than re-reading the chain and is stated as the weaker claim.
+
 ## Funding
 
 This measurement was unfunded: no party paid for it. Refused, in advance rather than on request: the issuer of any asset measured here, or any party acting for one; any party whose own parameters this measurement would be an input to. When a measurement is funded, the funder is named in this field and printed here above the table it paid for. The fee buys the measurement and not a conclusion, and a result that is unflattering to whatever it is attached to is published as measured.
