@@ -59,10 +59,22 @@ def check(rec_path: str, quiet: bool = False) -> int:
 
     idx_path = os.path.join(d, rec["index_file"])
     rsp_path = os.path.join(d, rec["responses_file"])
+    # 🔴 Declared and absent is a failure, not "could not look". The record names the file
+    #    and carries its digest, so the claim is that it exists; a named file that is not
+    #    there is a broken claim. This matches check H, whose docstring already settles the
+    #    same case the same way ("declares generator X and it is not in the tree" fails).
+    #    NOT_EXERCISED stays for the two cases where there is genuinely nothing to check:
+    #    no archive declared at all, and a record that will not parse.
+    #    The usual way this fires: a run wrote its archive and the files were not committed,
+    #    which would make "anchored in git history" false while everything else looked fine.
     for p in (idx_path, rsp_path):
         if not os.path.isfile(p):
-            print(f"NOT EXERCISED  {p}: recorded but not on disk", file=sys.stderr)
-            return NOT_EXERCISED
+            fails.append(f"{p}: recorded in {os.path.basename(rec_path)} and not on disk")
+    if fails:
+        print("FAILED", file=sys.stderr)
+        for f in fails:
+            print(f"  {f}", file=sys.stderr)
+        return FAIL
 
     # 1. the read list, over the file's exact bytes
     idx_bytes = open(idx_path, "rb").read()
@@ -228,11 +240,27 @@ def selftest() -> int:
         rec = json.load(open(rec_path, encoding="utf-8"))
         os.remove(os.path.join(td, rec["responses_file"]))
 
+    def strip_declaration(td, rec_path):
+        """No archive declared at all -- the shape of the pre-archive artifacts.
+
+        This is the only honest NOT_EXERCISED: there is nothing to check, as opposed to
+        a declaration whose file is missing, which is a broken claim and fails.
+        """
+        rec = json.load(open(rec_path, encoding="utf-8"))
+        for k in ("index_file", "index_sha256", "responses_file",
+                  "responses_sha256_uncompressed"):
+            rec.pop(k, None)
+        json.dump(rec, open(rec_path, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
+
     arms = {
         "clean": (_arm(), PASS, "clean"),
         "one_response_byte_changed": (_arm(corrupt_response), FAIL, "mismatch"),
         "one_manifest_byte_changed": (_arm(corrupt_manifest), FAIL, "mismatch"),
-        "responses_missing": (_arm(drop_responses), NOT_EXERCISED, "not-exercised"),
+        # Declared and absent is a broken claim, not an inability to look: the record
+        # names the file and carries its digest. This is the case that fires when a run
+        # wrote its archive and the files were never committed.
+        "responses_declared_but_absent": (_arm(drop_responses), FAIL, "mismatch"),
+        "no_archive_declared": (_arm(strip_declaration), NOT_EXERCISED, "not-exercised"),
     }
 
     ok = True

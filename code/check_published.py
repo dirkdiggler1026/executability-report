@@ -99,6 +99,19 @@ The checks, and the failure each exists for:
                                 checking the second one. Off-site links are recorded as not
                                 checked, because resolving them needs the network and this
                                 file deliberately does not use it.
+  J  a declared read archive    A run's record can name an archived read list and carry its
+     is present and verifies    digest. Naming it is a claim that it is there, and the usual
+                                way the claim breaks is undramatic: the run wrote its
+                                archive and the files were never committed, which makes
+                                "anchored in git history" false while everything else
+                                still looks right. J runs code/verify_reads.py over every
+                                record in measurements/*/ and fails on a declaration whose
+                                files are absent or whose digests do not match. A record
+                                that declares no archive is noted, not failed -- the
+                                artifacts published before the archive existed are that
+                                shape, and measurements/base-depth/EVIDENCE.json says so.
+                                This check exists because the alternative was a line in a
+                                checklist, and a checklist is not a criterion.
 """
 from __future__ import annotations
 
@@ -184,6 +197,43 @@ def rounds_of(path: str):
     for line in open(path):
         if line.strip():
             yield json.loads(line)
+
+
+def check_reads() -> None:
+    """Check J. One rule, one place: this calls code/verify_reads.py rather than
+    reimplementing its arithmetic, because two copies of a rule drift."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    try:
+        import verify_reads
+    except ImportError as exc:
+        fail("J", f"code/verify_reads.py could not be imported ({exc}); read archives "
+                  f"cannot be checked and that is not a pass")
+        return
+    declared = ("index_file", "index_sha256", "responses_file",
+                "responses_sha256_uncompressed")
+    records = sorted(p for p in glob.glob(os.path.join("measurements", "*", "reads-*.json"))
+                     if not p.endswith(".index.json"))
+    if not records:
+        note("J  no read records found in measurements/*/")
+        return
+    for rec_path in records:
+        try:
+            rec = json.load(open(rec_path, encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            fail("J", f"{rec_path}: unreadable as JSON ({exc})")
+            continue
+        if not any(k in rec for k in declared):
+            note(f"J  {rec_path} declares no read archive (pre-archive artifact)")
+            continue
+        rc = verify_reads.check(rec_path, quiet=True)
+        if rc == verify_reads.PASS:
+            note(f"J  {rec_path} archive verifies")
+        elif rc == verify_reads.FAIL:
+            fail("J", f"{rec_path}: declared read archive does not verify -- run "
+                      f"python3 code/verify_reads.py {rec_path} for the reason")
+        else:
+            not_exercised("J", f"{rec_path}: the archive could not be checked; "
+                               f"run python3 code/verify_reads.py {rec_path}")
 
 
 def check_urls() -> None:
@@ -464,6 +514,7 @@ def main() -> int:
     check_weekly()
     check_generated()
     check_urls()
+    check_reads()
 
     if not quiet:
         for n in notes:
