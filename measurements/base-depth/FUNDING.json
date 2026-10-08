@@ -1,0 +1,11 @@
+{
+  "_what": "Who paid for this measurement, and whose money is refused. Read by code/base_depth_publish.py and printed into DISCLOSURE.md, so the declaration is an input rather than prose somebody has to remember to keep. A measurement with no entry here has not been declared, which is itself the thing to notice.",
+  "measurement": "base-depth at block 52175000",
+  "funded_by": "This measurement was unfunded: no party paid for it",
+  "refused": [
+    "the issuer of any asset measured here, or any party acting for one",
+    "any party whose own parameters this measurement would be an input to"
+  ],
+  "if_funded": "When a measurement is funded, the funder is named in this field and printed here above the table it paid for. The fee buys the measurement and not a conclusion, and a result that is unflattering to whatever it is attached to is published as measured.",
+  "licence": "code/ is Apache-2.0 (LICENSE covers code/ only); the measurement data and the report are CC BY 4.0 (data/LICENSE). Attribution is the only condition. Nothing is gated and there is no subscription tier."
+}

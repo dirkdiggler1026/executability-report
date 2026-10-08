@@ -41,6 +41,12 @@ file on purpose: the hash is the time anchor, and anyone can resolve it with
 - Termination reasons (`exhausted` / `iteration_cap` / `sentinel`) are recorded per row. They
   are a boundary of the method, never a property of the asset.
 
+## Funding
+
+This measurement was unfunded: no party paid for it. Refused, in advance rather than on request: the issuer of any asset measured here, or any party acting for one; any party whose own parameters this measurement would be an input to. When a measurement is funded, the funder is named in this field and printed here above the table it paid for. The fee buys the measurement and not a conclusion, and a result that is unflattering to whatever it is attached to is published as measured.
+
+Licence: code/ is Apache-2.0 (LICENSE covers code/ only); the measurement data and the report are CC BY 4.0 (data/LICENSE). Attribution is the only condition. Nothing is gated and there is no subscription tier.
+
 ## Provable window
 
 `base-8453`, about `1283204` blocks, measured

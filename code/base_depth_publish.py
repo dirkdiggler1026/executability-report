@@ -142,6 +142,12 @@ file on purpose: the hash is the time anchor, and anyone can resolve it with
 - Termination reasons (`exhausted` / `iteration_cap` / `sentinel`) are recorded per row. They
   are a boundary of the method, never a property of the asset.
 
+## Funding
+
+{funded_by}. Refused, in advance rather than on request: {refused}. {if_funded}
+
+Licence: {licence}
+
 ## Provable window
 
 `{provable_chain}`, about `{provable_window_blocks}` blocks, measured
@@ -218,6 +224,7 @@ def main() -> int:
         lad = load(os.path.join(in_dir, a.ladder), "ladder artifact")
         pub = load(os.path.join(in_dir, "base-depth-publishable-Y.json"), "publishable set")
         bounds = load(os.path.join(in_dir, "base-depth-panelb-Y.json"), "Panel B bounds")
+        fund = load(os.path.join(in_dir, "FUNDING.json"), "funding declaration")
         prov = need(lad, "provable_until", a.ladder)
         both_ok = need(pub, "both_ok", "publishable")
         errors = need(pub, "errors", "publishable")
@@ -238,7 +245,11 @@ def main() -> int:
                 need(lad, "roundtrip_composition_validated", a.ladder)).lower(),
             provable_chain=need(prov, "chain", "provable_until"),
             provable_window_blocks=need(prov, "window_blocks", "provable_until"),
-            provable_measured=need(prov, "window_measured_utc", "provable_until"))
+            provable_measured=need(prov, "window_measured_utc", "provable_until"),
+            funded_by=need(fund, "funded_by", "FUNDING.json"),
+            refused="; ".join(need(fund, "refused", "FUNDING.json")),
+            if_funded=need(fund, "if_funded", "FUNDING.json"),
+            licence=need(fund, "licence", "FUNDING.json"))
         with open(os.path.join(out_dir, "DISCLOSURE.md"), "w", encoding="utf-8",
                   newline="\n") as fh:
             fh.write(text)

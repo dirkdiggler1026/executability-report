@@ -1,6 +1,21 @@
 {
   "generator": "code/base_depth_publish.py",
-  "argv": ["--from", "base-ladder-Y.json", "--out-dir", "{outdir}"],
-  "outputs": ["README.md", "DISCLOSURE.md", "INSTRUMENT.md"],
-  "inputs": ["base-ladder-Y.json", "base-depth-publishable-Y.json", "base-depth-panelb-Y.json", "memo-check.json"]
+  "argv": [
+    "--from",
+    "base-ladder-Y.json",
+    "--out-dir",
+    "{outdir}"
+  ],
+  "outputs": [
+    "README.md",
+    "DISCLOSURE.md",
+    "INSTRUMENT.md"
+  ],
+  "inputs": [
+    "base-ladder-Y.json",
+    "base-depth-publishable-Y.json",
+    "base-depth-panelb-Y.json",
+    "memo-check.json",
+    "FUNDING.json"
+  ]
 }
