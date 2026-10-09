@@ -133,6 +133,11 @@ The checks, and the failure each exists for:
                                 marked data-found="post". The totals are checked against a
                                 word list as well. An archive whose own count is wrong is
                                 worse than no archive, because the count is the claim.
+                                What L establishes is that the counts agree with the entries,
+                                and nothing about whether any entry is accurate. A green L
+                                means the archive counts itself correctly; it is not a
+                                statement about its contents. Same boundary as H, and stated
+                                for the same reason.
 """
 from __future__ import annotations
 
@@ -504,6 +509,29 @@ def check_urls() -> None:
                     fail("I", f"{path}:{key} points at {page}#{frag} and {page} carries no "
                               f'id="{frag}" -- the link resolves to the top of the page, so a '
                               f"reader following it never reaches what it promises")
+    # 🔴 Same shape, different direction: a feed field that names a path inside this
+    #    repository is a pointer too, and a pointer to a file that is not there is a claim
+    #    with no evidence behind it while everything around it still looks right. This does
+    #    not belong in the generator: there, the value is filled from a file it just read,
+    #    so the condition cannot occur and the check would be vacuous. It can occur here,
+    #    after the artifact is deleted and the committed feed still cites it.
+    for path in sorted(glob.glob(os.path.join(WEEKLY, "*.json"))):
+        try:
+            feed = json.load(open(path, encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        for key, val in sorted((feed.get("verification") or {}).items()):
+            if not key.endswith("_source") or not isinstance(val, str) or not val:
+                continue
+            if not _safe_rel(val):
+                fail("I", f"{path}:verification.{key} is {val!r}, which is not a safe "
+                          f"relative path inside this tree")
+            elif not os.path.isfile(val):
+                fail("I", f"{path}:verification.{key} cites {val} and that file is not in "
+                          f"the tree -- a cited source that is absent is no source")
+            else:
+                note(f"I  {os.path.basename(path)}:verification.{key} -> {val} exists")
+
     if not with_fragment:
         note("I  no on-site link with a fragment was available to check")
 
