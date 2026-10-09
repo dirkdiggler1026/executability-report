@@ -125,6 +125,14 @@ The checks, and the failure each exists for:
                                 make_verifiability.py --check, since VERIFIABILITY.md is
                                 derived from this file and a derived page that nobody
                                 recomputes is decoration.
+  L  the error archive counts  The archive paragraph counts the entries in words and then
+     match the entries         lists, by number, the ones caught after publication. Both are
+                                typed by hand, which is fine; drifting from the entries is
+                                not. The decisive part is language-independent: the numbers
+                                listed in that sentence must be exactly the set of entries
+                                marked data-found="post". The totals are checked against a
+                                word list as well. An archive whose own count is wrong is
+                                worse than no archive, because the count is the claim.
 """
 from __future__ import annotations
 
@@ -210,6 +218,138 @@ def rounds_of(path: str):
     for line in open(path):
         if line.strip():
             yield json.loads(line)
+
+
+# Word forms for the counts the archive paragraph states in prose. A count with no known
+# word form is reported as not checked rather than passed.
+COUNT_WORDS = {7: ("seven", "七"), 8: ("eight", "八"), 9: ("nine", "九"),
+               10: ("ten", "十"), 11: ("eleven", "十一"), 12: ("twelve", "十二"),
+               16: ("sixteen", "十六"), 17: ("seventeen", "十七"),
+               18: ("eighteen", "十八"), 19: ("nineteen", "十九"),
+               20: ("twenty", "二十")}
+ENTRY_RE = re.compile(r'data-found="(pre|post)"[^>]*>\s*<div class="n">(\d+)</div>')
+
+
+def check_errata() -> None:
+    """Check L. See the module docstring."""
+    pages = [p for p in ("index.html", "index.zh.html") if os.path.exists(p)]
+    if not pages:
+        note("L  neither report page is present, skipped")
+        return
+    for page in pages:
+        body = open(page, encoding="utf-8", errors="replace").read()
+        found = ENTRY_RE.findall(body)
+        if not found:
+            fail("L", f"{page}: no archive entry matched data-found plus a number -- either "
+                      f"there are none or the markup changed shape")
+            continue
+        nums = [int(n) for _k, n in found]
+        pre = sum(1 for k, _n in found if k == "pre")
+        post = sum(1 for k, _n in found if k == "post")
+        total = len(found)
+        if sorted(nums) != list(range(1, total + 1)):
+            fail("L", f"{page}: entry numbers are not 1..{total} with no gaps and no repeats: "
+                      f"{sorted(nums)}")
+
+        # The decisive, language-independent check: the sentence naming the entries caught
+        # after publication must name exactly the entries marked post.
+        marked_post = {int(n) for k, n in found if k == "post"}
+        # The counting paragraph is the <p> that lists the entry numbers. Locating it once
+        # and using it for every count check matters twice over:
+        # 🔴 Not re.search on the whole page: the first "were not" is somewhere else
+        #    ("...they were not computed..."), carries no numbers, and made this check report
+        #    a correct page as broken.
+        # 🔴 And not a page-wide word search either: the heading states the total too, so a
+        #    page-wide search let the heading vouch for a paragraph that had drifted -- and,
+        #    in the other direction, let a stale heading vouch for a correct paragraph. Each
+        #    place that states a count is held to the entries on its own.
+        # 🔴 Scope to the archive section first. Picking "the <p> with the most two-digit
+        #    numbers" across the whole page grabbed a paragraph of percentages elsewhere, and
+        #    the check then reported the entry numbers as mismatched when nothing was wrong.
+        #    Third time this check pointed at the wrong text -- the page was right every time.
+        h = body.find('<h2 id="errors">')
+        nxt = body.find("<h2", h + 10) if h >= 0 else -1
+        section = body[h:nxt] if h >= 0 and nxt > h else (body[h:] if h >= 0 else body)
+        paras = [t for t in re.findall(r"<p>(.*?)</p>", section, re.S)
+                 if ("were not" in t or "没有" in t) and re.search(r"\b\d{2}\b", t)]
+        counting = paras[0] if paras else ""
+        if not counting:
+            fail("L", f"{page}: no paragraph inside the archive section lists the "
+                      f"post-publication entries, so its counts cannot be held to them")
+            continue
+        listed = {int(x) for x in re.findall(r"\b(\d{2})\b", counting)}
+        if not listed:
+            fail("L", f"{page}: the paragraph does not list the post-publication entries by "
+                      f"number, so its count cannot be held to them")
+        elif listed != marked_post:
+            fail("L", f"{page}: the paragraph lists {sorted(listed)} as caught after "
+                      f"publication; the entries marked post are {sorted(marked_post)}")
+        else:
+            note(f"L  {page}: {total} entries ({pre} pre / {post} post), and the numbers the "
+                 f"paragraph lists match the entries marked post")
+
+        # 🔴 The total is stated in the heading as well, and the heading is where a stale
+        #    count is most visible. Checking "the word appears somewhere on the page" is too
+        #    weak: a stale heading saying "sixteen" satisfied it while seventeen entries were
+        #    listed below, which is exactly how this check first passed a page it should have
+        #    failed. So the heading is checked by itself.
+        head = re.search(r'<h2 id="errors">([^<]*)</h2>', body)
+        if not head:
+            fail("L", f'{page}: no <h2 id="errors"> heading, so the total it states cannot '
+                      f"be held to the entries")
+        else:
+            hw = COUNT_WORDS.get(total)
+            if not hw:
+                not_exercised("L", f"{page}: no word form known for {total}, heading unchecked")
+            elif not any(w in head.group(1).lower() for w in hw):
+                fail("L", f"{page}: {total} entries are listed and the heading reads "
+                          f"{head.group(1)!r}, which states none of {hw}")
+            else:
+                note(f"L  {page}: the heading states the same total as the entries")
+
+        # 🔴 The count word immediately in front of the listing phrase, checked exactly.
+        #    A presence test cannot catch a wrong count here: this paragraph legitimately
+        #    says "ten" twice ("Ten were not ..." and "One of those ten was reported by a
+        #    reader"), so changing the first one leaves the word present and the check blind.
+        #    The word that governs the list is the one next to the list.
+        # 中文是「十个没有」—— 量词挡在数词与那句话之间,所以允许一个可选量词。
+        gov = re.search(r"([A-Za-z]+|[一二三四五六七八九十]+)\s*[个條条]?\s*(?:were not|没有)",
+                        counting)
+        if not gov:
+            fail("L", f"{page}: cannot find the count word in front of the list, so the "
+                      f"paragraph's own number cannot be held to the entries")
+        else:
+            want = COUNT_WORDS.get(post)
+            said = gov.group(1).lower()
+            if not want:
+                not_exercised("L", f"{page}: no word form known for {post}, governing word "
+                                   f"{said!r} unchecked")
+            elif said not in want:
+                fail("L", f"{page}: {post} entries are marked post and the paragraph says "
+                          f"{gov.group(1)!r} were not caught before publication")
+            else:
+                note(f"L  {page}: the word governing the list ({gov.group(1)!r}) matches "
+                     f"the {post} entries marked post")
+
+        low = counting.lower()
+        for n, label in ((total, "total"), (pre, "pre"), (post, "post")):
+            words = COUNT_WORDS.get(n)
+            if not words:
+                not_exercised("L", f"{page}: no word form known for {n} ({label}), so that "
+                                   f"count was not checked against the prose")
+            # 🔴 Word boundaries for the Latin forms: "ten" is a substring of "seventeen",
+            #    "seven" of "seventeen", "nine" of "nineteen". Plain substring matching made
+            #    the post-count check vacuous -- it passed whatever the paragraph said,
+            #    because the total word contained it.
+            elif not any((re.search(rf"\b{w}\b", low) if w.isascii() else w in low)
+                         for w in words):
+                fail("L", f"{page}: {n} entries are marked {label} and the counting paragraph "
+                          f"states none of {words}")
+
+        readers = len(re.findall(r'data-reported-by="reader"', body))
+        if readers:
+            note(f"L  {page}: {readers} entr{'y' if readers == 1 else 'ies'} reported by a "
+                 f"reader rather than found inside the project")
 
 
 def check_coverage() -> None:
@@ -605,6 +745,7 @@ def main() -> int:
     check_urls()
     check_reads()
     check_coverage()
+    check_errata()
 
     if not quiet:
         for n in notes:

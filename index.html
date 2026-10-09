@@ -564,12 +564,12 @@ python3 code/verify.py 54088399</td></tr>
 <section>
   <div class="sec-head">
     <div class="eyebrow">Method</div>
-    <h2 id="errors">Our instruments lied to us sixteen times</h2>
+    <h2 id="errors">Our instruments lied to us seventeen times</h2>
   </div>
 
   <div class="col">
     <p>This section does not usually appear in a report like this. It is here because it explains something more important: why almost nobody does independent executability measurement.</p>
-    <p>Not because it is hard, but because instruments lie quietly. Sixteen errors, each producing a precise number that looked like an insight. Seven were caught before anything was published. Nine were not — 08, 09, 10, 11, 12, 13, 14, 15 and 16 — and what each one corrupted is corrected where it lives. A process that genuinely self-corrects will eventually catch something late; what matters is which side of publication each one landed on, so each entry carries its side and this paragraph counts them.</p>
+    <p>Not because it is hard, but because instruments lie quietly. Seventeen errors, each producing a precise number that looked like an insight. Seven were caught before anything was published. Ten were not — 08, 09, 10, 11, 12, 13, 14, 15, 16 and 17 — and what each one corrupted is corrected where it lives. One of those ten was reported by a reader rather than found here, which had not happened before. A process that genuinely self-corrects will eventually catch something late; what matters is which side of publication each one landed on, so each entry carries its side and this paragraph counts them.</p>
   </div>
 
   <div class="fail" data-found="pre">
@@ -641,6 +641,10 @@ python3 code/verify.py 54088399</td></tr>
   <div class="fail" data-found="post" data-found-date="2026-09-29">
     <div class="n">16</div><div class="t">A change detector that could only see the value fall</div>
     <div class="b">The month-long sampler for that factor compares consecutive samples by intersecting the exact interval each sample's logs imply. Its first published version tested only whether the previous interval sat <em>above</em> the next one — a fall. The factor rises. So the detector could not fire on the event it exists to find, and would have reported "no change in September" for an asset whose own output, three lines higher, printed two different values. What caught it was that contradiction, in the script's own printout, about forty minutes after it was pushed: <b>two distinct sampled values with zero changes is not a fact about the chain, it is a broken test.</b> The comparison is now symmetric and names the direction, and the file records that it shipped otherwise. This is <b>entry 5 inverted</b> — an alert that could never fire, where that one fired for nothing — and it is why the month's figures were still unpublished when it was found: a number does not get read out of an instrument that has not been shown able to move. <b>Found 2026-09-29, after publication, before any figure used it.</b></div>
+  </div>
+  <div class="fail" data-found="post" data-found-date="2026-10-09" data-reported-by="reader">
+    <div class="n">17</div><div class="t">A fact about state, published as a fact about the chain</div>
+    <div class="b">The verification block of every weekly issue said <em>no rolling provable window exists on this chain</em>. That is true of state and false of events. Measured on the public endpoint on 2026-10-09: at 200,000 blocks back <code>eth_getBalance</code> returns <em>historical state is not available</em>, while <code>eth_getLogs</code> over the same fifty-block range returns 524 events, and events are still served 20,000,000 blocks back — at 50,000,000 the query times out, which is a timeout and not an absence. So where events are served, realised execution over a past period is publicly recheckable, and that sentence had been denying it. <b>A reader reported this</b>, by pulling the event logs by hand; of the entries caught after publication it is the first that was not found inside this project. The claim is now read from a re-runnable measurement — <code>code/measure_retention.py</code> and <code>measurements/rh-retention/retention-2026-10-09.json</code> — instead of being held as a literal, and the generator refuses to publish an issue without it. Same family as several entries above: a limit on what I could obtain, written as a property of the thing.</div>
   </div>
 
 <div class="col" style="margin-top:34px">
