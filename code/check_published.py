@@ -112,6 +112,19 @@ The checks, and the failure each exists for:
                                 shape, and measurements/base-depth/EVIDENCE.json says so.
                                 This check exists because the alternative was a line in a
                                 checklist, and a checklist is not a criterion.
+  K  coverage.json binds to    The quantity published here can only be published where it
+     the tree, both ways       can be read from public state with no account. coverage.json
+                                records that verdict per venue. A file like that decays into
+                                prose in a JSON costume unless something binds it to the tree,
+                                so K checks both directions: a venue naming measurement paths
+                                must be readable from public state and those paths must exist;
+                                a venue whose verdict is anything else must name none; and
+                                every directory under measurements/ is either claimed by a
+                                venue or listed as not being a venue-depth measurement, so a
+                                new directory cannot sit here unclassified. K also runs
+                                make_verifiability.py --check, since VERIFIABILITY.md is
+                                derived from this file and a derived page that nobody
+                                recomputes is decoration.
 """
 from __future__ import annotations
 
@@ -197,6 +210,82 @@ def rounds_of(path: str):
     for line in open(path):
         if line.strip():
             yield json.loads(line)
+
+
+def check_coverage() -> None:
+    """Check K. See the module docstring."""
+    if not os.path.exists("coverage.json"):
+        fail("K", "coverage.json is not in the tree; every venue this publishes figures for "
+                  "has to carry a readability verdict, and its absence is not a pass")
+        return
+    try:
+        cov = json.load(open("coverage.json", encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        fail("K", f"coverage.json: unreadable as JSON ({exc})")
+        return
+    venues = cov.get("venues")
+    if not isinstance(venues, list) or not venues:
+        fail("K", "coverage.json: needs a non-empty 'venues' list")
+        return
+
+    claimed: dict = {}
+    for v in venues:
+        key = v.get("key") or "<no key>"
+        verdict = v.get("depth_readable_from_public_state")
+        paths = v.get("measurements") or []
+        for f in ("venue", "chain", "issuer", "reason", "as_of", "source"):
+            if not v.get(f):
+                fail("K", f"coverage.json: venue {key} has no {f}")
+        if verdict not in ("yes", "no", "unknown"):
+            fail("K", f"coverage.json: venue {key} has verdict {verdict!r}, "
+                      f"expected yes / no / unknown")
+        if paths and verdict != "yes":
+            fail("K", f"coverage.json: venue {key} is {verdict!r} and names measurement "
+                      f"paths {paths} -- a figure that cannot be read from public state "
+                      f"must not be published for it")
+        for p in paths:
+            if not _safe_rel(p) or not os.path.isdir(p):
+                fail("K", f"coverage.json: venue {key} names {p} and it is not a directory "
+                          f"in this tree")
+            if p in claimed:
+                fail("K", f"coverage.json: {p} is claimed by both {claimed[p]} and {key}")
+            claimed[p] = key
+
+    # The other direction: nothing under measurements/ may sit unclassified.
+    not_depth = set(cov.get("not_venue_depth") or [])
+    for p in not_depth:
+        if not os.path.isdir(p):
+            fail("K", f"coverage.json: not_venue_depth lists {p} and it is not a directory")
+    on_disk = {p.rstrip("/") for p in glob.glob(os.path.join("measurements", "*"))
+               if os.path.isdir(p)}
+    unclassified = sorted(on_disk - set(claimed) - not_depth)
+    if unclassified:
+        fail("K", f"unclassified measurement director{'y' if len(unclassified) == 1 else 'ies'}: "
+                  f"{unclassified} -- each has to be claimed by a venue in coverage.json or "
+                  f"listed in not_venue_depth, so that adding one forces the verdict to be made")
+    else:
+        note(f"K  {len(venues)} venues · {len(claimed)} measurement path(s) claimed · "
+             f"{len(not_depth)} listed as not venue depth · nothing unclassified")
+
+    # VERIFIABILITY.md is derived from this file; a derived page nobody recomputes is decoration.
+    gen = os.path.join("code", "make_verifiability.py")
+    if not os.path.exists(gen):
+        fail("K", f"{gen} is missing, so VERIFIABILITY.md cannot be checked against coverage.json")
+        return
+    try:
+        p = subprocess.run([sys.executable, gen, "--check"], capture_output=True,
+                           text=True, timeout=300)
+    except (OSError, subprocess.SubprocessError) as exc:
+        not_exercised("K", f"{gen} --check could not be launched ({exc})")
+        return
+    if p.returncode == 0:
+        note("K  VERIFIABILITY.md matches coverage.json")
+    elif p.returncode == 1:
+        fail("K", (p.stderr or p.stdout).strip().splitlines()[-1]
+             if (p.stderr or p.stdout).strip() else "VERIFIABILITY.md does not match coverage.json")
+    else:
+        not_exercised("K", f"{gen} --check exited {p.returncode}: "
+                           f"{(p.stderr or p.stdout).strip()[:120]}")
 
 
 def check_reads() -> None:
@@ -515,6 +604,7 @@ def main() -> int:
     check_generated()
     check_urls()
     check_reads()
+    check_coverage()
 
     if not quiet:
         for n in notes:

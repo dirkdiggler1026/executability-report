@@ -1,0 +1,62 @@
+{
+  "_what": "Which tokenized-equity venues this project measures, which it does not, and why. The verdict that matters is depth_readable_from_public_state: whether the quantity I publish can be read from public contract state by anyone, without an account. A venue where it cannot is not a venue I publish depth figures for, and saying why is the deliverable in that case.",
+  "_rule": "A venue naming measurement paths must have depth_readable_from_public_state == \"yes\". A venue whose verdict is anything else must name none. Every directory under measurements/ is either named by a venue row or listed in not_venue_depth, so nothing can sit in this tree unclassified. Enforced by check K in code/check_published.py.",
+  "_source_kinds": {
+    "measured": "read by me from public state; the artifacts are in this repository",
+    "announcement": "taken from a public announcement and NOT independently verified by me; no claim about actual depth is made or implied"
+  },
+  "venues": [
+    {
+      "key": "rh-chain-robinhood",
+      "venue": "Robinhood Chain pools",
+      "chain": "robinhood-4663",
+      "issuer": "Robinhood",
+      "depth_readable_from_public_state": "yes",
+      "reason": "pool state is readable by anyone from the public endpoint; the constraint here is retention rather than permission - the public endpoint keeps only minutes of state, so historical rounds need an archive and that is disclosed with the series",
+      "as_of": "2026-10-08",
+      "source": "measured",
+      "measurements": ["data", "measurements/oneside-depth"]
+    },
+    {
+      "key": "base-coinbase-wrappers",
+      "venue": "Coinbase-issued equity wrappers on Base",
+      "chain": "base-8453",
+      "issuer": "Coinbase",
+      "depth_readable_from_public_state": "yes",
+      "reason": "Uniswap v3-shaped pools; reserves, tick bitmap and per-tick liquidity are readable at a pinned block hash with requireCanonical, by anyone, with no account",
+      "as_of": "2026-10-08",
+      "source": "measured",
+      "measurements": ["measurements/base-depth"]
+    },
+    {
+      "key": "backed-xstocks",
+      "venue": "Backed / xStocks",
+      "chain": "multiple",
+      "issuer": "Backed",
+      "depth_readable_from_public_state": "unknown",
+      "reason": "no enumerable on-chain registry was found for this issuer's token set; addresses are reachable only by cross-chain identity, so the venue set cannot be enumerated reproducibly and no depth figure is published",
+      "as_of": "2026-10-08",
+      "source": "measured",
+      "measurements": []
+    },
+    {
+      "key": "securitize-stocks-solana",
+      "venue": "Securitize Stocks",
+      "chain": "solana",
+      "issuer": "Securitize",
+      "depth_readable_from_public_state": "no",
+      "reason": "announced 2026-10-08 with three properties that each remove the readable quantity: access is gated behind KYC and a qualified-investor test, so a quote cannot be obtained without an account; trading runs on the issuer's own proprietary AMM rather than a pool whose reserves are public; and liquidity is provided by a designated market maker, which means the depth is a quote that exists off-chain for milliseconds rather than a reserve that can be read. The honest deliverable for a venue like this is not a number, it is the finding that its depth is not independently verifiable, with the reason stated",
+      "as_of": "2026-10-08",
+      "source": "announcement",
+      "measurements": []
+    }
+  ],
+  "not_venue_depth": [
+    "measurements/accrual-multiplier",
+    "measurements/index-priced-test",
+    "measurements/issuer-feed",
+    "measurements/tsv-volume",
+    "measurements/wrapper-multipliers"
+  ],
+  "note": "The two halves of this file are the point. Depth that can be read from public state is becoming a property of the permissionless venues rather than an industry norm: a regulated venue's disclosure is auditable by its regulator, which is not the same as verifiable by a reader. Nothing here says the permissioned venues are worse or thinner - I cannot measure them, and that is the finding."
+}
