@@ -15,7 +15,10 @@
       "reason": "pool state is readable by anyone from the public endpoint; the constraint here is retention rather than permission - the public endpoint keeps only minutes of state, so historical rounds need an archive and that is disclosed with the series",
       "as_of": "2026-10-08",
       "source": "measured",
-      "measurements": ["data", "measurements/oneside-depth"]
+      "measurements": [
+        "data",
+        "measurements/oneside-depth"
+      ]
     },
     {
       "key": "base-coinbase-wrappers",
@@ -26,7 +29,9 @@
       "reason": "Uniswap v3-shaped pools; reserves, tick bitmap and per-tick liquidity are readable at a pinned block hash with requireCanonical, by anyone, with no account",
       "as_of": "2026-10-08",
       "source": "measured",
-      "measurements": ["measurements/base-depth"]
+      "measurements": [
+        "measurements/base-depth"
+      ]
     },
     {
       "key": "backed-xstocks",
@@ -55,6 +60,7 @@
     "measurements/accrual-multiplier",
     "measurements/index-priced-test",
     "measurements/issuer-feed",
+    "measurements/rh-retention",
     "measurements/tsv-volume",
     "measurements/wrapper-multipliers"
   ],

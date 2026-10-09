@@ -1,0 +1,78 @@
+{
+  "chain": "robinhood-4663",
+  "endpoint": "https://rpc.mainnet.chain.robinhood.com",
+  "head_at_measurement": 84162433,
+  "measured_utc": "2026-10-09",
+  "method": "one eth_getBalance of the zero address at (head - N), and one eth_getLogs over [head - N, head - N + 50], for each N in the ladder; a timeout is recorded as a timeout and not as an absence",
+  "log_span_blocks": 50,
+  "ladder": [
+    {
+      "blocks_back": 200000,
+      "block": 83962433,
+      "state": {
+        "verdict": "pruned",
+        "detail": "historical state b33aa73464cee19c700685aa5e20e53e1e250f96c4c1d18874b5231c3e9ae021 is not available"
+      },
+      "logs": {
+        "verdict": "served",
+        "count": 524,
+        "detail": ""
+      }
+    },
+    {
+      "blocks_back": 1000000,
+      "block": 83162433,
+      "state": {
+        "verdict": "pruned",
+        "detail": "historical state 245c909d1ef27ddfd1302560ea30401e463bdc6d8fd6cd4e611cbfc2d6b2e35f is not available"
+      },
+      "logs": {
+        "verdict": "served",
+        "count": 677,
+        "detail": ""
+      }
+    },
+    {
+      "blocks_back": 5000000,
+      "block": 79162433,
+      "state": {
+        "verdict": "pruned",
+        "detail": "historical state 8da10f1f4307d51de0aa6381c55ed517d90f0f62cfe7c226a4be943ac848c25a is not available"
+      },
+      "logs": {
+        "verdict": "served",
+        "count": 960,
+        "detail": ""
+      }
+    },
+    {
+      "blocks_back": 20000000,
+      "block": 64162433,
+      "state": {
+        "verdict": "pruned",
+        "detail": "historical state 8083d2c0b9f09ae9f688a45e752647c35d964e9ccf21971629e9737ed5c06f19 is not available"
+      },
+      "logs": {
+        "verdict": "served",
+        "count": 1318,
+        "detail": ""
+      }
+    },
+    {
+      "blocks_back": 50000000,
+      "block": 34162433,
+      "state": {
+        "verdict": "pruned",
+        "detail": "historical state 0ba8e86a1838c57c4958e7e539b27e0d2e4d5a2b5cbb0249055c9c467b4d1828 is not available"
+      },
+      "logs": {
+        "verdict": "timeout",
+        "count": null,
+        "detail": "log query timed out"
+      }
+    }
+  ],
+  "deepest_state_served_blocks_back": null,
+  "deepest_logs_served_blocks_back": 20000000,
+  "note": "state and events are pruned on different schedules on this endpoint, so a retention claim has to name which of the two it is about. Where events are served, realised execution is publicly recheckable; where state is not, a counterfactual figure at a past block can only be rechecked against an archive kept at the time, which is why this project archives its reads."
+}
