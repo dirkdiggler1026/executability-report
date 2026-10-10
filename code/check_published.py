@@ -392,18 +392,27 @@ def check_coverage() -> None:
             if not _safe_rel(p) or not os.path.isdir(p):
                 fail("K", f"coverage.json: venue {key} names {p} and it is not a directory "
                           f"in this tree")
-            if p in claimed:
-                fail("K", f"coverage.json: {p} is claimed by both {claimed[p]} and {key}")
-            claimed[p] = key
+            # Keyed by comparison key, not by spelling: two rows naming the same directory
+            # with different separators would otherwise both look like the first claim.
+            if _path_key(p) in claimed:
+                fail("K", f"coverage.json: {p} is claimed by both "
+                          f"{claimed[_path_key(p)]} and {key}")
+            claimed[_path_key(p)] = key
 
     # The other direction: nothing under measurements/ may sit unclassified.
+    # glob returns os.sep (backslash on Windows) and coverage.json stores "/" -- until both
+    # sides go through _path_key this difference is every path on both sides, so every
+    # directory reads as unclassified and the check fires on a tree with nothing wrong.
+    # That is a check failing for a reason that is not about the tree, and it is why this
+    # repository must not depend on the two spellings happening to agree.
     not_depth = set(cov.get("not_venue_depth") or [])
     for p in not_depth:
         if not os.path.isdir(p):
             fail("K", f"coverage.json: not_venue_depth lists {p} and it is not a directory")
-    on_disk = {p.rstrip("/") for p in glob.glob(os.path.join("measurements", "*"))
-               if os.path.isdir(p)}
-    unclassified = sorted(on_disk - set(claimed) - not_depth)
+    on_disk = {_path_key(p): _path_display(p)
+               for p in glob.glob(os.path.join("measurements", "*")) if os.path.isdir(p)}
+    unclassified = sorted(on_disk[k] for k in
+                          set(on_disk) - set(claimed) - {_path_key(p) for p in not_depth})
     if unclassified:
         fail("K", f"unclassified measurement director{'y' if len(unclassified) == 1 else 'ies'}: "
                   f"{unclassified} -- each has to be claimed by a venue in coverage.json or "
@@ -445,8 +454,20 @@ def check_reads() -> None:
         return
     declared = ("index_file", "index_sha256", "responses_file",
                 "responses_sha256_uncompressed")
-    records = sorted(p for p in glob.glob(os.path.join("measurements", "*", "reads-*.json"))
-                     if not p.endswith(".index.json"))
+    # The record set is a set of paths, so it is built the same way K's is: on the
+    # comparison key, never on the spelling. glob hands back os.sep (backslash here) while
+    # the committed files and every message in this tree use "/"; and the exclusion of the
+    # archive's own index is a name test, which on a case-insensitive filesystem has to be
+    # a case-insensitive one or a file spelled reads-X.INDEX.JSON would be handed to the
+    # verifier as though it were a record. Neither change relaxes anything: every record
+    # still goes to verify_reads.check, which is the only thing that decides pass or fail.
+    found = {}
+    for p in glob.glob(os.path.join("measurements", "*", "reads-*.json")):
+        name = os.path.basename(p)
+        if os.path.normcase(name).endswith(".index.json"):
+            continue                      # the archive itself, not a record of it
+        found.setdefault(_path_key(p), _path_display(p))
+    records = sorted(found.values())
     if not records:
         note("J  no read records found in measurements/*/")
         return
@@ -542,6 +563,29 @@ def _safe_rel(p: str) -> bool:
         return False
     parts = p.replace("\\", "/").split("/")
     return ".." not in parts and "" not in parts[:-1]
+
+
+def _path_key(p: str) -> str:
+    """One path, one comparison key, whatever separator the source used.
+
+    Set difference over paths is only a comparison if both sides are spelled the same way,
+    and they are not: coverage.json and the record files store forward slashes, while
+    glob.glob() returns os.sep -- backslashes on Windows. Compared raw, the difference is
+    every element of both sets, so a directory named in coverage.json still reads as
+    unclassified and the check fires on a tree with nothing wrong with it. That is a check
+    failing for a reason that is not about the tree.
+
+    normpath folds separators and "." / ".."; normcase folds case, which Windows paths need
+    because the filesystem is case-insensitive (two spellings of one directory would
+    otherwise read as two directories, one of them unclassified). Both sides go through
+    here, so the relation is unchanged -- only its spelling is.
+    """
+    return os.path.normcase(os.path.normpath(p))
+
+
+def _path_display(p: str) -> str:
+    """The forward-slash spelling the committed files use, for messages a reader greps."""
+    return os.path.normpath(p).replace(os.sep, "/")
 
 
 def check_generated_dir(decl_path: str) -> None:

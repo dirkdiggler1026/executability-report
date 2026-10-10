@@ -61,9 +61,16 @@ def short(a: str | None, keep: int = 10) -> str:
 
 
 def render(A: dict, mA: dict, B: dict, mB: dict) -> str:
-    both = sorted(set(A) & set(B), key=lambda k: (A[k]["_label"] or "", float(k[1])))
-    only_a = sorted(set(A) - set(B), key=lambda k: (A[k]["_label"] or "", float(k[1])))
-    only_b = sorted(set(B) - set(A), key=lambda k: (B[k]["_label"] or "", float(k[1])))
+    # (label, size) is a partial order: the same pool+label appears at several fees, so rows tie,
+    # and a tie sorted out of a `set` would follow string-hash order, which Python randomises per
+    # process (PYTHONHASHSEED). Appending fee and pool makes the key a total order, so the file
+    # does not depend on which process generated it.
+    def key(k):
+        r = A[k] if k in A else B[k]
+        return (r["_label"] or "", float(k[1]), str(r.get("_fee")), str(k[0]))
+    both = sorted(set(A) & set(B), key=key)
+    only_a = sorted(set(A) - set(B), key=key)
+    only_b = sorted(set(B) - set(A), key=key)
     pools_only_a = sorted(set(mA["pools"]) - set(mB["pools"]))
     pools_only_b = sorted(set(mB["pools"]) - set(mA["pools"]))
 

@@ -1,0 +1,17 @@
+{
+  "generator": "code/make_block_comparison.py",
+  "argv": [
+    "--a",
+    "../base-depth/base-ladder-Y.json",
+    "--b",
+    "base-ladder-B-run2.json",
+    "--out-dir",
+    "{outdir}"
+  ],
+  "outputs": [
+    "COMPARISON.md"
+  ],
+  "inputs": [
+    "base-ladder-B-run2.json"
+  ]
+}

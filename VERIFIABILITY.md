@@ -26,7 +26,7 @@ second kind, the structural reason.
 
 Uniswap v3-shaped pools; reserves, tick bitmap and per-tick liquidity are readable at a pinned block hash with requireCanonical, by anyone, with no account.
 
-Published measurements: `measurements/base-depth`
+Published measurements: `measurements/base-depth`, `measurements/base-depth-recheck-2026-10-09`
 
 ### Robinhood Chain pools — yes
 

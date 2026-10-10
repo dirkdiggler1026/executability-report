@@ -30,7 +30,8 @@
       "as_of": "2026-10-08",
       "source": "measured",
       "measurements": [
-        "measurements/base-depth"
+        "measurements/base-depth",
+        "measurements/base-depth-recheck-2026-10-09"
       ]
     },
     {
