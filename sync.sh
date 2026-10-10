@@ -298,6 +298,42 @@ fi
 # 生产值是默认值,但可被环境覆盖 —— 否则这一段【无法在不碰真产物的前提下演练】:
 # 写死路径的代码块只能连同真生成器一起跑,于是注入的失败永远不生效,演练会变成
 # 一个必然通过、什么也没测到的东西。(2026-10-07 第一版就是这样,被下限断言拦住。)
+# ── ORBIO 状态捕获的搬运:staging → 仓库 ───────────────────────────────
+# 🔴 为什么是搬运而不是在这里采集:那个 PT 市场 2026-10-22 到期,而这条链的【状态】
+#    只留几分钟 ⇒ 一天一次采样太稀,到期前最有价值的恰好是最后那段。所以采集由
+#    orbio-capture.timer 每小时做一次,写 staging;本脚本只负责把它们搬进仓库。
+# 🔴 而搬运必须在这里做:本脚本开头会 git reset --hard origin/main,任何在那之前
+#    写进工作树的东西都会被抹掉 ⇒ 定时器直写仓库会定期丢数据。
+#    "一个工作树一个提交者" 这条规则因此不变 —— 与周发布同一个理由。
+# 🔴 只搬【完整的三件套】:记录 + 清单 + 应答。缺一个就不搬,因为判据 J 会正确地
+#    拒绝一个声明了归档而文件不在的记录,而那时的红灯会指向错误的方向。
+ORBIO_SRC="${ORBIO_SRC:-/root/predict-data/orbio_data}"
+ORBIO_DST="${ORBIO_DST:-measurements/orbio-pendle}"
+if [ -d "$ORBIO_SRC" ]; then
+  orbio_moved=0
+  orbio_skipped=0
+  mkdir -p "$ORBIO_DST"
+  for rec in "$ORBIO_SRC"/orbio-*.json; do
+    case "$rec" in *.index.json) continue ;; esac
+    [ -f "$rec" ] || continue
+    stem="${rec%.json}"
+    if [ -f "${stem}.index.json" ] && [ -f "${stem}.responses.jsonl.gz" ]; then
+      cp "$rec" "${stem}.index.json" "${stem}.responses.jsonl.gz" "$ORBIO_DST"/ \
+        && orbio_moved=$((orbio_moved + 1))
+    else
+      orbio_skipped=$((orbio_skipped + 1))
+    fi
+  done
+  if [ "$orbio_moved" -gt 0 ]; then
+    git add "$ORBIO_DST" >/dev/null 2>&1
+    log "ORBIO 捕获:搬入 ${orbio_moved} 组(每组 3 个文件)"
+  fi
+  if [ "$orbio_skipped" -gt 0 ]; then
+    log "ORBIO 捕获:${orbio_skipped} 组不完整,未搬 —— 缺清单或应答的记录会让判据 J 正确地变红"
+    tg_send "⚠️ rh-report:ORBIO 有 ${orbio_skipped} 组捕获不完整,未搬入仓库($(date -u +%F))"
+  fi
+fi
+
 WEEKLY_GEN="${WEEKLY_GEN:-/root/predict-data/tools/weekly_publish.py}"
 WEEKLY_OUT="${WEEKLY_OUT:-/root/predict-data/dexfeed_data/weekly}"
 if [ -f "$WEEKLY_GEN" ]; then
