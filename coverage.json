@@ -74,9 +74,11 @@
     "measurements/accrual-multiplier",
     "measurements/index-priced-test",
     "measurements/issuer-feed",
+    "measurements/pendle-market-logs",
     "measurements/rh-retention",
     "measurements/tsv-volume",
     "measurements/wrapper-multipliers"
   ],
-  "note": "The two halves of this file are the point. Depth that can be read from public state is becoming a property of the permissionless venues rather than an industry norm: a regulated venue's disclosure is auditable by its regulator, which is not the same as verifiable by a reader. Nothing here says the permissioned venues are worse or thinner - I cannot measure them, and that is the finding."
+  "note": "The two halves of this file are the point. Depth that can be read from public state is becoming a property of the permissionless venues rather than an industry norm: a regulated venue's disclosure is auditable by its regulator, which is not the same as verifiable by a reader. Nothing here says the permissioned venues are worse or thinner - I cannot measure them, and that is the finding.",
+  "not_venue_depth_note": "These directories hold measurements that are not a venue's depth. measurements/pendle-market-logs is the clearest case: it is an archive of the raw event logs two PT markets emitted, captured because this chain keeps state for minutes and the trades are the only surviving record of what anyone actually paid. It carries no depth figure and makes no claim about either market's depth; what it is for is to make a later counterfactual quote checkable against a real trade."
 }

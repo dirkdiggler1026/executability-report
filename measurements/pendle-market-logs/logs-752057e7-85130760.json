@@ -1,0 +1,71 @@
+{
+  "address": "0x752057e7a63d0a7f15b740d41ef484fdec459ead",
+  "swept_from_block": 0,
+  "swept_to_block": 85130760,
+  "top_block_hash": "0x6c82ee725e3aa1a21871c7883e9b031f1c24f3cd7059e9352c476a7bc262c025",
+  "top_block_timestamp": 1791648949,
+  "span_per_query": 10000000,
+  "span_source": "node",
+  "span_evidence": "parsed from the node's refusal: {'code': -32602, 'message': 'query spans 85130755 blocks (0 to 85130754), but only 10000000 are allowed for this request; narrow the block range'}",
+  "chunks_served": 9,
+  "chunks_failed": 0,
+  "chunk_failures": [],
+  "log_count": 82,
+  "blocks_with_logs": 30,
+  "earliest_log_block": 71414107,
+  "latest_log_block": 84287536,
+  "topic0_counts": {
+    "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": 18,
+    "0x5c0e21d57bb4cf91d8fe238d6f92e2685a695371b19209afcce6217b478f83e1": 22,
+    "0xb4c03061fb5b7fed76389d5af8f2e0ddb09f8c70d1333abbb62582835e10accb": 7,
+    "0x829000a5bc6a12d46e30cdcecd7c56b1efd88f6d7d059da6734a04f3764557c4": 10,
+    "0x78d61a0c27b13f43911095f9f356f14daa3cd8b125eea1aa22421245e90e813d": 8,
+    "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": 11,
+    "0x4cf25bc1d991c17529c25213d3cc0cda295eeaad5f13f361969b12ea48015f90": 5,
+    "0xac49e518f90a358f652e4400164f05a5d8f7e35e7747279bc3a93dbf584e125a": 1
+  },
+  "retention_proven_to_block": 71414107,
+  "retention_proven_depth_blocks": 13716653,
+  "empty_ranges": [
+    [
+      0,
+      9999999
+    ],
+    [
+      10000000,
+      19999999
+    ],
+    [
+      20000000,
+      29999999
+    ],
+    [
+      30000000,
+      39999999
+    ],
+    [
+      40000000,
+      49999999
+    ],
+    [
+      50000000,
+      59999999
+    ],
+    [
+      60000000,
+      69999999
+    ]
+  ],
+  "coverage_note": "The only retention claim here is retention_proven_to_block: logs came back from that depth, so the node serves logs at least that deep for this address. empty_ranges establish nothing. An empty range is equally consistent with the contract not existing yet, with no events in it, and with a node that has dropped its log index that far back and answers empty instead of erroring; this sweep cannot tell those apart. Depths are in blocks and are deliberately not converted to days: this chain's block time was measured at about a tenth of a second, an earlier conversion in this project used two seconds and was wrong by roughly twenty times, and a reader who wants days should divide by a block time that carries its own measurement.",
+  "pinning_note": "eth_getLogs takes a block range and cannot be pinned by block hash the way eth_call is, so the top of this range is not reorg-proof. top_block_hash and top_block_timestamp are recorded so a re-run can be compared against the same chain tip, and --to-block reproduces exactly this range.",
+  "raw_only_note": "every response is archived as the node returned it: topics and data as hex, nothing decoded. topic0_counts counts identical first topics and does not name them, because naming an event needs an ABI and that choice belongs in the analysis.",
+  "calls": 10,
+  "entries": 10,
+  "failure_count": 0,
+  "expected_failures": 1,
+  "index_file": "logs-752057e7-85130760.index.json",
+  "index_sha256": "ceef9f60eea2994739407c22f270189f064cfa36b25454d3443ba68778959a0d",
+  "responses_file": "logs-752057e7-85130760.responses.jsonl.gz",
+  "responses_sha256_uncompressed": "7ea810ca40ba899095eff11d79c33cb101d4ce41ee2c2dc1552ca9c3e2d0fa92",
+  "archive_note": "index_file is the complete read list for this sweep, one entry per eth_getLogs in order, the span-cap probe and any failed chunk included, each carrying the request as sent and the sha256 of the full response. responses_file holds the full responses in the same order, one per line. Verified by code/verify_reads.py (path relative to the repository root)."
+}

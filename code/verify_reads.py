@@ -142,8 +142,17 @@ def check(rec_path: str, quiet: bool = False) -> int:
         return FAIL
 
     if not quiet:
-        print(f"ok -- {len(entries)} reads, both digests match, counts close "
-              f"(block {rec.get('block_number')}, {str(rec.get('block_hash'))[:18]}…)")
+        # Records come in two shapes: a capture pinned at one block, and a sweep over a
+        # block range, which eth_getLogs cannot pin by hash. Printing "block None" for the
+        # second shape reads as a missing field rather than a different kind of record.
+        if rec.get("block_number") is not None:
+            where = f"block {rec.get('block_number')}, {str(rec.get('block_hash'))[:18]}…"
+        elif rec.get("swept_to_block") is not None:
+            where = (f"swept {rec.get('swept_from_block')}..{rec.get('swept_to_block')}, "
+                     f"top {str(rec.get('top_block_hash'))[:18]}…")
+        else:
+            where = "this record names no block"
+        print(f"ok -- {len(entries)} reads, both digests match, counts close ({where})")
         print("    this shows the archive is unaltered; it does not re-read the chain")
     return PASS
 
