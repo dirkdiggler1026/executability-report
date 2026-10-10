@@ -1,0 +1,42 @@
+{
+  "market": "0x25ee3232421a08f390ef25a34b1d2ccc8394bd05",
+  "block_number": 85087002,
+  "block_hash": "0xe71773d2e7932cb460aecb12e579ca8678d9d427859cfa8944b54932b8663215",
+  "block_timestamp": 1791644467,
+  "pinned_by": "blockHash with requireCanonical; a forged hash returns 'header not found' on this endpoint, which was checked",
+  "readState_arg": "0x0000000000000000000000000000000000000000",
+  "readState_words_raw": {
+    "totalPt": "0x000000000000000000000000000000000000000000005b787a68198e690695de",
+    "totalSy": "0x00000000000000000000000000000000000000000000333410326fe2c2820bfa",
+    "totalLp": "0x0000000000000000000000000000000000000000000042aee4819dd643bf3fdd",
+    "treasury": "0x000000000000000000000000cbcb48e22622a3778b6f14c2f5d258ba026b05e6",
+    "scalarRoot": "0x0000000000000000000000000000000000000000000000014cdc0a13754dafc3",
+    "expiry": "0x000000000000000000000000000000000000000000000000000000006ad95200",
+    "lnFeeRateRoot": "0x000000000000000000000000000000000000000000000000001c4f0211730129",
+    "reserveFeePercent": "0x0000000000000000000000000000000000000000000000000000000000000050",
+    "lastLnImpliedRate": "0x000000000000000000000000000000000000000000000000019a1409bd095169"
+  },
+  "readTokens_raw": {
+    "SY": "0x346ae4fc5134f13655c65abb6dfd8728a6eb1235",
+    "PT": "0xe1652479358a5968bcc8a36274a616422a2d357d",
+    "YT": "0x4aec7f5ce469ff4717eceacb67a333fda09aacf0"
+  },
+  "pricing_inputs_raw": {
+    "sy_exchangeRate": "0x0000000000000000000000000000000000000000000000000de0b6b3a7640000",
+    "yt_pyIndexCurrent": "0x0000000000000000000000000000000000000000000000000de0b6b3a7640000",
+    "yt_pyIndexStored": "0x0000000000000000000000000000000000000000000000000de0b6b3a7640000",
+    "pt_totalSupply": "0x000000000000000000000000000000000000000000005b787a68198e690695de",
+    "pt_expiry": "0x000000000000000000000000000000000000000000000000000000006ad95200"
+  },
+  "pricing_inputs_note": "Pendle's market maths takes a PY index, which readState does not return, so these are captured alongside it. Without them the market's nine words cannot produce a quote. Captures before 2026-10-10T14:10Z lack this block and cannot be repaired: the state they would have read no longer exists.",
+  "raw_only_note": "every value here is the hex the chain returned. lastLnImpliedRate is a logarithm and not an annualised rate; no conversion is applied in this file, because a converted figure carries whoever converted it. Conversions belong in the analysis.",
+  "calls": 12,
+  "entries": 12,
+  "failure_count": 0,
+  "failures": [],
+  "index_file": "orbio-85087002.index.json",
+  "index_sha256": "2bfdefb073fa33e4dd473ca9f61b4870129002b38872e00bb8542f5e188baa80",
+  "responses_file": "orbio-85087002.responses.jsonl.gz",
+  "responses_sha256_uncompressed": "38d58c52a772b2e5aa2d4c6a62d28276ec2d39736d5c439ebe5ead0dbecbb8c4",
+  "archive_note": "index_file is the complete read list for this capture, one entry per eth_call in order, failures included, each carrying the request as sent and the sha256 of the full response. responses_file holds the full responses in the same order. Verified by code/verify_reads.py (path relative to the repository root)."
+}

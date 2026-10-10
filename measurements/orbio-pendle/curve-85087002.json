@@ -1,0 +1,172 @@
+{
+  "_what": "The pre-expiry exit curve of one Pendle PT market, computed by code/pendle_pt_exit_curve.py from the archived capture named below. Every input is a raw field from that capture; every conversion is in that file.",
+  "_claim": "recovery_pct is proceeds from selling N PT divided by N times the market's own pre-trade marginal quote, at the same block. Nothing outside the market enters either side.",
+  "_second_quantity": "proceeds_vs_face_value_pct is the same proceeds against PT's face value of one asset per PT. It is NOT the claim: it rises towards 100% as expiry approaches regardless of depth, because the discount PT trades at shrinks with the remaining time. Reading it as a depth improvement is the same error as quoting an annualised implied rate near maturity.",
+  "_standing": "the published formula evaluated on an archived state, NOT validated against any executed trade. The market's swap entry point reverts under eth_call because it requires PT transferred in first, and this market has been nearly inactive, so no recent trade exists to replay against. See measurements/pendle-market-logs/ for the logs that do exist; reconstructing the state they occurred at has not been done.",
+  "capture": "orbio-85087002.json",
+  "market": "0x25ee3232421a08f390ef25a34b1d2ccc8394bd05",
+  "block_number": 85087002,
+  "block_hash": "0xe71773d2e7932cb460aecb12e579ca8678d9d427859cfa8944b54932b8663215",
+  "block_timestamp": 1791644467,
+  "expiry": 1792627200,
+  "seconds_to_expiry": 982733,
+  "inputs_raw": {
+    "totalPt": "0x000000000000000000000000000000000000000000005b787a68198e690695de",
+    "totalSy": "0x00000000000000000000000000000000000000000000333410326fe2c2820bfa",
+    "totalLp": "0x0000000000000000000000000000000000000000000042aee4819dd643bf3fdd",
+    "treasury": "0x000000000000000000000000cbcb48e22622a3778b6f14c2f5d258ba026b05e6",
+    "scalarRoot": "0x0000000000000000000000000000000000000000000000014cdc0a13754dafc3",
+    "expiry": "0x000000000000000000000000000000000000000000000000000000006ad95200",
+    "lnFeeRateRoot": "0x000000000000000000000000000000000000000000000000001c4f0211730129",
+    "reserveFeePercent": "0x0000000000000000000000000000000000000000000000000000000000000050",
+    "lastLnImpliedRate": "0x000000000000000000000000000000000000000000000000019a1409bd095169"
+  },
+  "py_index_raw": "0x0000000000000000000000000000000000000000000000000de0b6b3a7640000",
+  "derived": {
+    "rate_scalar": "769.682865092083340010277460917665327204846077215276173691125",
+    "total_asset": "241801.088436457961556986",
+    "rate_anchor": "1.00284960271282945347260109018002423169764679080746971650265",
+    "fee_rate": "1.00024833699693594732372196513132207521857749721418135987234",
+    "proportion0": "0.641116280730773320935324518784835272236002656847400171634706",
+    "marginal_rate_from_stored": "1.00360343580138572481076609514213155831217871939117759211716"
+  },
+  "_clock_control": "recovery_pct is this block's number and is the one to quote for this block. It is NOT clock-free: rateScalar is scalarRoot x 365d / timeToExpiry, so the curve flattens as expiry approaches and recovery rises with nothing happening to the book. recovery_pct_at_reference_clock recomputes each row with the same reserves at reference_seconds_to_expiry, which pins the calendar so a series across captures compares the book. A series built from recovery_pct instead would read a market walking towards expiry as a market getting deeper.",
+  "reference_seconds_to_expiry": 2592000,
+  "reference_derived": {
+    "rate_scalar": "291.818190995578062105833333333333333333333333333333333333333",
+    "rate_anchor": "1.00754401071012170025404026823931079691011378963446593136543",
+    "fee_rate": "1.00065513255901062894578484162196491216638916184738359983125"
+  },
+  "rows": [
+    {
+      "size_pt": "1",
+      "quoted": true,
+      "size_as_fraction_of_totalPt": "0.000002",
+      "recovery_pct": "99.975172",
+      "proceeds_vs_face_value_pct": "99.616211",
+      "exchange_rate_after": "1.003603444",
+      "proceeds_sy": "0.996162110",
+      "fee_asset": "0.000247384",
+      "to_reserve_asset": "0.000197907",
+      "recovery_pct_at_reference_clock": "99.934527"
+    },
+    {
+      "size_pt": "10",
+      "quoted": true,
+      "size_as_fraction_of_totalPt": "0.000023",
+      "recovery_pct": "99.975164",
+      "proceeds_vs_face_value_pct": "99.616204",
+      "exchange_rate_after": "1.003603520",
+      "proceeds_sy": "9.961620352",
+      "fee_asset": "0.002473839",
+      "to_reserve_asset": "0.001979071",
+      "recovery_pct_at_reference_clock": "99.934508"
+    },
+    {
+      "size_pt": "100",
+      "quoted": true,
+      "size_as_fraction_of_totalPt": "0.000232",
+      "recovery_pct": "99.975089",
+      "proceeds_vs_face_value_pct": "99.616129",
+      "exchange_rate_after": "1.003604274",
+      "proceeds_sy": "99.616128646",
+      "fee_asset": "0.024738370",
+      "to_reserve_asset": "0.019790696",
+      "recovery_pct_at_reference_clock": "99.934311"
+    },
+    {
+      "size_pt": "1000",
+      "quoted": true,
+      "size_as_fraction_of_totalPt": "0.002315",
+      "recovery_pct": "99.974337",
+      "proceeds_vs_face_value_pct": "99.615379",
+      "exchange_rate_after": "1.003611824",
+      "proceeds_sy": "996.153792073",
+      "fee_asset": "0.247381841",
+      "to_reserve_asset": "0.197905473",
+      "recovery_pct_at_reference_clock": "99.932339"
+    },
+    {
+      "size_pt": "10000",
+      "quoted": true,
+      "size_as_fraction_of_totalPt": "0.023150",
+      "recovery_pct": "99.966745",
+      "proceeds_vs_face_value_pct": "99.607814",
+      "exchange_rate_after": "1.003688045",
+      "proceeds_sy": "9960.781435542",
+      "fee_asset": "2.473630549",
+      "to_reserve_asset": "1.978904439",
+      "recovery_pct_at_reference_clock": "99.912444"
+    },
+    {
+      "size_pt": "50000",
+      "quoted": true,
+      "size_as_fraction_of_totalPt": "0.115752",
+      "recovery_pct": "99.931034",
+      "proceeds_vs_face_value_pct": "99.572232",
+      "exchange_rate_after": "1.004046716",
+      "proceeds_sy": "49786.115954862",
+      "fee_asset": "12.363734525",
+      "to_reserve_asset": "9.890987620",
+      "recovery_pct_at_reference_clock": "99.818926"
+    },
+    {
+      "size_pt": "100000",
+      "quoted": true,
+      "size_as_fraction_of_totalPt": "0.231504",
+      "recovery_pct": "99.879241",
+      "proceeds_vs_face_value_pct": "99.520625",
+      "exchange_rate_after": "1.004567374",
+      "proceeds_sy": "99520.624590355",
+      "fee_asset": "24.714653044",
+      "to_reserve_asset": "19.771722435",
+      "recovery_pct_at_reference_clock": "99.683485"
+    },
+    {
+      "size_pt": "200000",
+      "quoted": true,
+      "size_as_fraction_of_totalPt": "0.463008",
+      "recovery_pct": "99.699523",
+      "proceeds_vs_face_value_pct": "99.341552",
+      "exchange_rate_after": "1.006378199",
+      "proceeds_sy": "198683.104525064",
+      "fee_asset": "49.340365520",
+      "to_reserve_asset": "39.472292416",
+      "recovery_pct_at_reference_clock": "99.215273"
+    },
+    {
+      "size_pt": "400000",
+      "quoted": false,
+      "refused_because": "market proportion would reach 1.234800, above the 0.96 cap the market reverts on -- no quote exists for this size",
+      "size_as_fraction_of_totalPt": "0.926016",
+      "recovery_pct_at_reference_clock": "refused"
+    }
+  ],
+  "self_checks": [
+    {
+      "check": "limit_at_zero_size_is_one_minus_fee",
+      "ok": true,
+      "detail": "recovery at 4.320e-7 PT = 99.975172000%, one minus the fee rebuilt from lnFeeRateRoot = 99.975172466%",
+      "boundary": "a property of the formula; it is satisfied by any formula wrong in the same way at every size. It does catch a wrong fee, because the fee it compares against is recomputed from the raw state field rather than taken from the precompute"
+    },
+    {
+      "check": "recovery_falls_as_size_grows",
+      "ok": true,
+      "detail": "8 quoted sizes, strictly decreasing",
+      "boundary": "orders the rows against each other and says nothing about whether any one of them is right"
+    },
+    {
+      "check": "marginal_rate_equals_stored_implied_rate",
+      "ok": true,
+      "detail": "marginal rate 1.003603435801385725 vs exp(lastLnImpliedRate x t / 365d) 1.003603435801385725, difference 0.000e-56",
+      "boundary": "ties the rate anchor to the rate function; an error made identically in both still satisfies it"
+    },
+    {
+      "check": "clock_control_moves_the_curve",
+      "ok": true,
+      "detail": "capture at 982,733 s to expiry, reference at 2,592,000 s; measured recovery is strictly above the reference at 8/8 sizes",
+      "boundary": "shows the reference column is computed at a different clock and in the right direction. It does not establish that the reference clock is the right one to compare at -- that is a convention, and it is declared in the artifact rather than derived"
+    }
+  ],
+  "arithmetic_note": "60-digit decimal; the contract uses 1e18 fixed point with Balancer LogExpMath, so figures can differ in the last places and that difference is not modelled. A size above the market's 0.96 PT-proportion cap is a refusal, not a low recovery: the market would revert."
+}
