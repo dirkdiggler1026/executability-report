@@ -18,6 +18,7 @@ second kind, the structural reason.
 | venue | chain | issuer | readable from public state | as of | source |
 |---|---|---|---|---|---|
 | Coinbase-issued equity wrappers on Base | `base-8453` | Coinbase | **yes** | 2026-10-08 | measured |
+| Pendle PT market for ORBIO on Robinhood Chain | `robinhood-4663` | Pendle (market) / Robinhood Chain (venue) | **yes** | 2026-10-10 | measured |
 | Robinhood Chain pools | `robinhood-4663` | Robinhood | **yes** | 2026-10-08 | measured |
 | Backed / xStocks | `multiple` | Backed | **unknown** | 2026-10-08 | measured |
 | Securitize Stocks | `solana` | Securitize | **no** | 2026-10-08 | announcement |
@@ -27,6 +28,12 @@ second kind, the structural reason.
 Uniswap v3-shaped pools; reserves, tick bitmap and per-tick liquidity are readable at a pinned block hash with requireCanonical, by anyone, with no account.
 
 Published measurements: `measurements/base-depth`, `measurements/base-depth-recheck-2026-10-09`
+
+### Pendle PT market for ORBIO on Robinhood Chain — yes
+
+the market's whole state is one readState call and the pricing curve is closed form, so a quote is arithmetic rather than a walk; reads pin by block hash with requireCanonical, which this endpoint honours - a forged hash returns 'header not found'. The constraint is retention, not permission: state survives only minutes on the public endpoint, so a pre-expiry capture cannot be made after the fact and is archived at the time instead.
+
+Published measurements: `measurements/orbio-pendle`
 
 ### Robinhood Chain pools — yes
 

@@ -55,6 +55,19 @@
       "as_of": "2026-10-08",
       "source": "announcement",
       "measurements": []
+    },
+    {
+      "key": "rh-chain-pendle-orbio",
+      "venue": "Pendle PT market for ORBIO on Robinhood Chain",
+      "chain": "robinhood-4663",
+      "issuer": "Pendle (market) / Robinhood Chain (venue)",
+      "depth_readable_from_public_state": "yes",
+      "reason": "the market's whole state is one readState call and the pricing curve is closed form, so a quote is arithmetic rather than a walk; reads pin by block hash with requireCanonical, which this endpoint honours - a forged hash returns 'header not found'. The constraint is retention, not permission: state survives only minutes on the public endpoint, so a pre-expiry capture cannot be made after the fact and is archived at the time instead",
+      "as_of": "2026-10-10",
+      "source": "measured",
+      "measurements": [
+        "measurements/orbio-pendle"
+      ]
     }
   ],
   "not_venue_depth": [

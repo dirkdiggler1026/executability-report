@@ -461,8 +461,15 @@ def check_reads() -> None:
     # a case-insensitive one or a file spelled reads-X.INDEX.JSON would be handed to the
     # verifier as though it were a record. Neither change relaxes anything: every record
     # still goes to verify_reads.check, which is the only thing that decides pass or fail.
+    # 🔴 Records are found by what they declare, not by what they are named. The first
+    #    version globbed reads-*.json; a capture written as orbio-<block>.json then carried a
+    #    valid archive this criterion never looked at -- it verified by hand while the check
+    #    said nothing about it. A naming convention drifts, a declaration does not, which is
+    #    the same reason GENERATED.json exists instead of a rule about filenames. Files named
+    #    reads-* that declare nothing are still noted, because those are the pre-archive
+    #    artifacts and their silence should stay visible.
     found = {}
-    for p in glob.glob(os.path.join("measurements", "*", "reads-*.json")):
+    for p in glob.glob(os.path.join("measurements", "*", "*.json")):
         name = os.path.basename(p)
         if os.path.normcase(name).endswith(".index.json"):
             continue                      # the archive itself, not a record of it
@@ -474,11 +481,15 @@ def check_reads() -> None:
     for rec_path in records:
         try:
             rec = json.load(open(rec_path, encoding="utf-8"))
-        except (OSError, ValueError) as exc:
-            fail("J", f"{rec_path}: unreadable as JSON ({exc})")
+        except (OSError, ValueError):
+            continue              # not every json in these directories is a read record
+        if not isinstance(rec, dict):
             continue
         if not any(k in rec for k in declared):
-            note(f"J  {rec_path} declares no read archive (pre-archive artifact)")
+            # Only the files that were meant to be read records are worth a note; every
+            # other artifact in these directories would otherwise produce one.
+            if os.path.basename(rec_path).startswith("reads-"):
+                note(f"J  {rec_path} declares no read archive (pre-archive artifact)")
             continue
         rc = verify_reads.check(rec_path, quiet=True)
         if rc == verify_reads.PASS:
