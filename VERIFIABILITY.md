@@ -18,8 +18,8 @@ second kind, the structural reason.
 | venue | chain | issuer | readable from public state | as of | source |
 |---|---|---|---|---|---|
 | Coinbase-issued equity wrappers on Base | `base-8453` | Coinbase | **yes** | 2026-10-08 | measured |
-| Pendle PT market for ORBIO on Robinhood Chain | `robinhood-4663` | Pendle (market) / Robinhood Chain (venue) | **yes** | 2026-10-10 | measured |
-| Robinhood Chain pools | `robinhood-4663` | Robinhood | **yes** | 2026-10-08 | measured |
+| Pendle PT market for ORBIO on Robinhood Chain | `robinhood-4663` | Pendle (market) / Robinhood Chain (venue) | **yes** | 2026-10-11 | measured |
+| Robinhood Chain pools | `robinhood-4663` | Robinhood | **yes** | 2026-10-11 | measured |
 | Backed / xStocks | `multiple` | Backed | **unknown** | 2026-10-08 | measured |
 | Securitize Stocks | `solana` | Securitize | **no** | 2026-10-08 | announcement |
 
@@ -31,13 +31,13 @@ Published measurements: `measurements/base-depth`, `measurements/base-depth-rech
 
 ### Pendle PT market for ORBIO on Robinhood Chain — yes
 
-the market's whole state is one readState call and the pricing curve is closed form, so a quote is arithmetic rather than a walk; reads pin by block hash with requireCanonical, which this endpoint honours - a forged hash returns 'header not found'. The constraint is retention, not permission: state survives only minutes on the public endpoint, so a pre-expiry capture cannot be made after the fact and is archived at the time instead.
+the market's whole state is one readState call and the pricing curve is closed form, so a quote is arithmetic rather than a walk; reads pin by block hash with requireCanonical, which this endpoint honours - a forged hash returns 'header not found'. The constraint is retention, not permission: the public endpoint serves state about 6,000 blocks back and has already pruned it by 8,000 -- roughly 10 to 14 minutes at the 0.103 s/block this chain was measured at, re-measurable by code/measure_retention.py and recorded in measurements/rh-retention/retention-2026-10-11.json. Events are a different retention class on the same endpoint and are served at least 50,000,000 blocks back, measured by rows actually returned, so a pre-expiry capture cannot be made after the fact and is archived at the time instead.
 
 Published measurements: `measurements/orbio-pendle`
 
 ### Robinhood Chain pools — yes
 
-pool state is readable by anyone from the public endpoint; the constraint here is retention rather than permission - the public endpoint keeps only minutes of state, so historical rounds need an archive and that is disclosed with the series.
+pool state is readable by anyone from the public endpoint; the constraint here is retention rather than permission - the public endpoint serves state about 6,000 blocks back and has already pruned it by 8,000 -- roughly 10 to 14 minutes at the 0.103 s/block this chain was measured at, re-measurable by code/measure_retention.py and recorded in measurements/rh-retention/retention-2026-10-11.json. Events are a different retention class on the same endpoint and are served at least 50,000,000 blocks back, measured by rows actually returned, so historical rounds need an archive and that is disclosed with the series.
 
 Published measurements: `data`, `measurements/oneside-depth`
 

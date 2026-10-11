@@ -306,7 +306,13 @@ def check_errata() -> None:
             hw = COUNT_WORDS.get(total)
             if not hw:
                 not_exercised("L", f"{page}: no word form known for {total}, heading unchecked")
-            elif not any(w in head.group(1).lower() for w in hw):
+            # 🔴 Word boundaries here too. The paragraph checks below already do this; the
+            #    heading was left on plain substring matching, where a heading reading
+            #    "nineteen" satisfies a check for nine, "eighteen" one for eight, and
+            #    "seventeen" one for seven -- so a stale heading could be vouched for by the
+            #    very digits that made it stale.
+            elif not any((re.search(rf"\b{w}\b", head.group(1).lower()) if w.isascii()
+                          else w in head.group(1).lower()) for w in hw):
                 fail("L", f"{page}: {total} entries are listed and the heading reads "
                           f"{head.group(1)!r}, which states none of {hw}")
             else:

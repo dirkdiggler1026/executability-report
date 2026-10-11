@@ -12,8 +12,8 @@
       "chain": "robinhood-4663",
       "issuer": "Robinhood",
       "depth_readable_from_public_state": "yes",
-      "reason": "pool state is readable by anyone from the public endpoint; the constraint here is retention rather than permission - the public endpoint keeps only minutes of state, so historical rounds need an archive and that is disclosed with the series",
-      "as_of": "2026-10-08",
+      "reason": "pool state is readable by anyone from the public endpoint; the constraint here is retention rather than permission - the public endpoint serves state about 6,000 blocks back and has already pruned it by 8,000 -- roughly 10 to 14 minutes at the 0.103 s/block this chain was measured at, re-measurable by code/measure_retention.py and recorded in measurements/rh-retention/retention-2026-10-11.json. Events are a different retention class on the same endpoint and are served at least 50,000,000 blocks back, measured by rows actually returned, so historical rounds need an archive and that is disclosed with the series",
+      "as_of": "2026-10-11",
       "source": "measured",
       "measurements": [
         "data",
@@ -62,8 +62,8 @@
       "chain": "robinhood-4663",
       "issuer": "Pendle (market) / Robinhood Chain (venue)",
       "depth_readable_from_public_state": "yes",
-      "reason": "the market's whole state is one readState call and the pricing curve is closed form, so a quote is arithmetic rather than a walk; reads pin by block hash with requireCanonical, which this endpoint honours - a forged hash returns 'header not found'. The constraint is retention, not permission: state survives only minutes on the public endpoint, so a pre-expiry capture cannot be made after the fact and is archived at the time instead",
-      "as_of": "2026-10-10",
+      "reason": "the market's whole state is one readState call and the pricing curve is closed form, so a quote is arithmetic rather than a walk; reads pin by block hash with requireCanonical, which this endpoint honours - a forged hash returns 'header not found'. The constraint is retention, not permission: the public endpoint serves state about 6,000 blocks back and has already pruned it by 8,000 -- roughly 10 to 14 minutes at the 0.103 s/block this chain was measured at, re-measurable by code/measure_retention.py and recorded in measurements/rh-retention/retention-2026-10-11.json. Events are a different retention class on the same endpoint and are served at least 50,000,000 blocks back, measured by rows actually returned, so a pre-expiry capture cannot be made after the fact and is archived at the time instead",
+      "as_of": "2026-10-11",
       "source": "measured",
       "measurements": [
         "measurements/orbio-pendle"
