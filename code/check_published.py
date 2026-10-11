@@ -138,6 +138,36 @@ The checks, and the failure each exists for:
                                 means the archive counts itself correctly; it is not a
                                 statement about its contents. Same boundary as H, and stated
                                 for the same reason.
+  M  a correction's figures    Four times now, a correction in that archive has carried the
+     come from the artifact    next error: it is written in the same sitting as the discovery
+     it cites                   and inherits the same optimism. Entry 17 said events are
+                                served 20,000,000 blocks back because the rung below it timed
+                                out, and the timeout was a cost limit. The fix is to route a
+                                correction through the same path as a measurement: an entry
+                                declares the artifact it rests on and the fields it quotes,
+                                and each figure is tagged where it is claimed, so M compares
+                                the tagged value with the artifact's. Tagging rather than
+                                scanning the prose is deliberate: entry 18 states 50,000,000
+                                both as the depth that used to time out and as the depth now
+                                proven, and a presence test over the text passed a corrupted
+                                correction because the other occurrence was still there --
+                                check L had already been bitten by the same shape. A figure
+                                that drifts from its artifact, or a field renamed out from
+                                under the entry, fails here rather than standing in a
+                                published correction.
+                                What M establishes is narrower than it looks and the gap is
+                                worth naming: every TAGGED figure equals the artifact's. An
+                                untagged number in the same entry is not checked at all --
+                                entry 18 also states the depth at which the earlier query
+                                timed out, and that number lives in a ladder row rather than
+                                a top-level field, so it carries no tag and M is silent on it.
+                                So M is only as good as the tagging, and the discipline it
+                                asks for is to tag every figure that carries a claim. It also
+                                says nothing about whether the prose around a figure describes
+                                it correctly, and nothing about whether the artifact itself is
+                                right -- the second is what the probe's own drills are for. An
+                                entry that declares nothing is skipped, not failed: the
+                                entries written before this attribute existed are that shape.
 """
 from __future__ import annotations
 
@@ -683,6 +713,95 @@ def check_generated_dir(decl_path: str) -> None:
                 note(f"H  {d}/{name} == regenerated ({len(b)} bytes)")
 
 
+ENTRY_DIV_RE = re.compile(r'<div class="fail"([^>]*)>(.*?)\n  </div>', re.S)
+SRC_RE = re.compile(r'data-derived-from="([^"]*)"')
+FIELD_SPAN_RE = re.compile(r'<span data-field="([^"]+)">([^<]*)</span>')
+
+
+def _as_int(text: str):
+    """The span's content as an integer, or None if it is not a bare number.
+
+    Both 50,000,000 and 50000000 are accepted; anything else is refused rather than
+    guessed at, because a span that holds prose is a span whose value cannot be checked.
+    """
+    t = text.strip().replace(",", "").replace("\u00a0", "").replace(" ", "")
+    return int(t) if t.isdigit() else None
+
+
+def check_errata_figures() -> None:
+    """Check M. See the module docstring."""
+    pages = [p for p in ("index.html", "index.zh.html") if os.path.exists(p)]
+    if not pages:
+        not_exercised("M", "neither report page is present, so no correction was checked")
+        return
+    declared = 0
+    for page in pages:
+        body = open(page, encoding="utf-8", errors="replace").read()
+        for attrs, text in ENTRY_DIV_RE.findall(body):
+            src = (SRC_RE.search(attrs).group(1) if SRC_RE.search(attrs) else None)
+            spans = FIELD_SPAN_RE.findall(text)
+            num = re.search(r'<div class="n">(\d+)</div>', text)
+            which = f"{page} entry {num.group(1) if num else '?'}"
+            if not src and not spans:
+                continue                      # an entry that rests on no artifact
+            declared += 1
+            # 🔴 Each figure is marked where it is claimed, not looked for in the text.
+            #    A presence test over the entry's prose cannot catch a wrong figure when the
+            #    number legitimately appears twice -- entry 18 states 50,000,000 both as the
+            #    depth that used to time out and as the depth now proven, so changing one of
+            #    them left the other and the check passed a corrupted correction. Same
+            #    failure as check L's "the paragraph says ten twice". The number that carries
+            #    the claim is the one next to the claim, so it is tagged there.
+            if not src:
+                fail("M", f"{which}: tags {len(spans)} figure(s) with a field name and names "
+                          f"no artifact, so there is nothing to check them against")
+                continue
+            if not spans:
+                fail("M", f"{which}: cites {src} and tags no figure as coming from it -- an "
+                          f"entry that rests on a measurement has to say which numbers are "
+                          f"the measurement's")
+                continue
+            if not _safe_rel(src) or not os.path.exists(src):
+                fail("M", f"{which}: cites {src} and that file is not in the tree, so the "
+                          f"figures in this correction rest on nothing")
+                continue
+            try:
+                art = json.load(open(src, encoding="utf-8"))
+            except (OSError, ValueError) as exc:
+                fail("M", f"{which}: cites {src} and it will not parse ({exc})")
+                continue
+            bad = False
+            for field, shown in spans:
+                got = _as_int(shown)
+                if field not in art:
+                    fail("M", f"{which}: tags {shown.strip()!r} as {src}:{field}, and the "
+                              f"artifact has no such field -- either this correction quotes a "
+                              f"figure the artifact never carried, or the field was renamed "
+                              f"and the entry still names the old one")
+                    bad = True
+                elif not isinstance(art[field], int):
+                    fail("M", f"{which}: {src}:{field} is {art[field]!r}, not an integer, so "
+                              f"this check cannot hold the text to it")
+                    bad = True
+                elif got is None:
+                    fail("M", f"{which}: the figure tagged {field} reads {shown.strip()!r}, "
+                              f"which is not a bare number, so it cannot be compared")
+                    bad = True
+                elif got != art[field]:
+                    fail("M", f"{which}: states {got:,} as {src}:{field} and the artifact "
+                              f"says {art[field]:,} -- the correction and the measurement it "
+                              f"cites disagree")
+                    bad = True
+            if not bad:
+                note(f"M  {which}: {len(spans)} tagged figure(s) match {src} "
+                     f"({', '.join(f for f, _ in spans)})")
+    if not declared:
+        not_exercised("M", "no error-archive entry declares the artifact its figures come "
+                           "from, so nothing was checked. An entry resting on a measurement "
+                           'should carry data-derived-from and tag each figure with '
+                           '<span data-field="...">')
+
+
 def check_generated() -> None:
     decls = sorted(glob.glob(os.path.join("measurements", "*", "GENERATED.json")))
     if not decls:
@@ -835,6 +954,7 @@ def main() -> int:
     check_reads()
     check_coverage()
     check_errata()
+    check_errata_figures()
 
     if not quiet:
         for n in notes:

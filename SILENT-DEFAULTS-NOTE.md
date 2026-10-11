@@ -214,6 +214,86 @@ Rows that depend on either are sealed rather than published. The distinction mat
 "we validated the legs" is often offered as if it validated the product of the legs, and it
 does not.
 
+
+## 8. A later measurement may not be coarser than the one it supersedes
+
+Where a measurement lands may move for real reasons. How tightly it is pinned is a property of
+the instrument, and that may only improve.
+
+This project brackets how long a public endpoint keeps state. In September the bracket was
+3,100 to 5,900 blocks, from a ladder with rungs in that range. In October a rebuilt ladder
+asked at 5,000 and then at 20,000, and produced "still served at 5,000, already pruned by
+20,000" — a true statement, a wider interval, and dated later. Published as a re-measurement
+it would have retired the finer number and replaced it with a vaguer one, while reading as a
+correction. Nothing in it was wrong. It was just coarser, and later.
+
+The rule is mechanical, so write it as code rather than as an intention. The probe declares
+the measurement it would supersede, with its source and its bounds, compares bracket widths,
+and **exits non-zero without writing an artifact** when its own ladder is wider. The fix it
+asks for is the right one: add rungs between the two that bracket, and run again.
+
+Widths are what get compared, not positions. Two brackets that do not overlap is a finding
+about the thing being measured; a wider bracket is a finding about the ladder.
+
+## 9. A check that is pointed at the wrong object passes whatever you ask it
+
+Five instances from this project, all the same shape. In each, a criterion was real, ran
+green, and was looking at something adjacent to what it claimed to check.
+
+- **A filename treated as a declaration.** Files were held to a rule by matching their names,
+  so a record written under a different name was not held to anything. Fixed by having
+  directories declare their files in a manifest: a naming convention drifts, a declaration
+  does not.
+- **A key's existence treated as a value's presence.** A publishing criterion required four
+  fields to be *in* a dict, and the code that built the dict filled every one of them with
+  `.get()`. The keys were therefore always present, so the criterion could only fire when the
+  artifact was missing entirely — a case the check above it already caught. Vacuous, and green.
+- **A substring of an opaque identifier.** A rung's verdict was decided by testing whether the
+  node's message contained `429`. One pruned block's state root ends in those three digits, so
+  a genuinely pruned rung was filed as our own rate limit and left the retention bracket
+  without a word.
+- **A substring of a longer number.** A check that a correction quotes its artifact's row cap
+  of `10,000` was satisfied by the span cap of `10,000,000` sitting in the same sentence.
+- **A word that legitimately appears twice.** An archive's count paragraph says "ten" twice,
+  once governing a list and once in a following sentence. A presence test for the right count
+  word therefore could not see a wrong count; and a page-wide version let a heading vouch for
+  a paragraph and a stale heading be vouched for by a correct one.
+
+The unifying rule: **a check has to be pointed at the thing that carries the claim, and the
+only reliable way to guarantee that is a declaration at the point of claim.** Tag the figure
+where it is stated. Bound the match so no digit or separator may touch it. Scope to the section
+before searching it. Compare values, not the presence of keys. Match a code as a whole token,
+never as a substring of a message that carries an identifier.
+
+And the tell is always the same: a criterion that has never failed has not been shown to be
+able to. Every one of these was found by deliberately breaking the thing it was supposed to
+catch, which is why a drill has to have arms that differ and each arm has to be named by a
+different message.
+
+## 10. A correction has to come down the same path as a measurement
+
+Four times in this project a published correction has carried the next error. The mechanism is
+not carelessness, it is timing: a correction is written in the same sitting as the discovery,
+by the same person, in the same mood of having just understood something — and it inherits the
+optimism that produced the original.
+
+The clearest case: a correction established that events and state are retained differently,
+which was right, and then stated the event depth as the deepest rung of a ladder whose next
+rung had timed out. The timeout was recorded honestly as a timeout. But the figure went where a
+boundary goes, and a boundary was not what had been measured. Narrowing the query's span and
+changing nothing else moved that depth by a factor of two and a half.
+
+So route the correction through the instrument, not around it. In this repository every figure
+in an error-archive entry that rests on a measurement is tagged in place with the artifact and
+the field it comes from, and a criterion compares the two on every run. A figure that drifts
+from its artifact, or a field renamed out from under an entry, fails there rather than standing
+in a published correction.
+
+That criterion is only as good as the tagging, and the gap is worth stating: an untagged number
+in the same entry is not checked at all. Which makes the discipline the point rather than the
+tool — **tag every figure that carries a claim**, and a correction can no longer be written in
+prose that nothing re-derives.
+
 ---
 
 ## Why this is published

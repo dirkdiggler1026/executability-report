@@ -1,36 +1,50 @@
 {
   "chain": "robinhood-4663",
   "endpoint": "https://rpc.mainnet.chain.robinhood.com",
-  "head_at_measurement": 85470411,
-  "head_after_measurement": 85470800,
-  "head_drift_blocks_during_run": 389,
+  "head_at_measurement": 85483931,
+  "head_after_measurement": 85484395,
+  "head_drift_blocks_during_run": 464,
   "head_drift_note": "every rung's block number is head_at_measurement minus its label, so a rung probed late in the run is deeper than its label by up to this drift. At the state bracket the rungs are 2,000 blocks apart, so a drift of this size is a real part of the bracket's width and is not corrected for here.",
   "measured_utc": "2026-10-11",
+  "measured_at_utc": "2026-10-11T02:22:25Z",
+  "file_naming_note": "this file is named by date only, so it is the LAST run of that date; earlier runs of the same date were overwritten and are not retained. measured_at_utc says which run this is. Pass --tag to keep a run under its own name instead.",
+  "state_bracket_resolution": {
+    "prior": {
+      "source": "PREREG-oneside-depth-2026-09-25-addendum-4.md",
+      "measured": "2026-09-11 to 2026-09-15",
+      "served_through_blocks_back": 3100,
+      "pruned_by_blocks_back": 5900
+    },
+    "prior_bracket_width_blocks": 2800,
+    "this_bracket_width_blocks": 2000,
+    "at_least_as_fine_as_prior": true,
+    "rule": "a later measurement may only supersede an earlier one if its bracket is at least as tight. Where the bracket sits may move for real reasons; how tightly it is pinned is a property of the ladder and may only improve. measure_retention.py exits 1 rather than write an artifact that violates this, because a wider interval produced later reads as a correction while being merely a coarser ladder."
+  },
   "method": "one eth_getBalance of the zero address at (head - N) for each N in the state ladder; one eth_getLogs over a small span at (head - N) for each N in the log ladder, escalated to a narrower span and a longer timeout if it does not answer. A timeout is recorded as a timeout, a span refusal as a span refusal, and neither as an absence. The log queries carry no address filter, so their cost grows with how busy the chain was",
   "block_time": {
     "spans": [
       {
         "span_blocks": 1000,
-        "elapsed_seconds": 104,
-        "seconds_per_block": 0.104
+        "elapsed_seconds": 101,
+        "seconds_per_block": 0.101
       },
       {
         "span_blocks": 100000,
-        "elapsed_seconds": 10406,
-        "seconds_per_block": 0.10406
+        "elapsed_seconds": 10361,
+        "seconds_per_block": 0.10361
       },
       {
         "span_blocks": 1000000,
-        "elapsed_seconds": 102972,
-        "seconds_per_block": 0.102972
+        "elapsed_seconds": 102947,
+        "seconds_per_block": 0.102947
       }
     ],
-    "seconds_per_block": 0.10367733333333333,
+    "seconds_per_block": 0.10251900000000001,
     "spans_agree_within_5pct": true,
     "note": "the mean of the spans above, which is only usable as a unit because they agree; if spans_agree_within_5pct is false, no single block time describes this chain over this window and a conversion to hours should not be made from it"
   },
   "logs_query_span_cap_blocks": 10000000,
-  "logs_query_span_cap_evidence": "query spans 85470412 blocks (0 to 85470411), but only 10000000 are allowed for this request; narrow the block range",
+  "logs_query_span_cap_evidence": "query spans 85483931 blocks (0 to 85483930), but only 10000000 are allowed for this request; narrow the block range",
   "logs_query_row_cap": 10000,
   "logs_query_row_cap_evidence": "logs matched by query exceeds limit of 10000",
   "query_limits_note": "two separate limits, measured separately because the first version of this probe hit whichever came first and reported one number: a cap on how many blocks one query may span, and a cap on how many rows one query may match. Neither is a statement about retention.",
@@ -39,145 +53,145 @@
   "state_ladder": [
     {
       "blocks_back": 10,
-      "block": 85470401,
+      "block": 85483921,
       "verdict": "served",
-      "rpc_tries": 2,
+      "rpc_tries": 3,
       "detail": ""
     },
     {
       "blocks_back": 50,
-      "block": 85470361,
+      "block": 85483881,
       "verdict": "served",
       "rpc_tries": 1,
       "detail": ""
     },
     {
       "blocks_back": 100,
-      "block": 85470311,
+      "block": 85483831,
       "verdict": "served",
       "rpc_tries": 1,
       "detail": ""
     },
     {
       "blocks_back": 500,
-      "block": 85469911,
+      "block": 85483431,
       "verdict": "served",
       "rpc_tries": 1,
       "detail": ""
     },
     {
       "blocks_back": 1000,
-      "block": 85469411,
+      "block": 85482931,
       "verdict": "served",
       "rpc_tries": 1,
       "detail": ""
     },
     {
       "blocks_back": 2000,
-      "block": 85468411,
+      "block": 85481931,
       "verdict": "served",
       "rpc_tries": 1,
       "detail": ""
     },
     {
       "blocks_back": 3000,
-      "block": 85467411,
+      "block": 85480931,
       "verdict": "served",
       "rpc_tries": 1,
       "detail": ""
     },
     {
       "blocks_back": 4000,
-      "block": 85466411,
+      "block": 85479931,
       "verdict": "served",
       "rpc_tries": 1,
       "detail": ""
     },
     {
       "blocks_back": 5000,
-      "block": 85465411,
+      "block": 85478931,
       "verdict": "served",
       "rpc_tries": 1,
       "detail": ""
     },
     {
       "blocks_back": 6000,
-      "block": 85464411,
+      "block": 85477931,
       "verdict": "served",
       "rpc_tries": 1,
       "detail": ""
     },
     {
       "blocks_back": 8000,
-      "block": 85462411,
+      "block": 85475931,
       "verdict": "pruned",
       "rpc_tries": 1,
-      "detail": "historical state 78eec71a791a89d20a630a7e7ffe1c8f8e7318ac675172f628024ace34b3013f is not available"
+      "detail": "historical state 80125a041cca3d4fb1f9b5e83da682fc64c5e9e13218363bd6acd6ab1224705f is not available"
     },
     {
       "blocks_back": 10000,
-      "block": 85460411,
+      "block": 85473931,
       "verdict": "pruned",
       "rpc_tries": 1,
-      "detail": "historical state 989f7936a6b83e64d086c672d524a862ce5e2101e367339787ead5c1bcf87cad is not available"
+      "detail": "historical state 2ff49e09f5ed9e50eb7bcf753bde74aec94a27691e367e5b8434416ad5c56357 is not available"
     },
     {
       "blocks_back": 15000,
-      "block": 85455411,
+      "block": 85468931,
       "verdict": "pruned",
       "rpc_tries": 1,
-      "detail": "historical state 59d993456900be74680b2c8114f5f9ff101dbcf6f934bf5b99f0b8e84970f61c is not available"
+      "detail": "historical state 3dddc3882022a7362ffd2dd02f28c8f9314717d2bcc2ea72a31cc7b943751457 is not available"
     },
     {
       "blocks_back": 20000,
-      "block": 85450411,
+      "block": 85463931,
       "verdict": "pruned",
       "rpc_tries": 1,
-      "detail": "historical state 2b44f234f04de854a613804003a24bd4f33b0a7971656adf1de97f01fc203821 is not available"
+      "detail": "historical state 5e16c09ae02bfb08f4e8c2568976c8e0d9e132f5e11bf44a4264bb49eafd6cee is not available"
     },
     {
       "blocks_back": 50000,
-      "block": 85420411,
+      "block": 85433931,
       "verdict": "pruned",
       "rpc_tries": 1,
-      "detail": "historical state b14bef11e15918545cda68d6b5f856b595119a612abad6c95b583d53804d775a is not available"
+      "detail": "historical state 7368ff21e74f008f170350f9b9384dc3cef797f90caf79bf51a012a832fe7a5b is not available"
     },
     {
       "blocks_back": 100000,
-      "block": 85370411,
+      "block": 85383931,
       "verdict": "pruned",
       "rpc_tries": 1,
-      "detail": "historical state 646cde292d29300a678c1def99799a68ff9812ba4280453fbe090f20c9d9ed64 is not available"
+      "detail": "historical state fe7d10a1e6865936b5413580a630a601bd228f77be18e86312cd8e12755cdd3f is not available"
     },
     {
       "blocks_back": 200000,
-      "block": 85270411,
+      "block": 85283931,
       "verdict": "pruned",
       "rpc_tries": 1,
-      "detail": "historical state 17b99e939c3272d55a0cd3108acd97b75314a04235b1c761c2bc7a562aa02e29 is not available"
+      "detail": "historical state 201b76b510143d7a958fef0eafcc49498a19f5a094c33ae3a34c43b40a2d0b98 is not available"
     },
     {
       "blocks_back": 1000000,
-      "block": 84470411,
+      "block": 84483931,
       "verdict": "pruned",
       "rpc_tries": 1,
-      "detail": "historical state ec8b915e31d0076adbf79fb4785d7b61df73184b5c1309bc7b7ba50251046af6 is not available"
+      "detail": "historical state 8b3ff88dcdc127c216f56975e6a85ab7b79c684f1542a1f7eb7fba20f6444e42 is not available"
     }
   ],
   "log_ladder": [
     {
       "blocks_back": 200000,
-      "block": 85270411,
+      "block": 85283931,
       "verdict": "served",
-      "count": 837,
+      "count": 768,
       "detail": "",
       "attempts": [
         {
           "span_blocks": 50,
           "timeout_s": 30,
           "verdict": "served",
-          "count": 837,
-          "elapsed_s": 0.47,
+          "count": 768,
+          "elapsed_s": 0.31,
           "rpc_tries": 1,
           "detail": ""
         }
@@ -186,17 +200,17 @@
     },
     {
       "blocks_back": 1000000,
-      "block": 84470411,
+      "block": 84483931,
       "verdict": "served",
-      "count": 915,
+      "count": 951,
       "detail": "",
       "attempts": [
         {
           "span_blocks": 50,
           "timeout_s": 30,
           "verdict": "served",
-          "count": 915,
-          "elapsed_s": 0.5,
+          "count": 951,
+          "elapsed_s": 0.22,
           "rpc_tries": 1,
           "detail": ""
         }
@@ -205,17 +219,17 @@
     },
     {
       "blocks_back": 5000000,
-      "block": 80470411,
+      "block": 80483931,
       "verdict": "served",
-      "count": 1405,
+      "count": 625,
       "detail": "",
       "attempts": [
         {
           "span_blocks": 50,
           "timeout_s": 30,
           "verdict": "served",
-          "count": 1405,
-          "elapsed_s": 0.77,
+          "count": 625,
+          "elapsed_s": 0.69,
           "rpc_tries": 1,
           "detail": ""
         }
@@ -224,17 +238,17 @@
     },
     {
       "blocks_back": 20000000,
-      "block": 65470411,
+      "block": 65483931,
       "verdict": "served",
-      "count": 2523,
+      "count": 5023,
       "detail": "",
       "attempts": [
         {
           "span_blocks": 50,
           "timeout_s": 30,
           "verdict": "served",
-          "count": 2523,
-          "elapsed_s": 1.38,
+          "count": 5023,
+          "elapsed_s": 1.2,
           "rpc_tries": 1,
           "detail": ""
         }
@@ -243,32 +257,41 @@
     },
     {
       "blocks_back": 50000000,
-      "block": 35470411,
+      "block": 35483931,
       "verdict": "served",
-      "count": 2144,
+      "count": 254,
       "detail": "",
       "attempts": [
         {
           "span_blocks": 50,
           "timeout_s": 30,
+          "verdict": "timeout",
+          "count": null,
+          "elapsed_s": 2.18,
+          "rpc_tries": 1,
+          "detail": "log query timed out"
+        },
+        {
+          "span_blocks": 5,
+          "timeout_s": 90,
           "verdict": "served",
-          "count": 2144,
-          "elapsed_s": 0.9,
+          "count": 254,
+          "elapsed_s": 0.61,
           "rpc_tries": 1,
           "detail": ""
         }
       ],
-      "escalated": false
+      "escalated": true
     }
   ],
   "state_served_at_deepest_blocks_back": 6000,
-  "state_served_at_deepest_hours": 0.173,
+  "state_served_at_deepest_hours": 0.171,
   "state_pruned_at_shallowest_blocks_back": 8000,
-  "state_pruned_at_shallowest_hours": 0.23,
+  "state_pruned_at_shallowest_hours": 0.228,
   "state_retention_prior_measurement": "PREREG-oneside-depth-2026-09-25-addendum-4.md records 3,100-5,900 blocks, measured 2026-09-11 to 09-15. This ladder is spaced to be comparable with that rather than coarser than it. State pruning is a node's housekeeping schedule, so the two brackets differing is not by itself an error in either; what would be an error is letting a coarser ladder read as a correction.",
   "state_retention_bracket_note": "state retention lies between state_served_at_deepest_blocks_back and state_pruned_at_shallowest_blocks_back. Either bound may be null: null for the served bound means even the shallowest rung was already pruned and this ladder brackets nothing from below, which is what the first version of this probe did without saying so.",
   "logs_proven_at_deepest_blocks_back": 50000000,
-  "logs_proven_at_deepest_hours": 1439.963,
+  "logs_proven_at_deepest_hours": 1423.875,
   "logs_answered_at_deepest_blocks_back": 50000000,
   "logs_refused": [],
   "logs_claim_note": "logs_proven_at_deepest_blocks_back is the deepest rung that came back with at least one row: the node had those logs at that depth, and it is the only positive retention claim in this file. logs_answered_at_deepest_blocks_back counts a query that returned without error even if it returned nothing, and is NOT evidence of retention -- a node that has dropped its log index can answer empty rather than erroring. A rung in logs_refused hit a timeout or a span limit after escalation; both are limits on the query and neither is a statement about retention. An earlier artifact reported the deepest answered rung under a name that read as a boundary, and the rung below it had merely timed out on an unfiltered query; an address-filtered query at a comparable depth answers immediately.",

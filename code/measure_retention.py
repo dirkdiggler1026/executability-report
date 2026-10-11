@@ -87,6 +87,18 @@ LOG_ATTEMPTS = ((50, 30), (5, 90), (1, 120))
 BACKOFF = (2, 5, 12)
 PACE = 1.2
 BLOCK_TIME_SPANS = [1_000, 100_000, 1_000_000]
+# 🔴 The measurement this one would supersede, and the rule that it must not be coarser.
+#    A later measurement is only allowed to replace an earlier one if its bracket is at
+#    least as tight: a wider interval produced later reads as a correction while being
+#    nothing but a coarser ladder, and it would retire a finer number. Declared here, with
+#    its source, and enforced below -- this exits 1 rather than writing an artifact that
+#    would quietly widen what is on record.
+PRIOR_STATE_BRACKET = {
+    "source": "PREREG-oneside-depth-2026-09-25-addendum-4.md",
+    "measured": "2026-09-11 to 2026-09-15",
+    "served_through_blocks_back": 3_100,
+    "pruned_by_blocks_back": 5_900,
+}
 UA = {"content-type": "application/json", "user-agent": "executability-report/1.0"}
 CAP_RE = re.compile(r"only\s+(\d+)\s+are allowed")
 ROW_CAP_RE = re.compile(r"exceeds limit of\s+(\d+)")
@@ -245,6 +257,8 @@ def main() -> int:
     ap.add_argument("--chain", default="robinhood-4663")
     ap.add_argument("--out-dir", default=".")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--tag", default="", help="keep this run under its own name instead of "
+                                              "overwriting the day's file")
     ap.add_argument("--selftest", action="store_true")
     a = ap.parse_args()
     if a.selftest:
@@ -331,6 +345,34 @@ def main() -> int:
 
     deepest_state = max(served_state) if served_state else None
     shallowest_pruned = min(pruned_state) if pruned_state else None
+
+    # The rule, applied. Width is the only thing compared: where the bracket sits may move
+    # for real reasons -- pruning is a node's housekeeping schedule -- but how tightly it is
+    # pinned is a property of the ladder, and that may only improve.
+    prior = PRIOR_STATE_BRACKET
+    prior_width = prior["pruned_by_blocks_back"] - prior["served_through_blocks_back"]
+    our_width = (shallowest_pruned - deepest_state
+                 if (deepest_state is not None and shallowest_pruned is not None) else None)
+    resolution = {
+        "prior": prior, "prior_bracket_width_blocks": prior_width,
+        "this_bracket_width_blocks": our_width,
+        "at_least_as_fine_as_prior": (our_width is not None and our_width <= prior_width),
+        "rule": ("a later measurement may only supersede an earlier one if its bracket is at "
+                 "least as tight. Where the bracket sits may move for real reasons; how "
+                 "tightly it is pinned is a property of the ladder and may only improve. "
+                 "measure_retention.py exits 1 rather than write an artifact that violates "
+                 "this, because a wider interval produced later reads as a correction while "
+                 "being merely a coarser ladder."),
+    }
+    if our_width is None or our_width > prior_width:
+        print(f"REFUSED: this ladder brackets state at "
+              f"{deepest_state}..{shallowest_pruned} blocks back (width "
+              f"{our_width}), and {prior['source']} already brackets it at "
+              f"{prior['served_through_blocks_back']}..{prior['pruned_by_blocks_back']} "
+              f"(width {prior_width}). A later measurement may not be coarser than the one "
+              f"it would supersede -- add rungs between the two that bracket, then re-run. "
+              f"Nothing was written.", file=sys.stderr)
+        return 1
     rec = {
         "chain": a.chain,
         "endpoint": a.url,
@@ -343,6 +385,18 @@ def main() -> int:
                             "2,000 blocks apart, so a drift of this size is a real part of "
                             "the bracket's width and is not corrected for here."),
         "measured_utc": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d"),
+        # 🔴 The filename carries only the date, so a second run on the same day overwrites
+        #    the first -- the same collision that overwrote an archive once before, when two
+        #    runs keyed on a block hash. Here the overwrite is the intended behaviour (one
+        #    current measurement per day), so the convention is written down instead of being
+        #    left to be discovered, and the full timestamp distinguishes runs in git history.
+        #    --tag keeps a run under its own name when a run is worth keeping beside another.
+        "measured_at_utc": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "file_naming_note": ("this file is named by date only, so it is the LAST run of that "
+                             "date; earlier runs of the same date were overwritten and are "
+                             "not retained. measured_at_utc says which run this is. Pass "
+                             "--tag to keep a run under its own name instead."),
+        "state_bracket_resolution": resolution,
         "method": ("one eth_getBalance of the zero address at (head - N) for each N in the "
                    "state ladder; one eth_getLogs over a small span at (head - N) for each N "
                    "in the log ladder, escalated to a narrower span and a longer timeout if "
@@ -414,7 +468,8 @@ def main() -> int:
         return 0
     out = os.path.abspath(a.out_dir)
     os.makedirs(out, exist_ok=True)
-    path = os.path.join(out, f"retention-{rec['measured_utc']}.json")
+    tag = f"-{a.tag}" if a.tag else ""
+    path = os.path.join(out, f"retention-{rec['measured_utc']}{tag}.json")
     with open(path, "w", encoding="utf-8", newline="\n") as fh:
         json.dump(rec, fh, indent=2, ensure_ascii=False)
         fh.write("\n")
