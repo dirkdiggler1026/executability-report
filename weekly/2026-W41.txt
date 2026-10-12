@@ -1,0 +1,11 @@
+Executable depth, week of 2026-10-05 to 2026-10-11 (UTC)
+
+AMC at $100,000 crossed a recovery band this week: 88.2006% to 93.108% of notional, at block 84,426,593, one of 15 crossings in this window. A band crossing changes what the cell is, not where it sits inside a range.
+
+This figure is an input to decisions that size a position against what it can recover on exit — it is not a recommendation, and no parameter advice is implied.
+
+Also this window: QQQ $1,000 ended a 179-round identical run at block 83,723,714; QQQ $100 ended a 179-round identical run at block 83,723,714; SPY $100 ended a 96-round identical run at block 86,101,322.
+Window: blocks 80,350,563 to 86,223,885, 323 rounds, 2026-10-05T00:07:43Z to 2026-10-11T23:37:56Z. Canon rhdepth-v2.
+Caliber: same-pool round trip, direct quoter calls; routes from a pool table frozen at block 53,983,886; recovery is not a fee.
+Verification: on the Robinhood Chain public endpoint, state is still served 6,000 blocks back and already pruned by 8,000, so every historical round here needs an archive kept at the time; events are served at least 50,000,000 blocks back -- measured by rows actually returned, not by a query that merely answered -- so realised execution over the same period is publicly recheckable (retention measured 2026-10-11; derived; source measurements/rh-retention/retention-2026-10-11.json).
+Feed: https://raw.githubusercontent.com/dirkdiggler1026/executability-report/main/weekly/latest.json
