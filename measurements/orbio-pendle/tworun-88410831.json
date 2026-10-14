@@ -1,0 +1,24 @@
+{
+  "_what": "Two captures of one pinned block, compared field for field.",
+  "_establishes": "the endpoint returned the same state for this pinned block on two separate calls, so the read is reproducible",
+  "_does_not_establish": "that the state is correct -- two identical reads of a wrong answer agree; anything about the exit curve, whose own four self-checks are separate and none of which establishes agreement with Pendle's deployed contract; and anything about execution -- this market has had no event since 2026-10-08T16:36:11Z, so no quote here has been checked against a trade anybody made",
+  "_why_not_two_runs_of_the_curve": "the curve is closed-form arithmetic over one state, so running it twice agrees by construction. The repeatable part is the read, not the sum.",
+  "block_number": 88410831,
+  "block_hash": "0x9e5fe65ab6530d6be355b623979a6ffd6732faff7bf4df31ba4bb9b0f3eb5b6d",
+  "block_timestamp": 1791985350,
+  "capture_a": "orbio-88410831-run1.json",
+  "capture_b": "orbio-88410831-run2.json",
+  "fields_compared": 22,
+  "disagreements": 0,
+  "compared_utc": "2026-10-14T13:42:37Z",
+  "field_groups": [
+    "readState_words_raw",
+    "readTokens_raw",
+    "pricing_inputs_raw",
+    "market",
+    "block_number",
+    "block_hash",
+    "block_timestamp",
+    "readState_arg"
+  ]
+}

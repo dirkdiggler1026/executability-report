@@ -42,11 +42,50 @@ So every row also carries `recovery_pct_at_reference_clock`: the same reserves r
 one declared time to expiry (`reference_seconds_to_expiry`, 30 days). The clock is pinned, so
 what is left to move is the book.
 
-The first three captures show why that column is the one to put in a series. Over 1 h 48 min
-in which this market emitted no events at all, measured recovery at 200,000 PT rose from
-**99.698638%** to **99.700612%** — while the 30-day reference column stayed **identical to all
-six decimals** across every capture. The measured column would have been read as a market
-getting deeper. Nothing happened to the book.
+Four captures over **3 days 23.5 hours** now show why that column is the one to put in a
+series. The market has emitted no event since 2026-10-08T16:36:11Z, so nothing happened to the
+book in that window. Measured recovery at 200,000 PT over those four captures:
+
+| capture block | UTC | s to expiry | measured | at the 30-day clock |
+|---|---|---|---|---|
+| 85,058,560 | 2026-10-10 14:12:33 | 985,647 | 99.698638% | 99.215273% |
+| 85,087,002 | 2026-10-10 15:01:07 | 982,733 | 99.699523% | 99.215273% |
+| 85,122,008 | 2026-10-10 16:00:51 | 979,149 | 99.700612% | 99.215273% |
+| 88,412,184 | 2026-10-14 13:44:43 | 641,717 | 99.803378% | 99.215273% |
+
+The measured column rose **0.1047 percentage points**. The reference column is **identical to
+all six decimals in all four**. A series built from the measured column would have reported a
+market getting steadily deeper across four days; the book did not move at all. That is the
+whole argument for the column, and it is now demonstrated rather than asserted.
+
+## The two-run gate, and why it is not a two-run gate on the curve
+
+The Base work gates a figure on two runs agreeing bit-for-bit. Copied here unchanged it would
+be the purest vacuous criterion in this repository: the exit curve is closed-form arithmetic
+over one state, a pure function of its input, so running it twice agrees **by construction** —
+green every time, saying nothing.
+
+So what is run twice is the **read**. `code/compare_captures.py` compares two captures pinned
+to the same block hash and requires every raw field to be identical. The ladder at block
+88,412,184 rests on such a pair — `tworun-88412184.json`, 22 fields compared, 0 disagreements —
+and `curve-88412184.json` records it, refusing a two-run record that names a different block,
+because a gate attached to the wrong block reads as a gate that passed.
+
+**What it establishes:** the endpoint returned the same state for that pinned block on two
+separate calls, so the read is reproducible.
+
+**What it does not:** that the state is correct — two identical reads of a wrong answer agree.
+Nothing about the curve, whose four self-checks are separate and none of which establishes
+agreement with Pendle's deployed contract. And nothing about execution.
+
+**The gate can fail, which is the part worth checking.** State survives roughly ten to
+fourteen minutes on this endpoint, so a second capture taken too late does not disagree — it
+comes back empty, and an empty capture that still wrote a record would read as agreement on
+nothing. Two things prevent that: `read_orbio_state.py` records `usable: false` with the reason
+inside the capture and exits non-zero when its pinned block yields no state words (drilled
+against a block 20,000 deep: `readState returned 0 words`), and `compare_captures.py` refuses a
+capture that declares itself unusable and counts two empty values as *not comparable* rather
+than as a match.
 
 ## Coverage limits, all of them
 

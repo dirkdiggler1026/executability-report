@@ -102,18 +102,34 @@ def main() -> int:
     ap.add_argument("--out-dir", default=".")
     ap.add_argument("--tag", default="", help="run label, e.g. run1; keeps two captures at "
                                               "the same block from overwriting each other")
+    ap.add_argument("--at-block", type=int, default=0,
+                    help="pin this block instead of the head. The point of it: a second "
+                         "capture of the SAME block is the only form 'two runs that agree' "
+                         "can take here -- the curve is arithmetic over one state, so "
+                         "running the arithmetic twice proves nothing, while reading the "
+                         "state twice proves the read is reproducible. State survives about "
+                         "ten minutes on this endpoint, so the second read has to follow "
+                         "immediately.")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
 
-    h = rpc("eth_blockNumber", [])
-    if "result" not in h:
-        print(f"could not read head: {json.dumps(h)[:140]}", file=sys.stderr)
-        return 3
-    head = int(h["result"], 16)
+    if a.at_block:
+        head = a.at_block
+    else:
+        h = rpc("eth_blockNumber", [])
+        if "result" not in h:
+            print(f"could not read head: {json.dumps(h)[:140]}", file=sys.stderr)
+            return 3
+        head = int(h["result"], 16)
     blk = rpc("eth_getBlockByNumber", [hex(head), False])
     if "result" not in blk or not blk["result"]:
         print(f"could not read block {head}: {json.dumps(blk)[:140]}", file=sys.stderr)
         return 3
+    # 🔴 A pinned block whose state is already gone must fail loudly here rather than
+    #    produce a capture of empty reads. The reads below carry requireCanonical, so a
+    #    pruned state answers with an error and `failures` records it -- but a capture that
+    #    is all failures still writes a record, and a record is what the analysis trusts.
+    #    So the second run's own exit code has to say whether it got anything.
     bh = blk["result"]["hash"]
     btime = int(blk["result"]["timestamp"], 16)
     pin = {"blockHash": bh, "requireCanonical": True}
@@ -204,8 +220,26 @@ def main() -> int:
               f"{len(plan)} calls", file=sys.stderr)
         return 1
 
+    # 🔴 Usability is decided before the record is written, and recorded inside it.
+    #    Letting the exit code carry it alone was not enough: the files still land on disk
+    #    looking exactly like a good capture, and a reader scanning the directory has no way
+    #    to tell. The analysis would refuse it (the curve exits 3 without a PY index), but
+    #    "refused downstream" is not the same as "says so about itself".
+    unusable = []
+    if len(state_raw) != 9:
+        unusable.append(f"readState returned {len(state_raw)} words, not nine")
+    if not captured["pricing_inputs_raw"]["yt_pyIndexCurrent"]:
+        unusable.append("no PY index, so the market's nine words cannot price a trade")
     rec = dict(captured)
     rec.update({
+        "usable": not unusable,
+        "why_unusable": unusable or None,
+        "usable_note": "a capture is usable when readState returned its nine words and the "
+                       "PY index came back. The usual way this is false: --at-block pinned a "
+                       "block whose state is already pruned, which happens after roughly ten "
+                       "minutes on this endpoint. Such a capture is kept, because it is "
+                       "evidence that the window had closed, and it is labelled here so it "
+                       "cannot be mistaken for a reading.",
         "calls": len(raw), "entries": len(raw),
         "failure_count": len(failures), "failures": failures,
         "index_file": idx_name, "index_sha256": hashlib.sha256(idx_bytes).hexdigest(),
@@ -224,6 +258,15 @@ def main() -> int:
     print(f"\nwrote {recname}, {idx_name}, {rsp_name} in {out}")
     if failures:
         print(f"{len(failures)} read failure(s) recorded, not dropped", file=sys.stderr)
+    # 🔴 A record is what the analysis trusts, so a record built out of failed reads must
+    #    not exit 0. This fires when a pinned block's state is already pruned -- which is
+    #    the normal outcome of pinning a block more than about ten minutes old on this
+    #    endpoint, and exactly the mistake a second run is liable to make.
+    if unusable:
+        print(f"this capture is marked usable=false: {'; '.join(unusable)}. "
+              f"If --at-block was used, the state at that block is most likely already "
+              f"pruned -- it survives about ten minutes on this endpoint.", file=sys.stderr)
+        return 1
     return 0
 
 

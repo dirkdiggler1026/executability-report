@@ -375,6 +375,13 @@ def main() -> int:
     ap.add_argument("--capture")
     ap.add_argument("--out-dir", default="")
     ap.add_argument("--sizes", default=",".join(DEFAULT_SIZES))
+    ap.add_argument("--two-run", metavar="FILE",
+                    help="the tworun-<block>.json written by code/compare_captures.py for "
+                         "this capture's block. Supplying it makes the gate load-bearing: "
+                         "the ladder records that its state was read twice at the same "
+                         "pinned block and agreed field for field. Refused if it names a "
+                         "different block -- a gate attached to the wrong block is worse "
+                         "than none, because it reads as one that passed.")
     ap.add_argument("--reference-days", type=float, default=30.0,
                     help="the clock the reference column is pinned at; declared in the "
                          "artifact, because two artifacts are only comparable if it matches")
@@ -390,6 +397,26 @@ def main() -> int:
     if m is None:
         print(f"NOT EXERCISED  {why}", file=sys.stderr)
         return NOT_EXERCISED
+    two = None
+    if a.two_run:
+        try:
+            two = json.load(open(a.two_run, encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            print(f"NOT EXERCISED  {a.two_run}: unreadable ({exc})", file=sys.stderr)
+            return NOT_EXERCISED
+        if two.get("block_hash") != cap.get("block_hash"):
+            print(f"NOT EXERCISED  {a.two_run} is for block "
+                  f"{str(two.get('block_hash'))[:18]}… and this capture is block "
+                  f"{str(cap.get('block_hash'))[:18]}… -- a two-run record attached to the "
+                  f"wrong block would read as a gate that passed", file=sys.stderr)
+            return NOT_EXERCISED
+        if two.get("disagreements") != 0 or not two.get("fields_compared"):
+            print(f"NOT EXERCISED  {a.two_run} records "
+                  f"{two.get('disagreements')} disagreement(s) over "
+                  f"{two.get('fields_compared')} field(s) -- that is not an agreement",
+                  file=sys.stderr)
+            return NOT_EXERCISED
+
     sizes = [s.strip() for s in a.sizes.split(",") if s.strip()]
     ref_seconds = int(a.reference_days * 86400)
     res = compute(m, sizes, reference_seconds=ref_seconds)
@@ -463,6 +490,22 @@ def main() -> int:
             "reference_seconds_to_expiry": res["reference_seconds"],
             "reference_derived": {k: str(res["reference_comp"][k]) for k in
                                   ("rate_scalar", "rate_anchor", "fee_rate")},
+            "two_run_read": ({
+                "record": os.path.basename(a.two_run),
+                "fields_compared": two.get("fields_compared"),
+                "disagreements": two.get("disagreements"),
+                "establishes": "the endpoint returned this same state for this pinned block "
+                               "on two separate calls, so the read is reproducible",
+                "does_not_establish": "that the state is correct -- two identical reads of a "
+                                      "wrong answer agree. And nothing about the curve: the "
+                                      "curve is arithmetic over this state, so running it "
+                                      "twice agrees by construction and would be a vacuous "
+                                      "check.",
+            } if two else {
+                "record": None,
+                "note": "no two-run record was supplied, so this ladder rests on a single "
+                        "read of the state. Pass --two-run to attach one.",
+            }),
             "rows": rows, "self_checks": checks,
             "arithmetic_note": "60-digit decimal; the contract uses 1e18 fixed point with "
                                "Balancer LogExpMath, so figures can differ in the last "
