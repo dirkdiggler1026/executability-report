@@ -168,6 +168,26 @@ The checks, and the failure each exists for:
                                 right -- the second is what the probe's own drills are for. An
                                 entry that declares nothing is skipped, not failed: the
                                 entries written before this attribute existed are that shape.
+  N  the repository says who    Three things a reader needs before they can quote anything:
+     may quote what, and the    which licence covers the part they took, a citation that names
+     citation matches the tree  the artifact rather than the repository, and identifiers that
+                                will still resolve later. All three were prose, and prose has
+                                no failing state -- the README named code/, data/ and the two
+                                report pages and said nothing about measurements/, which is
+                                337 files and every artifact an outside reader would quote.
+                                So LICENSE-MAP.json declares area -> licence and is bound to
+                                the tree in both directions: a declared path that does not
+                                exist fails, and a top-level entry that no area claims fails
+                                unless it is listed as repository plumbing or as somebody
+                                else's content with a reason. CITATION.cff is held to the
+                                repository it describes, and STABLE-LINKS.json to the
+                                identifiers it promises not to move.
+                                What N establishes is coverage and agreement, which is all a
+                                check can do here. It cannot tell whether a licence is the
+                                right licence, whether a file said to be mine is mine, or
+                                whether the citation metadata is current -- only that nothing
+                                is silently uncovered and that the file agrees with the tree
+                                it sits in.
 """
 from __future__ import annotations
 
@@ -802,6 +822,195 @@ def check_errata_figures() -> None:
                            '<span data-field="...">')
 
 
+CFF = "CITATION.cff"
+LICENSE_MAP = "LICENSE-MAP.json"
+STABLE_LINKS = "STABLE-LINKS.json"
+
+
+def _cff_field(text: str, name: str):
+    """One scalar field, anchored at the start of a line so a nested key of the same
+    name cannot answer for it (authors carry their own `website:`)."""
+    m = re.search(rf"^{re.escape(name)}:\s*\"?([^\"\n]+)\"?\s*$", text, re.M)
+    return m.group(1).strip() if m else None
+
+
+def _cff_license_list(text: str) -> list:
+    m = re.search(r"^license:\s*\n((?:\s+-\s*\S+\s*\n)+)", text, re.M)
+    if m:
+        return [x.strip().lstrip("-").strip() for x in m.group(1).splitlines() if x.strip()]
+    one = _cff_field(text, "license")
+    return [one] if one else []
+
+
+def check_citation() -> None:
+    """Check N. See the module docstring."""
+    # ── N1 the licence map, bound to the tree in both directions ────────────────────
+    if not os.path.exists(LICENSE_MAP):
+        not_exercised("N", f"{LICENSE_MAP} is not in the tree, so nothing says which licence "
+                           f"covers which part and no check can be made")
+        lmap = None
+    else:
+        try:
+            lmap = json.load(open(LICENSE_MAP, encoding="utf-8"))
+        except ValueError as exc:
+            fail("N", f"{LICENSE_MAP} will not parse ({exc})")
+            lmap = None
+    licenses = []
+    if lmap:
+        import fnmatch
+        claimed, phantom = {}, []
+        for area in lmap.get("areas", []):
+            licenses.append(area.get("license"))
+            lf = area.get("license_file")
+            if lf and not os.path.exists(lf):
+                fail("N", f"{LICENSE_MAP}: area for {area.get('license')} names licence file "
+                          f"{lf} and it is not in the tree")
+            for pth in area.get("paths", []):
+                if not os.path.exists(pth):
+                    phantom.append(pth)
+                else:
+                    claimed[pth] = area.get("license")
+            for pat in area.get("paths_glob", []):
+                hits = [e for e in os.listdir(".") if fnmatch.fnmatch(e, pat)]
+                if not hits:
+                    phantom.append(pat)
+                for h in hits:
+                    claimed[h] = area.get("license")
+        for row in lmap.get("not_content", []):
+            pth = row.get("path")
+            if pth and os.path.exists(pth):
+                claimed[pth] = "not_content"
+            elif pth:
+                phantom.append(pth)
+        if phantom:
+            fail("N", f"{LICENSE_MAP} declares {sorted(set(phantom))} and nothing in the tree "
+                      f"matches -- a declaration that names something absent is a claim with "
+                      f"no object, and it also means the two-way binding below is weaker "
+                      f"than it looks")
+        # the other direction: nothing uncovered
+        present = sorted(e for e in os.listdir(".") if e != ".git")
+        uncovered = [e for e in present if e not in claimed]
+        if uncovered:
+            fail("N", f"top-level entries no area claims and nothing excuses: {uncovered} -- "
+                      f"each has to be claimed by an area in {LICENSE_MAP}, or listed as "
+                      f"repository plumbing, so that adding a file forces the licence "
+                      f"question to be answered")
+        else:
+            note(f"N  {LICENSE_MAP}: {len(present)} top-level entries, all claimed "
+                 f"({len(lmap.get('areas', []))} areas, "
+                 f"{len(lmap.get('not_content', []))} plumbing, "
+                 f"{len(lmap.get('not_mine', []))} not mine)")
+
+    # ── N2 the citation file, held to the repository it describes ───────────────────
+    if not os.path.exists(CFF):
+        not_exercised("N", f"{CFF} is not in the tree, so there is no citation metadata to "
+                           f"hold to the repository")
+    else:
+        text = open(CFF, encoding="utf-8").read()
+        repo = _cff_field(text, "repository-code")
+        want_repo = "https://github.com/dirkdiggler1026/executability-report"
+        if repo != want_repo:
+            fail("N", f"{CFF}: repository-code is {repo!r}, and this checkout's remote is "
+                      f"{want_repo!r} -- a citation file pointing at a different repository "
+                      f"sends a reader somewhere else")
+        site = _cff_field(text, "url")
+        if site and site.rstrip("/") != SITE.rstrip("/"):
+            fail("N", f"{CFF}: url is {site!r} and the published site is {SITE!r}")
+        got_lic = sorted(x for x in _cff_license_list(text) if x)
+        want_lic = sorted({x for x in licenses if x})
+        if lmap and got_lic != want_lic:
+            fail("N", f"{CFF}: license says {got_lic} and {LICENSE_MAP} declares {want_lic} "
+                      f"-- the two places that state the licence must not disagree")
+        ver, rel = _cff_field(text, "version"), _cff_field(text, "date-released")
+        try:
+            relday = dt.date.fromisoformat(rel) if rel else None
+        except ValueError:
+            relday = None
+        if not relday:
+            fail("N", f"{CFF}: date-released is {rel!r}, which is not an ISO date")
+        elif relday > dt.date.today():
+            fail("N", f"{CFF}: date-released {rel} is in the future")
+        elif ver != rel:
+            fail("N", f"{CFF}: version {ver!r} and date-released {rel!r} differ -- this "
+                      f"project versions by release date, so they are the same string")
+        else:
+            note(f"N  {CFF}: repository, site, licences and version agree with the tree "
+                 f"(released {rel})")
+
+    # ── N3 the identifiers promised not to move ─────────────────────────────────────
+    if not os.path.exists(STABLE_LINKS):
+        not_exercised("N", f"{STABLE_LINKS} is not in the tree, so no identifier is promised "
+                           f"and none was checked")
+        return
+    try:
+        links = json.load(open(STABLE_LINKS, encoding="utf-8")).get("links", [])
+    except ValueError as exc:
+        fail("N", f"{STABLE_LINKS} will not parse ({exc})")
+        return
+    if not links:
+        not_exercised("N", f"{STABLE_LINKS} promises no identifiers")
+        return
+    # ── N4 the prose must not drift from the declaration ────────────────────────────
+    # 🔴 The whole reason LICENSE-MAP.json exists is that the README's licence section
+    #    was correct and incomplete for weeks. Declaring the map fixes the tree binding
+    #    and leaves the prose free to drift again, which would reintroduce the same
+    #    failure one level up. So the section is held to the map: every licence the map
+    #    declares has to appear in it, and it may not name one the map does not.
+    if lmap and os.path.exists("README.md"):
+        body = open("README.md", encoding="utf-8", errors="replace").read()
+        h = body.find("\n## License")
+        nxt = body.find("\n## ", h + 5) if h >= 0 else -1
+        sect = body[h:nxt] if h >= 0 and nxt > h else (body[h:] if h >= 0 else "")
+        if not sect:
+            fail("N", "README.md has no '## License' section, so the licence is declared in "
+                      "LICENSE-MAP.json and stated nowhere a reader will look")
+        else:
+            want = {x for x in licenses if x}
+            spoken = {lic for lic in want if lic.replace("-", " ") in sect
+                      or lic in sect
+                      or ("Apache License 2.0" in sect and lic == "Apache-2.0")
+                      or ("Creative Commons Attribution 4.0" in sect and lic == "CC-BY-4.0")}
+            if spoken != want:
+                fail("N", f"README.md's licence section states {sorted(spoken)} and "
+                          f"{LICENSE_MAP} declares {sorted(want)} -- the prose and the "
+                          f"declaration must not disagree about which licences apply")
+            elif LICENSE_MAP not in sect:
+                fail("N", f"README.md's licence section does not point at {LICENSE_MAP} -- a "
+                          f"reader who finds the prose has to be told where the "
+                          f"authoritative version is")
+            else:
+                note(f"N  README.md's licence section agrees with {LICENSE_MAP} and points "
+                     f"at it")
+
+    good = 0
+    for ln in links:
+        key, url = ln.get("key"), ln.get("url", "")
+        pth, frag = ln.get("path"), ln.get("fragment")
+        page = ln.get("page")
+        target = page or pth
+        if not target:
+            fail("N", f"{STABLE_LINKS}:{key} names neither a path nor a page, so nothing in "
+                      f"the tree can be checked against it")
+            continue
+        if not _safe_rel(target) or not os.path.exists(target):
+            fail("N", f"{STABLE_LINKS}:{key} promises {url} and {target} is not in the tree")
+            continue
+        if frag:
+            body = open(target, encoding="utf-8", errors="replace").read()
+            if f'id="{frag}"' not in body and f"id='{frag}'" not in body:
+                fail("N", f"{STABLE_LINKS}:{key} promises {url} and {target} carries no "
+                          f'id="{frag}" -- the link resolves to the top of the page, so a '
+                          f"reader following a citation never reaches what it names")
+                continue
+        if url and frag and not url.endswith("#" + frag):
+            fail("N", f"{STABLE_LINKS}:{key} declares fragment {frag!r} and its url is {url} "
+                      f"-- the two disagree about where the link points")
+            continue
+        good += 1
+    if good == len(links):
+        note(f"N  {STABLE_LINKS}: {good} promised identifier(s) all resolve in the tree")
+
+
 def check_generated() -> None:
     decls = sorted(glob.glob(os.path.join("measurements", "*", "GENERATED.json")))
     if not decls:
@@ -955,6 +1164,7 @@ def main() -> int:
     check_coverage()
     check_errata()
     check_errata_figures()
+    check_citation()
 
     if not quiet:
         for n in notes:

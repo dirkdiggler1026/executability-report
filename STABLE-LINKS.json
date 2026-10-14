@@ -1,0 +1,32 @@
+{
+  "_what": "The four identifiers this project asks to be cited by. They are the four that outbound letters already use, which is the point: a link we send and a link we promise to keep must be the same link.",
+  "_rule": "Every target here must resolve inside this repository: a path must exist, and a fragment must land on an element that carries that id. Enforced by check N; the same test check I applies to the weekly feed's own URLs, for the same reason -- exists is not arrives.",
+  "_promise": "These four do not move. If one has to move, the old location keeps a pointer rather than disappearing, and the move is recorded in the error archive if anything published had already cited it.",
+  "links": [
+    {
+      "key": "errors",
+      "url": "https://dirkdiggler1026.github.io/executability-report/#errors",
+      "page": "index.html",
+      "fragment": "errors",
+      "what": "the instrument's own failure archive -- the entry point this project leads with"
+    },
+    {
+      "key": "verifier",
+      "url": "https://github.com/dirkdiggler1026/executability-report/blob/main/code/check_published.py",
+      "path": "code/check_published.py",
+      "what": "the criteria, their three exit codes, and what each one does not establish"
+    },
+    {
+      "key": "decision",
+      "url": "https://github.com/dirkdiggler1026/executability-report/blob/main/measurements/base-depth/DECISION-DEMO.md",
+      "path": "measurements/base-depth/DECISION-DEMO.md",
+      "what": "a number handed over under a deadline, with its limits and its own expiry attached"
+    },
+    {
+      "key": "feed",
+      "url": "https://dirkdiggler1026.github.io/executability-report/weekly/latest.json",
+      "path": "weekly/latest.json",
+      "what": "the machine-readable weekly issue; latest.json is the subscribed URL"
+    }
+  ]
+}

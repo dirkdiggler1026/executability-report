@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: >-
+  Cite the artifact you used and the block it was pinned at, not the repository
+  as a whole. A figure here is only meaningful with its pinned block, and most
+  artifacts carry their own expiry. The four identifiers worth citing are
+  declared in STABLE-LINKS.json; the licence split is declared in
+  LICENSE-MAP.json.
+title: >-
+  Executability report: reproducible exit-depth measurement, published with the
+  instrument's own failures
+abstract: >-
+  Independent measurement of what a position can actually be sold for on
+  permissionless venues, at a pinned block, from public contract state only.
+  Reads are pinned by block hash with requireCanonical and archived with
+  digests; generated documents byte-reproduce from their generators; claims are
+  compiled into criteria that run in CI with three exit codes, so that "we did
+  not look" is never reported as "we looked and it was fine", and each
+  criterion states what it does not establish. The instrument's own failures
+  are published as a numbered archive, each entry recording which side of
+  publication it landed on and what it corrupted.
+type: dataset
+authors:
+  - name: dirkdiggler1026
+    website: "https://dirkdiggler1026.github.io/executability-report/"
+repository-code: "https://github.com/dirkdiggler1026/executability-report"
+url: "https://dirkdiggler1026.github.io/executability-report/"
+license:
+  - Apache-2.0
+  - CC-BY-4.0
+keywords:
+  - executable depth
+  - liquidity
+  - tokenized equities
+  - collateral risk
+  - reproducibility
+  - measurement error
+version: "2026-10-14"
+date-released: "2026-10-14"

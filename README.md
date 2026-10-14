@@ -66,7 +66,23 @@ anyone — noticing it does not require trusting the operator.
 
 ## Citing this
 
-Copy the stable block; fill the volatile block at the moment you cite.
+`CITATION.cff` carries the machine-readable metadata. **Cite the artifact you used
+and the block it was pinned at, not the repository as a whole** — a figure here is
+only meaningful with its pinned block, and several artifacts carry their own
+expiry date.
+
+Four identifiers are promised not to move, declared in `STABLE-LINKS.json` and
+checked on every run by criterion N:
+
+| what | where |
+|---|---|
+| the instrument's own failure archive | [`/#errors`](https://dirkdiggler1026.github.io/executability-report/#errors) |
+| the criteria, their exit codes, and what each does not establish | [`code/check_published.py`](https://github.com/dirkdiggler1026/executability-report/blob/main/code/check_published.py) |
+| a number handed over under a deadline, with its limits | [`measurements/base-depth/DECISION-DEMO.md`](https://github.com/dirkdiggler1026/executability-report/blob/main/measurements/base-depth/DECISION-DEMO.md) |
+| the machine-readable weekly issue | [`weekly/latest.json`](https://dirkdiggler1026.github.io/executability-report/weekly/latest.json) |
+
+For the round-trip and one-side series specifically, copy the stable block below;
+fill the volatile block at the moment you cite.
 
 ```
 series   rhdepth-oneside-v1              (round trip: rhdepth-v2)
@@ -106,12 +122,30 @@ The data decides the conclusion. Coverage and scheduling are what you pay for.
 
 ## License
 
-- `code/` — Apache License 2.0 (`LICENSE`, which covers `code/` only)
-- `data/` — Creative Commons Attribution 4.0 (`data/LICENSE`)
-- `index.html`, `index.zh.html` — Creative Commons Attribution 4.0, same terms
-  as the data
+- **Apache License 2.0** (`LICENSE`) — `code/`, `sync.sh`, `make_now.py`. Permissive
+  on purpose: the invitation here is *check it before believing any of it*, and
+  nobody should need legal review to run the verifier.
+- **Creative Commons Attribution 4.0** (`data/LICENSE`) — everything else that is
+  mine: `data/`, `data-oneside/`, `measurements/`, `weekly/`, the report pages,
+  the notes and the pre-registrations. Attribution is the only condition.
 
-Attribution is the only condition, for the data and the report alike.
+Two things are **not** mine and are not relicensed here, and they are in the tree
+because a measurement that cites a source and cannot show what the source said is
+not recheckable:
+
+- `measurements/issuer-feed/rhj-*.json` — verbatim snapshots of the issuer's own
+  public asset feed. Its own terms apply.
+- `measurements/*/*.responses.jsonl.gz` — verbatim endpoint responses, archived
+  with digests. These are records of public chain state rather than authored
+  content; the grant above covers my selection and arrangement, not the chain's
+  own bytes.
+
+The authoritative version of all of this is `LICENSE-MAP.json`, which declares
+area → licence and is bound to the tree in both directions by criterion N: a
+declared path that does not exist fails, and a top-level entry that no area
+claims fails. This section used to say `LICENSE` covered `code/` only and said
+nothing about `measurements/` — 337 files, and every artifact an outside reader
+would quote. Prose has no failing state; that is why the declaration exists.
 
 ## Contents
 

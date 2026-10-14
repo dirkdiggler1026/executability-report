@@ -1,0 +1,54 @@
+{
+  "_what": "Which licence covers which part of this repository, declared rather than described. The README says the same thing in prose; this file is the version a check can hold the tree to.",
+  "_rule": "Every tracked top-level entry is either claimed by an area, listed in not_content, or listed in not_mine with a reason. Nothing may sit in this tree unlicensed and unexplained. Enforced by check N in code/check_published.py, in both directions: an area naming a path that does not exist fails too.",
+  "_why_two_way": "The prose section in the README was correct and incomplete: it named code/, data/ and the two report pages, and said nothing about measurements/ -- 337 files including every artifact an outside reader would quote. Nobody noticed for weeks, because prose has no failing state. A declaration does.",
+  "areas": [
+    {
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "paths": ["code", "sync.sh", "make_now.py"],
+      "note": "the programs. Permissive on purpose: the whole invitation is 'check it before believing any of it', and a reader should not need legal review to run the verifier."
+    },
+    {
+      "license": "CC-BY-4.0",
+      "license_file": "data/LICENSE",
+      "paths": ["data", "data-oneside", "measurements", "weekly", "coverage.json",
+                "depth-latest.json", "LICENSE-MAP.json", "STABLE-LINKS.json",
+                "CITATION.cff"],
+      "note": "the measurements and the declarations about them. Attribution is the only condition."
+    },
+    {
+      "license": "CC-BY-4.0",
+      "license_file": "data/LICENSE",
+      "paths": ["index.html", "index.zh.html", "index-v17.html", "now.html",
+                "README.md", "FINDINGS.md", "VERIFIABILITY.md", "SILENT-DEFAULTS-NOTE.md",
+                "SERIALIZATION-NOTE.md", "SPEC-base-disclosure-2026-10-07.md",
+                "apple-touch-icon.png", "favicon-16.png", "favicon-32.png",
+                "favicon.ico", "og-image.png"],
+      "note": "the report pages, the notes and the page assets. Same terms as the data."
+    },
+    {
+      "license": "CC-BY-4.0",
+      "license_file": "data/LICENSE",
+      "paths_glob": ["PREREG-*.md"],
+      "note": "the pre-registrations. Same terms; they are the part most worth quoting against, since they state what would falsify a figure before it was measured."
+    }
+  ],
+  "not_content": [
+    {"path": "LICENSE", "why": "the Apache-2.0 text itself"},
+    {"path": "NOTICE", "why": "the Apache-2.0 attribution notice"},
+    {"path": ".gitattributes", "why": "repository plumbing"},
+    {"path": ".gitignore", "why": "repository plumbing"},
+    {"path": ".github", "why": "CI configuration"}
+  ],
+  "not_mine": [
+    {
+      "path_glob": "measurements/issuer-feed/rhj-*.json",
+      "why": "a verbatim snapshot of the issuer's own public asset feed, archived so a figure derived from it can be rechecked later. It is not my content and I do not relicense it; its own terms apply. It is kept because a measurement that cites a feed and cannot show what the feed said is not recheckable."
+    },
+    {
+      "path_glob": "measurements/*/*.responses.jsonl.gz",
+      "why": "verbatim endpoint responses, archived with digests so a reader can confirm what was read. These are records of public chain state rather than authored content; the CC-BY grant above covers my selection, arrangement and the records around them, not any claim over the chain's own bytes."
+    }
+  ]
+}
