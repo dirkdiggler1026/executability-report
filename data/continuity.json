@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-13T06:01:00Z",
+ "generated_utc": "2026-10-14T06:05:01Z",
  "since": "2026-08-29",
- "until": "2026-10-12",
- "days": 45,
+ "until": "2026-10-13",
+ "days": 46,
  "venues": 4,
  "venue_list": [
   "pm/kalshi",
@@ -30,226 +30,231 @@
  "tradeoff_curve": [
   {
    "since": "2026-08-29",
-   "days": 45,
+   "days": 46,
    "venues": 4
   },
   {
    "since": "2026-08-30",
-   "days": 44,
+   "days": 45,
    "venues": 8
   },
   {
    "since": "2026-08-31",
-   "days": 43,
+   "days": 44,
    "venues": 9
   },
   {
    "since": "2026-09-01",
-   "days": 42,
+   "days": 43,
    "venues": 9
   },
   {
    "since": "2026-09-02",
-   "days": 41,
+   "days": 42,
    "venues": 9
   },
   {
    "since": "2026-09-03",
-   "days": 40,
+   "days": 41,
    "venues": 9
   },
   {
    "since": "2026-09-04",
-   "days": 39,
+   "days": 40,
    "venues": 11
   },
   {
    "since": "2026-09-05",
-   "days": 38,
+   "days": 39,
    "venues": 11
   },
   {
    "since": "2026-09-06",
-   "days": 37,
+   "days": 38,
    "venues": 11
   },
   {
    "since": "2026-09-07",
-   "days": 36,
+   "days": 37,
    "venues": 11
   },
   {
    "since": "2026-09-08",
-   "days": 35,
+   "days": 36,
    "venues": 11
   },
   {
    "since": "2026-09-09",
-   "days": 34,
+   "days": 35,
    "venues": 11
   },
   {
    "since": "2026-09-10",
-   "days": 33,
+   "days": 34,
    "venues": 11
   },
   {
    "since": "2026-09-11",
-   "days": 32,
+   "days": 33,
    "venues": 11
   },
   {
    "since": "2026-09-12",
-   "days": 31,
+   "days": 32,
    "venues": 11
   },
   {
    "since": "2026-09-13",
-   "days": 30,
+   "days": 31,
    "venues": 11
   },
   {
    "since": "2026-09-14",
-   "days": 29,
+   "days": 30,
    "venues": 11
   },
   {
    "since": "2026-09-15",
-   "days": 28,
+   "days": 29,
    "venues": 11
   },
   {
    "since": "2026-09-16",
-   "days": 27,
+   "days": 28,
    "venues": 11
   },
   {
    "since": "2026-09-17",
-   "days": 26,
+   "days": 27,
    "venues": 11
   },
   {
    "since": "2026-09-18",
-   "days": 25,
+   "days": 26,
    "venues": 11
   },
   {
    "since": "2026-09-19",
-   "days": 24,
+   "days": 25,
    "venues": 11
   },
   {
    "since": "2026-09-20",
-   "days": 23,
+   "days": 24,
    "venues": 11
   },
   {
    "since": "2026-09-21",
-   "days": 22,
+   "days": 23,
    "venues": 11
   },
   {
    "since": "2026-09-22",
-   "days": 21,
+   "days": 22,
    "venues": 11
   },
   {
    "since": "2026-09-23",
-   "days": 20,
+   "days": 21,
    "venues": 11
   },
   {
    "since": "2026-09-24",
-   "days": 19,
+   "days": 20,
    "venues": 11
   },
   {
    "since": "2026-09-25",
-   "days": 18,
+   "days": 19,
    "venues": 11
   },
   {
    "since": "2026-09-26",
-   "days": 17,
+   "days": 18,
    "venues": 11
   },
   {
    "since": "2026-09-27",
-   "days": 16,
+   "days": 17,
    "venues": 11
   },
   {
    "since": "2026-09-28",
-   "days": 15,
+   "days": 16,
    "venues": 11
   },
   {
    "since": "2026-09-29",
-   "days": 14,
+   "days": 15,
    "venues": 12
   },
   {
    "since": "2026-09-30",
-   "days": 13,
+   "days": 14,
    "venues": 12
   },
   {
    "since": "2026-10-01",
-   "days": 12,
+   "days": 13,
    "venues": 12
   },
   {
    "since": "2026-10-02",
-   "days": 11,
+   "days": 12,
    "venues": 12
   },
   {
    "since": "2026-10-03",
-   "days": 10,
+   "days": 11,
    "venues": 12
   },
   {
    "since": "2026-10-04",
-   "days": 9,
+   "days": 10,
    "venues": 12
   },
   {
    "since": "2026-10-05",
-   "days": 8,
+   "days": 9,
    "venues": 12
   },
   {
    "since": "2026-10-06",
-   "days": 7,
+   "days": 8,
    "venues": 12
   },
   {
    "since": "2026-10-07",
-   "days": 6,
+   "days": 7,
    "venues": 12
   },
   {
    "since": "2026-10-08",
-   "days": 5,
+   "days": 6,
    "venues": 12
   },
   {
    "since": "2026-10-09",
-   "days": 4,
+   "days": 5,
    "venues": 12
   },
   {
    "since": "2026-10-10",
-   "days": 3,
+   "days": 4,
    "venues": 12
   },
   {
    "since": "2026-10-11",
-   "days": 2,
+   "days": 3,
    "venues": 12
   },
   {
    "since": "2026-10-12",
+   "days": 2,
+   "venues": 12
+  },
+  {
+   "since": "2026-10-13",
    "days": 1,
    "venues": 12
   }
@@ -258,11 +263,11 @@
   "per_chain": {
    "ethereum": {
     "sources_max": 4,
-    "groups": 108025,
-    "full": 95270,
+    "groups": 110665,
+    "full": 97907,
     "dropped_rounds": 0,
     "dropped_groups": 0,
-    "rate": 0.8819,
+    "rate": 0.8847,
     "sources_by_day": {
      "2026-08-30": [
       "cow",
@@ -480,13 +485,17 @@
      "2026-10-12": [
       "cow",
       "kyberswap"
+     ],
+     "2026-10-13": [
+      "cow",
+      "kyberswap"
      ]
     }
    },
    "solana": {
     "sources_max": 1,
-    "groups": 71005,
-    "full": 71005,
+    "groups": 72741,
+    "full": 72741,
     "dropped_rounds": 0,
     "dropped_groups": 0,
     "rate": 1.0,
@@ -622,16 +631,19 @@
      ],
      "2026-10-12": [
       "jupiter"
+     ],
+     "2026-10-13": [
+      "jupiter"
      ]
     }
    },
    "robinhood": {
     "sources_max": 1,
-    "groups": 66384,
-    "full": 66384,
+    "groups": 68112,
+    "full": 68112,
     "dropped_rounds": 13,
     "dropped_groups": 213,
-    "rate": 0.9968,
+    "rate": 0.9969,
     "sources_by_day": {
      "2026-09-04": [
       "uniswap_v4_rh"
@@ -749,11 +761,14 @@
      ],
      "2026-10-12": [
       "uniswap_v4_rh"
+     ],
+     "2026-10-13": [
+      "uniswap_v4_rh"
      ]
     }
    }
   },
-  "worst": 0.8819,
+  "worst": 0.8847,
   "bucket_s": 1800,
   "slow_excluded": [
    "lifi",
@@ -766,17 +781,17 @@
  },
  "headline": {
   "since": "2026-08-30",
-  "days": 44,
+  "days": 45,
   "venues": 8,
   "quorum": {
    "per_chain": {
     "ethereum": {
      "sources_max": 4,
-     "groups": 108025,
-     "full": 95270,
+     "groups": 110665,
+     "full": 97907,
      "dropped_rounds": 0,
      "dropped_groups": 0,
-     "rate": 0.8819,
+     "rate": 0.8847,
      "sources_by_day": {
       "2026-08-30": [
        "cow",
@@ -994,13 +1009,17 @@
       "2026-10-12": [
        "cow",
        "kyberswap"
+      ],
+      "2026-10-13": [
+       "cow",
+       "kyberswap"
       ]
      }
     },
     "solana": {
      "sources_max": 1,
-     "groups": 71005,
-     "full": 71005,
+     "groups": 72741,
+     "full": 72741,
      "dropped_rounds": 0,
      "dropped_groups": 0,
      "rate": 1.0,
@@ -1136,16 +1155,19 @@
       ],
       "2026-10-12": [
        "jupiter"
+      ],
+      "2026-10-13": [
+       "jupiter"
       ]
      }
     },
     "robinhood": {
      "sources_max": 1,
-     "groups": 66384,
-     "full": 66384,
+     "groups": 68112,
+     "full": 68112,
      "dropped_rounds": 13,
      "dropped_groups": 213,
-     "rate": 0.9968,
+     "rate": 0.9969,
      "sources_by_day": {
       "2026-09-04": [
        "uniswap_v4_rh"
@@ -1263,11 +1285,14 @@
       ],
       "2026-10-12": [
        "uniswap_v4_rh"
+      ],
+      "2026-10-13": [
+       "uniswap_v4_rh"
       ]
      }
     }
    },
-   "worst": 0.8819,
+   "worst": 0.8847,
    "bucket_s": 1800,
    "slow_excluded": [
     "lifi",
