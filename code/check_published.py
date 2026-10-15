@@ -125,7 +125,7 @@ The checks, and the failure each exists for:
                                 make_verifiability.py --check, since VERIFIABILITY.md is
                                 derived from this file and a derived page that nobody
                                 recomputes is decoration.
-  L  the error archive counts  The archive paragraph counts the entries in words and then
+  L  a count stated on a page   The archive paragraph counts the entries in words and then
      match the entries         lists, by number, the ones caught after publication. Both are
                                 typed by hand, which is fine; drifting from the entries is
                                 not. The decisive part is language-independent: the numbers
@@ -138,6 +138,12 @@ The checks, and the failure each exists for:
                                 means the archive counts itself correctly; it is not a
                                 statement about its contents. Same boundary as H, and stated
                                 for the same reason.
+                                L also holds the criteria count the report pages state to the
+                                criteria code/check_published.py actually defines, attribute and
+                                prose separately. Same assertion, different countable: this
+                                project has twice sent out a figure that had gone stale because
+                                a count was typed into prose, so a count on a published page is
+                                now a declaration rather than a sentence.
   M  a correction's figures    Four times now, a correction in that archive has carried the
      come from the artifact    next error: it is written in the same sitting as the discovery
      it cites                   and inherits the same optimism. Entry 17 said events are
@@ -204,6 +210,10 @@ import tempfile
 
 DAY = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 CANON = {"data": "rhdepth-v2", "data-oneside": "rhdepth-oneside-v1"}
+# 判据表就写在本模块的 docstring 里 —— 让"有多少条判据"从【唯一那份表】里数出来,
+# 而不是另写一个列表:另写一个就会漂,而漂了没人会发现。
+MODULE_DOC = __doc__ or ""
+
 WEEKLY = "weekly"           # root-level: data/ holds only YYYY-MM-DD directories
 STALE_DAYS = 10             # one issue per UTC week leaves the window at most 7 days
                             # behind just before the next run; 10 is that plus slack,
@@ -279,6 +289,8 @@ def rounds_of(path: str):
 # word form is reported as not checked rather than passed.
 COUNT_WORDS = {7: ("seven", "七"), 8: ("eight", "八"), 9: ("nine", "九"),
                10: ("ten", "十"), 11: ("eleven", "十一"), 12: ("twelve", "十二"),
+               13: ("thirteen", "十三"), 14: ("fourteen", "十四"),
+               15: ("fifteen", "十五"),
                16: ("sixteen", "十六"), 17: ("seventeen", "十七"),
                18: ("eighteen", "十八"), 19: ("nineteen", "十九"),
                20: ("twenty", "二十")}
@@ -406,6 +418,40 @@ def check_errata() -> None:
                          for w in words):
                 fail("L", f"{page}: {n} entries are marked {label} and the counting paragraph "
                           f"states none of {words}")
+
+        # 🔴 同一条判据,换一个被数的东西。页面上写"十四条判据"是一个【计数声明】,
+        #    而本项目今晚已经两次因为写死计数而发出过期的数字(档案 17→19、判据 13→14)。
+        #    所以页面上的计数带 data-criteria-count,这里拿它与 code/ 里真实存在的
+        #    判据数对比,并且要求可见文字与那个属性一致 —— 属性漂了、散文漂了,各报一次。
+        decl = re.search(r'data-criteria-count="(\d+)"[^>]*>([^<]*)', body)
+        letters = sorted({m for m in re.findall(r"^  ([A-Z])  ", MODULE_DOC, re.M)})
+        real = len(letters)
+        if not decl:
+            not_exercised("L", f"{page}: no element carries data-criteria-count, so the number "
+                               f"of criteria stated on the page is not held to the criteria "
+                               f"that exist")
+        elif int(decl.group(1)) != real:
+            fail("L", f"{page}: data-criteria-count says {decl.group(1)} and "
+                      f"code/check_published.py defines {real} ({letters[0]}-{letters[-1]}) -- "
+                      f"the page states a count that the code does not support")
+        else:
+            words = COUNT_WORDS.get(real)
+            shown = decl.group(2)
+            if not words:
+                not_exercised("L", f"{page}: no word form known for {real}, so the visible "
+                                   f"text beside data-criteria-count was not checked")
+            elif not any((re.search(rf"\b{w}\b", shown.lower()) if w.isascii()
+                          else w in shown) for w in words):
+                fail("L", f"{page}: data-criteria-count is {real} and the visible text reads "
+                          f"{shown.strip()!r}, which states none of {words} -- the attribute "
+                          f"and the prose beside it disagree")
+            elif letters[-1] not in shown:
+                fail("L", f"{page}: the visible text reads {shown.strip()!r} and the last "
+                          f"criterion is {letters[-1]} -- a stated letter range that stops "
+                          f"short tells a reader there are fewer checks than there are")
+            else:
+                note(f"L  {page}: states {real} criteria ({letters[0]}-{letters[-1]}), and "
+                     f"that is how many code/check_published.py defines")
 
         readers = len(re.findall(r'data-reported-by="reader"', body))
         if readers:
