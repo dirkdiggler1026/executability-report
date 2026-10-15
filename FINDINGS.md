@@ -5,9 +5,10 @@ the measurement, the raw reads, and the limits. **No figure is restated on this 
 number lives in exactly one list, next to the block it was pinned to; a number copied into a
 second document is a number that can drift away from its list.
 
-Subjects covered: executable exit depth for tokenized equities (Base, Robinhood Chain),
-Uniswap v3 and v4 pool measurement, prediction-market order books, and the accounting
-factors that sit between a wrapper token and the share it references.
+Subjects covered: executable exit depth for tokenized equities (Base, Robinhood Chain), the
+pre-expiry exit on a Pendle principal-token market, Uniswap v3 and v4 pool measurement,
+prediction-market order books, what a public endpoint still serves and for how long, and the
+accounting factors that sit between a wrapper token and the share it references.
 
 ---
 
@@ -50,6 +51,61 @@ That asymmetry is the finding.
 **[measurements/tsv-volume/](measurements/tsv-volume/)** — September 2026 volume for nine
 symbols: the numerator of the ratio capped by §II.F of the tokenized-stock exemption, with
 the denominator explicitly absent rather than estimated.
+
+## Pre-expiry exit on a Pendle PT market
+
+**[measurements/orbio-pendle/](measurements/orbio-pendle/)** — what selling a principal token
+into its own market returns before the market expires, captured hourly because on that chain the
+state is gone minutes later and an expiry cannot be re-read after the fact.
+
+The claim is deliberately isomorphic to the Base work: proceeds over the market's **own pre-trade
+marginal quote** for the same size at the same block, with nothing from outside the market on
+either side. PT's face value is computed too and labelled as a *second* quantity, never the
+claim, because it climbs towards full value as expiry approaches whatever happens to the book.
+
+**The finding worth the click is a correction to that caliber, made after it was settled.** The
+claim is not clock-free either: the curve's scale parameter carries the time to expiry, so the
+measured recovery rises as expiry nears with nothing happening to the book at all. Four captures
+spanning most of four days, in a market that emitted no event in that window, show the measured
+figure moving while a column recomputed at one fixed reference clock does not move at all. So a
+single capture's recovery is a fact about its block, and **a series of them is not a depth
+series** — which is the exact error the caliber had been chosen to avoid, one level up.
+
+Two limits travel with every figure there, in the artifacts rather than here. The gate that says
+"two runs agreed" is on the **read**, not on the arithmetic: the curve is closed-form over one
+state, so running it twice agrees by construction and would be the emptiest check in this
+repository — what is run twice is the capture of the same pinned block. And nothing in that
+directory has been validated against a trade anybody actually made: the market has been dormant,
+so every figure is the published formula evaluated on an archived state, and says so.
+
+## Event logs of two PT markets, kept before they were needed
+
+**[measurements/pendle-market-logs/](measurements/pendle-market-logs/)** — the raw logs both
+markets have emitted, archived with digests, decoded by nothing.
+
+They exist because a counterfactual quote can only ever be checked against a trade somebody
+made, and those trades survive only as events. The retention claim the directory makes is the
+narrow one: logs *came back* from a given depth, so the node serves them at least that deep. The
+ranges that came back empty establish nothing, and the record says so — an empty range is
+equally consistent with the market not existing yet, with no events, and with a dropped log
+index that answers empty rather than erroring.
+
+## What a public endpoint still serves, and for how long
+
+**[measurements/rh-retention/](measurements/rh-retention/)** — state and events are retained on
+different schedules, so a sentence about "this chain" is almost always a sentence about one of
+them. A reader pointed that out; it is the first error in this project caught from outside it,
+and the claim is now read from a re-runnable probe instead of being held as a literal.
+
+The probe reports three things under three names that cannot be read as each other: **proven**
+(rows actually came back from that depth), **answered** (the query returned without error, which
+a node that has dropped its index can also do), and **refused** (a timeout, or one of the
+endpoint's two query caps — neither of which is retention). State is reported as a bracket,
+deepest served and shallowest pruned, because "gone by N" and "survives to N" are different
+claims. And the artifact carries the chain's **block time, measured over three spans in the same
+run with an agreement test**, because a depth in blocks only becomes minutes through a unit — and
+this project has already converted this chain at the wrong unit once and been wrong by roughly
+twenty times.
 
 ## Across issuers
 

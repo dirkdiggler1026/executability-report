@@ -1,5 +1,12 @@
 # Start here
 
+[![criteria](https://github.com/dirkdiggler1026/executability-report/actions/workflows/check.yml/badge.svg?branch=main)](https://github.com/dirkdiggler1026/executability-report/actions/workflows/check.yml)
+
+Fourteen criteria, **A through N**, run on every push to `main` — the badge above is that run.
+Three exit codes, so that *we did not look* is never reported as *we looked and it was fine*, and
+each criterion states in its own text **what it does not establish**. Run it yourself:
+`python3 code/check_published.py` (standard library only, no network).
+
 This repository measures **what a position actually realises when it exits** - not the mark, not
 TVL, not a price-impact quote. Same pinned block, both legs priced against the same state, a size
 ladder, a failure class per row, and the raw reads shipped alongside.
@@ -13,8 +20,10 @@ reproduces it.
   the same underlying in two pools differing by roughly 600x on a USD 100 exit, with the reason.
 - A machine-readable figure per asset and size is at [weekly/latest.json](weekly/latest.json)
   (stable URL; the weekly file for each ISO week is also kept). The intended cadence is one issue
-  per UTC week; generation is not yet scheduled, so read the `window` field - and `reason`, when
-  the window is empty - rather than assuming the file is current.
+  per UTC week and it is now generated automatically: the 06:01 UTC sync issues the previous
+  complete ISO week on its first run of each week, and criterion G fails if the newest issue's
+  window ends more than ten days ago. The first automatic issue was `2026-W41`. Read the `window`
+  field — and `reason`, when the window is empty — rather than assuming any particular freshness.
 - Corrections are published as normal, rather than quietly: each measurement directory carries its
   own disclosure, and superseded numbers are kept next to the reason they were superseded.
 
@@ -35,7 +44,7 @@ tokenized stocks on Robinhood Chain, and prediction markets.
 
 **Report:** https://dirkdiggler1026.github.io/executability-report/
 
-**Weekly:** a machine-readable depth figure per asset and size — [weekly/latest.json](weekly/latest.json). The intended cadence is one issue per UTC week; generation is not yet scheduled, so read the `window` field (and `reason`, when the window is empty) rather than assuming the file is current.
+**Weekly:** a machine-readable depth figure per asset and size — [weekly/latest.json](weekly/latest.json). One issue per UTC week, generated automatically by the 06:01 UTC sync on its first run of each ISO week, for the previous complete week; criterion G fails if the newest issue's window ends more than ten days ago, so a stalled feed shows up as a failing check rather than as a quietly old file. Read the `window` field (and `reason`, when the window is empty) rather than assuming any particular freshness.
 
 ## Contact
 
@@ -119,6 +128,27 @@ non-commercial use, and paid work would not be. The public aggregator series in
 this report stays non-commercial for the same reason.
 
 The data decides the conclusion. Coverage and scheduling are what you pay for.
+
+**What a unit of work is, so it can be scoped without a call.** One named pool or token, one
+pinned block, a size ladder you choose, both legs priced against the same state, every row
+carrying its failure class, and the complete read log archived with digests — delivered as the
+artifact plus a reproduction command, not as a slide.
+
+**Turnaround.** A venue whose shape is already implemented here (Uniswap v3-style pools on Base
+or Robinhood Chain, or a Pendle PT market) is 48–72 hours from a pinned block. A venue shape that
+is new needs a new adapter, and that is the honest long pole: the Pendle market took most of a
+week, and my own error archive says the first measurement of a venue I have not read before is
+the one most likely to be wrong, so I would rather quote the longer number than publish the
+faster one.
+
+**Capacity, stated rather than implied.** This runs alongside full-time employment at roughly ten
+hours a week. That is about one venue, or one recheck of an existing one, per week. If you need
+continuous coverage across a large venue set, I am the wrong supplier and would say so on the
+first exchange rather than the third.
+
+**What I will not take.** Work on key-gated endpoints, because a figure a reader cannot recheck
+should not carry a price. Money from the issuer of an asset I measure, or from a party whose own
+parameters the measurement would feed.
 
 ## License
 
@@ -279,8 +309,8 @@ page heads, the manifests, the enumeration chain, and the re-derivation behind
 criteria and not two. It is **not** a check on the publishing process: a green tick
 never means the collection was sound. And it is not advisory: if the check is red on
 the commit `main` points at, the 06:01 UTC data sync **refuses to publish**. The log
-line has the shape `CI: check main@<sha> success`; as of the 2026-09-28 06:02 UTC run
-it read `CI: check main@306eb5f success`. A failed, timed-out or unstartable check
+line has the shape `CI: check main@<sha> success`; as of the 2026-10-14 06:04 UTC run
+it read `CI: check main@a6cef4c success`. A failed, timed-out or unstartable check
 blocks; a result the API will not return does not — treating an API hiccup as a
 broken publication would stop collection for the wrong reason.
 
