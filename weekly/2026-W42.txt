@@ -1,0 +1,11 @@
+Executable depth, week of 2026-10-12 to 2026-10-18 (UTC)
+
+GME at $1,000 oscillated between two states this week: 2 band crossings in 336 rounds, ending in the band it started in. A cell that crosses and returns is a different fact from one that crosses and stays.
+
+This figure is an input to decisions that size a position against what it can recover on exit — it is not a recommendation, and no parameter advice is implied.
+
+Also this window: AAPL $1,000 ended a 66-round identical run at block 91,565,056; RDDT $100 ended a 51-round identical run at block 91,249,951; GOOGL $100 ended a 48-round identical run at block 90,136,806.
+Window: blocks 86,241,111 to 92,164,675, 336 rounds, 2026-10-12T00:07:25Z to 2026-10-18T23:37:46Z. Canon rhdepth-v2.
+Caliber: same-pool round trip, direct quoter calls; routes from a pool table frozen at block 53,983,886; recovery is not a fee.
+Verification: on the Robinhood Chain public endpoint, state is still served 6,000 blocks back and already pruned by 8,000, so every historical round here needs an archive kept at the time; events are served at least 50,000,000 blocks back -- measured by rows actually returned, not by a query that merely answered -- so realised execution over the same period is publicly recheckable (retention measured 2026-10-11; derived; source measurements/rh-retention/retention-2026-10-11.json).
+Feed: https://raw.githubusercontent.com/dirkdiggler1026/executability-report/main/weekly/latest.json
