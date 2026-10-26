@@ -1,0 +1,11 @@
+Executable depth, week of 2026-10-19 to 2026-10-25 (UTC)
+
+AMC at $100,000 oscillated between two states this week: 20 band crossings in 336 rounds, ending in the band it started in. A cell that crosses and returns is a different fact from one that crosses and stays.
+
+This figure is an input to decisions that size a position against what it can recover on exit — it is not a recommendation, and no parameter advice is implied.
+
+Also this window: GOOGL $100 ended a 64-round identical run at block 93,317,925; RDDT $100 ended a 62-round identical run at block 97,937,552; TSLA $100 ended a 51-round identical run at block 97,764,373.
+Window: blocks 92,182,244 to 97,971,837, 336 rounds, 2026-10-19T00:07:42Z to 2026-10-25T23:37:29Z. Canon rhdepth-v2.
+Caliber: same-pool round trip, direct quoter calls; routes from a pool table frozen at block 53,983,886; recovery is not a fee.
+Verification: on the Robinhood Chain public endpoint, state is still served 6,000 blocks back and already pruned by 8,000, so every historical round here needs an archive kept at the time; events are served at least 50,000,000 blocks back -- measured by rows actually returned, not by a query that merely answered -- so realised execution over the same period is publicly recheckable (retention measured 2026-10-11; derived; source measurements/rh-retention/retention-2026-10-11.json).
+Feed: https://raw.githubusercontent.com/dirkdiggler1026/executability-report/main/weekly/latest.json
