@@ -56,6 +56,15 @@ The checks, and the failure each exists for:
                                  G3 a non-empty window ends no more than STALE_DAYS ago,
                                     or the file says why. The cadence is one issue per UTC
                                     week; this is what notices that it stopped.
+                                    After the date FROZEN.json declares, G3 asks a
+                                    different question, because this one has a known
+                                    answer and reporting it as a failure would punish
+                                    something announced in advance: no issue may cover a
+                                    window that begins after the declared end, and the
+                                    newest issue may not end after it. Green then means
+                                    the archive stops where it said it would -- never that
+                                    the feed is live, and the run prints which of the two
+                                    it checked.
                                  What G cannot see: whether generation is scheduled at
                                  all. That is a fact about a host, not about this tree.
   H  a generated file is what    Several files here say in prose that they are generated
@@ -1073,6 +1082,62 @@ def check_generated() -> None:
         check_generated_dir(p)
 
 
+FROZEN_FILE = "FROZEN.json"
+FROZEN_STATES = ("scheduled", "effective")
+
+
+def load_frozen():
+    """The freeze declaration, or None when there is none.
+
+    Returns (decl, None) or (None, reason). A missing file is not a problem -- most of
+    this repository's life had no such file. A file that is present and unreadable, or
+    that declares a state this checker does not know, IS a problem: a declaration nobody
+    can parse is worse than no declaration, because the tree looks governed and is not.
+    """
+    if not os.path.exists(FROZEN_FILE):
+        return None, None
+    try:
+        decl = json.load(open(FROZEN_FILE, encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        return None, f"{FROZEN_FILE} is present but unreadable as JSON ({exc})"
+    state = decl.get("state")
+    if state not in FROZEN_STATES:
+        return None, (f"{FROZEN_FILE}: state {state!r} is not one of {FROZEN_STATES} -- "
+                      f"this checker will not guess what a declaration means")
+    try:
+        dt.date.fromisoformat((decl.get("effective_utc") or "")[:10])
+    except ValueError:
+        return None, (f"{FROZEN_FILE}: effective_utc "
+                      f"{decl.get('effective_utc')!r} is not a date")
+    return decl, None
+
+
+def frozen_verdict(effective: str, through: str, since_list, today: str):
+    """Pure, so it can be drilled without a tree. Returns (ok, message).
+
+    After the declared end the question is no longer 'is the feed moving' -- it is
+    'does the archive stop where it said it would'. Both halves are falsifiable: a
+    window ending past the declared end, or any issue covering a week that starts
+    after it, means something was published after the freeze.
+    """
+    eff = dt.date.fromisoformat(effective[:10])
+    now = dt.date.fromisoformat(today[:10])
+    if now <= eff:
+        return None, f"freeze declared for {eff}, not yet in force"
+    end = dt.date.fromisoformat(through[:10])
+    if end > eff:
+        return False, (f"newest issue's window ends {end}, after the declared end {eff} "
+                       f"-- something was published after the freeze")
+    late = sorted(w for w in since_list
+                  if dt.date.fromisoformat(w[:10]) > eff)
+    if late:
+        return False, (f"{len(late)} issue(s) cover a window beginning after the declared "
+                       f"end {eff}, first {late[0]}")
+    return True, (f"archive stops where {FROZEN_FILE} says it stops: newest window ends "
+                  f"{end}, declared end {eff}. This does NOT establish that anything is "
+                  f"being collected -- by declaration, nothing is")
+
+
 def check_weekly() -> None:
     """Check G. See the module docstring for what each sub-check exists for."""
     latest = os.path.join(WEEKLY, "latest.json")
@@ -1110,9 +1175,35 @@ def check_weekly() -> None:
         fail("G2", f"{latest}: window rounds={rounds!r} and reason={'set' if reason else 'absent'}"
                    f" -- exactly one of the two is required")
 
-    # G3 -- a window that stopped moving. Measured against today, because that is what
-    # a reader checking the feed has; the generator stamps generated_utc separately.
+    # G3 -- while the feed is live, a window that stopped moving; after the date
+    # FROZEN.json declares, that the archive stops where it said it would. Which of the
+    # two ran is printed, because a green line that does not say what it checked is the
+    # failure mode this whole file exists to avoid.
     through = win.get("through")
+    decl, decl_err = load_frozen()
+    if decl_err:
+        fail("G3", decl_err)
+        return
+    if decl and rounds and through:
+        others = [ (json.load(open(p, encoding="utf-8")).get("window") or {}).get("since")
+                   for p in archives ]
+        since_list = [w for w in others if w]
+        since = win.get("since")
+        if since:
+            since_list.append(since)
+        today = dt.date.today().isoformat()
+        try:
+            ok, msg = frozen_verdict(decl["effective_utc"], through, since_list, today)
+        except ValueError as exc:
+            fail("G3", f"{latest}: cannot compare dates against {FROZEN_FILE} ({exc})")
+            return
+        if ok is False:
+            fail("G3", f"{latest}: {msg}")
+            return
+        if ok is True:
+            note(f"G  {msg}")
+            return
+        note(f"G  {msg}")
     if rounds and through:
         try:
             age = (dt.date.today() - dt.date.fromisoformat(through)).days
@@ -1131,7 +1222,48 @@ def check_weekly() -> None:
                 note(f"G  window ends {through}, {age} days ago (limit {STALE_DAYS})")
 
 
+FROZEN_ARMS = [
+    # (effective, through, since_list, today, expected_ok, what this arm defends)
+    ("2026-10-31", "2026-10-25", ["2026-10-19"], "2026-10-28", None,
+     "before the declared date the freeze must not take over the live check"),
+    ("2026-10-31", "2026-10-25", ["2026-10-19"], "2026-10-31", None,
+     "on the declared day itself the feed may still publish"),
+    ("2026-10-31", "2026-10-25", ["2026-10-19"], "2026-11-15", True,
+     "after it, a stopped archive is green and says so"),
+    ("2026-10-31", "2026-10-25", ["2026-10-19"], "2027-06-01", True,
+     "and stays green however long afterwards -- age is not the question any more"),
+    ("2026-10-31", "2026-11-08", ["2026-11-02"], "2026-11-15", False,
+     "an issue published after the freeze must fail, which is the point of declaring"),
+    ("2026-10-31", "2026-10-25", ["2026-11-02"], "2026-11-15", False,
+     "a late window hidden in an ARCHIVED issue must fail too, not just in latest.json"),
+]
+
+
+def drill_frozen() -> int:
+    """Exercises frozen_verdict on synthetic dates only.
+
+    Deliberately not run against this tree. A drill that writes, or that reads the real
+    artifacts, has already cost this project a published evidence file; the rule now is
+    that a drill runs on a path that is not the product's.
+    """
+    bad = 0
+    for eff, through, since, today, want, why in FROZEN_ARMS:
+        got, msg = frozen_verdict(eff, through, since, today)
+        mark = "ok  " if got is want else "BAD "
+        if got is not want:
+            bad += 1
+        print(f"  {mark} today={today} through={through} since={since} "
+              f"-> {got!r} (want {want!r})")
+        print(f"       {why}")
+        if got is not want:
+            print(f"       got message: {msg}")
+    print("frozen drill: %d arm(s), %d wrong" % (len(FROZEN_ARMS), bad))
+    return 1 if bad else 0
+
+
 def main() -> int:
+    if "--selftest" in sys.argv:
+        return drill_frozen()
     quiet = "--quiet" in sys.argv
     if not os.path.isdir("data"):
         print("FAIL: run this from the repository root (no data/ here)", file=sys.stderr)

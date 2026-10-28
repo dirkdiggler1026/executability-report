@@ -19,11 +19,16 @@ reproduces it.
 - Measured so far: [Base equities venues](measurements/base-depth/) at pinned block `52175000` -
   the same underlying in two pools differing by roughly 600x on a USD 100 exit, with the reason.
 - A machine-readable figure per asset and size is at [weekly/latest.json](weekly/latest.json)
-  (stable URL; the weekly file for each ISO week is also kept). The intended cadence is one issue
-  per UTC week and it is now generated automatically: the 06:01 UTC sync issues the previous
-  complete ISO week on its first run of each week, and criterion G fails if the newest issue's
-  window ends more than ten days ago. The first automatic issue was `2026-W41`. Read the `window`
-  field — and `reason`, when the window is empty — rather than assuming any particular freshness.
+  (stable URL; the weekly file for each ISO week is also kept). One issue per UTC week, generated
+  automatically by the 06:01 UTC sync on its first run of each week, for the previous complete ISO
+  week. The first automatic issue was `2026-W41`. Read the `window` field — and `reason`, when the
+  window is empty — rather than assuming any particular freshness.
+- **Collection ends 2026-10-31**, declared in advance in [FROZEN.json](FROZEN.json). After that
+  date the figures here are final rather than stale, and criterion G stops asking whether the feed
+  is moving and starts asking whether the archive stops where it said it would. What does not stop:
+  the verifiers, which re-derive every published figure from the artifacts in this tree, and
+  [code/verify_feed_staleness.py](code/verify_feed_staleness.py), which queries a public endpoint
+  and never needed this project to be running.
 - Corrections are published as normal, rather than quietly: each measurement directory carries its
   own disclosure, and superseded numbers are kept next to the reason they were superseded.
 
@@ -44,7 +49,7 @@ tokenized stocks on Robinhood Chain, and prediction markets.
 
 **Report:** https://dirkdiggler1026.github.io/executability-report/
 
-**Weekly:** a machine-readable depth figure per asset and size — [weekly/latest.json](weekly/latest.json). One issue per UTC week, generated automatically by the 06:01 UTC sync on its first run of each ISO week, for the previous complete week; criterion G fails if the newest issue's window ends more than ten days ago, so a stalled feed shows up as a failing check rather than as a quietly old file. Read the `window` field (and `reason`, when the window is empty) rather than assuming any particular freshness.
+**Weekly:** a machine-readable depth figure per asset and size — [weekly/latest.json](weekly/latest.json). One issue per UTC week, generated automatically by the 06:01 UTC sync on its first run of each ISO week, for the previous complete week, **through 2026-10-31**; criterion G failed if the newest issue's window ended more than ten days ago, so a stalled feed showed up as a failing check rather than as a quietly old file, and after the declared end in [FROZEN.json](FROZEN.json) it asserts instead that no issue covers a window beginning after that date. Read the `window` field (and `reason`, when the window is empty) rather than assuming any particular freshness.
 
 ## Contact
 

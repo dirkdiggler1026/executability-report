@@ -297,6 +297,11 @@ def main() -> int:
     latest published day: median recovery per token and size, with the p10&ndash;p90 range
     <b>within that day</b> beneath it. A round that could not fill is counted separately, never as
     a zero.</div>
+  <div class="lead"><b>Collection ends 2026-10-31</b>, declared in advance in
+    <a href="FROZEN.json">FROZEN.json</a>. &ldquo;Latest published day&rdquo; below therefore means
+    the last one, not today&rsquo;s &mdash; these numbers are final rather than stale, and the
+    declaration is there so an archive that stopped on purpose can be told from a feed that
+    broke.</div>
 
   <div class="anchor mono">
     <b>latest round</b> &nbsp; block {last['block']:,} &nbsp;&middot;&nbsp; canon {html.escape(str(last['canon']))}

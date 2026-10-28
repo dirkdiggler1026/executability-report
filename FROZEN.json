@@ -1,0 +1,33 @@
+{
+ "canon": "frozen-declaration-v1",
+ "_what": "A declaration, made before the fact, that collection for this repository ends on a stated date and that what is published here becomes final rather than stale. It exists so that a reader, and the checks, can tell an archive that stopped on purpose from a feed that broke.",
+ "_why_declared_in_advance": "This project has already learned once that a limit announced after the event proves nothing: a commitment ceiling was raised after a batch had been committed under it, and the watcher was right to refuse the explanation. The same rule applies here. This file is written while the feed is still running, so the claim 'it stopped where it said it would' is falsifiable rather than retrofitted.",
+
+ "state": "scheduled",
+ "declared_utc": "2026-10-28T02:45:00Z",
+ "effective_utc": "2026-10-31T23:59:59Z",
+
+ "what_stops_on_that_date": [
+  "the 06:01 UTC publishing job, so no new data/ or data-oneside/ day directories appear",
+  "the weekly issue, so weekly/latest.json stops moving and keeps the last window it had",
+  "the hourly Pendle state capture and the one-sided depth rounds"
+ ],
+
+ "what_does_not_stop": [
+  "every figure already published, which stays at the block it names",
+  "code/verify.py and the other verifiers, which re-derive published figures from the artifacts in this tree",
+  "code/verify_feed_staleness.py, which re-queries a public endpoint and does not depend on this project running at all",
+  "the error archive, the pre-registrations, and the correction policy, which continue to apply to anything published here"
+ ],
+
+ "how_the_checks_change": "Criterion G asks, while the feed is live, whether the newest weekly issue is less than STALE_DAYS old -- that is what notices a feed that quietly stopped. After effective_utc that question has a known answer and asking it would report a failure for something that was announced in advance. So from that date G asserts a different and still falsifiable property: that no weekly issue covers a window beginning after the declared end, and that the newest issue is the one the archive stops at. A reader gets a green check for 'the archive stops where it says it stops', never for 'the feed is live'. The boundary is printed next to the result on every run.",
+
+ "what_this_declaration_does_not_establish": [
+  "that the figures are right. It says when they stop, not whether they were correct.",
+  "that nothing further will ever be published here. If collection resumes, this file is the record that it had stopped, and the resumption gets its own declaration rather than a quiet edit to this one.",
+  "anything about the private collection trees. This declaration is about what this repository publishes."
+ ],
+
+ "final_record": null,
+ "final_record_note": "Written by hand on the last publishing day, after the last run, with the final data day, the final weekly issue and its window, and the commit the archive ends at. It is null until then because guessing it now and being wrong would be exactly the failure this file exists to prevent."
+}
