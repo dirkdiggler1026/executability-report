@@ -107,6 +107,25 @@ run with an agreement test**, because a depth in blocks only becomes minutes thr
 this project has already converted this chain at the wrong unit once and been wrong by roughly
 twenty times.
 
+## The feeds that price this collateral stopped, and nothing reverted
+
+**[measurements/rh-feed-staleness/](measurements/rh-feed-staleness/)** — every Chainlink
+feed pricing the tokenized equities on Robinhood Chain went several multiples of its
+documented heartbeat without publishing, over one weekend and the whole of the regular
+session that followed. The stops are staggered across most of a day; the resumes land
+within seconds of each other. Through the gap, every call returned a price carrying a
+timestamp that looked valid: nothing reverted, nothing failed, and a consumer polling the
+feed had no way to tell from the call itself. Two of the nine tokens have no feed on that
+chain at all, which is recorded as a finding rather than left as a missing file.
+
+Re-derived from `AnswerUpdated` logs rather than from state, which is why it is here at
+all: state on that endpoint is pruned within minutes, so the question cannot be asked
+afterwards, while logs are served tens of millions of blocks back. So this is the one
+quantity in this repository that stays checkable by anyone, later, from a public endpoint —
+unlike the depth figures, which had to be captured at the time or not at all. The script
+carries three controls and the account of the one that had to be added after it produced a
+wrong number.
+
 ## Across issuers
 
 **[measurements/wrapper-multipliers/](measurements/wrapper-multipliers/)** — the same

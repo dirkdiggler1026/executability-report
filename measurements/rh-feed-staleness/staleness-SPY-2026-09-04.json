@@ -1,0 +1,73 @@
+{
+ "canon": "rh-feed-staleness-v1",
+ "measured_utc": "2026-10-28T02:38:00Z",
+ "symbol": "SPY",
+ "feed_name": "Robinhood SPY / USD",
+ "aggregator": "0x78BCB218fA04B9b3a278eBc865Ed320BF8DEFBAc",
+ "proxy": "0x319724394D3A0e3669269846abE664Cd621f9f6A",
+ "directory_source": "https://reference-data-directory.vercel.app/feeds-robinhood-mainnet.json",
+ "documented_heartbeat_s": 86400,
+ "requested_range": {
+  "from_utc": "2026-09-04T12:00:00Z",
+  "to_utc": "2026-09-08T12:00:00Z",
+  "from_block": 54248341,
+  "to_block": 57673474
+ },
+ "lookback_blocks": 12000000,
+ "head_at_measurement": 99733749,
+ "blocks_back_at_measurement": 45371180,
+ "updates_used": 4,
+ "roundIds": {
+  "first": 118,
+  "last": 121,
+  "contiguous": true
+ },
+ "longest_gap": {
+  "seconds": 290892,
+  "hours": 80.8,
+  "from_utc": "2026-09-04T15:12:39Z",
+  "to_utc": "2026-09-08T00:00:51Z",
+  "from_round": 120,
+  "to_round": 121,
+  "answer_held_throughout": 769.59,
+  "multiple_of_documented_heartbeat": 3.37,
+  "spans_requested_window_start": false
+ },
+ "sequencer_control": {
+  "blocks_between_the_two_updates": 2883297,
+  "seconds_between": 290892,
+  "blocks_per_second_mean": 9.912,
+  "verdict": "the chain produced blocks throughout, so the gap is the feed's and not a halt"
+ },
+ "what_this_does_not_establish": [
+  "that any position was unliquidatable, or that anything was liquidated",
+  "that the published answer was wrong, only that it did not change",
+  "anything about a feed this run did not query"
+ ],
+ "updates": [
+  {
+   "block": 53432249,
+   "roundId": 118,
+   "answer": 767.32875,
+   "updatedAt": 1788440050
+  },
+  {
+   "block": 53512001,
+   "roundId": 119,
+   "answer": 771.185,
+   "updatedAt": 1788448332
+  },
+  {
+   "block": 54362569,
+   "roundId": 120,
+   "answer": 769.59,
+   "updatedAt": 1788534759
+  },
+  {
+   "block": 57245866,
+   "roundId": 121,
+   "answer": 768.966807,
+   "updatedAt": 1788825651
+  }
+ ]
+}

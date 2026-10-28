@@ -1,0 +1,17 @@
+{
+ "canon": "rh-feed-absence-v1",
+ "_what": "Tokens priced on this chain that have no Chainlink feed on it. Recorded as a file because a missing artifact and a measured absence look identical in a directory listing, and only one of them is a finding.",
+ "measured_utc": "2026-10-28T02:39:00Z",
+ "directory_source": "https://reference-data-directory.vercel.app/feeds-robinhood-mainnet.json",
+ "feeds_in_directory": 58,
+ "absent": [
+  {"symbol": "AMC", "finding": "no feed named 'Robinhood AMC / USD' in the directory"},
+  {"symbol": "RDDT", "finding": "no feed named 'Robinhood RDDT / USD' in the directory"}
+ ],
+ "present": ["AAPL", "GME", "GOOGL", "NVDA", "QQQ", "SPY", "TSLA"],
+ "note": "Seven of the nine tokens this project measures depth for have a feed on this chain; two do not. code/verify_feed_staleness.py exits 3 for those two rather than 0, because the absence of a feed and a feed that never went stale must not share an exit code.",
+ "what_this_does_not_establish": [
+  "that AMC and RDDT are unpriced. They may be priced by something that is not a Chainlink feed on this chain; this records only that the directory names no feed for them.",
+  "that the directory is complete. It is the data source behind the vendor's own documentation page, which is rendered client-side and cannot be read directly."
+ ]
+}

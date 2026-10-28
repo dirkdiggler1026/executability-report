@@ -1,0 +1,265 @@
+{
+ "canon": "rh-feed-staleness-v1",
+ "measured_utc": "2026-10-28T02:39:32Z",
+ "symbol": "GME",
+ "feed_name": "Robinhood GME / USD",
+ "aggregator": "0xf83Cde62D1Cd90dE8d2Bf3332B90c590985aD679",
+ "proxy": "0x27C71df6A64fB476468EdF256CF72c038baB5B67",
+ "directory_source": "https://reference-data-directory.vercel.app/feeds-robinhood-mainnet.json",
+ "documented_heartbeat_s": 86400,
+ "requested_range": {
+  "from_utc": "2026-09-04T12:00:00Z",
+  "to_utc": "2026-09-08T12:00:00Z",
+  "from_block": 54248341,
+  "to_block": 57673474
+ },
+ "lookback_blocks": 12000000,
+ "head_at_measurement": 99734652,
+ "blocks_back_at_measurement": 45230687,
+ "updates_used": 36,
+ "roundIds": {
+  "first": 645,
+  "last": 680,
+  "contiguous": true
+ },
+ "longest_gap": {
+  "seconds": 276563,
+  "hours": 76.82,
+  "from_utc": "2026-09-04T19:11:08Z",
+  "to_utc": "2026-09-08T00:00:31Z",
+  "from_round": 678,
+  "to_round": 679,
+  "answer_held_throughout": 19.195,
+  "multiple_of_documented_heartbeat": 3.2,
+  "spans_requested_window_start": false
+ },
+ "sequencer_control": {
+  "blocks_between_the_two_updates": 2741702,
+  "seconds_between": 276563,
+  "blocks_per_second_mean": 9.913,
+  "verdict": "the chain produced blocks throughout, so the gap is the feed's and not a halt"
+ },
+ "what_this_does_not_establish": [
+  "that any position was unliquidatable, or that anything was liquidated",
+  "that the published answer was wrong, only that it did not change",
+  "anything about a feed this run did not query"
+ ],
+ "updates": [
+  {
+   "block": 53454347,
+   "roundId": 645,
+   "answer": 19.13,
+   "updatedAt": 1788442327
+  },
+  {
+   "block": 53465338,
+   "roundId": 646,
+   "answer": 19.23,
+   "updatedAt": 1788443468
+  },
+  {
+   "block": 53477063,
+   "roundId": 647,
+   "answer": 19.125,
+   "updatedAt": 1788444698
+  },
+  {
+   "block": 53488335,
+   "roundId": 648,
+   "answer": 19.225,
+   "updatedAt": 1788445868
+  },
+  {
+   "block": 53511690,
+   "roundId": 649,
+   "answer": 19.12505,
+   "updatedAt": 1788448299
+  },
+  {
+   "block": 53525258,
+   "roundId": 650,
+   "answer": 19.2349,
+   "updatedAt": 1788449710
+  },
+  {
+   "block": 53578965,
+   "roundId": 651,
+   "answer": 19.135,
+   "updatedAt": 1788455321
+  },
+  {
+   "block": 53595522,
+   "roundId": 652,
+   "answer": 19.255,
+   "updatedAt": 1788457062
+  },
+  {
+   "block": 53608191,
+   "roundId": 653,
+   "answer": 19.155,
+   "updatedAt": 1788458382
+  },
+  {
+   "block": 53666810,
+   "roundId": 654,
+   "answer": 19.255,
+   "updatedAt": 1788464354
+  },
+  {
+   "block": 53670379,
+   "roundId": 655,
+   "answer": 19.355,
+   "updatedAt": 1788464714
+  },
+  {
+   "block": 53678763,
+   "roundId": 656,
+   "answer": 19.235,
+   "updatedAt": 1788465554
+  },
+  {
+   "block": 53833335,
+   "roundId": 657,
+   "answer": 19.35,
+   "updatedAt": 1788481219
+  },
+  {
+   "block": 53869324,
+   "roundId": 658,
+   "answer": 19.24499999,
+   "updatedAt": 1788484849
+  },
+  {
+   "block": 53956263,
+   "roundId": 659,
+   "answer": 19.35,
+   "updatedAt": 1788493642
+  },
+  {
+   "block": 54042602,
+   "roundId": 660,
+   "answer": 19.455,
+   "updatedAt": 1788502375
+  },
+  {
+   "block": 54102685,
+   "roundId": 661,
+   "answer": 19.555,
+   "updatedAt": 1788508466
+  },
+  {
+   "block": 54106538,
+   "roundId": 662,
+   "answer": 19.43723452,
+   "updatedAt": 1788508857
+  },
+  {
+   "block": 54110975,
+   "roundId": 663,
+   "answer": 19.55465,
+   "updatedAt": 1788509307
+  },
+  {
+   "block": 54128174,
+   "roundId": 664,
+   "answer": 19.6526,
+   "updatedAt": 1788511047
+  },
+  {
+   "block": 54129641,
+   "roundId": 665,
+   "answer": 19.8265,
+   "updatedAt": 1788511197
+  },
+  {
+   "block": 54131445,
+   "roundId": 666,
+   "answer": 19.9553,
+   "updatedAt": 1788511378
+  },
+  {
+   "block": 54148041,
+   "roundId": 667,
+   "answer": 19.82225,
+   "updatedAt": 1788513058
+  },
+  {
+   "block": 54210099,
+   "roundId": 668,
+   "answer": 19.7098,
+   "updatedAt": 1788519329
+  },
+  {
+   "block": 54212180,
+   "roundId": 669,
+   "answer": 19.81015,
+   "updatedAt": 1788519540
+  },
+  {
+   "block": 54220774,
+   "roundId": 670,
+   "answer": 19.67035,
+   "updatedAt": 1788520410
+  },
+  {
+   "block": 54239456,
+   "roundId": 671,
+   "answer": 19.5603,
+   "updatedAt": 1788522300
+  },
+  {
+   "block": 54267300,
+   "roundId": 672,
+   "answer": 19.43615,
+   "updatedAt": 1788525121
+  },
+  {
+   "block": 54307707,
+   "roundId": 673,
+   "answer": 19.32,
+   "updatedAt": 1788529202
+  },
+  {
+   "block": 54318976,
+   "roundId": 674,
+   "answer": 19.195,
+   "updatedAt": 1788530342
+  },
+  {
+   "block": 54329042,
+   "roundId": 675,
+   "answer": 19.29495,
+   "updatedAt": 1788531363
+  },
+  {
+   "block": 54340000,
+   "roundId": 676,
+   "answer": 19.195,
+   "updatedAt": 1788532473
+  },
+  {
+   "block": 54422449,
+   "roundId": 677,
+   "answer": 19.095,
+   "updatedAt": 1788540815
+  },
+  {
+   "block": 54503965,
+   "roundId": 678,
+   "answer": 19.195,
+   "updatedAt": 1788549068
+  },
+  {
+   "block": 57245667,
+   "roundId": 679,
+   "answer": 19.14343601,
+   "updatedAt": 1788825631
+  },
+  {
+   "block": 57258157,
+   "roundId": 680,
+   "answer": 19.24,
+   "updatedAt": 1788826892
+  }
+ ]
+}

@@ -1,0 +1,85 @@
+{
+ "canon": "rh-feed-staleness-v1",
+ "measured_utc": "2026-10-28T02:36:54Z",
+ "symbol": "QQQ",
+ "feed_name": "Robinhood QQQ / USD",
+ "aggregator": "0x25e996ce8b3529885D429241156e83e7b7744049",
+ "proxy": "0x80901d846d5D7B030F26B480776EE3b29374C2ae",
+ "directory_source": "https://reference-data-directory.vercel.app/feeds-robinhood-mainnet.json",
+ "documented_heartbeat_s": 86400,
+ "requested_range": {
+  "from_utc": "2026-09-04T12:00:00Z",
+  "to_utc": "2026-09-08T12:00:00Z",
+  "from_block": 54248341,
+  "to_block": 57673474
+ },
+ "lookback_blocks": 12000000,
+ "head_at_measurement": 99733087,
+ "blocks_back_at_measurement": 45750439,
+ "updates_used": 6,
+ "roundIds": {
+  "first": 327,
+  "last": 332,
+  "contiguous": true
+ },
+ "longest_gap": {
+  "seconds": 329319,
+  "hours": 91.48,
+  "from_utc": "2026-09-04T04:31:52Z",
+  "to_utc": "2026-09-08T00:00:31Z",
+  "from_round": 329,
+  "to_round": 330,
+  "answer_held_throughout": 719.58999999,
+  "multiple_of_documented_heartbeat": 3.81,
+  "spans_requested_window_start": true
+ },
+ "sequencer_control": {
+  "blocks_between_the_two_updates": 3263024,
+  "seconds_between": 329319,
+  "blocks_per_second_mean": 9.908,
+  "verdict": "the chain produced blocks throughout, so the gap is the feed's and not a halt"
+ },
+ "what_this_does_not_establish": [
+  "that any position was unliquidatable, or that anything was liquidated",
+  "that the published answer was wrong, only that it did not change",
+  "anything about a feed this run did not query"
+ ],
+ "updates": [
+  {
+   "block": 53458701,
+   "roundId": 327,
+   "answer": 712.2052,
+   "updatedAt": 1788442777
+  },
+  {
+   "block": 53511965,
+   "roundId": 328,
+   "answer": 715.96,
+   "updatedAt": 1788448328
+  },
+  {
+   "block": 53982648,
+   "roundId": 329,
+   "answer": 719.58999999,
+   "updatedAt": 1788496312
+  },
+  {
+   "block": 57245672,
+   "roundId": 330,
+   "answer": 719.2178925,
+   "updatedAt": 1788825631
+  },
+  {
+   "block": 57370009,
+   "roundId": 331,
+   "answer": 722.835,
+   "updatedAt": 1788838175
+  },
+  {
+   "block": 57470786,
+   "roundId": 332,
+   "answer": 719.155,
+   "updatedAt": 1788848349
+  }
+ ]
+}
